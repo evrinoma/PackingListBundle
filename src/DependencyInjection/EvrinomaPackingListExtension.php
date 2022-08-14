@@ -86,7 +86,7 @@ class EvrinomaPackingListExtension extends Extension
         );
 
 //        if ($doctrineRegistry) {
-//            $this->wireRepository($container, $doctrineRegistry, $config['entity']);
+            $this->wireRepository($container, $config['entity']);
 //        }
 
         $this->wireController($container, $config['dto']);
@@ -153,16 +153,15 @@ class EvrinomaPackingListExtension extends Extension
 //        }
 //    }
 
-//    private function wireRepository(ContainerBuilder $container, Reference $doctrineRegistry, string $class): void
-//    {
-//        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.repository');
-//        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.query.mediator');
-//        $definitionRepository->setArgument(0, $doctrineRegistry);
-//        $definitionRepository->setArgument(1, $class);
-//        $definitionRepository->setArgument(2, $definitionQueryMediator);
-//        $container->addAliases([PackingListCommandRepositoryInterface::class => 'evrinoma.'.$this->getAlias().'.repository']);
-//        $container->addAliases([PackingListQueryRepositoryInterface::class => 'evrinoma.'.$this->getAlias().'.repository']);
-//    }
+    private function wireRepository(ContainerBuilder $container, string $class): void
+    {
+        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.repository');
+        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.query.mediator');
+        $definitionRepository->setArgument(0, $class);
+        $definitionRepository->setArgument(1, $definitionQueryMediator);
+        $container->addAliases([PackingListCommandRepositoryInterface::class => 'evrinoma.'.$this->getAlias().'.repository']);
+        $container->addAliases([PackingListQueryRepositoryInterface::class => 'evrinoma.'.$this->getAlias().'.repository']);
+    }
 
     private function wireFactory(ContainerBuilder $container, string $class, string $paramClass): void
     {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Repository;
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface;
 use Doctrine\ORM\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,18 +24,17 @@ use Evrinoma\PackingListBundle\Exception\PackingListProxyException;
 use Evrinoma\PackingListBundle\Mediator\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 
-class PackingListRepository extends ServiceEntityRepository implements PackingListRepositoryInterface
+class PackingListRepository implements ServiceEntityRepositoryInterface, PackingListRepositoryInterface
 {
     private QueryMediatorInterface $mediator;
 
     /**
-     * @param ManagerRegistry        $registry
      * @param string                 $entityClass
      * @param QueryMediatorInterface $mediator
      */
-    public function __construct(ManagerRegistry $registry, string $entityClass, QueryMediatorInterface $mediator)
+    public function __construct(string $entityClass, QueryMediatorInterface $mediator)
     {
-        parent::__construct($registry, $entityClass);
+//        parent::__construct($registry, $entityClass);
         $this->mediator = $mediator;
     }
 
@@ -49,11 +48,11 @@ class PackingListRepository extends ServiceEntityRepository implements PackingLi
      */
     public function save(PackingListInterface $packingList): bool
     {
-        try {
-            $this->getEntityManager()->persist($packingList);
-        } catch (ORMInvalidArgumentException $e) {
-            throw new PackingListCannotBeSavedException($e->getMessage());
-        }
+//        try {
+//            $this->getEntityManager()->persist($packingList);
+//        } catch (ORMInvalidArgumentException $e) {
+//            throw new PackingListCannotBeSavedException($e->getMessage());
+//        }
 
         return true;
     }
@@ -77,15 +76,16 @@ class PackingListRepository extends ServiceEntityRepository implements PackingLi
      */
     public function findByCriteria(PackingListApiDtoInterface $dto): array
     {
-        $builder = $this->createQueryBuilder($this->mediator->alias());
-
-        $this->mediator->createQuery($dto, $builder);
-
-        $packingList = $this->mediator->getResult($dto, $builder);
-
-        if (0 === \count($packingList)) {
-            throw new PackingListNotFoundException('Cannot find packing list by findByCriteria');
-        }
+//        $builder = $this->createQueryBuilder($this->mediator->alias());
+//
+//        $this->mediator->createQuery($dto, $builder);
+//
+//        $packingList = $this->mediator->getResult($dto, $builder);
+//
+//        if (0 === \count($packingList)) {
+//            throw new PackingListNotFoundException('Cannot find packing list by findByCriteria');
+//        }
+        $packingList = [];
 
         return $packingList;
     }
@@ -101,12 +101,13 @@ class PackingListRepository extends ServiceEntityRepository implements PackingLi
      */
     public function find($id, $lockMode = null, $lockVersion = null): PackingListInterface
     {
-        /** @var PackingListInterface $packingList */
-        $packingList = parent::find($id);
-
-        if (null === $packingList) {
-            throw new PackingListNotFoundException("Cannot find packing list with id $id");
-        }
+//        /** @var PackingListInterface $packingList */
+//        $packingList = parent::find($id);
+//
+//        if (null === $packingList) {
+//            throw new PackingListNotFoundException("Cannot find packing list with id $id");
+//        }
+        $packingList = [];
 
         return $packingList;
     }
@@ -121,13 +122,14 @@ class PackingListRepository extends ServiceEntityRepository implements PackingLi
      */
     public function proxy(string $id): PackingListInterface
     {
-        $em = $this->getEntityManager();
-
-        $packingList = $em->getReference($this->getEntityName(), $id);
-
-        if (!$em->contains($packingList)) {
-            throw new PackingListProxyException("Proxy doesn't exist with $id");
-        }
+//        $em = $this->getEntityManager();
+//
+//        $packingList = $em->getReference($this->getEntityName(), $id);
+//
+//        if (!$em->contains($packingList)) {
+//            throw new PackingListProxyException("Proxy doesn't exist with $id");
+//        }
+        $packingList = [];
 
         return $packingList;
     }

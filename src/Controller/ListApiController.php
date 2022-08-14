@@ -16,6 +16,8 @@ namespace Evrinoma\PackingListBundle\Controller;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
+use Evrinoma\PackingListBundle\Exception\PackingListCannotBeCreatedException;
+use Evrinoma\PackingListBundle\Exception\PackingListCannotBeRemovedException;
 use Evrinoma\PackingListBundle\Exception\PackingListCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\PackingListInvalidException;
 use Evrinoma\PackingListBundle\Exception\PackingListNotFoundException;
@@ -76,13 +78,9 @@ final class ListApiController extends AbstractWrappedApiController
      *             @OA\Schema(
      *                 example={
      *                     "class": "Evrinoma\PackingListBundle\Dto\PackingListApiDto",
-     *                     "id": "48",
-     *                     "description": "Интертех",
      *                 },
      *                 type="object",
      *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\PackingListApiDto"),
-     *                 @OA\Property(property="id", type="string"),
-     *                 @OA\Property(property="description", type="string"),
      *             )
      *         )
      *     )
@@ -93,25 +91,10 @@ final class ListApiController extends AbstractWrappedApiController
      */
     public function postAction(): JsonResponse
     {
-        /** @var PackingListApiDtoInterface $packingListApiDto */
-        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
-        $commandManager = $this->commandManager;
-
-        $this->setStatusCreated();
-
         $json = [];
-        $error = [];
 
         try {
-            $this->preValidator->onPost($packingListApiDto);
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->transactional(
-                function () use ($packingListApiDto, $commandManager, &$json) {
-                    $json[] = $commandManager->post($packingListApiDto);
-                }
-            );
+            throw new PackingListCannotBeCreatedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -130,15 +113,9 @@ final class ListApiController extends AbstractWrappedApiController
      *             @OA\Schema(
      *                 example={
      *                     "class": "Evrinoma\PackingListBundle\Dto\PackingListApiDto",
-     *                     "active": "b",
-     *                     "id": "48",
-     *                     "description": "Интертех",
      *                 },
      *                 type="object",
      *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\PackingListApiDto"),
-     *                 @OA\Property(property="id", type="string"),
-     *                 @OA\Property(property="description", type="string"),
-     *                 @OA\Property(property="active", type="string")
      *             )
      *         )
      *     )
@@ -149,23 +126,10 @@ final class ListApiController extends AbstractWrappedApiController
      */
     public function putAction(): JsonResponse
     {
-        /** @var PackingListApiDtoInterface $packingListApiDto */
-        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
-        $commandManager = $this->commandManager;
-
         $json = [];
-        $error = [];
 
         try {
-            $this->preValidator->onPut($packingListApiDto);
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->transactional(
-                function () use ($packingListApiDto, $commandManager, &$json) {
-                    $json[] = $commandManager->put($packingListApiDto);
-                }
-            );
+            throw new PackingListCannotBeSavedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -205,25 +169,10 @@ final class ListApiController extends AbstractWrappedApiController
      */
     public function deleteAction(): JsonResponse
     {
-        /** @var PackingListApiDtoInterface $packingListApiDto */
-        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
-
-        $commandManager = $this->commandManager;
-        $this->setStatusAccepted();
-
         $json = [];
-        $error = [];
 
         try {
-            $this->preValidator->onDelete($packingListApiDto);
-            $em = $this->getDoctrine()->getManager();
-
-            $em->transactional(
-                function () use ($packingListApiDto, $commandManager, &$json) {
-                    $commandManager->delete($packingListApiDto);
-                    $json = ['OK'];
-                }
-            );
+            throw new PackingListCannotBeRemovedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -339,6 +288,8 @@ final class ListApiController extends AbstractWrappedApiController
     public function setRestStatus(\Exception $e): array
     {
         switch (true) {
+            case $e instanceof PackingListCannotBeCreatedException:
+            case $e instanceof PackingListCannotBeRemovedException:
             case $e instanceof PackingListCannotBeSavedException:
                 $this->setStatusNotImplemented();
                 break;
