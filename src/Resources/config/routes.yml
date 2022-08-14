@@ -1,0 +1,3 @@
+packinglistapi:
+  resource: "@EvrinomaPackingListBundle/Resources/config/routing/api.yml"
+  prefix: evrinoma

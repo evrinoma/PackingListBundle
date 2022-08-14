@@ -1,0 +1,3 @@
+packing_list_api:
+  resource: "@EvrinomaPackingListBundle/Controller/PackingListApiController.php"
+  type: annotation

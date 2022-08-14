@@ -1,0 +1,85 @@
+services:
+  Evrinoma\PackingListBundle\Controller\ListApiController:
+    alias: evrinoma.packing.list.api.controller
+    public: true
+
+  evrinoma.packing.list.api.controller:
+    class: Evrinoma\PackingListBundle\Controller\ListApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.packing.list.command.manager'
+      - '@evrinoma.packing.list.query.manager'
+      - '@evrinoma.packing.list.pre.validator'
+    autowire: true
+
+  evrinoma.packing.list.factory:
+    class: Evrinoma\PackingListBundle\Factory\PackingListFactory
+    public: true
+    arguments:
+
+  evrinoma.packing.list.repository:
+    class: Evrinoma\PackingListBundle\Repository\PackingListRepository
+    public: true
+    arguments:
+
+  evrinoma.packing.list.command.manager:
+    class: Evrinoma\PackingListBundle\Manager\CommandManager
+    arguments:
+      - '@evrinoma.packing.list.validator'
+      - '@evrinoma.packing.list.repository'
+      - '@evrinoma.packing.list.factory'
+      - '@evrinoma.packing.list.command.mediator'
+
+  Evrinoma\PackingListBundle\Manager\CommandManagerInterface:
+    alias: evrinoma.packing.list.command.manager
+
+  evrinoma.packing.list.query.manager:
+    class: Evrinoma\PackingListBundle\Manager\QueryManager
+    arguments:
+      - '@evrinoma.packing.list.repository'
+
+  Evrinoma\PackingListBundle\Manager\QueryManagerInterface:
+    alias: evrinoma.packing.list.query.manager
+
+  evrinoma.packing.list.validator:
+    class: Evrinoma\PackingListBundle\Validator\PackingListValidator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Validator\PackingListValidator:
+    alias: evrinoma.packing.list.validator
+
+  evrinoma.packing.list.query.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\QueryMediator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Mediator\QueryMediator:
+    alias: evrinoma.packing.list.query.mediator
+
+  Evrinoma\PackingListBundle\Mediator\QueryMediatorInterface:
+    alias: evrinoma.packing.list.query.mediator
+
+  evrinoma.packing.list.command.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\CommandMediator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Mediator\CommandMediator:
+    alias: evrinoma.packing.list.command.mediator
+
+  Evrinoma\PackingListBundle\Mediator\CommandMediatorInterface:
+    alias: evrinoma.packing.list.command.mediator
+
+  evrinoma.packing.list.pre.validator:
+    class: Evrinoma\PackingListBundle\PreValidator\DtoPreValidator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\PreValidator\DtoPreValidator:
+    alias: evrinoma.packing.list.pre.validator
+
+  Evrinoma\PackingListBundle\PreValidator\DtoPreValidatorInterface:
+    alias: evrinoma.packing.list.pre.validator
