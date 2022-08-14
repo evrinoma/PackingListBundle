@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class EvrinomaPackingListBundle extends Bundle
 {
-    public const BUNDLE = 'packing-list';
+    public const BUNDLE = 'packing_list';
 
     public function build(ContainerBuilder $container)
     {

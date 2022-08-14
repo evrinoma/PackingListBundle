@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder(EvrinomaPackingListBundle::BUNDLE);
         $rootNode = $treeBuilder->getRootNode();
-        $supportedDrivers = ['orm'];
+        $supportedDrivers = ['exchange'];
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -41,7 +41,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->scalarNode('factory')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_FACTORY_PACKING_LIST)->end()
             ->scalarNode('entity')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_BASE_PACKING_LIST)->end()
-        //    ->scalarNode('constraints')->defaultTrue()->info('This option is used for enable/disable basic packing list constraints')->end()
+            ->scalarNode('constraints')->defaultTrue()->info('This option is used for enable/disable basic packing list constraints')->end()
             ->scalarNode('dto')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::DTO_BASE_PACKING_LIST)->info('This option is used for dto class override')->end()
             ->arrayNode('decorates')->addDefaultsIfNotSet()->children()
             ->scalarNode('command')->defaultNull()->info('This option is used for command packing list decoration')->end()
