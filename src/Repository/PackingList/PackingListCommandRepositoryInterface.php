@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository;
+namespace Evrinoma\PackingListBundle\Repository\PackingList;
 
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeRemovedException;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeSavedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeRemovedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeSavedException;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 
 interface PackingListCommandRepositoryInterface

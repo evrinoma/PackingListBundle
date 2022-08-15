@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository;
+namespace Evrinoma\PackingListBundle\Repository\PackingList;
 
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Exception\ORMException;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingListNotFoundException;
-use Evrinoma\PackingListBundle\Exception\PackingListProxyException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListProxyException;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 
 interface PackingListQueryRepositoryInterface
