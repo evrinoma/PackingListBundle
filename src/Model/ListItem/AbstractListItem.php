@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingList;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 use Evrinoma\UtilsBundle\Entity\NameTrait;

@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Entity\PackingList;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList;
+use Evrinoma\PackingListBundle\Model\PackingList\AbstractListItem;
 
 /**
- * @ORM\Table(name="e_packing_list")
+ * @ORM\Table(name="e_list_item")
  * @ORM\Entity
  */
-class BasePackingList extends AbstractPackingList
+class BaseListItem extends AbstractListItem
 {
 }
