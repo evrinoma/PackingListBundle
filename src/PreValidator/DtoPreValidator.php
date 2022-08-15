@@ -15,7 +15,7 @@ namespace Evrinoma\PackingListBundle\PreValidator;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingListInvalidException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;
 use Evrinoma\UtilsBundle\PreValidator\AbstractPreValidator;
 
 class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInterface

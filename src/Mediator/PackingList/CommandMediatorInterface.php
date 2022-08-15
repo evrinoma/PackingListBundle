@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Mediator;
+namespace Evrinoma\PackingListBundle\Mediator\PackingList;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeCreatedException;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeRemovedException;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeSavedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeCreatedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeRemovedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeSavedException;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 
 interface CommandMediatorInterface

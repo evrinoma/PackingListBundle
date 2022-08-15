@@ -15,8 +15,8 @@ namespace Evrinoma\PackingListBundle\DependencyInjection;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
-use Evrinoma\PackingListBundle\Repository\PackingListCommandRepositoryInterface;
-use Evrinoma\PackingListBundle\Repository\PackingListQueryRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\PackingList\PackingListCommandRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\PackingList\PackingListQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
@@ -38,10 +38,7 @@ class EvrinomaPackingListExtension extends Extension
      * @var array
      */
     private static array $doctrineDrivers = [
-        'exchange' => [
-            'registry' => 'doctrine',
-            'tag' => 'doctrine.event_subscriber',
-        ],
+        'exchange' => [],
     ];
 
     public function load(array $configs, ContainerBuilder $container)
@@ -56,23 +53,12 @@ class EvrinomaPackingListExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory']) {
-            $this->wireFactory($container, $config['factory'], $config['entity']);
+        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory_packing_list']) {
+            $this->wireFactory($container, 'packing_list', $config['factory_packing_list'], $config['entity_packing_list']);
         } else {
-            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.factory');
-            $definitionFactory->setArgument(0, $config['entity']);
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.packing_list.factory');
+            $definitionFactory->setArgument(0, $config['entity_packing_list']);
         }
-
-        $doctrineRegistry = null;
-
-//        if (isset(self::$doctrineDrivers[$config['db_driver']])) {
-//            $loader->load('doctrine.yml');
-//            $container->setAlias('evrinoma.'.$this->getAlias().'.doctrine_registry', new Alias(self::$doctrineDrivers[$config['db_driver']]['registry'], false));
-//            $doctrineRegistry = new Reference('evrinoma.'.$this->getAlias().'.doctrine_registry');
-//            $container->setParameter('evrinoma.'.$this->getAlias().'.backend_type_'.$config['db_driver'], true);
-//            $objectManager = $container->getDefinition('evrinoma.'.$this->getAlias().'.object_manager');
-//            $objectManager->setFactory([$doctrineRegistry, 'getManager']);
-//        }
 
         $this->remapParametersNamespaces(
             $container,
@@ -80,24 +66,21 @@ class EvrinomaPackingListExtension extends Extension
             [
                 '' => [
                     'db_driver' => 'evrinoma.'.$this->getAlias().'.storage',
-                    'entity' => 'evrinoma.'.$this->getAlias().'.entity',
+                    'entity' => 'evrinoma.'.$this->getAlias().'.entity_packing_list',
                 ],
             ]
         );
 
-//        if ($doctrineRegistry) {
-            $this->wireRepository($container, $config['entity']);
-//        }
+        $this->wireRepository($container, 'packing_list', $config['entity_packing_list']);
 
-        $this->wireController($container, $config['dto']);
 
-        $this->wireValidator($container, $config['entity']);
+        $this->wireController($container, 'packing_list', $config['dto_packing_list']);
+
+        $this->wireValidator($container, 'packing_list', $config['entity_packing_list']);
 
         if ($config['constraints']) {
             $loader->load('validation.yml');
         }
-
-//        $this->wireConstraintTag($container);
 
         if ($config['decorates']) {
             $remap = [];
@@ -105,10 +88,10 @@ class EvrinomaPackingListExtension extends Extension
                 if (null !== $service) {
                     switch ($key) {
                         case 'command':
-                            $remap['command'] = 'evrinoma.'.$this->getAlias().'.decorates.command';
+                            $remap['command'] = 'evrinoma.'.$this->getAlias().'.decorates.packing_list.command';
                             break;
                         case 'query':
-                            $remap['query'] = 'evrinoma.'.$this->getAlias().'.decorates.query';
+                            $remap['query'] = 'evrinoma.'.$this->getAlias().'.decorates.packing_list.query';
                             break;
                     }
                 }
@@ -141,47 +124,43 @@ class EvrinomaPackingListExtension extends Extension
         }
     }
 
-//    private function wireConstraintTag(ContainerBuilder $container): void
-//    {
-//        foreach ($container->getDefinitions() as $key => $definition) {
-//            switch (true) {
-//                case str_contains($key, PackingListPass::PACKING_LIST_CONSTRAINT)   :
-//                    $definition->addTag(PackingListPass::PACKING_LIST_CONSTRAINT);
-//                    break;
-//                default:
-//                }
-//        }
-//    }
-
-    private function wireRepository(ContainerBuilder $container, string $class): void
+    private function wireRepository(ContainerBuilder $container, string $name, string $class): void
     {
-        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.repository');
-        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.query.mediator');
-        $definitionRepository->setArgument(0, $class);
-        $definitionRepository->setArgument(1, $definitionQueryMediator);
-        $container->addAliases([PackingListCommandRepositoryInterface::class => 'evrinoma.'.$this->getAlias().'.repository']);
-        $container->addAliases([PackingListQueryRepositoryInterface::class => 'evrinoma.'.$this->getAlias().'.repository']);
+        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
+
+        switch ($name) {
+            case 'packing_list':
+                $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
+                $definitionRepository->setArgument(1, $definitionQueryMediator);
+            // no break
+            default:
+                $definitionRepository->setArgument(0, $class);
+        }
+        $array = $definitionRepository->getArguments();
+        ksort($array);
+        $definitionRepository->setArguments($array);
     }
 
-    private function wireFactory(ContainerBuilder $container, string $class, string $paramClass): void
+    private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass): void
     {
-        $container->removeDefinition('evrinoma.'.$this->getAlias().'.factory');
+        $container->removeDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
         $definitionFactory = new Definition($class);
         $definitionFactory->addArgument($paramClass);
-        $alias = new Alias('evrinoma.'.$this->getAlias().'.factory');
-        $container->addDefinitions(['evrinoma.'.$this->getAlias().'.factory' => $definitionFactory]);
+        $alias = new Alias('evrinoma.'.$this->getAlias().'.'.$name.'.factory');
+        $container->addDefinitions(['evrinoma.'.$this->getAlias().'.'.$name.'.factory' => $definitionFactory]);
         $container->addAliases([$class => $alias]);
     }
 
-    private function wireController(ContainerBuilder $container, string $class): void
+
+    private function wireController(ContainerBuilder $container, string $name, string $class): void
     {
-        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.api.controller');
+        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.api.controller');
         $definitionApiController->setArgument(6, $class);
     }
 
-    private function wireValidator(ContainerBuilder $container, string $class): void
+    private function wireValidator(ContainerBuilder $container, string $name, string $class): void
     {
-        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.validator');
+        $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.validator');
         $definitionApiController->setArgument(0, new Reference('validator'));
         $definitionApiController->setArgument(1, $class);
     }

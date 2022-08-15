@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\PreValidator;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingListInvalidException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;
 
 interface DtoPreValidatorInterface
 {

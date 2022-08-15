@@ -1,2 +1,2 @@
 imports:
-  - { resource: services/list.yml }
+  - { resource: services/packing_list.yml }

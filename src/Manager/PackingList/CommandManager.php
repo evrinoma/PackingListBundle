@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Manager;
+namespace Evrinoma\PackingListBundle\Manager\PackingList;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeCreatedException;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeRemovedException;
-use Evrinoma\PackingListBundle\Exception\PackingListCannotBeSavedException;
-use Evrinoma\PackingListBundle\Exception\PackingListInvalidException;
-use Evrinoma\PackingListBundle\Exception\PackingListNotFoundException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeCreatedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeRemovedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeSavedException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundException;
 use Evrinoma\PackingListBundle\Factory\PackingListFactoryInterface;
-use Evrinoma\PackingListBundle\Mediator\CommandMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\PackingList\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
-use Evrinoma\PackingListBundle\Repository\PackingListCommandRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\PackingList\PackingListCommandRepositoryInterface;
 use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 
 final class CommandManager implements CommandManagerInterface

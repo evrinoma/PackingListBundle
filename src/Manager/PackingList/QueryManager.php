@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Manager;
+namespace Evrinoma\PackingListBundle\Manager\PackingList;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingListNotFoundException;
-use Evrinoma\PackingListBundle\Exception\PackingListProxyException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundException;
+use Evrinoma\PackingListBundle\Exception\PackingList\PackingListProxyException;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
-use Evrinoma\PackingListBundle\Repository\PackingListQueryRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\PackingList\PackingListQueryRepositoryInterface;
 
 final class QueryManager implements QueryManagerInterface
 {
