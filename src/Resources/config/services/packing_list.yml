@@ -4,7 +4,7 @@ services:
     public: true
 
   evrinoma.packing_list.packing_list.api.controller:
-    class: Evrinoma\PackingListBundle\Controller\ListApiController
+    class: Evrinoma\PackingListBundle\Controller\PackingListApiController
     arguments:
       - '@jms_serializer'
       - '@request_stack'

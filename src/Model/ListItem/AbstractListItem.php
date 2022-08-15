@@ -218,5 +218,4 @@ abstract class AbstractListItem implements PackingListInterface
 
         return $this;
     }
-
 }

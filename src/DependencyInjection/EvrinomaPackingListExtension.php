@@ -15,8 +15,6 @@ namespace Evrinoma\PackingListBundle\DependencyInjection;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
-use Evrinoma\PackingListBundle\Repository\PackingList\PackingListCommandRepositoryInterface;
-use Evrinoma\PackingListBundle\Repository\PackingList\PackingListQueryRepositoryInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
@@ -72,7 +70,6 @@ class EvrinomaPackingListExtension extends Extension
         );
 
         $this->wireRepository($container, 'packing_list', $config['entity_packing_list']);
-
 
         $this->wireController($container, 'packing_list', $config['dto_packing_list']);
 
@@ -132,7 +129,7 @@ class EvrinomaPackingListExtension extends Extension
             case 'packing_list':
                 $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
                 $definitionRepository->setArgument(1, $definitionQueryMediator);
-            // no break
+                // no break
             default:
                 $definitionRepository->setArgument(0, $class);
         }
@@ -150,7 +147,6 @@ class EvrinomaPackingListExtension extends Extension
         $container->addDefinitions(['evrinoma.'.$this->getAlias().'.'.$name.'.factory' => $definitionFactory]);
         $container->addAliases([$class => $alias]);
     }
-
 
     private function wireController(ContainerBuilder $container, string $name, string $class): void
     {

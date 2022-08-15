@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Mediator\PackingList;
 
-use Doctrine\ORM\QueryBuilder;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
 use Evrinoma\PackingListBundle\Repository\AliasInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
 use Evrinoma\UtilsBundle\QueryBuilder\QueryBuilderInterface;
@@ -25,7 +23,7 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
     protected static string $alias = AliasInterface::PACKING_LIST;
 
     /**
-     * @param DtoInterface $dto
+     * @param DtoInterface          $dto
      * @param QueryBuilderInterface $builder
      *
      * @return mixed

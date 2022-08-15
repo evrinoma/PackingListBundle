@@ -32,7 +32,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class ListApiController extends AbstractWrappedApiController
+final class PackingListApiController extends AbstractWrappedApiController
 {
     private string $dtoClass;
     /**

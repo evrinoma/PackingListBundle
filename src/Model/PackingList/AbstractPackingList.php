@@ -175,6 +175,7 @@ abstract class AbstractPackingList implements PackingListInterface
     public function setContractorName(string $contractorName): PackingListInterface
     {
         $this->contractorName = $contractorName;
+
         return $this;
     }
 
@@ -194,6 +195,7 @@ abstract class AbstractPackingList implements PackingListInterface
     public function setSubContracts(string $subContracts): PackingListInterface
     {
         $this->subContracts = $subContracts;
+
         return $this;
     }
 
