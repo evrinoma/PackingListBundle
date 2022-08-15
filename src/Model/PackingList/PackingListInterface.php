@@ -13,11 +13,99 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingList;
 
-use Evrinoma\UtilsBundle\Entity\ActiveInterface;
-use Evrinoma\UtilsBundle\Entity\CreateUpdateAtInterface;
-use Evrinoma\UtilsBundle\Entity\DescriptionInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 
-interface PackingListInterface extends ActiveInterface, CreateUpdateAtInterface, IdInterface, DescriptionInterface
+interface PackingListInterface extends IdInterface
 {
+    /**
+     * @param int|null $id
+     *
+     * @return PackingListInterface
+     */
+    public function setId(?int $id): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getLabel(): string;
+
+    /**
+     * @param string $label
+     *
+     * @return PackingListInterface
+     */
+    public function setLabel(string $label): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getContract(): string;
+
+    /**
+     * @param string $contract
+     *
+     * @return PackingListInterface
+     */
+    public function setContract(string $contract): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getContractDescription(): string;
+
+    /**
+     * @param string $contractDescription
+     *
+     * @return PackingListInterface
+     */
+    public function setContractDescription(string $contractDescription): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getProjectName(): string;
+
+    /**
+     * @param string $projectName
+     *
+     * @return PackingListInterface
+     */
+    public function setProjectName(string $projectName): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getContractorName(): string;
+
+    /**
+     * @param string $contractorName
+     *
+     * @return PackingListInterface
+     */
+    public function setContractorName(string $contractorName): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getSubContracts(): string;
+
+    /**
+     * @param string $subContracts
+     *
+     * @return PackingListInterface
+     */
+    public function setSubContracts(string $subContracts): PackingListInterface;
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getItems(): ArrayCollection;
+
+    /**
+     * @param ArrayCollection $items
+     *
+     * @return PackingListInterface
+     */
+    public function setItems(ArrayCollection $items): PackingListInterface;
 }
