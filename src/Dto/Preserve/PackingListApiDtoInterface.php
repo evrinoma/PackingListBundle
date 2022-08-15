@@ -13,10 +13,8 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-use Evrinoma\DtoCommon\ValueObject\Mutable\ActiveInterface;
-use Evrinoma\DtoCommon\ValueObject\Mutable\DescriptionInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
 
-interface PackingListApiDtoInterface extends IdInterface, ActiveInterface, DescriptionInterface
+interface PackingListApiDtoInterface extends IdInterface
 {
 }

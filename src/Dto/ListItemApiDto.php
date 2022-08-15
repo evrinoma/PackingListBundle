@@ -18,7 +18,7 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterface
+class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
 {
     use IdTrait;
 

@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Model\PackingList;
+namespace Evrinoma\PackingListBundle\Model\ListItem;
 
 use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
@@ -20,7 +20,7 @@ use Evrinoma\UtilsBundle\Entity\NameTrait;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class AbstractListItem implements PackingListInterface
+abstract class AbstractListItem implements ListItemInterface
 {
     use IdTrait;
     use NameTrait;

@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder(EvrinomaPackingListBundle::BUNDLE);
         $rootNode = $treeBuilder->getRootNode();
-        $supportedDrivers = ['exchange'];
+        $supportedDrivers = ['api'];
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -37,18 +37,24 @@ class Configuration implements ConfigurationInterface
             ->thenInvalid('The driver %s is not supported. Please choose one of '.json_encode($supportedDrivers))
             ->end()
             ->cannotBeOverwritten()
-            ->defaultValue('exchange')
+            ->defaultValue('api')
             ->end()
             ->scalarNode('factory_packing_list')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_FACTORY_PACKING_LIST)->end()
             ->scalarNode('entity_packing_list')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_BASE_PACKING_LIST)->end()
+            ->scalarNode('factory_list_item')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_FACTORY_LIST_ITEM)->end()
+            ->scalarNode('entity_list_item')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_BASE_LIST_ITEM)->end()
             ->scalarNode('constraints')->defaultTrue()->info('This option is used for enable/disable basic packing list constraints')->end()
             ->scalarNode('dto_packing_list')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::DTO_BASE_PACKING_LIST)->info('This option is used for dto class override')->end()
+            ->scalarNode('dto_list_item')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::DTO_BASE_LIST_ITEM)->info('This option is used for dto class override')->end()
             ->arrayNode('decorates')->addDefaultsIfNotSet()->children()
-            ->scalarNode('command')->defaultNull()->info('This option is used for command packing list decoration')->end()
-            ->scalarNode('query')->defaultNull()->info('This option is used for query packing list decoration')->end()
+            ->scalarNode('command_packing_list')->defaultNull()->info('This option is used for command packing list decoration')->end()
+            ->scalarNode('query_packing_list')->defaultNull()->info('This option is used for query packing list decoration')->end()
+            ->scalarNode('command_list_item')->defaultNull()->info('This option is used for command list item decoration')->end()
+            ->scalarNode('query_list_item')->defaultNull()->info('This option is used for query list item decoration')->end()
             ->end()->end()
             ->arrayNode('services')->addDefaultsIfNotSet()->children()
             ->scalarNode('pre_validator_packing_list')->defaultNull()->info('This option is used for pre_validator_packing_list overriding')->end()
+            ->scalarNode('pre_validator_list_item')->defaultNull()->info('This option is used for pre_validator_list_item overriding')->end()
             ->end()->end()
             ->end();
 

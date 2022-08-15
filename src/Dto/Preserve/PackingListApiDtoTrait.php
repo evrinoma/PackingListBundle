@@ -13,13 +13,9 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-use Evrinoma\DtoCommon\ValueObject\Preserve\ActiveTrait;
-use Evrinoma\DtoCommon\ValueObject\Preserve\DescriptionTrait;
 use Evrinoma\DtoCommon\ValueObject\Preserve\IdTrait;
 
 trait PackingListApiDtoTrait
 {
-    use ActiveTrait;
-    use DescriptionTrait;
     use IdTrait;
 }

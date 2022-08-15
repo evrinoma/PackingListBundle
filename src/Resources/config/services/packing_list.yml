@@ -1,5 +1,5 @@
 services:
-  Evrinoma\PackingListBundle\Controller\ListApiController:
+  Evrinoma\PackingListBundle\Controller\PackingListApiController:
     alias: evrinoma.packing_list.packing_list.api.controller
     public: true
 
@@ -74,7 +74,7 @@ services:
     alias: evrinoma.packing_list.packing_list.command.mediator
 
   evrinoma.packing_list.packing_list.pre.validator:
-    class: Evrinoma\PackingListBundle\PreValidator\DtoPreValidator
+    class: Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidator
     public: true
     arguments:
 

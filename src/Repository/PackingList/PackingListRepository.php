@@ -81,13 +81,13 @@ class PackingListRepository extends RepositoryWrapper implements PackingListRepo
 
         $this->mediator->createQuery($dto, $builder);
 
-        $packingList = $this->mediator->getResult($dto, $builder);
+        $packingLists = $this->mediator->getResult($dto, $builder);
 
-        if (0 === \count($packingList)) {
+        if (0 === \count($packingLists)) {
             throw new PackingListNotFoundException('Cannot find packing list by findByCriteria');
         }
 
-        return $packingList;
+        return $packingLists;
     }
 
     /**

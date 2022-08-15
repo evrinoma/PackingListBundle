@@ -15,15 +15,15 @@ namespace Evrinoma\PackingListBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
-use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeCreatedException;
-use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeRemovedException;
-use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeSavedException;
-use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;
-use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundException;
-use Evrinoma\PackingListBundle\Manager\PackingList\CommandManagerInterface;
-use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface;
-use Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
+use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeCreatedException;
+use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeRemovedException;
+use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeSavedException;
+use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
+use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
+use Evrinoma\PackingListBundle\Manager\ListItem\CommandManagerInterface;
+use Evrinoma\PackingListBundle\Manager\ListItem\QueryManagerInterface;
+use Evrinoma\PackingListBundle\PreValidator\ListItem\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
@@ -32,7 +32,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class PackingListApiController extends AbstractWrappedApiController
+final class ListItemApiController extends AbstractWrappedApiController
 {
     private string $dtoClass;
     /**
@@ -68,7 +68,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Post("/api/packing/list/create", options={"expose": true}, name="api_packing_list_create")
+     * @Rest\Post("/api/packing/list/item/create", options={"expose": true}, name="api_packing_list_item_create")
      * @OA\Post(
      *     tags={"packing-list"},
      *     description="the method perform create packing list",
@@ -77,10 +77,10 @@ final class PackingListApiController extends AbstractWrappedApiController
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 example={
-     *                     "class": "Evrinoma\PackingListBundle\Dto\PackingListApiDto",
+     *                     "class": "Evrinoma\PackingListBundle\Dto\ListItemApiDto",
      *                 },
      *                 type="object",
-     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\PackingListApiDto"),
+     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\ListItemApiDto"),
      *             )
      *         )
      *     )
@@ -94,33 +94,33 @@ final class PackingListApiController extends AbstractWrappedApiController
         $json = [];
 
         try {
-            throw new PackingListCannotBeCreatedException();
+            throw new ListItemCannotBeCreatedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_post_packing_list')->JsonResponse('Create packing list', $json, $error);
+        return $this->setSerializeGroup('api_post_list_item')->JsonResponse('Create list item', $json, $error);
     }
 
     /**
-     * @Rest\Put("/api/packing/list/save", options={"expose": true}, name="api_packing_list_save")
+     * @Rest\Put("/api/packing/list/item/save", options={"expose": true}, name="api_packing_list_item_save")
      * @OA\Put(
      *     tags={"packing-list"},
-     *     description="the method perform save packing list for current entity",
+     *     description="the method perform save list item for current entity",
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 example={
-     *                     "class": "Evrinoma\PackingListBundle\Dto\PackingListApiDto",
+     *                     "class": "Evrinoma\PackingListBundle\Dto\ListItemApiDto",
      *                 },
      *                 type="object",
-     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\PackingListApiDto"),
+     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\ListItemApiDto"),
      *             )
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Save packing list")
+     * @OA\Response(response=200, description="Save list item")
      *
      * @return JsonResponse
      */
@@ -129,16 +129,16 @@ final class PackingListApiController extends AbstractWrappedApiController
         $json = [];
 
         try {
-            throw new PackingListCannotBeSavedException();
+            throw new ListItemCannotBeSavedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_put_packing_list')->JsonResponse('Save packing list', $json, $error);
+        return $this->setSerializeGroup('api_put_list_item')->JsonResponse('Save list item', $json, $error);
     }
 
     /**
-     * @Rest\Delete("/api/packing/list/delete", options={"expose": true}, name="api_packing_list_delete")
+     * @Rest\Delete("/api/packing/list/item/delete", options={"expose": true}, name="api_packing_list_item_delete")
      * @OA\Delete(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -148,7 +148,7 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="Evrinoma\PackingListBundle\Dto\PackingListApiDto",
+     *             default="Evrinoma\PackingListBundle\Dto\ListItemApiDto",
      *             readOnly=true
      *         )
      *     ),
@@ -163,7 +163,7 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Delete packing list")
+     * @OA\Response(response=200, description="Delete list item")
      *
      * @return JsonResponse
      */
@@ -172,16 +172,16 @@ final class PackingListApiController extends AbstractWrappedApiController
         $json = [];
 
         try {
-            throw new PackingListCannotBeRemovedException();
+            throw new ListItemCannotBeRemovedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->JsonResponse('Delete packing list', $json, $error);
+        return $this->JsonResponse('Delete list item', $json, $error);
     }
 
     /**
-     * @Rest\Get("/api/packing/list/criteria", options={"expose": true}, name="api_packing_list_criteria")
+     * @Rest\Get("/api/packing/list/item/criteria", options={"expose": true}, name="api_packing_list_item_criteria")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -191,7 +191,7 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="Evrinoma\PackingListBundle\Dto\PackingListApiDto",
+     *             default="Evrinoma\PackingListBundle\Dto\ListItemApiDto",
      *             readOnly=true
      *         )
      *     ),
@@ -204,29 +204,29 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Return packing list")
+     * @OA\Response(response=200, description="Return list item")
      *
      * @return JsonResponse
      */
     public function criteriaAction(): JsonResponse
     {
-        /** @var PackingListApiDtoInterface $packingListApiDto */
-        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var ListItemApiDtoInterface $listItemApiDto */
+        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $json = [];
         $error = [];
 
         try {
-            $json = $this->queryManager->criteria($packingListApiDto);
+            $json = $this->queryManager->criteria($listItemApiDto);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_packing_list')->JsonResponse('Get packing list', $json, $error);
+        return $this->setSerializeGroup('api_get_list_item')->JsonResponse('Get list item', $json, $error);
     }
 
     /**
-     * @Rest\Get("/api/packing/list", options={"expose": true}, name="api_packing_list")
+     * @Rest\Get("/api/packing/list/item", options={"expose": true}, name="api_packing_list_item")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -236,7 +236,7 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="Evrinoma\PackingListBundle\Dto\PackingListApiDto",
+     *             default="Evrinoma\PackingListBundle\Dto\ListItemApiDto",
      *             readOnly=true
      *         )
      *     ),
@@ -251,25 +251,25 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Return packing list")
+     * @OA\Response(response=200, description="Return list item")
      *
      * @return JsonResponse
      */
     public function getAction(): JsonResponse
     {
-        /** @var PackingListApiDtoInterface $packingListApiDto */
-        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var ListItemApiDtoInterface $listItemApiDto */
+        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $json = [];
         $error = [];
 
         try {
-            $json[] = $this->queryManager->get($packingListApiDto);
+            $json[] = $this->queryManager->get($listItemApiDto);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_packing_list')->JsonResponse('Get packing list', $json, $error);
+        return $this->setSerializeGroup('api_get_list_item')->JsonResponse('Get list item', $json, $error);
     }
 
     /**
@@ -280,18 +280,18 @@ final class PackingListApiController extends AbstractWrappedApiController
     public function setRestStatus(\Exception $e): array
     {
         switch (true) {
-            case $e instanceof PackingListCannotBeCreatedException:
-            case $e instanceof PackingListCannotBeRemovedException:
-            case $e instanceof PackingListCannotBeSavedException:
+            case $e instanceof ListItemCannotBeCreatedException:
+            case $e instanceof ListItemCannotBeRemovedException:
+            case $e instanceof ListItemCannotBeSavedException:
                 $this->setStatusNotImplemented();
                 break;
             case $e instanceof UniqueConstraintViolationException:
                 $this->setStatusConflict();
                 break;
-            case $e instanceof PackingListNotFoundException:
+            case $e instanceof ListItemNotFoundException:
                 $this->setStatusNotFound();
                 break;
-            case $e instanceof PackingListInvalidException:
+            case $e instanceof ListItemInvalidException:
                 $this->setStatusUnprocessableEntity();
                 break;
             default:

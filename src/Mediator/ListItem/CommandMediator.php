@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Mediator\PackingList;
+namespace Evrinoma\PackingListBundle\Mediator\ListItem;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
+use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
+use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractCommandMediator;
 
 class CommandMediator extends AbstractCommandMediator implements CommandMediatorInterface
 {
-    public function onUpdate(DtoInterface $dto, $entity): PackingListInterface
+    public function onUpdate(DtoInterface $dto, $entity): ListItemInterface
     {
-        /* @var $dto PackingListApiDtoInterface */
+        /* @var $dto ListItemApiDtoInterface */
         $entity
             ->setId($dto->getId());
 
@@ -33,9 +33,9 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
     {
     }
 
-    public function onCreate(DtoInterface $dto, $entity): PackingListInterface
+    public function onCreate(DtoInterface $dto, $entity): ListItemInterface
     {
-        /* @var $dto PackingListApiDtoInterface */
+        /* @var $dto ListItemApiDtoInterface */
         $entity
             ->setId($dto->getId());
 

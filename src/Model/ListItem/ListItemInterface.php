@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Model\PackingList;
+namespace Evrinoma\PackingListBundle\Model\ListItem;
 
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 use Evrinoma\UtilsBundle\Entity\NameInterface;
@@ -21,9 +21,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param int|null $id
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setId(?int $id): PackingListInterface;
+    public function setId(?int $id): ListItemInterface;
 
     /**
      * @return string
@@ -33,9 +33,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param string $stateStandard
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setStateStandard(string $stateStandard): PackingListInterface;
+    public function setStateStandard(string $stateStandard): ListItemInterface;
 
     /**
      * @return float
@@ -45,9 +45,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param float $quantity
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setQuantity(float $quantity): PackingListInterface;
+    public function setQuantity(float $quantity): ListItemInterface;
 
     /**
      * @return string
@@ -57,9 +57,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param string $measure
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setMeasure(string $measure): PackingListInterface;
+    public function setMeasure(string $measure): ListItemInterface;
 
     /**
      * @return string
@@ -69,9 +69,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param string $comment
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setComment(string $comment): PackingListInterface;
+    public function setComment(string $comment): ListItemInterface;
 
     /**
      * @return string
@@ -81,9 +81,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param string $subContract
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setSubContract(string $subContract): PackingListInterface;
+    public function setSubContract(string $subContract): ListItemInterface;
 
     /**
      * @return string
@@ -93,9 +93,9 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param string $number
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setNumber(string $number): PackingListInterface;
+    public function setNumber(string $number): ListItemInterface;
 
     /**
      * @return string
@@ -105,7 +105,7 @@ interface ListItemInterface extends IdInterface, NameInterface
     /**
      * @param string $stamp
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setStamp(string $stamp): PackingListInterface;
+    public function setStamp(string $stamp): ListItemInterface;
 }

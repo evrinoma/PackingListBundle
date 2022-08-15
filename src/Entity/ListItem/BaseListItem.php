@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Entity\PackingList;
+namespace Evrinoma\PackingListBundle\Entity\ListItem;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\PackingListBundle\Model\PackingList\AbstractListItem;
+use Evrinoma\PackingListBundle\Model\ListItem\AbstractListItem;
 
 /**
  * @ORM\Table(name="e_list_item")

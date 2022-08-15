@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository;
+namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-interface AliasInterface
+use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
+
+interface ListItemApiDtoInterface extends IdInterface
 {
-    public const PACKING_LIST = 'packing_list';
-    public const LIST_ITEM = 'list_item';
 }
