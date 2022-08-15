@@ -18,6 +18,7 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
 use Evrinoma\PackingListBundle\Repository\AliasInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
+use Evrinoma\UtilsBundle\QueryBuilder\QueryBuilderInterface;
 
 class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterface
 {
@@ -25,31 +26,11 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 
     /**
      * @param DtoInterface $dto
-     * @param QueryBuilder $builder
+     * @param QueryBuilderInterface $builder
      *
      * @return mixed
      */
-    public function createQuery(DtoInterface $dto, QueryBuilder $builder): void
+    public function createQuery(DtoInterface $dto, QueryBuilderInterface $builder): void
     {
-        $alias = $this->alias();
-
-        /** @var $dto PackingListApiDtoInterface */
-        if ($dto->hasId()) {
-            $builder
-                ->andWhere($alias.'.id = :id')
-                ->setParameter('id', $dto->getId());
-        }
-
-        if ($dto->hasDescription()) {
-            $builder
-                ->andWhere($alias.'.description like :description')
-                ->setParameter('description', '%'.$dto->getDescription().'%');
-        }
-
-        if ($dto->hasActive()) {
-            $builder
-                ->andWhere($alias.'.active = :active')
-                ->setParameter('active', $dto->getActive());
-        }
     }
 }

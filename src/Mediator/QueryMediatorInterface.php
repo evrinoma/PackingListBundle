@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Mediator;
 
-use Doctrine\ORM\QueryBuilder;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
+use Evrinoma\UtilsBundle\QueryBuilder\QueryBuilderInterface;
 
 interface QueryMediatorInterface
 {
@@ -25,17 +25,17 @@ interface QueryMediatorInterface
 
     /**
      * @param PackingListApiDtoInterface $dto
-     * @param QueryBuilder               $builder
+     * @param QueryBuilderInterface               $builder
      *
      * @return mixed
      */
-    public function createQuery(PackingListApiDtoInterface $dto, QueryBuilder $builder): void;
+    public function createQuery(PackingListApiDtoInterface $dto, QueryBuilderInterface $builder): void;
 
     /**
      * @param PackingListApiDtoInterface $dto
-     * @param QueryBuilder               $builder
+     * @param QueryBuilderInterface               $builder
      *
      * @return array
      */
-    public function getResult(PackingListApiDtoInterface $dto, QueryBuilder $builder): array;
+    public function getResult(PackingListApiDtoInterface $dto, QueryBuilderInterface $builder): array;
 }
