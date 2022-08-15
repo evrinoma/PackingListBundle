@@ -106,8 +106,8 @@ class EvrinomaPackingListExtension extends Extension
             foreach ($config['services'] as $key => $service) {
                 if (null !== $service) {
                     switch ($key) {
-                        case 'pre_validator':
-                            $remap['pre_validator'] = 'evrinoma.'.$this->getAlias().'.services.pre.validator';
+                        case 'pre_validator_packing_list':
+                            $remap['pre_validator_packing_list'] = 'evrinoma.'.$this->getAlias().'.services.packing_list.pre.validator';
                             break;
                     }
                 }

@@ -48,7 +48,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('query')->defaultNull()->info('This option is used for query packing list decoration')->end()
             ->end()->end()
             ->arrayNode('services')->addDefaultsIfNotSet()->children()
-            ->scalarNode('pre_validator')->defaultNull()->info('This option is used for pre_validator overriding')->end()
+            ->scalarNode('pre_validator_packing_list')->defaultNull()->info('This option is used for pre_validator_packing_list overriding')->end()
             ->end()->end()
             ->end();
 
