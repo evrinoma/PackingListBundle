@@ -23,7 +23,7 @@ use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException
 use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundException;
 use Evrinoma\PackingListBundle\Manager\PackingList\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface;
-use Evrinoma\PackingListBundle\PreValidator\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;

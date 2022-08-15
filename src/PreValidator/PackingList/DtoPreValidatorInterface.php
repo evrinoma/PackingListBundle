@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\PreValidator;
+namespace Evrinoma\PackingListBundle\PreValidator\PackingList;
 
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
 use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;

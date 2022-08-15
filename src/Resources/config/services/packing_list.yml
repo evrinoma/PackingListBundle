@@ -78,8 +78,8 @@ services:
     public: true
     arguments:
 
-  Evrinoma\PackingListBundle\PreValidator\DtoPreValidator:
+  Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidator:
     alias: evrinoma.packing_list.packing_list.pre.validator
 
-  Evrinoma\PackingListBundle\PreValidator\DtoPreValidatorInterface:
+  Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface:
     alias: evrinoma.packing_list.packing_list.pre.validator
