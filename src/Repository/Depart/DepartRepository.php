@@ -21,13 +21,11 @@ use Evrinoma\PackingListBundle\Exception\Depart\DepartNotFoundException;
 use Evrinoma\PackingListBundle\Exception\Depart\DepartProxyException;
 use Evrinoma\PackingListBundle\Mediator\Depart\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
-use Evrinoma\PackingListBundle\Repository\Api\RepositoryWrapper;
 use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class DepartRepository extends RepositoryWrapper implements DepartRepositoryInterface, RepositoryWrapperInterface
+class DepartRepository extends DepartRepositoryWrapper implements DepartRepositoryInterface, RepositoryWrapperInterface
 {
     private QueryMediatorInterface $mediator;
-    protected string               $entityClass;
 
     /**
      * @param string                 $entityClass

@@ -21,13 +21,12 @@ use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
 use Evrinoma\PackingListBundle\Exception\ListItem\ListItemProxyException;
 use Evrinoma\PackingListBundle\Mediator\ListItem\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
-use Evrinoma\PackingListBundle\Repository\Api\RepositoryWrapper;
+use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
 class ListItemRepository extends RepositoryWrapper implements ListItemRepositoryInterface, RepositoryWrapperInterface
 {
     private QueryMediatorInterface $mediator;
-    protected string               $entityClass;
 
     /**
      * @param string                 $entityClass
