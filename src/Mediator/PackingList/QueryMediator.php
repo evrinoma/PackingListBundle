@@ -16,10 +16,13 @@ namespace Evrinoma\PackingListBundle\Mediator\PackingList;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Repository\AliasInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
+use Evrinoma\UtilsBundle\Mediator\Api\QueryMediatorTrait;
 use Evrinoma\UtilsBundle\QueryBuilder\QueryBuilderInterface;
 
 class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterface
 {
+    use QueryMediatorTrait;
+
     protected static string $alias = AliasInterface::PACKING_LIST;
 
     /**
