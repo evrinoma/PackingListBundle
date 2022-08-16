@@ -14,28 +14,28 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\PreValidator\ListItem;
 
 use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;
+use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
 
 interface DtoPreValidatorInterface
 {
     /**
      * @param ListItemApiDtoInterface $dto
      *
-     * @throws PackingListInvalidException
+     * @throws ListItemInvalidException
      */
     public function onPost(ListItemApiDtoInterface $dto): void;
 
     /**
      * @param ListItemApiDtoInterface $dto
      *
-     * @throws PackingListInvalidException
+     * @throws ListItemInvalidException
      */
     public function onPut(ListItemApiDtoInterface $dto): void;
 
     /**
      * @param ListItemApiDtoInterface $dto
      *
-     * @throws PackingListInvalidException
+     * @throws ListItemInvalidException
      */
     public function onDelete(ListItemApiDtoInterface $dto): void;
 }

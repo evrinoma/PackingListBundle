@@ -11,15 +11,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Entity\ListItem;
+namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\PackingListBundle\Model\ListItem\AbstractListItem;
+use Evrinoma\DtoCommon\ValueObject\Preserve\IdTrait;
 
-/**
- * @ORM\Table(name="e_packing_list_item")
- * @ORM\Entity
- */
-class BaseListItem extends AbstractListItem
+trait DepartApiDtoTrait
 {
+    use IdTrait;
 }

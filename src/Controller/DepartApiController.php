@@ -15,15 +15,15 @@ namespace Evrinoma\PackingListBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeCreatedException;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeRemovedException;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeSavedException;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
-use Evrinoma\PackingListBundle\Manager\ListItem\CommandManagerInterface;
-use Evrinoma\PackingListBundle\Manager\ListItem\QueryManagerInterface;
-use Evrinoma\PackingListBundle\PreValidator\ListItem\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
+use Evrinoma\PackingListBundle\Exception\Depart\DepartCannotBeCreatedException;
+use Evrinoma\PackingListBundle\Exception\Depart\DepartCannotBeRemovedException;
+use Evrinoma\PackingListBundle\Exception\Depart\DepartCannotBeSavedException;
+use Evrinoma\PackingListBundle\Exception\Depart\DepartInvalidException;
+use Evrinoma\PackingListBundle\Exception\Depart\DepartNotFoundException;
+use Evrinoma\PackingListBundle\Manager\Depart\CommandManagerInterface;
+use Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface;
+use Evrinoma\PackingListBundle\PreValidator\Depart\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
@@ -32,7 +32,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class ListItemApiController extends AbstractWrappedApiController
+final class DepartApiController extends AbstractWrappedApiController
 {
     private string $dtoClass;
     /**
@@ -68,19 +68,19 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Post("/api/packing/list/item/create", options={"expose": true}, name="api_packing_list_item_create")
+     * @Rest\Post("/api/packing/depart/create", options={"expose": true}, name="api_packing_depart_create")
      * @OA\Post(
      *     tags={"packing-list"},
-     *     description="the method perform create list item",
+     *     description="the method perform create departure packing list",
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 example={
-     *                     "class": "Evrinoma\PackingListBundle\Dto\ListItemApiDto",
+     *                     "class": "Evrinoma\PackingListBundle\Dto\DepartApiDto",
      *                 },
      *                 type="object",
-     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\ListItemApiDto"),
+     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\DepartApiDto"),
      *             )
      *         )
      *     )
@@ -94,28 +94,28 @@ final class ListItemApiController extends AbstractWrappedApiController
         $json = [];
 
         try {
-            throw new ListItemCannotBeCreatedException();
+            throw new DepartCannotBeCreatedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_post_list_item')->JsonResponse('Create list item', $json, $error);
+        return $this->setSerializeGroup('api_post_depart')->JsonResponse('Create list item', $json, $error);
     }
 
     /**
-     * @Rest\Put("/api/packing/list/item/save", options={"expose": true}, name="api_packing_list_item_save")
+     * @Rest\Put("/api/packing/depart/save", options={"expose": true}, name="api_packing_depart_save")
      * @OA\Put(
      *     tags={"packing-list"},
-     *     description="the method perform save list item for current entity",
+     *     description="the method perform save departure packing list for current entity",
      *     @OA\RequestBody(
      *         @OA\MediaType(
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 example={
-     *                     "class": "Evrinoma\PackingListBundle\Dto\ListItemApiDto",
+     *                     "class": "Evrinoma\PackingListBundle\Dto\DepartApiDto",
      *                 },
      *                 type="object",
-     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\ListItemApiDto"),
+     *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\DepartApiDto"),
      *             )
      *         )
      *     )
@@ -129,16 +129,16 @@ final class ListItemApiController extends AbstractWrappedApiController
         $json = [];
 
         try {
-            throw new ListItemCannotBeSavedException();
+            throw new DepartCannotBeSavedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_put_list_item')->JsonResponse('Save list item', $json, $error);
+        return $this->setSerializeGroup('api_put_depart')->JsonResponse('Save list item', $json, $error);
     }
 
     /**
-     * @Rest\Delete("/api/packing/list/item/delete", options={"expose": true}, name="api_packing_list_item_delete")
+     * @Rest\Delete("/api/packing/depart/delete", options={"expose": true}, name="api_packing_depart_delete")
      * @OA\Delete(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -148,7 +148,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="Evrinoma\PackingListBundle\Dto\ListItemApiDto",
+     *             default="Evrinoma\PackingListBundle\Dto\DepartApiDto",
      *             readOnly=true
      *         )
      *     ),
@@ -172,7 +172,7 @@ final class ListItemApiController extends AbstractWrappedApiController
         $json = [];
 
         try {
-            throw new ListItemCannotBeRemovedException();
+            throw new DepartCannotBeRemovedException();
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -181,7 +181,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/list/item/criteria", options={"expose": true}, name="api_packing_list_item_criteria")
+     * @Rest\Get("/api/packing/depart/criteria", options={"expose": true}, name="api_packing_depart_criteria")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -191,7 +191,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="Evrinoma\PackingListBundle\Dto\ListItemApiDto",
+     *             default="Evrinoma\PackingListBundle\Dto\DepartApiDto",
      *             readOnly=true
      *         )
      *     ),
@@ -210,7 +210,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      */
     public function criteriaAction(): JsonResponse
     {
-        /** @var ListItemApiDtoInterface $listItemApiDto */
+        /** @var DepartApiDtoInterface $listItemApiDto */
         $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $json = [];
@@ -222,11 +222,11 @@ final class ListItemApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_list_item')->JsonResponse('Get list item', $json, $error);
+        return $this->setSerializeGroup('api_get_depart')->JsonResponse('Get list item', $json, $error);
     }
 
     /**
-     * @Rest\Get("/api/packing/list/item", options={"expose": true}, name="api_packing_list_item")
+     * @Rest\Get("/api/packing/depart", options={"expose": true}, name="api_packing_depart")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -236,7 +236,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="Evrinoma\PackingListBundle\Dto\ListItemApiDto",
+     *             default="Evrinoma\PackingListBundle\Dto\DepartApiDto",
      *             readOnly=true
      *         )
      *     ),
@@ -257,7 +257,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      */
     public function getAction(): JsonResponse
     {
-        /** @var ListItemApiDtoInterface $listItemApiDto */
+        /** @var DepartApiDtoInterface $listItemApiDto */
         $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $json = [];
@@ -269,7 +269,7 @@ final class ListItemApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_list_item')->JsonResponse('Get list item', $json, $error);
+        return $this->setSerializeGroup('api_get_depart')->JsonResponse('Get list item', $json, $error);
     }
 
     /**
@@ -280,18 +280,18 @@ final class ListItemApiController extends AbstractWrappedApiController
     public function setRestStatus(\Exception $e): array
     {
         switch (true) {
-            case $e instanceof ListItemCannotBeCreatedException:
-            case $e instanceof ListItemCannotBeRemovedException:
-            case $e instanceof ListItemCannotBeSavedException:
+            case $e instanceof DepartCannotBeCreatedException:
+            case $e instanceof DepartCannotBeRemovedException:
+            case $e instanceof DepartCannotBeSavedException:
                 $this->setStatusNotImplemented();
                 break;
             case $e instanceof UniqueConstraintViolationException:
                 $this->setStatusConflict();
                 break;
-            case $e instanceof ListItemNotFoundException:
+            case $e instanceof DepartNotFoundException:
                 $this->setStatusNotFound();
                 break;
-            case $e instanceof ListItemInvalidException:
+            case $e instanceof DepartInvalidException:
                 $this->setStatusUnprocessableEntity();
                 break;
             default:

@@ -5,3 +5,7 @@ packing_list_api:
 packing_list_item_api:
   resource: "@EvrinomaPackingListBundle/Controller/ListItemApiController.php"
   type: annotation
+
+packing_depart_api:
+  resource: "@EvrinomaPackingListBundle/Controller/DepartApiController.php"
+  type: annotation

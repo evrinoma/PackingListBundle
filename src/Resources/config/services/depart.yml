@@ -1,0 +1,85 @@
+services:
+  Evrinoma\PackingListBundle\Controller\DepartApiController:
+    alias: evrinoma.packing_list.depart.api.controller
+    public: true
+
+  evrinoma.packing_list.depart.api.controller:
+    class: Evrinoma\PackingListBundle\Controller\DepartApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.packing_list.depart.command.manager'
+      - '@evrinoma.packing_list.depart.query.manager'
+      - '@evrinoma.packing_list.depart.pre.validator'
+    autowire: true
+
+  evrinoma.packing_list.depart.factory:
+    class: Evrinoma\PackingListBundle\Factory\DepartFactory
+    public: true
+    arguments:
+
+  evrinoma.packing_list.depart.repository:
+    class: Evrinoma\PackingListBundle\Repository\Depart\DepartRepository
+    public: true
+    arguments:
+
+  evrinoma.packing_list.depart.command.manager:
+    class: Evrinoma\PackingListBundle\Manager\Depart\CommandManager
+    arguments:
+      - '@evrinoma.packing_list.depart.validator'
+      - '@evrinoma.packing_list.depart.repository'
+      - '@evrinoma.packing_list.depart.factory'
+      - '@evrinoma.packing_list.depart.command.mediator'
+
+  Evrinoma\PackingListBundle\Manager\Depart\CommandManagerInterface:
+    alias: evrinoma.packing_list.depart.command.manager
+
+  evrinoma.packing_list.depart.query.manager:
+    class: Evrinoma\PackingListBundle\Manager\Depart\QueryManager
+    arguments:
+      - '@evrinoma.packing_list.depart.repository'
+
+  Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface:
+    alias: evrinoma.packing_list.depart.query.manager
+
+  evrinoma.packing_list.depart.validator:
+    class: Evrinoma\PackingListBundle\Validator\DepartValidator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Validator\DepartValidator:
+    alias: evrinoma.packing_list.depart.validator
+
+  evrinoma.packing_list.depart.query.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\Depart\QueryMediator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Mediator\Depart\QueryMediator:
+    alias: evrinoma.packing_list.depart.query.mediator
+
+  Evrinoma\PackingListBundle\Mediator\Depart\QueryMediatorInterface:
+    alias: evrinoma.packing_list.depart.query.mediator
+
+  evrinoma.packing_list.depart.command.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\Depart\CommandMediator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Mediator\Depart\CommandMediator:
+    alias: evrinoma.packing_list.depart.command.mediator
+
+  Evrinoma\PackingListBundle\Mediator\Depart\CommandMediatorInterface:
+    alias: evrinoma.packing_list.depart.command.mediator
+
+  evrinoma.packing_list.depart.pre.validator:
+    class: Evrinoma\PackingListBundle\PreValidator\Depart\DtoPreValidator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\PreValidator\Depart\DtoPreValidator:
+    alias: evrinoma.packing_list.depart.pre.validator
+
+  Evrinoma\PackingListBundle\PreValidator\Depart\DtoPreValidatorInterface:
+    alias: evrinoma.packing_list.depart.pre.validator

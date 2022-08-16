@@ -11,15 +11,8 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Entity\ListItem;
+namespace Evrinoma\PackingListBundle\Exception\Depart;
 
-use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\PackingListBundle\Model\ListItem\AbstractListItem;
-
-/**
- * @ORM\Table(name="e_packing_list_item")
- * @ORM\Entity
- */
-class BaseListItem extends AbstractListItem
+class DepartInvalidException extends \Exception
 {
 }

@@ -11,15 +11,15 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Entity\ListItem;
+namespace Evrinoma\PackingListBundle\Entity\Depart;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\PackingListBundle\Model\ListItem\AbstractListItem;
+use Evrinoma\PackingListBundle\Model\Depart\AbstractDepart;
 
 /**
- * @ORM\Table(name="e_packing_list_item")
+ * @ORM\Table(name="e_packing_depart")
  * @ORM\Entity
  */
-class BaseListItem extends AbstractListItem
+class BaseDepart extends AbstractDepart
 {
 }

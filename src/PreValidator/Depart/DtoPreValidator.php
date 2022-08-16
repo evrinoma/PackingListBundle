@@ -11,10 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\PreValidator\ListItem;
+namespace Evrinoma\PackingListBundle\PreValidator\Depart;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
 use Evrinoma\UtilsBundle\PreValidator\AbstractPreValidator;
 
@@ -36,7 +36,7 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
 
     private function checkId(DtoInterface $dto): void
     {
-        /** @var ListItemApiDtoInterface $dto */
+        /** @var DepartApiDtoInterface $dto */
         if (!$dto->hasId()) {
             throw new ListItemInvalidException('The Dto has\'t ID or class invalid');
         }

@@ -70,9 +70,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param int|null $id
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setId(?int $id): PackingListInterface
+    public function setId(?int $id): ListItemInterface
     {
         $this->id = $id;
 
@@ -90,9 +90,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param string $stateStandard
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setStateStandard(string $stateStandard): PackingListInterface
+    public function setStateStandard(string $stateStandard): ListItemInterface
     {
         $this->stateStandard = $stateStandard;
 
@@ -110,9 +110,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param float $quantity
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setQuantity(float $quantity): PackingListInterface
+    public function setQuantity(float $quantity): ListItemInterface
     {
         $this->quantity = $quantity;
 
@@ -130,9 +130,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param string $measure
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setMeasure(string $measure): PackingListInterface
+    public function setMeasure(string $measure): ListItemInterface
     {
         $this->measure = $measure;
 
@@ -150,9 +150,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param string $comment
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setComment(string $comment): PackingListInterface
+    public function setComment(string $comment): ListItemInterface
     {
         $this->comment = $comment;
 
@@ -170,9 +170,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param string $subContract
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setSubContract(string $subContract): PackingListInterface
+    public function setSubContract(string $subContract): ListItemInterface
     {
         $this->subContract = $subContract;
 
@@ -190,9 +190,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param string $number
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setNumber(string $number): PackingListInterface
+    public function setNumber(string $number): ListItemInterface
     {
         $this->number = $number;
 
@@ -210,9 +210,9 @@ abstract class AbstractListItem implements ListItemInterface
     /**
      * @param string $stamp
      *
-     * @return PackingListInterface
+     * @return ListItemInterface
      */
-    public function setStamp(string $stamp): PackingListInterface
+    public function setStamp(string $stamp): ListItemInterface
     {
         $this->stamp = $stamp;
 

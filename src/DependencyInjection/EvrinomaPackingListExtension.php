@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DependencyInjection;
 
+use Evrinoma\PackingListBundle\Dto\DepartApiDto;
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
@@ -33,9 +34,14 @@ class EvrinomaPackingListExtension extends Extension
     public const ENTITY_FACTORY_PACKING_LIST = 'Evrinoma\PackingListBundle\Factory\PackingListFactory';
     public const ENTITY_BASE_PACKING_LIST = self::ENTITY.'\PackingList\BasePackingList';
     public const DTO_BASE_PACKING_LIST = PackingListApiDto::class;
+
     public const ENTITY_FACTORY_LIST_ITEM = 'Evrinoma\PackingListBundle\Factory\ListItemFactory';
     public const ENTITY_BASE_LIST_ITEM = self::ENTITY.'\ListItem\BaseListItem';
     public const DTO_BASE_LIST_ITEM = ListItemApiDto::class;
+
+    public const ENTITY_FACTORY_DEPART = 'Evrinoma\PackingListBundle\Factory\DepartFactory';
+    public const ENTITY_BASE_DEPART = self::ENTITY.'\Depart\BaseDepart';
+    public const DTO_BASE_DEPART = DepartApiDto::class;
     /**
      * @var array
      */
@@ -69,6 +75,13 @@ class EvrinomaPackingListExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_list_item']);
         }
 
+        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory_depart']) {
+            $this->wireFactory($container, 'depart', $config['factory_depart'], $config['entity_depart']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.depart.factory');
+            $definitionFactory->setArgument(0, $config['entity_depart']);
+        }
+
         $this->remapParametersNamespaces(
             $container,
             $config,
@@ -77,6 +90,7 @@ class EvrinomaPackingListExtension extends Extension
                     'db_driver' => 'evrinoma.'.$this->getAlias().'.storage',
                     'entity_packing_list' => 'evrinoma.'.$this->getAlias().'.entity_packing_list',
                     'entity_list_item' => 'evrinoma.'.$this->getAlias().'.entity_list_item',
+                    'entity_depart' => 'evrinoma.'.$this->getAlias().'.entity_depart',
                 ],
             ]
         );
@@ -92,6 +106,12 @@ class EvrinomaPackingListExtension extends Extension
         $this->wireController($container, 'list_item', $config['dto_list_item']);
 
         $this->wireValidator($container, 'list_item', $config['entity_list_item']);
+
+        $this->wireRepository($container, 'depart', $config['entity_depart']);
+
+        $this->wireController($container, 'depart', $config['dto_depart']);
+
+        $this->wireValidator($container, 'depart', $config['entity_depart']);
 
         if ($config['constraints']) {
             $loader->load('validation.yml');
@@ -113,6 +133,12 @@ class EvrinomaPackingListExtension extends Extension
                             break;
                         case 'query_list_item':
                             $remap['query_list_item'] = 'evrinoma.'.$this->getAlias().'.decorates.list_item.query';
+                            break;
+                        case 'command_depart':
+                            $remap['command_depart'] = 'evrinoma.'.$this->getAlias().'.decorates.depart.command';
+                            break;
+                        case 'query_depart':
+                            $remap['query_depart'] = 'evrinoma.'.$this->getAlias().'.decorates.depart.query';
                             break;
                     }
                 }
@@ -136,6 +162,9 @@ class EvrinomaPackingListExtension extends Extension
                         case 'pre_validator_list_item':
                             $remap['pre_validator_list_item'] = 'evrinoma.'.$this->getAlias().'.services.list_item.pre.validator';
                             break;
+                        case 'pre_validator_depart':
+                            $remap['pre_validator_depart'] = 'evrinoma.'.$this->getAlias().'.services.depart.pre.validator';
+                            break;
                     }
                 }
             }
@@ -155,6 +184,7 @@ class EvrinomaPackingListExtension extends Extension
         switch ($name) {
             case 'packing_list':
             case 'list_item':
+            case 'depart':
                 $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
                 $definitionRepository->setArgument(1, $definitionQueryMediator);
                 // no break
