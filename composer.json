@@ -16,7 +16,8 @@
         "php": "^7.4 || ^8.0",
         "evrinoma/dto-bundle": "dev-master",
         "evrinoma/dto-common": "dev-master",
-        "evrinoma/utils-bundle": "dev-master"
+        "evrinoma/utils-bundle": "dev-master",
+        "evrinoma/fetch-bundle": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -58,6 +59,10 @@
         "dto-common": {
             "type": "vcs",
             "url": "https://github.com/evrinoma/DtoCommon.git"
+        },
+        "fetch": {
+            "type": "vcs",
+            "url": "https://github.com/evrinoma/FetchBundle.git"
         },
         "test-utils": {
             "type": "vcs",
