@@ -210,14 +210,14 @@ final class DepartApiController extends AbstractWrappedApiController
      */
     public function criteriaAction(): JsonResponse
     {
-        /** @var DepartApiDtoInterface $listItemApiDto */
-        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var DepartApiDtoInterface $departApiDto */
+        $departApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $json = [];
         $error = [];
 
         try {
-            $json = $this->queryManager->criteria($listItemApiDto);
+            $json = $this->queryManager->criteria($departApiDto);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -257,14 +257,14 @@ final class DepartApiController extends AbstractWrappedApiController
      */
     public function getAction(): JsonResponse
     {
-        /** @var DepartApiDtoInterface $listItemApiDto */
-        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        /** @var DepartApiDtoInterface $departApiDto */
+        $departApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
 
         $json = [];
         $error = [];
 
         try {
-            $json[] = $this->queryManager->get($listItemApiDto);
+            $json[] = $this->queryManager->get($departApiDto);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
