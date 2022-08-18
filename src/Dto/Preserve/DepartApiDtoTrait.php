@@ -14,8 +14,16 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
 use Evrinoma\DtoCommon\ValueObject\Preserve\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Preserve\NameTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\AddressTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\IdDepartTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\IsFinalTrait;
 
 trait DepartApiDtoTrait
 {
+    use AddressTrait;
+    use IdDepartTrait;
     use IdTrait;
+    use IsFinalTrait;
+    use NameTrait;
 }

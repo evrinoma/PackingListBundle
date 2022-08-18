@@ -15,22 +15,29 @@ namespace Evrinoma\PackingListBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IdDepartTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class LogisticsApiDto extends AbstractDto implements LogisticsApiDtoInterface
 {
-    use IdTrait;
+    use IdDepartTrait;
+    use PackingListIdTrait;
 
     public function toDto(Request $request): DtoInterface
     {
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $id = $request->get(PackingListApiDtoInterface::ID);
+            $packingListId = $request->get(LogisticsApiDtoInterface::PACKING_LIST_ID);
+            $idDepart = $request->get(LogisticsApiDtoInterface::ID_DEPART);
 
-            if ($id) {
-                $this->setId($id);
+            if ($packingListId) {
+                $this->setPackingListId($packingListId);
+            }
+
+            if ($idDepart) {
+                $this->setIdDepart($idDepart);
             }
         }
 

@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IdDepartInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdInterface;
 
-interface LogisticsApiDtoInterface extends IdInterface
+interface LogisticsApiDtoInterface extends PackingListIdInterface, IdDepartInterface
 {
 }

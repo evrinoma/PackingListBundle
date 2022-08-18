@@ -13,9 +13,11 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-use Evrinoma\DtoCommon\ValueObject\Preserve\IdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\IdDepartTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\PackingListIdTrait;
 
 trait LogisticsApiDtoTrait
 {
-    use IdTrait;
+    use IdDepartTrait;
+    use PackingListIdTrait;
 }
