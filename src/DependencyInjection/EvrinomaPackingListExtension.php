@@ -213,6 +213,7 @@ class EvrinomaPackingListExtension extends Extension
         switch ($name) {
             case 'packing_list':
             case 'list_item':
+            case 'logistics':
             case 'depart':
                 $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
                 $definitionRepository->setArgument(2, $definitionQueryMediator);
