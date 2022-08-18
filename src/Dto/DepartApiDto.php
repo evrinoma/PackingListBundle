@@ -27,7 +27,7 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $id = $request->get(PackingListApiDtoInterface::ID);
+            $id = $request->get(DepartApiDtoInterface::ID);
 
             if ($id) {
                 $this->setId($id);

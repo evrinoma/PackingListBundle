@@ -18,7 +18,7 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
-class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
+class LogisticsApiDto extends AbstractDto implements LogisticsApiDtoInterface
 {
     use IdTrait;
 
@@ -27,7 +27,7 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $id = $request->get(ListItemApiDtoInterface::ID);
+            $id = $request->get(PackingListApiDtoInterface::ID);
 
             if ($id) {
                 $this->setId($id);

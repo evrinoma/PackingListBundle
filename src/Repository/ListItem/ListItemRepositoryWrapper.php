@@ -11,13 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\Depart;
+namespace Evrinoma\PackingListBundle\Repository\ListItem;
 
-use Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription;
+use Evrinoma\PackingListBundle\Fetch\Description\ListItem\CriteriaDescription;
+use Evrinoma\PackingListBundle\Fetch\Description\ListItem\GetDescription;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
-abstract class DepartRepositoryWrapper extends RepositoryWrapper
+abstract class ListItemRepositoryWrapper extends RepositoryWrapper
 {
     public function persistWrapped($entity): void
     {
@@ -29,6 +30,10 @@ abstract class DepartRepositoryWrapper extends RepositoryWrapper
 
     public function findWrapped($id, $lockMode = null, $lockVersion = null)
     {
+        $handler = $this->managerRegistry->getManager(BaseHandler::NAME, GetDescription::NAME);
+
+        $json = $handler->run();
+
         return null;
     }
 

@@ -11,20 +11,20 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\Depart;
+namespace Evrinoma\PackingListBundle\Repository\Logistics;
 
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\ORMInvalidArgumentException;
-use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\Depart\DepartCannotBeSavedException;
-use Evrinoma\PackingListBundle\Exception\Depart\DepartNotFoundException;
-use Evrinoma\PackingListBundle\Exception\Depart\DepartProxyException;
-use Evrinoma\PackingListBundle\Mediator\Depart\QueryMediatorInterface;
-use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
+use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
+use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeSavedException;
+use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
+use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsProxyException;
+use Evrinoma\PackingListBundle\Mediator\Logistics\QueryMediatorInterface;
+use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
 use Evrinoma\UtilsBundle\Persistence\ManagerRegistry;
 use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class DepartRepository extends DepartRepositoryWrapper implements DepartRepositoryInterface, RepositoryWrapperInterface
+class LogisticsRepository extends LogisticsRepositoryWrapper implements LogisticsRepositoryInterface, RepositoryWrapperInterface
 {
     private QueryMediatorInterface $mediator;
 
@@ -41,42 +41,42 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
     }
 
     /**
-     * @param DepartInterface $listItem
+     * @param LogisticsInterface $listItem
      *
      * @return bool
      *
-     * @throws DepartCannotBeSavedException
+     * @throws LogisticsCannotBeSavedException
      * @throws ORMException
      */
-    public function save(DepartInterface $listItem): bool
+    public function save(LogisticsInterface $listItem): bool
     {
         try {
             $this->persistWrapped($listItem);
         } catch (ORMInvalidArgumentException $e) {
-            throw new DepartCannotBeSavedException($e->getMessage());
+            throw new LogisticsCannotBeSavedException($e->getMessage());
         }
 
         return true;
     }
 
     /**
-     * @param DepartInterface $listItem
+     * @param LogisticsInterface $listItem
      *
      * @return bool
      */
-    public function remove(DepartInterface $listItem): bool
+    public function remove(LogisticsInterface $listItem): bool
     {
         return true;
     }
 
     /**
-     * @param DepartApiDtoInterface $dto
+     * @param LogisticsApiDtoInterface $dto
      *
      * @return array
      *
-     * @throws DepartNotFoundException
+     * @throws LogisticsNotFoundException
      */
-    public function findByCriteria(DepartApiDtoInterface $dto): array
+    public function findByCriteria(LogisticsApiDtoInterface $dto): array
     {
         $builder = $this->createQueryBuilderWrapped($this->mediator->alias());
 
@@ -85,7 +85,7 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
         $listItems = $this->mediator->getResult($dto, $builder);
 
         if (0 === \count($listItems)) {
-            throw new DepartNotFoundException('Cannot find depart by findByCriteria');
+            throw new LogisticsNotFoundException('Cannot find depart by findByCriteria');
         }
 
         return $listItems;
@@ -98,15 +98,15 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
      *
      * @return mixed
      *
-     * @throws DepartNotFoundException
+     * @throws LogisticsNotFoundException
      */
-    public function find($id, $lockMode = null, $lockVersion = null): DepartInterface
+    public function find($id, $lockMode = null, $lockVersion = null): LogisticsInterface
     {
-        /** @var DepartInterface $listItem */
+        /** @var LogisticsInterface $listItem */
         $listItem = $this->findWrapped($id);
 
         if (null === $listItem) {
-            throw new DepartNotFoundException("Cannot find depart with id $id");
+            throw new LogisticsNotFoundException("Cannot find depart with id $id");
         }
 
         return $listItem;
@@ -115,17 +115,17 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
     /**
      * @param string $id
      *
-     * @return DepartInterface
+     * @return LogisticsInterface
      *
-     * @throws DepartProxyException
+     * @throws LogisticsProxyException
      * @throws ORMException
      */
-    public function proxy(string $id): DepartInterface
+    public function proxy(string $id): LogisticsInterface
     {
         $listItem = $this->referenceWrapped($id);
 
         if (!$this->containsWrapped($listItem)) {
-            throw new DepartProxyException("Proxy doesn't exist with $id");
+            throw new LogisticsProxyException("Proxy doesn't exist with $id");
         }
 
         return $listItem;

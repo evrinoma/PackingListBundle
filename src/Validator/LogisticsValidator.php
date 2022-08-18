@@ -13,16 +13,16 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Validator;
 
-use Evrinoma\PackingListBundle\Entity\ListItem\BaseListItem;
+use Evrinoma\PackingListBundle\Entity\Logistics\BaseLogistics;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-final class ListItemValidator extends AbstractValidator
+final class LogisticsValidator extends AbstractValidator
 {
     /**
      * @var string|null
      */
-    protected static ?string $entityClass = BaseListItem::class;
+    protected static ?string $entityClass = BaseLogistics::class;
 
     /**
      * @param ValidatorInterface $validator

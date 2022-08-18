@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\Depart;
+namespace Evrinoma\PackingListBundle\Repository\Logistics;
 
-use Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription;
+use Evrinoma\PackingListBundle\Fetch\Description\Logistics\CriteriaDescription;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
-abstract class DepartRepositoryWrapper extends RepositoryWrapper
+abstract class LogisticsRepositoryWrapper extends RepositoryWrapper
 {
     public function persistWrapped($entity): void
     {

@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Validator;
 
-use Evrinoma\PackingListBundle\Entity\PackingList\BaseDepart;
+use Evrinoma\PackingListBundle\Entity\Depart\BaseDepart;
 use Evrinoma\UtilsBundle\Validator\AbstractValidator;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 

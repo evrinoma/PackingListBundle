@@ -42,6 +42,10 @@ class EvrinomaPackingListExtension extends Extension
     public const ENTITY_FACTORY_DEPART = 'Evrinoma\PackingListBundle\Factory\DepartFactory';
     public const ENTITY_BASE_DEPART = self::ENTITY.'\Depart\BaseDepart';
     public const DTO_BASE_DEPART = DepartApiDto::class;
+
+    public const ENTITY_FACTORY_LOGISTICS = 'Evrinoma\PackingListBundle\Factory\LogisticsFactory';
+    public const ENTITY_BASE_LOGISTICS = self::ENTITY.'\Logistics\BaseLogistics';
+    public const DTO_BASE_LOGISTICS = DepartApiDto::class;
     /**
      * @var array
      */
@@ -82,6 +86,13 @@ class EvrinomaPackingListExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_depart']);
         }
 
+        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory_logistics']) {
+            $this->wireFactory($container, 'logistics', $config['factory_logistics'], $config['entity_logistics']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.logistics.factory');
+            $definitionFactory->setArgument(0, $config['entity_logistics']);
+        }
+
         $this->remapParametersNamespaces(
             $container,
             $config,
@@ -91,6 +102,7 @@ class EvrinomaPackingListExtension extends Extension
                     'entity_packing_list' => 'evrinoma.'.$this->getAlias().'.entity_packing_list',
                     'entity_list_item' => 'evrinoma.'.$this->getAlias().'.entity_list_item',
                     'entity_depart' => 'evrinoma.'.$this->getAlias().'.entity_depart',
+                    'entity_logistics' => 'evrinoma.'.$this->getAlias().'.entity_logistics',
                 ],
             ]
         );
@@ -112,6 +124,12 @@ class EvrinomaPackingListExtension extends Extension
         $this->wireController($container, 'depart', $config['dto_depart']);
 
         $this->wireValidator($container, 'depart', $config['entity_depart']);
+
+        $this->wireRepository($container, 'logistics', $config['entity_logistics']);
+
+        $this->wireController($container, 'logistics', $config['dto_logistics']);
+
+        $this->wireValidator($container, 'logistics', $config['entity_logistics']);
 
         if ($config['constraints']) {
             $loader->load('validation.yml');
@@ -140,6 +158,12 @@ class EvrinomaPackingListExtension extends Extension
                         case 'query_depart':
                             $remap['query_depart'] = 'evrinoma.'.$this->getAlias().'.decorates.depart.query';
                             break;
+                        case 'command_logistics':
+                            $remap['command_logistics'] = 'evrinoma.'.$this->getAlias().'.decorates.logistics.command';
+                            break;
+                        case 'query_logistics':
+                            $remap['query_logistics'] = 'evrinoma.'.$this->getAlias().'.decorates.logistics.query';
+                            break;
                     }
                 }
             }
@@ -165,6 +189,9 @@ class EvrinomaPackingListExtension extends Extension
                         case 'pre_validator_depart':
                             $remap['pre_validator_depart'] = 'evrinoma.'.$this->getAlias().'.services.depart.pre.validator';
                             break;
+                        case 'pre_validator_logistics':
+                            $remap['pre_validator_logistics'] = 'evrinoma.'.$this->getAlias().'.services.logistics.pre.validator';
+                            break;
                     }
                 }
             }
@@ -181,15 +208,18 @@ class EvrinomaPackingListExtension extends Extension
     {
         $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
 
+        $definition = $container->getDefinition('evrinoma.packing_list.persistence');
+
         switch ($name) {
             case 'packing_list':
             case 'list_item':
             case 'depart':
                 $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
-                $definitionRepository->setArgument(1, $definitionQueryMediator);
+                $definitionRepository->setArgument(2, $definitionQueryMediator);
                 // no break
             default:
-                $definitionRepository->setArgument(0, $class);
+                $definitionRepository->setArgument(1, $class);
+                $definitionRepository->setArgument(0, $definition);
         }
         $array = $definitionRepository->getArguments();
         ksort($array);

@@ -21,19 +21,21 @@ use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
 use Evrinoma\PackingListBundle\Exception\ListItem\ListItemProxyException;
 use Evrinoma\PackingListBundle\Mediator\ListItem\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
-use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
+use Evrinoma\UtilsBundle\Persistence\ManagerRegistry;
 use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class ListItemRepository extends RepositoryWrapper implements ListItemRepositoryInterface, RepositoryWrapperInterface
+class ListItemRepository extends ListItemRepositoryWrapper implements ListItemRepositoryInterface, RepositoryWrapperInterface
 {
     private QueryMediatorInterface $mediator;
 
     /**
+     * @param ManagerRegistry        $managerRegistry
      * @param string                 $entityClass
      * @param QueryMediatorInterface $mediator
      */
-    public function __construct(string $entityClass, QueryMediatorInterface $mediator)
+    public function __construct(ManagerRegistry $managerRegistry, string $entityClass, QueryMediatorInterface $mediator)
     {
+        parent::__construct($managerRegistry);
         $this->mediator = $mediator;
         $this->entityClass = $entityClass;
     }
