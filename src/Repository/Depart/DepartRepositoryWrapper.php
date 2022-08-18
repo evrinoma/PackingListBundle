@@ -32,11 +32,11 @@ abstract class DepartRepositoryWrapper extends RepositoryWrapper
         return null;
     }
 
-    protected function criteriaWrapped($dto): array
+    protected function criteriaWrapped($entity): array
     {
         $handler = $this->managerRegistry->getManager(BaseHandler::NAME, CriteriaDescription::NAME);
 
-        $json = $handler->setDto($dto)->run();
+        $json = $handler->setEntity($entity)->run();
 
         return [];
     }

@@ -17,7 +17,7 @@ use Evrinoma\FetchBundle\Handler\AbstractHandler;
 
 class BaseHandler extends AbstractHandler
 {
-    public const NAME = 'depart';
+    public const NAME = 'packing_list';
 
     public function isValid(): bool
     {

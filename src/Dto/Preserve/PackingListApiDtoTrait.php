@@ -28,8 +28,8 @@ trait PackingListApiDtoTrait
     use ContractorNameTrait;
     use ContractTrait;
     use IdTrait;
+    use ItemsApiDtoTrait;
     use LabelTrait;
     use ProjectNameTrait;
     use SubContractTrait;
-    use ItemsApiDtoTrait;
 }

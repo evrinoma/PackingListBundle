@@ -32,16 +32,16 @@ abstract class PackingListRepositoryWrapper extends RepositoryWrapper
     {
         $handler = $this->managerRegistry->getManager(BaseHandler::NAME, GetDescription::NAME);
 
-        $handler->run();
+        $handler->setEntity($id)->run();
 
         return $handler->getRaw();
     }
 
-    protected function criteriaWrapped($dto): array
+    protected function criteriaWrapped($entity): array
     {
         $handler = $this->managerRegistry->getManager(BaseHandler::NAME, CriteriaDescription::NAME);
 
-        $handler->setDto($dto)->run();
+        $handler->setEntity($entity)->run();
 
         return $handler->getRaw();
     }

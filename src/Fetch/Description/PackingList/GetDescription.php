@@ -13,9 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Fetch\Description\PackingList;
 
-use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
-use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -30,10 +28,9 @@ class GetDescription extends AbstractApiDescription
         parent::__construct($apiHost);
     }
 
-    protected function getOptions(?DtoInterface $dto): array
+    protected function getOptions($entity): array
     {
-        /* @var DepartApiDtoInterface $dto */
-        return ['id' => 9]; // $dto->getId()];
+        return ['id' => $entity];
     }
 
     /**

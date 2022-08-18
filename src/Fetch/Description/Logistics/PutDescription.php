@@ -11,18 +11,18 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Fetch\Description\ListItem;
+namespace Evrinoma\PackingListBundle\Fetch\Description\Logistics;
 
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
 use Symfony\Component\HttpFoundation\Request;
 
-class CriteriaDescription extends AbstractApiDescription
+class PutDescription extends AbstractApiDescription
 {
-    public const NAME = 'api_packing_list_item_criteria';
-    protected string $method = Request::METHOD_GET;
-    protected string $route = '/api/packing_list/items';
+    public const NAME = 'api_packing_depart_criteria';
+    protected string $method = Request::METHOD_PUT;
+    protected string $route = '/api/packing_list_to_depart';
 
     public function __construct(string $apiHost = 'http://cmp.ite-ng.ru')
     {
@@ -31,8 +31,11 @@ class CriteriaDescription extends AbstractApiDescription
 
     protected function getOptions($entity): array
     {
-        /* @var ListItemApiDtoInterface $entity */
-        return ['packingListId' => $entity->getId()];
+        /* @var LogisticsApiDtoInterface $entity */
+        return [
+            'id' => $entity->getId(),
+            'idDepart' => $entity->getId(),
+            ];
     }
 
     /**
