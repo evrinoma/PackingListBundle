@@ -21,7 +21,7 @@ class GetDescription extends AbstractApiDescription
 {
     public const NAME = 'api_packing_list_item';
     protected string $method = Request::METHOD_GET;
-    protected string $route = '/api/packing_list/items';
+    protected string $route  = '/api/packing_list/items';
 
     public function __construct(string $apiHost = 'http://cmp.ite-ng.ru')
     {
@@ -30,7 +30,12 @@ class GetDescription extends AbstractApiDescription
 
     protected function getOptions($entity): array
     {
-        return ['id' => $entity];
+        return [];
+    }
+
+    protected function getUrl($entity): string
+    {
+        return parent::getUrl($entity).'/'.$entity;
     }
 
     /**

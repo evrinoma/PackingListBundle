@@ -32,7 +32,10 @@ class CriteriaDescription extends AbstractApiDescription
     protected function getOptions($entity): array
     {
         /* @var PackingListApiDtoInterface $entity */
-        return ['id' => $entity->getId()];
+        return [
+            'id' => $entity->getId(),
+            'withItems' => true
+        ];
     }
 
     /**
