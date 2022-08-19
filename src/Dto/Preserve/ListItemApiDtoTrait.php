@@ -15,6 +15,7 @@ namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
 use Evrinoma\DtoCommon\ValueObject\Mutable\NumberTrait;
 use Evrinoma\DtoCommon\ValueObject\Preserve\IdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\PackingListIdTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\CommentTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\MeasureTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\QuantityTrait;
@@ -32,4 +33,5 @@ trait ListItemApiDtoTrait
     use StampTrait;
     use StateStandardTrait;
     use SubContractTrait;
+    use PackingListIdTrait;
 }

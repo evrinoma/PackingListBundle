@@ -20,6 +20,7 @@ use Evrinoma\DtoCommon\ValueObject\Mutable\NameTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\AddressTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IdDepartTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IsFinalTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
@@ -29,6 +30,7 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
     use IdTrait;
     use IsFinalTrait;
     use NameTrait;
+    use PackingListIdTrait;
 
     public function toDto(Request $request): DtoInterface
     {
@@ -41,6 +43,7 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
             $idDepart = $request->get(DepartApiDtoInterface::ID_DEPART);
             $isFinal = $request->get(DepartApiDtoInterface::IS_FINAL);
             $name = $request->get(DepartApiDtoInterface::NAME);
+            $packingListId = $request->get(ListItemApiDtoInterface::PACKING_LIST_ID);
 
             if ($address) {
                 $this->setAddress($address);
@@ -64,6 +67,10 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 
             if ($id) {
                 $this->setId($id);
+            }
+
+            if ($packingListId) {
+                $this->setPackingListId($packingListId);
             }
         }
 

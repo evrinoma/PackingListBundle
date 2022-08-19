@@ -19,6 +19,7 @@ use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Evrinoma\DtoCommon\ValueObject\Mutable\NumberTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CommentTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\MeasureTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\QuantityTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StampTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StateStandardTrait;
@@ -35,6 +36,7 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
     use StampTrait;
     use StateStandardTrait;
     use SubContractTrait;
+    use PackingListIdTrait;
 
     public function toDto(Request $request): DtoInterface
     {
@@ -49,6 +51,7 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
             $comment = $request->get(ListItemApiDtoInterface::COMMENT);
             $subContract = $request->get(ListItemApiDtoInterface::SUB_CONTRACT);
             $stamp = $request->get(ListItemApiDtoInterface::STAMP);
+            $packingListId = $request->get(ListItemApiDtoInterface::PACKING_LIST_ID);
 
             if ($id) {
                 $this->setId($id);
@@ -80,6 +83,10 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
 
             if ($stamp) {
                 $this->setStamp($stamp);
+            }
+
+            if ($packingListId) {
+                $this->setPackingListId($packingListId);
             }
         }
 

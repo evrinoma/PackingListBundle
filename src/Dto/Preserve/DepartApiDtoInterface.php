@@ -18,7 +18,8 @@ use Evrinoma\DtoCommon\ValueObject\Mutable\NameInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\AddressInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IdDepartInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IsFinalInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdInterface;
 
-interface DepartApiDtoInterface extends IdInterface, NameInterface, AddressInterface, IdDepartInterface, IsFinalInterface
+interface DepartApiDtoInterface extends IdInterface, NameInterface, AddressInterface, IdDepartInterface, IsFinalInterface, PackingListIdInterface
 {
 }

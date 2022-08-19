@@ -18,6 +18,7 @@ use Evrinoma\DtoCommon\ValueObject\Preserve\NameTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\AddressTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\IdDepartTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\IsFinalTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\PackingListIdTrait;
 
 trait DepartApiDtoTrait
 {
@@ -26,4 +27,5 @@ trait DepartApiDtoTrait
     use IdTrait;
     use IsFinalTrait;
     use NameTrait;
+    use PackingListIdTrait;
 }

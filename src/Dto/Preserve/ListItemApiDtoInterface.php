@@ -16,6 +16,7 @@ namespace Evrinoma\PackingListBundle\Dto\Preserve;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Immutable\NumberInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CommentInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\MeasureInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\QuantityInterface;
@@ -23,6 +24,6 @@ use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StampInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StateStandardInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\SubContractInterface;
 
-interface ListItemApiDtoInterface extends DtoInterface, IdInterface, NumberInterface, StateStandardInterface, QuantityInterface, MeasureInterface, CommentInterface, SubContractInterface, StampInterface
+interface ListItemApiDtoInterface extends DtoInterface, IdInterface, NumberInterface, StateStandardInterface, QuantityInterface, MeasureInterface, CommentInterface, SubContractInterface, StampInterface, PackingListIdInterface
 {
 }

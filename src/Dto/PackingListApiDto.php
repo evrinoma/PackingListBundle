@@ -32,10 +32,10 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
     use ContractorNameTrait;
     use ContractTrait;
     use IdTrait;
+    use ItemsApiDtoTrait;
     use LabelTrait;
     use ProjectNameTrait;
     use SubContractTrait;
-    use ItemsApiDtoTrait;
 
     /**
      * @Dtos(class="Evrinoma\PackingListBundle\Dto\ListItemApiDto", generator="genRequestItemsApiDto", add="addListItemApiDto")
@@ -56,19 +56,18 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
         return $this;
     }
 
-
     public function toDto(Request $request): DtoInterface
     {
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
             $contractDescription = $request->get(PackingListApiDtoInterface::CONTRACT_DESCRIPTION);
-            $contractorName      = $request->get(PackingListApiDtoInterface::CONTRACTOR_NAME);
-            $contract            = $request->get(PackingListApiDtoInterface::CONTRACT);
-            $id                  = $request->get(PackingListApiDtoInterface::ID);
-            $label               = $request->get(PackingListApiDtoInterface::LABEL);
-            $projectName         = $request->get(PackingListApiDtoInterface::PROJECT_NAME);
-            $subContract         = $request->get(PackingListApiDtoInterface::SUB_CONTRACT);
+            $contractorName = $request->get(PackingListApiDtoInterface::CONTRACTOR_NAME);
+            $contract = $request->get(PackingListApiDtoInterface::CONTRACT);
+            $id = $request->get(PackingListApiDtoInterface::ID);
+            $label = $request->get(PackingListApiDtoInterface::LABEL);
+            $projectName = $request->get(PackingListApiDtoInterface::PROJECT_NAME);
+            $subContract = $request->get(PackingListApiDtoInterface::SUB_CONTRACT);
 
             if ($contractDescription) {
                 $this->setContractDescription($contractDescription);
