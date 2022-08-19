@@ -48,6 +48,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('factory_logistics')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_FACTORY_LOGISTICS)->end()
             ->scalarNode('entity_logistics')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::ENTITY_BASE_LOGISTICS)->end()
             ->scalarNode('constraints')->defaultTrue()->info('This option is used for enable/disable basic packing list constraints')->end()
+            ->scalarNode('fetch')->defaultTrue()->info('This option is used for enable/disable basic fetch')->end()
             ->scalarNode('dto_packing_list')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::DTO_BASE_PACKING_LIST)->info('This option is used for dto class override')->end()
             ->scalarNode('dto_list_item')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::DTO_BASE_LIST_ITEM)->info('This option is used for dto class override')->end()
             ->scalarNode('dto_depart')->cannotBeEmpty()->defaultValue(EvrinomaPackingListExtension::DTO_BASE_DEPART)->info('This option is used for dto class override')->end()

@@ -20,6 +20,6 @@ use Evrinoma\PackingListBundle\Model\Logistics\AbstractLogistics;
  * @ORM\Table(name="e_packing_logistics")
  * @ORM\Entity
  */
-class BaseDepart extends AbstractLogistics
+class BaseLogistics extends AbstractLogistics
 {
 }

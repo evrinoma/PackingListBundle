@@ -13,11 +13,22 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DependencyInjection;
 
+use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Dto\DepartApiDto;
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
+use Evrinoma\PackingListBundle\Entity\Depart\BaseDepart;
+use Evrinoma\PackingListBundle\Entity\ListItem\BaseListItem;
+use Evrinoma\PackingListBundle\Entity\Logistics\BaseLogistics;
+use Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
+use Evrinoma\PackingListBundle\Factory\DepartFactory;
+use Evrinoma\PackingListBundle\Factory\ListItemFactory;
+use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
+use Evrinoma\PackingListBundle\Factory\PackingListFactory;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
+use Evrinoma\UtilsBundle\Persistence\ManagerRegistry;
+use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -31,21 +42,22 @@ class EvrinomaPackingListExtension extends Extension
     use HelperTrait;
 
     public const ENTITY = 'Evrinoma\PackingListBundle\Entity';
-    public const ENTITY_FACTORY_PACKING_LIST = 'Evrinoma\PackingListBundle\Factory\PackingListFactory';
-    public const ENTITY_BASE_PACKING_LIST = self::ENTITY.'\PackingList\BasePackingList';
+    public const ENTITY_FACTORY_PACKING_LIST = PackingListFactory::class;
+    public const ENTITY_BASE_PACKING_LIST = BasePackingList::class;
     public const DTO_BASE_PACKING_LIST = PackingListApiDto::class;
 
-    public const ENTITY_FACTORY_LIST_ITEM = 'Evrinoma\PackingListBundle\Factory\ListItemFactory';
-    public const ENTITY_BASE_LIST_ITEM = self::ENTITY.'\ListItem\BaseListItem';
+    public const ENTITY_FACTORY_LIST_ITEM = ListItemFactory::class;
+    public const ENTITY_BASE_LIST_ITEM = BaseListItem::class;
     public const DTO_BASE_LIST_ITEM = ListItemApiDto::class;
 
-    public const ENTITY_FACTORY_DEPART = 'Evrinoma\PackingListBundle\Factory\DepartFactory';
-    public const ENTITY_BASE_DEPART = self::ENTITY.'\Depart\BaseDepart';
+    public const ENTITY_FACTORY_DEPART = DepartFactory::class;
+    public const ENTITY_BASE_DEPART = BaseDepart::class;
     public const DTO_BASE_DEPART = DepartApiDto::class;
 
-    public const ENTITY_FACTORY_LOGISTICS = 'Evrinoma\PackingListBundle\Factory\LogisticsFactory';
-    public const ENTITY_BASE_LOGISTICS = self::ENTITY.'\Logistics\BaseLogistics';
+    public const ENTITY_FACTORY_LOGISTICS = LogisticsFactory::class;
+    public const ENTITY_BASE_LOGISTICS = BaseLogistics::class;
     public const DTO_BASE_LOGISTICS = DepartApiDto::class;
+
     /**
      * @var array
      */
@@ -93,6 +105,23 @@ class EvrinomaPackingListExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_logistics']);
         }
 
+        $registry = null;
+
+        if (isset(self::$doctrineDrivers[$config['db_driver']]) && 'api' === $config['db_driver']) {
+            if (false === $container->hasDefinition('evrinoma.utils.persistence')) {
+                $managerRegistry = new Definition(ManagerRegistry::class);
+                $managerRegistry->addArgument(new Reference(FetchManagerInterface::class));
+                $alias = new Alias('evrinoma.utils.persistence');
+                $container->addDefinitions(['evrinoma.utils.persistence' => $managerRegistry]);
+                $container->addAliases([ManagerRegistryInterface::class => $alias]);
+                $registry = new Reference(ManagerRegistryInterface::class);
+            }
+
+            if ($config['fetch']) {
+                $loader->load('api.yml');
+            }
+        }
+
         $this->remapParametersNamespaces(
             $container,
             $config,
@@ -107,28 +136,21 @@ class EvrinomaPackingListExtension extends Extension
             ]
         );
 
-        $this->wireRepository($container, 'packing_list', $config['entity_packing_list']);
+        if ($registry instanceof Reference) {
+            $this->wireRepository($container, $registry, 'packing_list', $config['entity_packing_list']);
+            $this->wireRepository($container, $registry, 'list_item', $config['entity_list_item']);
+            $this->wireRepository($container, $registry, 'depart', $config['entity_depart']);
+            $this->wireRepository($container, $registry, 'logistics', $config['entity_logistics']);
+        }
 
         $this->wireController($container, 'packing_list', $config['dto_packing_list']);
-
-        $this->wireValidator($container, 'packing_list', $config['entity_packing_list']);
-
-        $this->wireRepository($container, 'list_item', $config['entity_list_item']);
-
         $this->wireController($container, 'list_item', $config['dto_list_item']);
-
-        $this->wireValidator($container, 'list_item', $config['entity_list_item']);
-
-        $this->wireRepository($container, 'depart', $config['entity_depart']);
-
         $this->wireController($container, 'depart', $config['dto_depart']);
-
-        $this->wireValidator($container, 'depart', $config['entity_depart']);
-
-        $this->wireRepository($container, 'logistics', $config['entity_logistics']);
-
         $this->wireController($container, 'logistics', $config['dto_logistics']);
 
+        $this->wireValidator($container, 'packing_list', $config['entity_packing_list']);
+        $this->wireValidator($container, 'list_item', $config['entity_list_item']);
+        $this->wireValidator($container, 'depart', $config['entity_depart']);
         $this->wireValidator($container, 'logistics', $config['entity_logistics']);
 
         if ($config['constraints']) {
@@ -204,24 +226,13 @@ class EvrinomaPackingListExtension extends Extension
         }
     }
 
-    private function wireRepository(ContainerBuilder $container, string $name, string $class): void
+    private function wireRepository(ContainerBuilder $container, Reference $registry, string $name, string $class): void
     {
         $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
-
-        $definition = $container->getDefinition('evrinoma.packing_list.persistence');
-
-        switch ($name) {
-            case 'packing_list':
-            case 'list_item':
-            case 'logistics':
-            case 'depart':
-                $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
-                $definitionRepository->setArgument(2, $definitionQueryMediator);
-                // no break
-            default:
-                $definitionRepository->setArgument(1, $class);
-                $definitionRepository->setArgument(0, $definition);
-        }
+        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
+        $definitionRepository->setArgument(0, $registry);
+        $definitionRepository->setArgument(1, $class);
+        $definitionRepository->setArgument(2, $definitionQueryMediator);
         $array = $definitionRepository->getArguments();
         ksort($array);
         $definitionRepository->setArguments($array);
