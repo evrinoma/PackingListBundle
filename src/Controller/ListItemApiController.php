@@ -202,9 +202,17 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         @OA\Schema(
      *             type="string",
      *         )
-     *     )
+     *     ),
+     *    @OA\Parameter(
+     *         description="Id Entity Packing List",
+     *         in="query",
+     *         name="packing_list_id",
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
      * )
-     * @OA\Response(response=200, description="Return list item")
+     * @OA\Response(response=200, description="Return list items")
      *
      * @return JsonResponse
      */

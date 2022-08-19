@@ -32,7 +32,7 @@ abstract class ListItemRepositoryWrapper extends RepositoryWrapper
     {
         $handler = $this->managerRegistry->getManager(BaseHandler::NAME, GetDescription::NAME);
 
-        $json = $handler->run();
+        $json = $handler->setEntity($id)->run();
 
         return null;
     }
