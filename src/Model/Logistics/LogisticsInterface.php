@@ -13,16 +13,19 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\Logistics;
 
-use Evrinoma\UtilsBundle\Entity\IdInterface;
-
-interface LogisticsInterface extends IdInterface
+interface LogisticsInterface
 {
     /**
-     * @param int|null $id
+     * @return string
+     */
+    public function getPackingListId(): string;
+
+    /**
+     * @param string $packingListId
      *
      * @return LogisticsInterface
      */
-    public function setId(?int $id): LogisticsInterface;
+    public function setPackingListId(string $packingListId): LogisticsInterface;
 
     /**
      * @return string

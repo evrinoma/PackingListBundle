@@ -32,11 +32,11 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
     use IdTrait;
     use MeasureTrait;
     use NumberTrait;
+    use PackingListIdTrait;
     use QuantityTrait;
     use StampTrait;
     use StateStandardTrait;
     use SubContractTrait;
-    use PackingListIdTrait;
 
     public function toDto(Request $request): DtoInterface
     {

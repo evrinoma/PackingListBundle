@@ -203,7 +203,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      *             type="string",
      *         )
      *     ),
-     *    @OA\Parameter(
+     *     @OA\Parameter(
      *         description="Id Entity Packing List",
      *         in="query",
      *         name="packing_list_id",

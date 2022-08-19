@@ -112,6 +112,8 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *             @OA\Schema(
      *                 example={
      *                     "class": "Evrinoma\PackingListBundle\Dto\LogisticsApiDto",
+     *                     "packing_list_id":  "1004",
+     *                     "id_depart":  "9",
      *                 },
      *                 type="object",
      *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\LogisticsApiDto"),
@@ -152,15 +154,13 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="id Entity",
+     *         description="Id Entity Packing List",
      *         in="query",
-     *         name="id",
-     *         required=true,
+     *         name="packing_list_id",
      *         @OA\Schema(
      *             type="string",
-     *             default="3",
      *         )
-     *     )
+     *     ),
      * )
      * @OA\Response(response=200, description="Delete logistics item")
      *
@@ -195,13 +195,21 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="id Entity",
+     *         description="id Entity Depart",
      *         in="query",
-     *         name="id",
+     *         name="id_depart",
      *         @OA\Schema(
      *             type="string",
      *         )
-     *     )
+     *     ),
+     *     @OA\Parameter(
+     *         description="Id Entity Packing List",
+     *         in="query",
+     *         name="packing_list_id",
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
      * )
      * @OA\Response(response=200, description="Return logistics item")
      *
@@ -236,15 +244,13 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="id Entity",
+     *         description="Id Entity Packing List",
      *         in="query",
-     *         name="id",
-     *         required=true,
+     *         name="packing_list_id",
      *         @OA\Schema(
      *             type="string",
-     *             default="3",
      *         )
-     *     )
+     *     ),
      * )
      * @OA\Response(response=200, description="Return logistics item")
      *

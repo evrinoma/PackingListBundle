@@ -34,7 +34,7 @@ class CriteriaDescription extends AbstractApiDescription
         /* @var PackingListApiDtoInterface $entity */
         return [
             'id' => $entity->getId(),
-            'withItems' => true
+            'withItems' => true,
         ];
     }
 

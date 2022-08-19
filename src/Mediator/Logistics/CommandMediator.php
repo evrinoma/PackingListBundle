@@ -23,7 +23,9 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
     public function onUpdate(DtoInterface $dto, $entity): LogisticsInterface
     {
         /* @var $dto LogisticsApiDtoInterface */
-        $entity->setId($dto->getId());
+        $entity
+            ->setPackingListId($dto->getPackingListId())
+            ->setIdDepart($dto->getIdDepart());
 
         return $entity;
     }
@@ -35,7 +37,9 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
     public function onCreate(DtoInterface $dto, $entity): LogisticsInterface
     {
         /* @var $dto LogisticsApiDtoInterface */
-        $entity->setId($dto->getId());
+        $entity
+            ->setPackingListId($dto->getPackingListId())
+            ->setIdDepart($dto->getIdDepart());
 
         return $entity;
     }

@@ -14,14 +14,18 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\Logistics;
 
 use Doctrine\ORM\Mapping as ORM;
-use Evrinoma\UtilsBundle\Entity\IdTrait;
 
 /**
  * @ORM\MappedSuperclass
  */
 abstract class AbstractLogistics implements LogisticsInterface
 {
-    use IdTrait;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="packingListId", type="string", length=255, nullable=true)
+     */
+    protected string $packingListId;
 
     /**
      * @var string
@@ -31,13 +35,21 @@ abstract class AbstractLogistics implements LogisticsInterface
     protected string $idDepart;
 
     /**
-     * @param int|null $id
+     * @return string
+     */
+    public function getPackingListId(): string
+    {
+        return $this->packingListId;
+    }
+
+    /**
+     * @param string $packingListId
      *
      * @return LogisticsInterface
      */
-    public function setId(?int $id): LogisticsInterface
+    public function setPackingListId(string $packingListId): LogisticsInterface
     {
-        $this->id = $id;
+        $this->packingListId = $packingListId;
 
         return $this;
     }
