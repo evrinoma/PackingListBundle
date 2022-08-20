@@ -21,12 +21,6 @@ class GetDescription extends AbstractApiDescription
 {
     public const NAME = 'api_packing_list';
     protected string $method = Request::METHOD_GET;
-    protected string $route = '/api/packing_lists';
-
-    public function __construct(string $apiHost = 'http://cmp.ite-ng.ru')
-    {
-        parent::__construct($apiHost);
-    }
 
     protected function getOptions($entity): array
     {

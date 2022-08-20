@@ -22,19 +22,13 @@ class PutDescription extends AbstractApiDescription
 {
     public const NAME = 'api_packing_depart_criteria';
     protected string $method = Request::METHOD_PUT;
-    protected string $route = '/api/packing_list_to_depart';
-
-    public function __construct(string $apiHost = 'http://cmp.ite-ng.ru')
-    {
-        parent::__construct($apiHost);
-    }
 
     protected function getOptions($entity): array
     {
         /* @var LogisticsApiDtoInterface $entity */
         return [
-            'id' => $entity->getId(),
-            'idDepart' => $entity->getId(),
+            'id' => $entity->getPackingListId(),
+            'idDepart' => $entity->getIdDepart(),
             ];
     }
 

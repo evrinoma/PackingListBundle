@@ -117,8 +117,13 @@ class EvrinomaPackingListExtension extends Extension
                 $registry = new Reference(ManagerRegistryInterface::class);
             }
 
-            if ($config['fetch']) {
+            if (true === $config['fetch']['enabled']) {
                 $loader->load('api.yml');
+                foreach ($config['fetch']['urls'] as $name => $methods) {
+                    foreach ($methods as $method => $url) {
+                        $this->wireFetch($container, $name, $method, $config['fetch']['host'], $url);
+                    }
+                }
             }
         }
 
@@ -224,6 +229,13 @@ class EvrinomaPackingListExtension extends Extension
                 ['' => $remap]
             );
         }
+    }
+
+    private function wireFetch(ContainerBuilder $container, string $name, string $method, string $host, string $route): void
+    {
+        $definitionFetch = $container->getDefinition((string) $container->getAlias('evrinoma.'.$this->getAlias().'.'.$name.'.fetch.'.$method));
+        $definitionFetch->setArgument(0, $host);
+        $definitionFetch->setArgument(1, $route);
     }
 
     private function wireRepository(ContainerBuilder $container, Reference $registry, string $name, string $class): void

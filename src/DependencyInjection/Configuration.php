@@ -69,6 +69,79 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('pre_validator_depart')->defaultNull()->info('This option is used for pre_validator_depart overriding')->end()
             ->scalarNode('pre_validator_logistics')->defaultNull()->info('This option is used for pre_validator_logistics overriding')->end()
             ->end()->end()
+//            ->arrayNode('fetch')
+//            ->addDefaultsIfNotSet()
+//            ->treatFalseLike(['enabled' => false])
+//            ->treatTrueLike(['enabled' => true])
+//            ->validate()
+//            ->ifTrue(function ($v) {
+//                if (\is_array($v) && (1 === \count($v))) {
+//                    return true;
+//                }
+//
+//                return false;
+//            })
+//            ->then(function ($v) {
+//                if (\array_key_exists('enabled', $v) && $v['enabled']) {
+//                    throw new \InvalidArgumentException(sprintf('token required options are missing, just only enabled', json_encode($v)));
+//                }
+//
+//                return $v;
+//            })
+//            ->end()
+//            ->children()
+//            ->scalarNode('host')->isRequired()->cannotBeEmpty()->defaultValue('http://cmp.ite-ng.ru')->end()
+// //            ->arrayNode('depart')->addDefaultsIfNotSet()->children()
+// //            ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/departs')->end()
+// //            ->end()->end()
+// //            ->arrayNode('list_item')->addDefaultsIfNotSet()->children()
+// //            ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/items')->end()
+// //            ->scalarNode('get')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/items')->end()
+// //            ->end()->end()
+// //            ->arrayNode('logistics')->addDefaultsIfNotSet()->children()
+// //            ->scalarNode('put')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list_to_depart')->end()
+// //            ->end()->end()
+// //            ->arrayNode('packing_list')->addDefaultsIfNotSet()->children()
+// //            ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing/lists')->end()
+// //            ->scalarNode('get')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_lists')->end()
+// //            ->end()->end()
+
+                ->arrayNode('fetch')
+                ->beforeNormalization()
+                ->ifString()
+                ->then(function ($v) {
+                    if (!('enabled' !== $v ^ 'disabled' !== $v)) {
+                        throw new \InvalidArgumentException(sprintf('"enabled/disabled" Option is missing  [%s]', $v));
+                    }
+
+                    return [
+                        'enabled' => 'enabled' === $v,
+                    ];
+                })
+                ->end()
+                ->canBeDisabled()
+                ->children()
+                    ->scalarNode('host')->defaultValue('http://cmp.ite-ng.ru')->end()
+                    ->arrayNode('urls')->addDefaultsIfNotSet()->children()
+                        ->arrayNode('depart')->addDefaultsIfNotSet()->children()
+                        ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/departs')->end()
+                        ->end()->end()
+                        ->arrayNode('list_item')->addDefaultsIfNotSet()->children()
+                        ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/items')->end()
+                        ->scalarNode('get')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/items')->end()
+                        ->end()->end()
+                        ->arrayNode('logistics')->addDefaultsIfNotSet()->children()
+                        ->scalarNode('put')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list_to_depart')->end()
+                        ->end()->end()
+                        ->arrayNode('packing_list')->addDefaultsIfNotSet()->children()
+                        ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing/lists')->end()
+                        ->scalarNode('get')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_lists')->end()
+                        ->end()->end()
+                    ->end()->end()
+                ->end()
+                ->end()
+
+            ->end()
             ->end();
 
         return $treeBuilder;
