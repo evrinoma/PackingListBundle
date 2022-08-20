@@ -63,6 +63,10 @@ class EvrinomaPackingListExtension extends Extension
      */
     private static array $doctrineDrivers = [
         'api' => [],
+        'orm' => [
+            'registry' => 'doctrine',
+            'tag' => 'doctrine.event_subscriber',
+        ],
     ];
 
     public function load(array $configs, ContainerBuilder $container)
@@ -127,6 +131,15 @@ class EvrinomaPackingListExtension extends Extension
             }
         }
 
+        if (isset(self::$doctrineDrivers[$config['db_driver']]) && 'orm' === $config['db_driver']) {
+            $loader->load('doctrine.yml');
+            $container->setAlias('evrinoma.'.$this->getAlias().'.doctrine_registry', new Alias(self::$doctrineDrivers[$config['db_driver']]['registry'], false));
+            $registry = new Reference('evrinoma.'.$this->getAlias().'.doctrine_registry');
+            $container->setParameter('evrinoma.'.$this->getAlias().'.backend_type_'.$config['db_driver'], true);
+            $objectManager = $container->getDefinition('evrinoma.'.$this->getAlias().'.object_manager');
+            $objectManager->setFactory([$registry, 'getManager']);
+        }
+
         $this->remapParametersNamespaces(
             $container,
             $config,
@@ -141,7 +154,7 @@ class EvrinomaPackingListExtension extends Extension
             ]
         );
 
-        if ($registry instanceof Reference) {
+        if ($registry instanceof Reference && 'api' === $config['db_driver']) {
             $this->wireRepository($container, $registry, 'packing_list', $config['entity_packing_list']);
             $this->wireRepository($container, $registry, 'list_item', $config['entity_list_item']);
             $this->wireRepository($container, $registry, 'depart', $config['entity_depart']);
