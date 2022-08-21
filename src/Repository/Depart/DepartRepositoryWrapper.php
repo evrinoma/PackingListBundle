@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Repository\Depart;
 
+use Doctrine\ORM\Mapping\Column;
+use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
@@ -34,9 +36,29 @@ abstract class DepartRepositoryWrapper extends RepositoryWrapper
 
     protected function criteriaWrapped($entity): array
     {
-        $handler = $this->managerRegistry->getManager(BaseHandler::NAME, CriteriaDescription::NAME);
+//        $mapping = [$this->entityClass];
+//        $reflectionObject = new \ReflectionObject(new $this->entityClass());
+//        $reflectionProperties = $reflectionObject->getProperties(\ReflectionProperty::IS_PROTECTED);
+//        foreach ($reflectionProperties as $reflectionProperty) {
+//            $annotation = $this->annotationReader->getPropertyAnnotation($reflectionProperty, Column::class);
+//            $mapping[$this->entityClass][$annotation->name] = $annotation;
+//        }
+
+        /** @var FetchManagerInterface $manager */
+        $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
+        $handler = $manager->getHandler(BaseHandler::NAME, CriteriaDescription::NAME);
+        // getManager(BaseHandler::NAME, CriteriaDescription::NAME);
 
         $json = $handler->setEntity($entity)->run();
+
+        foreach ($json->getRaw()as $value) {
+            while (true) {
+                foreach (array_keys($value) as $key) {
+                    $d = $key;
+                }
+                break;
+            }
+        }
 
         return [];
     }

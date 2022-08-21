@@ -20,6 +20,8 @@ use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractMapEntity;
+use Evrinoma\UtilsBundle\Exception\MetadataManagerNotFoundException;
+use Evrinoma\UtilsBundle\Mapping\MetadataManagerInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -62,6 +64,22 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
                 $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Logistics', '%s/Entity/Logistics');
             }
             $this->addResolveTargetEntity([$entityContract => [LogisticsInterface::class => []]], false);
+        }
+        if ('api' === $container->getParameter('evrinoma.packing_list.storage')) {
+            if (!$container->has(MetadataManagerInterface::class)) {
+                throw new MetadataManagerNotFoundException();
+            }
+
+            $definition = $container->findDefinition(MetadataManagerInterface::class);
+
+            $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_depart');
+            $definition->addMethodCall('registerEntity', [$entityContract, DepartInterface::class]);
+            $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_list_item');
+            $definition->addMethodCall('registerEntity', [$entityContract, ListItemInterface::class]);
+            $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_packing_list');
+            $definition->addMethodCall('registerEntity', [$entityContract, PackingListIdInterface::class]);
+            $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_logistics');
+            $definition->addMethodCall('registerEntity', [$entityContract, LogisticsInterface::class]);
         }
     }
 }

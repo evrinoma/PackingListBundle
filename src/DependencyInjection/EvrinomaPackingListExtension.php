@@ -112,14 +112,8 @@ class EvrinomaPackingListExtension extends Extension
         $registry = null;
 
         if (isset(self::$doctrineDrivers[$config['db_driver']]) && 'api' === $config['db_driver']) {
-            if (false === $container->hasDefinition('evrinoma.utils.persistence')) {
-                $managerRegistry = new Definition(ManagerRegistry::class);
-                $managerRegistry->addArgument(new Reference(FetchManagerInterface::class));
-                $alias = new Alias('evrinoma.utils.persistence');
-                $container->addDefinitions(['evrinoma.utils.persistence' => $managerRegistry]);
-                $container->addAliases([ManagerRegistryInterface::class => $alias]);
-                $registry = new Reference(ManagerRegistryInterface::class);
-            }
+
+            $registry = new Reference(ManagerRegistryInterface::class);
 
             if (true === $config['fetch']['enabled']) {
                 $loader->load('api.yml');
