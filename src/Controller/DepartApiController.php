@@ -68,7 +68,7 @@ final class DepartApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Post("/api/packing/depart/create", options={"expose": true}, name="api_packing_depart_create")
+     * @Rest\Post("/api/packing_list/depart/create", options={"expose": true}, name="api_packing_list_depart_create")
      * @OA\Post(
      *     tags={"packing-list"},
      *     description="the method perform create departure packing list",
@@ -103,7 +103,7 @@ final class DepartApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Put("/api/packing/depart/save", options={"expose": true}, name="api_packing_depart_save")
+     * @Rest\Put("/api/packing_list/depart/save", options={"expose": true}, name="api_packing_list_depart_save")
      * @OA\Put(
      *     tags={"packing-list"},
      *     description="the method perform save departure packing list for current entity",
@@ -138,7 +138,7 @@ final class DepartApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Delete("/api/packing/depart/delete", options={"expose": true}, name="api_packing_depart_delete")
+     * @Rest\Delete("/api/packing_list/depart/delete", options={"expose": true}, name="api_packing_list_depart_delete")
      * @OA\Delete(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -181,7 +181,7 @@ final class DepartApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/depart/criteria", options={"expose": true}, name="api_packing_depart_criteria")
+     * @Rest\Get("/api/packing_list/depart/criteria", options={"expose": true}, name="api_packing_list_depart_criteria")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -234,7 +234,7 @@ final class DepartApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/depart", options={"expose": true}, name="api_packing_depart")
+     * @Rest\Get("/api/packing_list/depart", options={"expose": true}, name="api_packing_list_depart")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(

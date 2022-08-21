@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PutDescription extends AbstractApiDescription
 {
-    public const NAME = 'api_packing_logistics_save';
+    public const NAME = 'api_packing_list_logistics_save';
     protected string $method = Request::METHOD_PUT;
 
     protected function getOptions($entity): array

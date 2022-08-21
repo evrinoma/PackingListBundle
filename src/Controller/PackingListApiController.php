@@ -68,7 +68,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Post("/api/packing/list/create", options={"expose": true}, name="api_packing_list_create")
+     * @Rest\Post("/api/packing_list/create", options={"expose": true}, name="api_packing_list_create")
      * @OA\Post(
      *     tags={"packing-list"},
      *     description="the method perform create packing list",
@@ -103,7 +103,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Put("/api/packing/list/save", options={"expose": true}, name="api_packing_list_save")
+     * @Rest\Put("/api/packing_list/save", options={"expose": true}, name="api_packing_list_save")
      * @OA\Put(
      *     tags={"packing-list"},
      *     description="the method perform save packing list for current entity",
@@ -138,7 +138,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Delete("/api/packing/list/delete", options={"expose": true}, name="api_packing_list_delete")
+     * @Rest\Delete("/api/packing_list/delete", options={"expose": true}, name="api_packing_list_delete")
      * @OA\Delete(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -181,7 +181,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/list/criteria", options={"expose": true}, name="api_packing_list_criteria")
+     * @Rest\Get("/api/packing_list/criteria", options={"expose": true}, name="api_packing_list_criteria")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -226,7 +226,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/list", options={"expose": true}, name="api_packing_list")
+     * @Rest\Get("/api/packing_list", options={"expose": true}, name="api_packing_list")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(

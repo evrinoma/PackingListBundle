@@ -67,7 +67,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Post("/api/packing/logistics/create", options={"expose": true}, name="api_packing_logistics_create")
+     * @Rest\Post("/api_packing_list_logistics/create", options={"expose": true}, name="api_packing_list_logistics_create")
      * @OA\Post(
      *     tags={"packing-list"},
      *     description="the method perform create departure packing logistics",
@@ -102,7 +102,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Put("/api/packing/logistics/save", options={"expose": true}, name="api_packing_logistics_save")
+     * @Rest\Put("/api_packing_list_logistics/save", options={"expose": true}, name="api_packing_list_logistics_save")
      * @OA\Put(
      *     tags={"packing-list"},
      *     description="the method perform save departure packing logistics for current entity",
@@ -139,7 +139,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Delete("/api/packing/logistics/delete", options={"expose": true}, name="api_packing_logistics_delete")
+     * @Rest\Delete("/api_packing_list_logistics/delete", options={"expose": true}, name="api_packing_list_logistics_delete")
      * @OA\Delete(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -180,7 +180,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/logistics/criteria", options={"expose": true}, name="api_packing_logistics_criteria")
+     * @Rest\Get("/api_packing_list_logistics/criteria", options={"expose": true}, name="api_packing_list_logistics_criteria")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -229,7 +229,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/logistics", options={"expose": true}, name="api_packing_logistics")
+     * @Rest\Get("/api_packing_list_logistics", options={"expose": true}, name="api_packing_list_logistics")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(

@@ -68,7 +68,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Post("/api/packing/list/item/create", options={"expose": true}, name="api_packing_list_item_create")
+     * @Rest\Post("/api/packing_list/item/create", options={"expose": true}, name="api_packing_list_item_create")
      * @OA\Post(
      *     tags={"packing-list"},
      *     description="the method perform create list item",
@@ -103,7 +103,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Put("/api/packing/list/item/save", options={"expose": true}, name="api_packing_list_item_save")
+     * @Rest\Put("/api/packing_list/item/save", options={"expose": true}, name="api_packing_list_item_save")
      * @OA\Put(
      *     tags={"packing-list"},
      *     description="the method perform save list item for current entity",
@@ -138,7 +138,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Delete("/api/packing/list/item/delete", options={"expose": true}, name="api_packing_list_item_delete")
+     * @Rest\Delete("/api/packing_list/item/delete", options={"expose": true}, name="api_packing_list_item_delete")
      * @OA\Delete(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -181,7 +181,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/list/item/criteria", options={"expose": true}, name="api_packing_list_item_criteria")
+     * @Rest\Get("/api/packing_list/item/criteria", options={"expose": true}, name="api_packing_list_item_criteria")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
@@ -234,7 +234,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     }
 
     /**
-     * @Rest\Get("/api/packing/list/item", options={"expose": true}, name="api_packing_list_item")
+     * @Rest\Get("/api/packing_list/item", options={"expose": true}, name="api_packing_list_item")
      * @OA\Get(
      *     tags={"packing-list"},
      *     @OA\Parameter(
