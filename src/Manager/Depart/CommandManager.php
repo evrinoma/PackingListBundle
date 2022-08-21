@@ -57,11 +57,11 @@ final class CommandManager implements CommandManagerInterface
      */
     public function post(DepartApiDtoInterface $dto): DepartInterface
     {
-        $packingList = $this->factory->create($dto);
+        $depart = $this->factory->create($dto);
 
-        $this->mediator->onCreate($dto, $packingList);
+        $this->mediator->onCreate($dto, $depart);
 
-        $errors = $this->validator->validate($packingList);
+        $errors = $this->validator->validate($depart);
 
         if (\count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -69,9 +69,9 @@ final class CommandManager implements CommandManagerInterface
             throw new DepartInvalidException($errorsString);
         }
 
-        $this->repository->save($packingList);
+        $this->repository->save($depart);
 
-        return $packingList;
+        return $depart;
     }
 
     /**
@@ -86,14 +86,14 @@ final class CommandManager implements CommandManagerInterface
     public function put(DepartApiDtoInterface $dto): DepartInterface
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $depart = $this->repository->find($dto->getId());
         } catch (DepartNotFoundException $e) {
             throw $e;
         }
 
-        $this->mediator->onUpdate($dto, $packingList);
+        $this->mediator->onUpdate($dto, $depart);
 
-        $errors = $this->validator->validate($packingList);
+        $errors = $this->validator->validate($depart);
 
         if (\count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -101,9 +101,9 @@ final class CommandManager implements CommandManagerInterface
             throw new DepartInvalidException($errorsString);
         }
 
-        $this->repository->save($packingList);
+        $this->repository->save($depart);
 
-        return $packingList;
+        return $depart;
     }
 
     /**
@@ -115,13 +115,13 @@ final class CommandManager implements CommandManagerInterface
     public function delete(DepartApiDtoInterface $dto): void
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $depart = $this->repository->find($dto->getId());
         } catch (DepartNotFoundException $e) {
             throw $e;
         }
-        $this->mediator->onDelete($dto, $packingList);
+        $this->mediator->onDelete($dto, $depart);
         try {
-            $this->repository->remove($packingList);
+            $this->repository->remove($depart);
         } catch (DepartCannotBeRemovedException $e) {
             throw $e;
         }

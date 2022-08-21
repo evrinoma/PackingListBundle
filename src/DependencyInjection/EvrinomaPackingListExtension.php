@@ -15,6 +15,7 @@ namespace Evrinoma\PackingListBundle\DependencyInjection;
 
 use Evrinoma\PackingListBundle\Dto\DepartApiDto;
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
+use Evrinoma\PackingListBundle\Dto\LogisticsApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
 use Evrinoma\PackingListBundle\Entity\Depart\BaseDepart;
 use Evrinoma\PackingListBundle\Entity\ListItem\BaseListItem;
@@ -54,7 +55,7 @@ class EvrinomaPackingListExtension extends Extension
 
     public const ENTITY_FACTORY_LOGISTICS = LogisticsFactory::class;
     public const ENTITY_BASE_LOGISTICS = BaseLogistics::class;
-    public const DTO_BASE_LOGISTICS = DepartApiDto::class;
+    public const DTO_BASE_LOGISTICS = LogisticsApiDto::class;
 
     /**
      * @var array

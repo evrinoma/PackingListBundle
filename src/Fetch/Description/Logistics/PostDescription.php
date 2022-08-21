@@ -15,10 +15,10 @@ namespace Evrinoma\PackingListBundle\Fetch\Description\Logistics;
 
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
 use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
+use Evrinoma\PackingListBundle\Fetch\Handler\BasePostHandler;
 use Symfony\Component\HttpFoundation\Request;
 
-class PutDescription extends AbstractApiDescription
+class PostDescription extends AbstractApiDescription
 {
     public const NAME = 'api_packing_list_logistics_save';
     protected string $method = Request::METHOD_PUT;
@@ -37,7 +37,7 @@ class PutDescription extends AbstractApiDescription
      */
     public function tag(): string
     {
-        return BaseHandler::class;
+        return BasePostHandler::class;
     }
 
     public function name(): string

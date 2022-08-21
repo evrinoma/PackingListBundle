@@ -15,7 +15,7 @@ namespace Evrinoma\PackingListBundle\Repository\Depart;
 
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
+use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
 abstract class DepartRepositoryWrapper extends RepositoryWrapper
@@ -24,7 +24,7 @@ abstract class DepartRepositoryWrapper extends RepositoryWrapper
     {
         /** @var FetchManagerInterface $manager */
         $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseHandler::NAME, CriteriaDescription::NAME);
+        $handler = $manager->getHandler(BaseGetHandler::NAME, CriteriaDescription::NAME);
         $rows = $handler->setEntity($entity)->run()->getRaw();
 
         return $this->managerRegistry->hydrateRowData($rows, $this->entityClass);

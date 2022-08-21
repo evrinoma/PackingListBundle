@@ -15,6 +15,7 @@ namespace Evrinoma\PackingListBundle\Controller;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Evrinoma\DtoBundle\Factory\FactoryDtoInterface;
+use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeCreatedException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeRemovedException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeSavedException;
@@ -77,9 +78,13 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *             @OA\Schema(
      *                 example={
      *                     "class": "Evrinoma\PackingListBundle\Dto\LogisticsApiDto",
+     *                     "packing_list_id": "1004",
+     *                     "id_depart": "9",
      *                 },
      *                 type="object",
      *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\LogisticsApiDto"),
+     *                 @OA\Property(property="packing_list_id", type="string"),
+     *                 @OA\Property(property="id_depart", type="string"),
      *             )
      *         )
      *     )
@@ -90,10 +95,23 @@ final class LogisticsApiController extends AbstractWrappedApiController
      */
     public function postAction(): JsonResponse
     {
+        /** @var LogisticsApiDtoInterface $fcrApiDto */
+        $logicsticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+        $commandManager = $this->commandManager;
+
         $json = [];
+        $error = [];
 
         try {
-            throw new LogisticsCannotBeCreatedException();
+            $this->preValidator->onPost($logicsticApiDto);
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->transactional(
+                function () use ($logicsticApiDto, $commandManager, &$json) {
+                    $json[] = $commandManager->post($logicsticApiDto);
+                }
+            );
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -111,9 +129,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *             mediaType="application/json",
      *             @OA\Schema(
      *                 example={
-     *                     "class": "Evrinoma\PackingListBundle\Dto\LogisticsApiDto",
-     *                     "packing_list_id":  "1004",
-     *                     "id_depart":  "9",
+     *                     "class": "Evrinoma\PackingListBundle\Dto\LogisticsApiDto"
      *                 },
      *                 type="object",
      *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\LogisticsApiDto"),

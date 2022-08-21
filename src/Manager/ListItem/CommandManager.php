@@ -57,11 +57,11 @@ final class CommandManager implements CommandManagerInterface
      */
     public function post(ListItemApiDtoInterface $dto): ListItemInterface
     {
-        $packingList = $this->factory->create($dto);
+        $listItem = $this->factory->create($dto);
 
-        $this->mediator->onCreate($dto, $packingList);
+        $this->mediator->onCreate($dto, $listItem);
 
-        $errors = $this->validator->validate($packingList);
+        $errors = $this->validator->validate($listItem);
 
         if (\count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -69,9 +69,9 @@ final class CommandManager implements CommandManagerInterface
             throw new ListItemInvalidException($errorsString);
         }
 
-        $this->repository->save($packingList);
+        $this->repository->save($listItem);
 
-        return $packingList;
+        return $listItem;
     }
 
     /**
@@ -86,14 +86,14 @@ final class CommandManager implements CommandManagerInterface
     public function put(ListItemApiDtoInterface $dto): ListItemInterface
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $listItem = $this->repository->find($dto->getId());
         } catch (ListItemNotFoundException $e) {
             throw $e;
         }
 
-        $this->mediator->onUpdate($dto, $packingList);
+        $this->mediator->onUpdate($dto, $listItem);
 
-        $errors = $this->validator->validate($packingList);
+        $errors = $this->validator->validate($listItem);
 
         if (\count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -101,9 +101,9 @@ final class CommandManager implements CommandManagerInterface
             throw new ListItemInvalidException($errorsString);
         }
 
-        $this->repository->save($packingList);
+        $this->repository->save($listItem);
 
-        return $packingList;
+        return $listItem;
     }
 
     /**
@@ -115,13 +115,13 @@ final class CommandManager implements CommandManagerInterface
     public function delete(ListItemApiDtoInterface $dto): void
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $listItem = $this->repository->find($dto->getId());
         } catch (ListItemNotFoundException $e) {
             throw $e;
         }
-        $this->mediator->onDelete($dto, $packingList);
+        $this->mediator->onDelete($dto, $listItem);
         try {
-            $this->repository->remove($packingList);
+            $this->repository->remove($listItem);
         } catch (ListItemCannotBeRemovedException $e) {
             throw $e;
         }

@@ -38,12 +38,12 @@ final class QueryManager implements QueryManagerInterface
     public function criteria(ListItemApiDtoInterface $dto): array
     {
         try {
-            $packingList = $this->repository->findByCriteria($dto);
+            $listItem = $this->repository->findByCriteria($dto);
         } catch (ListItemNotFoundException $e) {
             throw $e;
         }
 
-        return $packingList;
+        return $listItem;
     }
 
     /**
@@ -57,7 +57,7 @@ final class QueryManager implements QueryManagerInterface
     {
         try {
             if ($dto->hasId()) {
-                $packingList = $this->repository->proxy($dto->idToString());
+                $listItem = $this->repository->proxy($dto->idToString());
             } else {
                 throw new ListItemProxyException('Id value is not set while trying get proxy object');
             }
@@ -65,7 +65,7 @@ final class QueryManager implements QueryManagerInterface
             throw $e;
         }
 
-        return $packingList;
+        return $listItem;
     }
 
     /**
@@ -78,11 +78,11 @@ final class QueryManager implements QueryManagerInterface
     public function get(ListItemApiDtoInterface $dto): ListItemInterface
     {
         try {
-            $packingList = $this->repository->find($dto->idToString());
+            $listItem = $this->repository->find($dto->idToString());
         } catch (ListItemNotFoundException $e) {
             throw $e;
         }
 
-        return $packingList;
+        return $listItem;
     }
 }

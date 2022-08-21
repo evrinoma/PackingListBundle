@@ -20,20 +20,20 @@ use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 interface ListItemCommandRepositoryInterface
 {
     /**
-     * @param ListItemInterface $packingList
+     * @param ListItemInterface $listItem
      *
      * @return bool
      *
      * @throws ListItemCannotBeSavedException
      */
-    public function save(ListItemInterface $packingList): bool;
+    public function save(ListItemInterface $listItem): bool;
 
     /**
-     * @param ListItemInterface $packingList
+     * @param ListItemInterface $listItem
      *
      * @return bool
      *
      * @throws ListItemCannotBeRemovedException
      */
-    public function remove(ListItemInterface $packingList): bool;
+    public function remove(ListItemInterface $listItem): bool;
 }

@@ -20,20 +20,20 @@ use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
 interface DepartCommandRepositoryInterface
 {
     /**
-     * @param DepartInterface $packingList
+     * @param DepartInterface $depart
      *
      * @return bool
      *
      * @throws DepartCannotBeSavedException
      */
-    public function save(DepartInterface $packingList): bool;
+    public function save(DepartInterface $depart): bool;
 
     /**
-     * @param DepartInterface $packingList
+     * @param DepartInterface $depart
      *
      * @return bool
      *
      * @throws DepartCannotBeRemovedException
      */
-    public function remove(DepartInterface $packingList): bool;
+    public function remove(DepartInterface $depart): bool;
 }

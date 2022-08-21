@@ -26,19 +26,29 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
 
     public function onPut(DtoInterface $dto): void
     {
-        $this->checkId($dto);
+        $this->checkIdDepart($dto);
+        $this->checkPackingListId($dto);
     }
 
     public function onDelete(DtoInterface $dto): void
     {
-        $this->checkId($dto);
+        $this->checkIdDepart($dto);
+        $this->checkPackingListId($dto);
     }
 
-    private function checkId(DtoInterface $dto): void
+    private function checkIdDepart(DtoInterface $dto): void
     {
         /** @var LogisticsApiDtoInterface $dto */
-        if (!$dto->hasId()) {
-            throw new ListItemInvalidException('The Dto has\'t ID or class invalid');
+        if (!$dto->hasIdDepart()) {
+            throw new ListItemInvalidException('The Dto has\'t IdDepart or class invalid');
+        }
+    }
+
+    private function checkPackingListId(DtoInterface $dto): void
+    {
+        /** @var LogisticsApiDtoInterface $dto */
+        if (!$dto->hasPackingListId()) {
+            throw new ListItemInvalidException('The Dto has\'t PackingListId or class invalid');
         }
     }
 }

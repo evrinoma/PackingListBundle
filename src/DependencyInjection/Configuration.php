@@ -96,7 +96,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('get')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list/items')->end()
                         ->end()->end()
                         ->arrayNode('logistics')->addDefaultsIfNotSet()->children()
-                        ->scalarNode('put')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list_to_depart')->end()
+                        ->scalarNode('post')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing_list_to_depart')->end()
                         ->end()->end()
                         ->arrayNode('packing_list')->addDefaultsIfNotSet()->children()
                         ->scalarNode('criteria')->isRequired()->cannotBeEmpty()->defaultValue('/api/packing/lists')->end()

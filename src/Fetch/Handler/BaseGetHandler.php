@@ -15,9 +15,9 @@ namespace Evrinoma\PackingListBundle\Fetch\Handler;
 
 use Evrinoma\FetchBundle\Handler\AbstractHandler;
 
-class BaseHandler extends AbstractHandler
+class BaseGetHandler extends AbstractHandler
 {
-    public const NAME = 'packing_list';
+    public const NAME = 'packing_list_get';
 
     public function isValid(): bool
     {

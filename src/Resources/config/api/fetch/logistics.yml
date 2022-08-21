@@ -1,8 +1,8 @@
 services:
-  Evrinoma\PackingListBundle\Fetch\Description\Logistics\PutDescription:
+  Evrinoma\PackingListBundle\Fetch\Description\Logistics\PostDescription:
     tags:
       - { name: 'evrinoma.fetch.description' }
 
-  evrinoma.packing_list.logistics.fetch.put:
-    alias: Evrinoma\PackingListBundle\Fetch\Description\Logistics\PutDescription
+  evrinoma.packing_list.logistics.fetch.post:
+    alias: Evrinoma\PackingListBundle\Fetch\Description\Logistics\PostDescription
     public: true

@@ -47,7 +47,7 @@
                  criteria: /api/packing_list/items
                  get: /api/packing_list/items
                 logistics:
-                 put: /api/packing_list_to_depart
+                 post: /api/packing_list_to_depart
                 packing_list:
                  criteria: /api/packing/lists
                  get: /api/packing_lists
@@ -117,9 +117,9 @@ Actions в контроллере разбиты на две группы соз
 сущность Logistics
 
     создание:
-        логистика создан HTTP_CREATED 201 - не доступен, статус ответа 501
+        логистика создан HTTP_CREATED 201
     обновление:
-        логистика обновление HTTP_OK 200
+        логистика обновление HTTP_OK 200 - не доступен, статус ответа 501
     удаление:
         логистика удален HTTP_ACCEPTED 202 - не доступен, статус ответа 501
     получение:

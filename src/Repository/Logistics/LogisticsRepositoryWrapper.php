@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Repository\Logistics;
 
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
-use Evrinoma\PackingListBundle\Fetch\Description\Logistics\PutDescription;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
+use Evrinoma\PackingListBundle\Fetch\Description\Logistics\PostDescription;
+use Evrinoma\PackingListBundle\Fetch\Handler\BasePostHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
 abstract class LogisticsRepositoryWrapper extends RepositoryWrapper
@@ -24,7 +24,7 @@ abstract class LogisticsRepositoryWrapper extends RepositoryWrapper
     {
         /** @var FetchManagerInterface $manager */
         $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseHandler::NAME, PutDescription::NAME);
+        $handler = $manager->getHandler(BasePostHandler::NAME, PostDescription::NAME);
 
         $handler->setEntity($entity)->run();
     }

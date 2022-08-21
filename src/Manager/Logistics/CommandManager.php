@@ -57,11 +57,11 @@ final class CommandManager implements CommandManagerInterface
      */
     public function post(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
-        $packingList = $this->factory->create($dto);
+        $logistics = $this->factory->create($dto);
 
-        $this->mediator->onCreate($dto, $packingList);
+        $this->mediator->onCreate($dto, $logistics);
 
-        $errors = $this->validator->validate($packingList);
+        $errors = $this->validator->validate($logistics);
 
         if (\count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -69,9 +69,9 @@ final class CommandManager implements CommandManagerInterface
             throw new LogisticsInvalidException($errorsString);
         }
 
-        $this->repository->save($packingList);
+        $this->repository->save($logistics);
 
-        return $packingList;
+        return $logistics;
     }
 
     /**
@@ -86,14 +86,14 @@ final class CommandManager implements CommandManagerInterface
     public function put(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $logistics = $this->repository->find($dto->getPackingListId());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }
 
-        $this->mediator->onUpdate($dto, $packingList);
+        $this->mediator->onUpdate($dto, $logistics);
 
-        $errors = $this->validator->validate($packingList);
+        $errors = $this->validator->validate($logistics);
 
         if (\count($errors) > 0) {
             $errorsString = (string) $errors;
@@ -101,9 +101,9 @@ final class CommandManager implements CommandManagerInterface
             throw new LogisticsInvalidException($errorsString);
         }
 
-        $this->repository->save($packingList);
+        $this->repository->save($logistics);
 
-        return $packingList;
+        return $logistics;
     }
 
     /**
@@ -115,13 +115,13 @@ final class CommandManager implements CommandManagerInterface
     public function delete(LogisticsApiDtoInterface $dto): void
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $logistics = $this->repository->find($dto->getPackingListId());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }
-        $this->mediator->onDelete($dto, $packingList);
+        $this->mediator->onDelete($dto, $logistics);
         try {
-            $this->repository->remove($packingList);
+            $this->repository->remove($logistics);
         } catch (LogisticsCannotBeRemovedException $e) {
             throw $e;
         }

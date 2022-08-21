@@ -41,17 +41,17 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
     }
 
     /**
-     * @param DepartInterface $listItem
+     * @param DepartInterface $depart
      *
      * @return bool
      *
      * @throws DepartCannotBeSavedException
      * @throws ORMException
      */
-    public function save(DepartInterface $listItem): bool
+    public function save(DepartInterface $depart): bool
     {
         try {
-            $this->persistWrapped($listItem);
+            $this->persistWrapped($depart);
         } catch (ORMInvalidArgumentException $e) {
             throw new DepartCannotBeSavedException($e->getMessage());
         }
@@ -60,11 +60,11 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
     }
 
     /**
-     * @param DepartInterface $listItem
+     * @param DepartInterface $depart
      *
      * @return bool
      */
-    public function remove(DepartInterface $listItem): bool
+    public function remove(DepartInterface $depart): bool
     {
         return true;
     }
@@ -82,13 +82,13 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
 
         $this->mediator->createQuery($dto, $builder);
 
-        $listItems = $this->mediator->getResult($dto, $builder);
+        $departs = $this->mediator->getResult($dto, $builder);
 
-        if (0 === \count($listItems)) {
+        if (0 === \count($departs)) {
             throw new DepartNotFoundException('Cannot find depart by findByCriteria');
         }
 
-        return $listItems;
+        return $departs;
     }
 
     /**
@@ -102,14 +102,14 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
      */
     public function find($id, $lockMode = null, $lockVersion = null): DepartInterface
     {
-        /** @var DepartInterface $listItem */
-        $listItem = $this->findWrapped($id);
+        /** @var DepartInterface $depart */
+        $depart = $this->findWrapped($id);
 
-        if (null === $listItem) {
+        if (null === $depart) {
             throw new DepartNotFoundException("Cannot find depart with id $id");
         }
 
-        return $listItem;
+        return $depart;
     }
 
     /**
@@ -122,12 +122,12 @@ class DepartRepository extends DepartRepositoryWrapper implements DepartReposito
      */
     public function proxy(string $id): DepartInterface
     {
-        $listItem = $this->referenceWrapped($id);
+        $depart = $this->referenceWrapped($id);
 
-        if (!$this->containsWrapped($listItem)) {
+        if (!$this->containsWrapped($depart)) {
             throw new DepartProxyException("Proxy doesn't exist with $id");
         }
 
-        return $listItem;
+        return $depart;
     }
 }

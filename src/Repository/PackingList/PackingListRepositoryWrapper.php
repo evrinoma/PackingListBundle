@@ -16,7 +16,7 @@ namespace Evrinoma\PackingListBundle\Repository\PackingList;
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Fetch\Description\PackingList\CriteriaDescription;
 use Evrinoma\PackingListBundle\Fetch\Description\PackingList\GetDescription;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
+use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
 abstract class PackingListRepositoryWrapper extends RepositoryWrapper
@@ -33,7 +33,7 @@ abstract class PackingListRepositoryWrapper extends RepositoryWrapper
     {
         /** @var FetchManagerInterface $manager */
         $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseHandler::NAME, GetDescription::NAME);
+        $handler = $manager->getHandler(BaseGetHandler::NAME, GetDescription::NAME);
 
         $rows[] = $handler->setEntity($id)->run()->getRaw();
         $entities = $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
@@ -45,7 +45,7 @@ abstract class PackingListRepositoryWrapper extends RepositoryWrapper
     {
         /** @var FetchManagerInterface $manager */
         $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseHandler::NAME, CriteriaDescription::NAME);
+        $handler = $manager->getHandler(BaseGetHandler::NAME, CriteriaDescription::NAME);
 
         $rows = $handler->setEntity($entity)->run()->getRaw();
 

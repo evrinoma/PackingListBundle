@@ -38,12 +38,12 @@ final class QueryManager implements QueryManagerInterface
     public function criteria(LogisticsApiDtoInterface $dto): array
     {
         try {
-            $packingList = $this->repository->findByCriteria($dto);
+            $logistics = $this->repository->findByCriteria($dto);
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }
 
-        return $packingList;
+        return $logistics;
     }
 
     /**
@@ -56,8 +56,8 @@ final class QueryManager implements QueryManagerInterface
     public function proxy(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         try {
-            if ($dto->hasId()) {
-                $packingList = $this->repository->proxy($dto->idToString());
+            if ($dto->hasPackingListId()) {
+                $logistics = $this->repository->proxy($dto->getPackingListId());
             } else {
                 throw new LogisticsProxyException('Id value is not set while trying get proxy object');
             }
@@ -65,7 +65,7 @@ final class QueryManager implements QueryManagerInterface
             throw $e;
         }
 
-        return $packingList;
+        return $logistics;
     }
 
     /**
@@ -78,11 +78,11 @@ final class QueryManager implements QueryManagerInterface
     public function get(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         try {
-            $packingList = $this->repository->find($dto->idToString());
+            $logistics = $this->repository->find($dto->getPackingListId());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }
 
-        return $packingList;
+        return $logistics;
     }
 }

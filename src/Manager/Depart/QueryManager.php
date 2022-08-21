@@ -38,12 +38,12 @@ final class QueryManager implements QueryManagerInterface
     public function criteria(DepartApiDtoInterface $dto): array
     {
         try {
-            $packingList = $this->repository->findByCriteria($dto);
+            $depart = $this->repository->findByCriteria($dto);
         } catch (DepartNotFoundException $e) {
             throw $e;
         }
 
-        return $packingList;
+        return $depart;
     }
 
     /**
@@ -57,7 +57,7 @@ final class QueryManager implements QueryManagerInterface
     {
         try {
             if ($dto->hasId()) {
-                $packingList = $this->repository->proxy($dto->idToString());
+                $depart = $this->repository->proxy($dto->idToString());
             } else {
                 throw new DepartProxyException('Id value is not set while trying get proxy object');
             }
@@ -65,7 +65,7 @@ final class QueryManager implements QueryManagerInterface
             throw $e;
         }
 
-        return $packingList;
+        return $depart;
     }
 
     /**
@@ -78,11 +78,11 @@ final class QueryManager implements QueryManagerInterface
     public function get(DepartApiDtoInterface $dto): DepartInterface
     {
         try {
-            $packingList = $this->repository->find($dto->idToString());
+            $depart = $this->repository->find($dto->idToString());
         } catch (DepartNotFoundException $e) {
             throw $e;
         }
 
-        return $packingList;
+        return $depart;
     }
 }

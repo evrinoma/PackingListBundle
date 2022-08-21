@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Fetch\Description\PackingList;
 
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
+use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Symfony\Component\HttpFoundation\Request;
 
 class GetDescription extends AbstractApiDescription
@@ -37,7 +37,7 @@ class GetDescription extends AbstractApiDescription
      */
     public function tag(): string
     {
-        return BaseHandler::class;
+        return BaseGetHandler::class;
     }
 
     public function name(): string

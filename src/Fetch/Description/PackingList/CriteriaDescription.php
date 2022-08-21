@@ -15,7 +15,7 @@ namespace Evrinoma\PackingListBundle\Fetch\Description\PackingList;
 
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
+use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Symfony\Component\HttpFoundation\Request;
 
 class CriteriaDescription extends AbstractApiDescription
@@ -37,7 +37,7 @@ class CriteriaDescription extends AbstractApiDescription
      */
     public function tag(): string
     {
-        return BaseHandler::class;
+        return BaseGetHandler::class;
     }
 
     public function name(): string

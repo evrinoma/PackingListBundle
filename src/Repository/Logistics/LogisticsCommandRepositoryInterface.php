@@ -20,20 +20,20 @@ use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
 interface LogisticsCommandRepositoryInterface
 {
     /**
-     * @param LogisticsInterface $packingList
+     * @param LogisticsInterface $logistics
      *
      * @return bool
      *
      * @throws LogisticsCannotBeSavedException
      */
-    public function save(LogisticsInterface $packingList): bool;
+    public function save(LogisticsInterface $logistics): bool;
 
     /**
-     * @param LogisticsInterface $packingList
+     * @param LogisticsInterface $logistics
      *
      * @return bool
      *
      * @throws LogisticsCannotBeRemovedException
      */
-    public function remove(LogisticsInterface $packingList): bool;
+    public function remove(LogisticsInterface $logistics): bool;
 }

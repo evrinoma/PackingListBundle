@@ -41,17 +41,17 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
     }
 
     /**
-     * @param LogisticsInterface $listItem
+     * @param LogisticsInterface $logistics
      *
      * @return bool
      *
      * @throws LogisticsCannotBeSavedException
      * @throws ORMException
      */
-    public function save(LogisticsInterface $listItem): bool
+    public function save(LogisticsInterface $logistics): bool
     {
         try {
-            $this->persistWrapped($listItem);
+            $this->persistWrapped($logistics);
         } catch (ORMInvalidArgumentException $e) {
             throw new LogisticsCannotBeSavedException($e->getMessage());
         }
@@ -60,11 +60,11 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
     }
 
     /**
-     * @param LogisticsInterface $listItem
+     * @param LogisticsInterface $logistics
      *
      * @return bool
      */
-    public function remove(LogisticsInterface $listItem): bool
+    public function remove(LogisticsInterface $logistics): bool
     {
         return true;
     }
@@ -82,13 +82,13 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
 
         $this->mediator->createQuery($dto, $builder);
 
-        $listItems = $this->mediator->getResult($dto, $builder);
+        $logistics = $this->mediator->getResult($dto, $builder);
 
-        if (0 === \count($listItems)) {
+        if (0 === \count($logistics)) {
             throw new LogisticsNotFoundException('Cannot find depart by findByCriteria');
         }
 
-        return $listItems;
+        return $logistics;
     }
 
     /**
@@ -102,14 +102,14 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
      */
     public function find($id, $lockMode = null, $lockVersion = null): LogisticsInterface
     {
-        /** @var LogisticsInterface $listItem */
-        $listItem = $this->findWrapped($id);
+        /** @var LogisticsInterface $logistics */
+        $logistics = $this->findWrapped($id);
 
-        if (null === $listItem) {
+        if (null === $logistics) {
             throw new LogisticsNotFoundException("Cannot find depart with id $id");
         }
 
-        return $listItem;
+        return $logistics;
     }
 
     /**
@@ -122,12 +122,12 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
      */
     public function proxy(string $id): LogisticsInterface
     {
-        $listItem = $this->referenceWrapped($id);
+        $logistics = $this->referenceWrapped($id);
 
-        if (!$this->containsWrapped($listItem)) {
+        if (!$this->containsWrapped($logistics)) {
             throw new LogisticsProxyException("Proxy doesn't exist with $id");
         }
 
-        return $listItem;
+        return $logistics;
     }
 }
