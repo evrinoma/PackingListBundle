@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Repository\ListItem;
 
+use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Fetch\Description\ListItem\CriteriaDescription;
 use Evrinoma\PackingListBundle\Fetch\Description\ListItem\GetDescription;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseHandler;
@@ -30,19 +31,24 @@ abstract class ListItemRepositoryWrapper extends RepositoryWrapper
 
     public function findWrapped($id, $lockMode = null, $lockVersion = null)
     {
-        $handler = $this->managerRegistry->getManager(BaseHandler::NAME, GetDescription::NAME);
+        /** @var FetchManagerInterface $manager */
+        $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
+        $handler = $manager->getHandler(BaseHandler::NAME, GetDescription::NAME);
 
-        $json = $handler->setEntity($id)->run();
+        $rows = $handler->setEntity($id)->run()->getRaw();
+        $entities = $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
 
-        return null;
+        return (0 === \count($entities)) ? null : $entities[0];
     }
 
     protected function criteriaWrapped($entity): array
     {
-        $handler = $this->managerRegistry->getManager(BaseHandler::NAME, CriteriaDescription::NAME);
+        /** @var FetchManagerInterface $manager */
+        $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
+        $handler = $manager->getHandler(BaseHandler::NAME, CriteriaDescription::NAME);
 
-        $json = $handler->setEntity($entity)->run();
+        $rows = $handler->setEntity($entity)->run()->getRaw();
 
-        return [];
+        return $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
     }
 }

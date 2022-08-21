@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DependencyInjection;
 
-use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Dto\DepartApiDto;
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
@@ -27,7 +26,6 @@ use Evrinoma\PackingListBundle\Factory\ListItemFactory;
 use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListFactory;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
-use Evrinoma\UtilsBundle\Persistence\ManagerRegistry;
 use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
@@ -112,7 +110,6 @@ class EvrinomaPackingListExtension extends Extension
         $registry = null;
 
         if (isset(self::$doctrineDrivers[$config['db_driver']]) && 'api' === $config['db_driver']) {
-
             $registry = new Reference(ManagerRegistryInterface::class);
 
             if (true === $config['fetch']['enabled']) {
