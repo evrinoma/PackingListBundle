@@ -25,14 +25,14 @@ abstract class AbstractLogistics implements LogisticsInterface
      *
      * @ORM\Column(name="packingListId", type="string", length=255, nullable=true)
      */
-    protected string $packingListId;
+    protected string $packingListId = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="idDepart", type="string", length=255, nullable=true)
      */
-    protected string $idDepart;
+    protected string $idDepart  = '';
 
     /**
      * @return string

@@ -29,43 +29,43 @@ abstract class AbstractListItem implements ListItemInterface
      *
      * @ORM\Column(name="stateStandard", type="string", length=255, nullable=true)
      */
-    protected string $stateStandard;
+    protected string $stateStandard = '';
     /**
      * @var float
      *
      * @ORM\Column(name="quantity", type="decimal", precision=20, scale=2)
      */
-    protected float $quantity;
+    protected float $quantity = 0;
     /**
      * @var string
      *
      * @ORM\Column(name="measure", type="string", length=255, nullable=true)
      */
-    protected string $measure;
+    protected string $measure = '';
     /**
      * @var string
      *
      * @ORM\Column(name="comment", type="string", length=255, nullable=true)
      */
-    protected string $comment;
+    protected string $comment = '';
     /**
      * @var string
      *
      * @ORM\Column(name="subContract", type="string", length=255, nullable=true)
      */
-    protected string $subContract;
+    protected string $subContract = '';
     /**
      * @var string
      *
      * @ORM\Column(name="number", type="string", length=255, nullable=true)
      */
-    protected string $number;
+    protected string $number = '';
     /**
      * @var string
      *
      * @ORM\Column(name="stamp", type="string", length=255, nullable=true)
      */
-    protected string $stamp;
+    protected string $stamp = '';
 
     /**
      * @param int|null $id

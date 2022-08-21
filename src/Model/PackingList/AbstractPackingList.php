@@ -27,37 +27,37 @@ abstract class AbstractPackingList implements PackingListInterface
      *
      * @ORM\Column(name="label", type="string", length=255, nullable=true)
      */
-    protected string $label;
+    protected string $label = '';
     /**
      * @var string
      *
      * @ORM\Column(name="contract", type="string", length=255, nullable=true)
      */
-    protected string $contract;
+    protected string $contract = '';
     /**
      * @var string
      *
      * @ORM\Column(name="contractDescription", type="string", length=255, nullable=true)
      */
-    protected string $contractDescription;
+    protected string $contractDescription = '';
     /**
      * @var string
      *
      * @ORM\Column(name="projectName", type="string", length=255, nullable=true)
      */
-    protected string $projectName;
+    protected string $projectName = '';
     /**
      * @var string
      *
      * @ORM\Column(name="contractorName", type="string", length=255, nullable=true)
      */
-    protected string $contractorName;
+    protected string $contractorName = '';
     /**
      * @var string
      *
      * @ORM\Column(name="subContracts", type="string", length=255, nullable=true)
      */
-    protected string $subContracts;
+    protected string $subContracts = '';
 
     /**
      * @ORM\OneToMany(targetEntity="Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface", mappedBy="id")

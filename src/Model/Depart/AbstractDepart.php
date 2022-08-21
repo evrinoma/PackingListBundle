@@ -30,21 +30,21 @@ abstract class AbstractDepart implements DepartInterface
      *
      * @ORM\Column(name="idDepart", type="string", length=255, nullable=true)
      */
-    protected string $idDepart;
+    protected string $idDepart = '';
 
     /**
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
-    protected string $address;
+    protected string $address = '';
 
     /**
      * @var bool
      *
      * @ORM\Column(name="isFinal", type="boolean")
      */
-    protected bool $isFinal;
+    protected bool $isFinal = false;
 
     /**
      * @param int|null $id
