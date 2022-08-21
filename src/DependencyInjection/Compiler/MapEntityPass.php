@@ -70,6 +70,10 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
                 throw new MetadataManagerNotFoundException();
             }
 
+            $driver = $container->findDefinition('doctrine.orm.default_metadata_driver');
+            $this->cleanMetadata($driver, [EvrinomaPackingListExtension::ENTITY]);
+            $this->cleanMetadata($driver, [EvrinomaPackingListExtension::MODEL]);
+
             $definition = $container->findDefinition(MetadataManagerInterface::class);
 
             $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_depart');

@@ -41,6 +41,7 @@ class EvrinomaPackingListExtension extends Extension
     use HelperTrait;
 
     public const ENTITY = 'Evrinoma\PackingListBundle\Entity';
+    public const MODEL = 'Evrinoma\PackingListBundle\Model';
     public const ENTITY_FACTORY_PACKING_LIST = PackingListFactory::class;
     public const ENTITY_BASE_PACKING_LIST = BasePackingList::class;
     public const DTO_BASE_PACKING_LIST = PackingListApiDto::class;
