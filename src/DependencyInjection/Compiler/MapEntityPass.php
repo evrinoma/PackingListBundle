@@ -14,11 +14,11 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DependencyInjection\Compiler;
 
 use Evrinoma\PackingListBundle\DependencyInjection\EvrinomaPackingListExtension;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdInterface;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
 use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\Compiler\AbstractMapEntity;
 use Evrinoma\UtilsBundle\Exception\MetadataManagerNotFoundException;
 use Evrinoma\UtilsBundle\Mapping\MetadataManagerInterface;
@@ -57,7 +57,7 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
             if (false !== strpos($entityContract, EvrinomaPackingListExtension::ENTITY)) {
                 $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/PackingListId', '%s/Entity/PackingListId');
             }
-            $this->addResolveTargetEntity([$entityContract => [PackingListIdInterface::class => []]], false);
+            $this->addResolveTargetEntity([$entityContract => [PackingListInterface::class => []]], false);
 
             $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_logistics');
             if (false !== strpos($entityContract, EvrinomaPackingListExtension::ENTITY)) {
@@ -77,7 +77,7 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
             $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_list_item');
             $definition->addMethodCall('registerEntity', [$entityContract, ListItemInterface::class]);
             $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_packing_list');
-            $definition->addMethodCall('registerEntity', [$entityContract, PackingListIdInterface::class]);
+            $definition->addMethodCall('registerEntity', [$entityContract, PackingListInterface::class]);
             $entityContract = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_logistics');
             $definition->addMethodCall('registerEntity', [$entityContract, LogisticsInterface::class]);
         }

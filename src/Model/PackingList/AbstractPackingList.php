@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingList;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 
@@ -56,16 +55,14 @@ abstract class AbstractPackingList implements PackingListInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="contractDescription", type="string", length=255, nullable=true)
+     * @ORM\Column(name="subContracts", type="string", length=255, nullable=true)
      */
     protected string $subContracts;
 
     /**
-     * @var ArrayCollection
-     *
-     * @ORM\ManyToMany(targetEntity="Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface", mappedBy="id")
+     * @ORM\OneToMany(targetEntity="Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface", mappedBy="id")
      */
-    protected $items;
+    protected $items = null;
 
     /**
      * @param int|null $id
@@ -199,20 +196,17 @@ abstract class AbstractPackingList implements PackingListInterface
         return $this;
     }
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getItems(): ArrayCollection
+    public function getItems()
     {
         return $this->items;
     }
 
     /**
-     * @param ArrayCollection $items
+     * @param $items
      *
      * @return PackingListInterface
      */
-    public function setItems(ArrayCollection $items): PackingListInterface
+    public function setItems($items): PackingListInterface
     {
         $this->items = $items;
 

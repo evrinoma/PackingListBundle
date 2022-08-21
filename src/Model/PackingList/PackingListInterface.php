@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingList;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 
 interface PackingListInterface extends IdInterface
@@ -97,15 +96,12 @@ interface PackingListInterface extends IdInterface
      */
     public function setSubContracts(string $subContracts): PackingListInterface;
 
-    /**
-     * @return ArrayCollection
-     */
-    public function getItems(): ArrayCollection;
+    public function getItems();
 
     /**
-     * @param ArrayCollection $items
+     * @param $items
      *
      * @return PackingListInterface
      */
-    public function setItems(ArrayCollection $items): PackingListInterface;
+    public function setItems($items): PackingListInterface;
 }
