@@ -1,2 +1,5 @@
 imports:
-  - { resource: constraint/list.yml }
+  - { resource: constraint/packing_list.yml }
+  - { resource: constraint/list_item.yml }
+  - { resource: constraint/depart.yml }
+  - { resource: constraint/logistics.yml }

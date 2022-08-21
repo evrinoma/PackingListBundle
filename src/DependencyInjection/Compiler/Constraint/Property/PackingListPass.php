@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class PackingListPass extends AbstractConstraint implements CompilerPassInterface
 {
-    public const PACKING_LIST_CONSTRAINT = 'evrinoma.contract.constraint.property.packing_list';
+    public const PACKING_LIST_CONSTRAINT = 'evrinoma.packing_list.constraint.property.packing_list';
 
     protected static string $alias = self::PACKING_LIST_CONSTRAINT;
     protected static string $class = PackingListValidator::class;

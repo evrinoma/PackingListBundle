@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class LogisticsPass extends AbstractConstraint implements CompilerPassInterface
 {
-    public const LOGISTICS_CONSTRAINT = 'evrinoma.contract.constraint.property.logistics';
+    public const LOGISTICS_CONSTRAINT = 'evrinoma.packing_list.constraint.property.logistics';
 
     protected static string $alias = self::LOGISTICS_CONSTRAINT;
     protected static string $class = LogisticsValidator::class;

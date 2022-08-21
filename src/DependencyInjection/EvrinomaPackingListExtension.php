@@ -162,8 +162,20 @@ class EvrinomaPackingListExtension extends Extension
         $this->wireValidator($container, 'depart', $config['entity_depart']);
         $this->wireValidator($container, 'logistics', $config['entity_logistics']);
 
-        if ($config['constraints']) {
-            $loader->load('validation.yml');
+        if ($config['constraints_packing_list']) {
+            $loader->load('constraint/packing_list.yml');
+        }
+
+        if ($config['constraints_list_item']) {
+            $loader->load('constraint/list_item.yml');
+        }
+
+        if ($config['constraints_depart']) {
+            $loader->load('constraint/depart.yml');
+        }
+
+        if ($config['constraints_logistics']) {
+            $loader->load('constraint/logistics.yml');
         }
 
         if ($config['decorates']) {

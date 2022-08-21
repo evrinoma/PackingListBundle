@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class ListItemPass extends AbstractConstraint implements CompilerPassInterface
 {
-    public const LIST_ITEM_CONSTRAINT = 'evrinoma.contract.constraint.property.list_item';
+    public const LIST_ITEM_CONSTRAINT = 'evrinoma.packing_list.constraint.property.list_item';
 
     protected static string $alias = self::LIST_ITEM_CONSTRAINT;
     protected static string $class = ListItemValidator::class;

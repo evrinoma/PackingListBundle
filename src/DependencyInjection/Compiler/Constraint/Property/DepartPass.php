@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 
 class DepartPass extends AbstractConstraint implements CompilerPassInterface
 {
-    public const DEPART_CONSTRAINT = 'evrinoma.contract.constraint.property.depart';
+    public const DEPART_CONSTRAINT = 'evrinoma.packing_list.constraint.property.depart';
 
     protected static string $alias = self::DEPART_CONSTRAINT;
     protected static string $class = DepartValidator::class;
