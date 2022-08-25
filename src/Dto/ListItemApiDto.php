@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto;
 
+use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\NameTrait;
 use Evrinoma\DtoCommon\ValueObject\Mutable\NumberTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CommentTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\MeasureTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\QuantityTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StampTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StateStandardTrait;
@@ -30,13 +32,20 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
 {
     use CommentTrait;
     use IdTrait;
+    use NameTrait;
     use MeasureTrait;
     use NumberTrait;
-    use PackingListIdTrait;
     use QuantityTrait;
     use StampTrait;
     use StateStandardTrait;
     use SubContractTrait;
+    use PackingListTrait;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
+     * @var PackingListApiDtoInterface|null
+     */
+    protected ?PackingListApiDtoInterface $packingListApiDto= null;
 
     public function toDto(Request $request): DtoInterface
     {
@@ -45,16 +54,20 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
         if ($class === $this->getClass()) {
             $id = $request->get(ListItemApiDtoInterface::ID);
             $number = $request->get(ListItemApiDtoInterface::NUMBER);
+            $name = $request->get(ListItemApiDtoInterface::NAME);
             $stateStandard = $request->get(ListItemApiDtoInterface::STATE_STANDARD);
             $quantity = $request->get(ListItemApiDtoInterface::QUANTITY);
             $measure = $request->get(ListItemApiDtoInterface::MEASURE);
             $comment = $request->get(ListItemApiDtoInterface::COMMENT);
             $subContract = $request->get(ListItemApiDtoInterface::SUB_CONTRACT);
             $stamp = $request->get(ListItemApiDtoInterface::STAMP);
-            $packingListId = $request->get(ListItemApiDtoInterface::PACKING_LIST_ID);
 
             if ($id) {
                 $this->setId($id);
+            }
+
+            if ($name) {
+                $this->setName($name);
             }
 
             if ($number) {
@@ -83,10 +96,6 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
 
             if ($stamp) {
                 $this->setStamp($stamp);
-            }
-
-            if ($packingListId) {
-                $this->setPackingListId($packingListId);
             }
         }
 

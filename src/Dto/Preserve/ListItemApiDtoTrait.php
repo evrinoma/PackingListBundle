@@ -13,11 +13,12 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
-use Evrinoma\DtoCommon\ValueObject\Mutable\NumberTrait;
+use Evrinoma\DtoCommon\ValueObject\Preserve\NumberTrait;
 use Evrinoma\DtoCommon\ValueObject\Preserve\IdTrait;
+use Evrinoma\DtoCommon\ValueObject\Preserve\NameTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\CommentTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\MeasureTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\PackingListIdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\PackingListTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\QuantityTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\StampTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\StateStandardTrait;
@@ -27,11 +28,12 @@ trait ListItemApiDtoTrait
 {
     use CommentTrait;
     use IdTrait;
+    use NameTrait;
     use MeasureTrait;
     use NumberTrait;
-    use PackingListIdTrait;
     use QuantityTrait;
     use StampTrait;
     use StateStandardTrait;
     use SubContractTrait;
+    use PackingListTrait;
 }

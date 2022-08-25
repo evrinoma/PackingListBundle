@@ -13,24 +13,31 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto;
 
+use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Evrinoma\DtoCommon\ValueObject\Mutable\NameTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\AddressTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IdDepartTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\IsFinalTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DepartTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FinalTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 {
     use AddressTrait;
-    use IdDepartTrait;
+    use DepartTrait;
     use IdTrait;
-    use IsFinalTrait;
+    use FinalTrait;
     use NameTrait;
-    use PackingListIdTrait;
+    use PackingListTrait;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
+     * @var PackingListApiDtoInterface|null
+     */
+    protected ?PackingListApiDtoInterface $packingListApiDto= null;
 
     public function toDto(Request $request): DtoInterface
     {
@@ -40,37 +47,32 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
             $id = $request->get(DepartApiDtoInterface::ID);
 
             $address = $request->get(DepartApiDtoInterface::ADDRESS);
-            $idDepart = $request->get(DepartApiDtoInterface::ID_DEPART);
-            $isFinal = $request->get(DepartApiDtoInterface::IS_FINAL);
+            $depart = $request->get(DepartApiDtoInterface::DEPART);
+            $final = $request->get(DepartApiDtoInterface::FINAL);
             $name = $request->get(DepartApiDtoInterface::NAME);
-            $packingListId = $request->get(ListItemApiDtoInterface::PACKING_LIST_ID);
 
             if ($address) {
                 $this->setAddress($address);
             }
 
-            if ($idDepart) {
-                $this->setIdDepart($idDepart);
+            if ($depart) {
+                $this->setDepart($depart);
             }
 
             if ($name) {
                 $this->setName($name);
             }
 
-            if ($isFinal) {
-                if ('true' === $isFinal) {
-                    $this->setIsFinal();
+            if ($final) {
+                if ('true' === $final) {
+                    $this->setFinal();
                 } else {
-                    $this->resetIsFinal();
+                    $this->resetFinal();
                 }
             }
 
             if ($id) {
                 $this->setId($id);
-            }
-
-            if ($packingListId) {
-                $this->setPackingListId($packingListId);
             }
         }
 

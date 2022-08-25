@@ -17,10 +17,10 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
 use Evrinoma\DtoCommon\ValueObject\Immutable\NameInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\AddressInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\IdDepartInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\IsFinalInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\PackingListIdInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\DepartInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\FinalInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\PackingListInterface;
 
-interface DepartApiDtoInterface extends DtoInterface, IdInterface, NameInterface, AddressInterface, IdDepartInterface, IsFinalInterface, PackingListIdInterface
+interface DepartApiDtoInterface extends DtoInterface, IdInterface, NameInterface, AddressInterface, DepartInterface, FinalInterface, PackingListInterface
 {
 }

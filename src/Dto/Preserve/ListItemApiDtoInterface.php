@@ -14,16 +14,18 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\DtoCommon\ValueObject\Immutable\NumberInterface;
+use Evrinoma\DtoCommon\ValueObject\Mutable\NumberInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
+use Evrinoma\DtoCommon\ValueObject\Mutable\NameInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CommentInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\MeasureInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\QuantityInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StampInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\StateStandardInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\SubContractInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListInterface;
 
-interface ListItemApiDtoInterface extends DtoInterface, IdInterface, NumberInterface, StateStandardInterface, QuantityInterface, MeasureInterface, CommentInterface, SubContractInterface, StampInterface, PackingListIdInterface
+
+interface ListItemApiDtoInterface extends DtoInterface, IdInterface, NameInterface, NumberInterface, StateStandardInterface, QuantityInterface, MeasureInterface, CommentInterface, SubContractInterface, StampInterface, PackingListInterface
 {
 }
