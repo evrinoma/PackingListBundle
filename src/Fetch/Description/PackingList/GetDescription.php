@@ -24,12 +24,9 @@ class GetDescription extends AbstractApiDescription
 
     protected function getOptions($entity): array
     {
-        return [];
-    }
-
-    protected function getUrl($entity): string
-    {
-        return parent::getUrl($entity).'/'.$entity;
+        return [
+            'id' => $entity
+        ];
     }
 
     /**

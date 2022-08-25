@@ -19,17 +19,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class GetDescription extends AbstractApiDescription
 {
-    public const NAME = 'api_packing_list_item';
+    public const NAME = 'api_packing_list_list_item';
     protected string $method = Request::METHOD_GET;
 
     protected function getOptions($entity): array
     {
-        return [];
-    }
-
-    protected function getUrl($entity): string
-    {
-        return parent::getUrl($entity).'/'.$entity;
+        return [
+            'id' => $entity
+        ];
     }
 
     /**

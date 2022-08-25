@@ -14,19 +14,19 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Fetch\Description\Depart;
 
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
-use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Symfony\Component\HttpFoundation\Request;
 
-class CriteriaDescription extends AbstractApiDescription
+class GetDescription extends AbstractApiDescription
 {
-    public const NAME = 'api_packing_list_depart_criteria';
+    public const NAME = 'api_packing_list_depart';
     protected string $method = Request::METHOD_GET;
 
     protected function getOptions($entity): array
     {
-        /* @var DepartApiDtoInterface $entity */
-        return ($entity->hasPackingListApiDto())? ['packingListId' => $entity->getPackingListApiDto()->getId()] : [];
+        return [
+            'id' => $entity
+        ];
     }
 
     /**

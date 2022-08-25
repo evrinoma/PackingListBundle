@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PostDescription extends AbstractApiDescription
 {
-    public const NAME = 'api_packing_list_logistics_save';
+    public const NAME = 'api_packing_list_logistics_create';
     protected string $method = Request::METHOD_PUT;
 
     protected function getOptions($entity): array
@@ -28,7 +28,7 @@ class PostDescription extends AbstractApiDescription
         /* @var LogisticsApiDtoInterface $entity */
         return [
             'id' => $entity->getPackingListId(),
-            'idDepart' => $entity->getIdDepart(),
+            'idDepart' => $entity->getDepart(),
             ];
     }
 

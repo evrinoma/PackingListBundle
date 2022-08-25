@@ -6,3 +6,10 @@ services:
   evrinoma.packing_list.depart.fetch.criteria:
     alias: Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription
     public: true
+
+  Evrinoma\PackingListBundle\Fetch\Description\Depart\GetDescription:
+    tags:
+      - { name: 'evrinoma.fetch.description' }
+
+  evrinoma.packing_list.depart.fetch.get:
+    alias: Evrinoma\PackingListBundle\Fetch\Description\Depart\GetDescription
