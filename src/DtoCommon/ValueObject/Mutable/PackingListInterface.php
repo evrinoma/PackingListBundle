@@ -14,21 +14,14 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\IdDepartTrait as IdDepartImmutableTrait;
+use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
 
-trait IdDepartTrait
+interface PackingListInterface
 {
-    use IdDepartImmutableTrait;
-
     /**
-     * @param string $idDepart
+     * @param PackingListApiDtoInterface $packingListApiDto
      *
      * @return DtoInterface
      */
-    protected function setIdDepart(string $idDepart): DtoInterface
-    {
-        $this->idDepart = trim($idDepart);
-
-        return $this;
-    }
+    public function setPackingListApiDto(PackingListApiDtoInterface $packingListApiDto): DtoInterface;
 }

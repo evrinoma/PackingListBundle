@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
-interface IdDepartInterface
+interface DimensionsInterface
 {
-    public const ID_DEPART = 'id_depart';
+    public const DIMENSIONS = 'dimensions';
 
     /**
      * @return bool
      */
-    public function hasIdDepart(): bool;
+    public function hasDimensions(): bool;
 
     /**
      * @return string
      */
-    public function getIdDepart(): string;
+    public function getDimensions(): string;
 }

@@ -14,28 +14,20 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\IsFinalTrait as IsFinalImmutableTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\WeightTrait as WeightImmutableTrait;
 
-trait IsFinalTrait
+trait WeightTrait
 {
-    use IsFinalImmutableTrait;
+    use WeightImmutableTrait;
 
     /**
+     * @param string $weight
+     *
      * @return DtoInterface
      */
-    protected function setIsFinal(): DtoInterface
+    protected function setWeight(string $weight): DtoInterface
     {
-        $this->isFinal = true;
-
-        return $this;
-    }
-
-    /**
-     * @return DtoInterface
-     */
-    protected function resetIsFinal(): DtoInterface
-    {
-        $this->isFinal = false;
+        $this->weight = trim($weight);
 
         return $this;
     }

@@ -11,25 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve;
+namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
-trait IsFinalTrait
+interface DimensionsInterface
 {
     /**
+     * @param string $dimensions
+     *
      * @return DtoInterface
      */
-    public function setIsFinal(): DtoInterface
-    {
-        return parent::setIsFinal();
-    }
-
-    /**
-     * @return DtoInterface
-     */
-    public function resetIsFinal(): DtoInterface
-    {
-        return parent::resetIsFinal();
-    }
+    public function setDimensions(string $dimensions): DtoInterface;
 }

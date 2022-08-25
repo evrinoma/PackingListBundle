@@ -15,15 +15,12 @@ namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
-interface IsFinalInterface
+interface ConsigneeInterface
 {
     /**
+     * @param string $consignee
+     *
      * @return DtoInterface
      */
-    public function setIsFinal(): DtoInterface;
-
-    /**
-     * @return DtoInterface
-     */
-    public function resetIsFinal(): DtoInterface;
+    public function setConsignee(string $consignee): DtoInterface;
 }

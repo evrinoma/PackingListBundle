@@ -13,19 +13,23 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
-use Evrinoma\DtoBundle\Dto\DtoInterface;
-
-interface ItemsApiDtoInterface
+trait FinalTrait
 {
-    public const ITEMS = 'items';
-
-    /**
-     * @return DtoInterface[]
-     */
-    public function getItemsApiDto(): array;
+    private ?bool  $final = null;
 
     /**
      * @return bool
      */
-    public function hasItemsApiDto(): bool;
+    public function isFinal(): bool
+    {
+        return $this->final;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasFinal(): bool
+    {
+        return null !== $this->final;
+    }
 }

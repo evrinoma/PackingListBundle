@@ -11,19 +11,19 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve;
+namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 
-trait IdDepartTrait
+interface FinalInterface
 {
     /**
-     * @param string $idDepart
-     *
      * @return DtoInterface
      */
-    public function setIdDepart(string $idDepart): DtoInterface
-    {
-        return parent::setIdDepart($idDepart);
-    }
+    public function setFinal(): DtoInterface;
+
+    /**
+     * @return DtoInterface
+     */
+    public function resetFinal(): DtoInterface;
 }

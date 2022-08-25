@@ -14,14 +14,21 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\FormFactorTrait as FormFactorImmutableTrait;
 
-interface ItemsApiDtoInterface
+trait FormFactorTrait
 {
+    use FormFactorImmutableTrait;
+
     /**
-     * @param ListItemApiDtoInterface[] $itemsApiDto
+     * @param string $formFactor
      *
      * @return DtoInterface
      */
-    public function setItemsApiDto(array $itemsApiDto): DtoInterface;
+    protected function setFormFactor(string $formFactor): DtoInterface
+    {
+        $this->formFactor = trim($formFactor);
+
+        return $this;
+    }
 }

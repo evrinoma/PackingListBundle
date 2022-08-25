@@ -13,23 +13,17 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
-trait IdDepartTrait
+interface FormFactorInterface
 {
-    private string $idDepart = '';
+    public const FORM_FACTOR = 'form_factor';
 
     /**
      * @return bool
      */
-    public function hasIdDepart(): bool
-    {
-        return '' !== $this->idDepart;
-    }
+    public function hasFormFactor(): bool;
 
     /**
      * @return string
      */
-    public function getIdDepart(): string
-    {
-        return $this->idDepart;
-    }
+    public function getFormFactor(): string;
 }

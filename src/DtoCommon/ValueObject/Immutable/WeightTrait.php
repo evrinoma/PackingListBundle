@@ -13,23 +13,23 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
-trait IsFinalTrait
+trait WeightTrait
 {
-    private ?bool  $isFinal = null;
+    private string $weight = '';
 
     /**
      * @return bool
      */
-    public function isIsFinal(): bool
+    public function hasWeight(): bool
     {
-        return $this->isFinal;
+        return '' !== $this->weight;
     }
 
     /**
-     * @return bool
+     * @return string
      */
-    public function hasIsFinal(): bool
+    public function getWeight(): string
     {
-        return null !== $this->isFinal;
+        return $this->weight;
     }
 }

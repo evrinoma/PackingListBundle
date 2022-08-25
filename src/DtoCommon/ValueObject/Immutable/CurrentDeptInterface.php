@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
-interface IsFinalInterface
+interface CurrentDeptInterface
 {
-    public const IS_FINAL = 'is_final';
+    public const CURRENT_DEPT = 'current_dept';
 
     /**
      * @return bool
      */
-    public function isIsFinal(): bool;
+    public function hasCurrentDept(): bool;
 
     /**
-     * @return bool
+     * @return string
      */
-    public function hasIsFinal(): bool;
+    public function getCurrentDept(): string;
 }

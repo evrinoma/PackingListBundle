@@ -14,21 +14,20 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\ItemsApiDtoTrait as ItemsApiDtoImmutableTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\DateTTNTrait as DateTTNImmutableTrait;
 
-trait ItemsApiDtoTrait
+trait DateTTNTrait
 {
-    use ItemsApiDtoImmutableTrait;
+    use DateTTNImmutableTrait;
 
     /**
-     * @param ListItemApiDtoInterface[] $itemsApiDto
+     * @param string $dateTTN
      *
      * @return DtoInterface
      */
-    protected function setItemsApiDto(array $itemsApiDto): DtoInterface
+    protected function setDateTTN(string $dateTTN): DtoInterface
     {
-        $this->itemsApiDto = $itemsApiDto;
+        $this->dateTTN = trim($dateTTN);
 
         return $this;
     }
