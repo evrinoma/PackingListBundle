@@ -25,7 +25,7 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
         /* @var $dto LogisticsApiDtoInterface */
         $entity
             ->setPackingListId($dto->getPackingListId())
-            ->setIdDepart($dto->getIdDepart());
+            ->setIdDepart($dto->getDepart());
 
         return $entity;
     }
@@ -39,7 +39,7 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
         /* @var $dto LogisticsApiDtoInterface */
         $entity
             ->setPackingListId($dto->getPackingListId())
-            ->setIdDepart($dto->getIdDepart());
+            ->setIdDepart($dto->getDepart());
 
         return $entity;
     }

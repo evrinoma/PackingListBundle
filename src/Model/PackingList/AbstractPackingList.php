@@ -60,9 +60,216 @@ abstract class AbstractPackingList implements PackingListInterface
     protected string $subContracts = '';
 
     /**
-     * @ORM\OneToMany(targetEntity="Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface", mappedBy="id")
+     * @var string
+     *
+     * @ORM\Column(name="weight", type="string", length=255, nullable=true)
      */
-    protected $items = null;
+    protected string $weight = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="formFactor", type="string", length=255, nullable=true)
+     */
+    protected string $formFactor = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dimensions", type="string", length=255, nullable=true)
+     */
+    protected string $dimensions = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="currentDept", type="string", length=255, nullable=true)
+     */
+    protected string $currentDept = '';
+
+    /**
+     * @var \DateTimeImmutable
+     *
+     * @ORM\Column(name="dateTTN", type="datetime_immutable", nullable=true)
+     */
+    protected $dateTTN;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comment", type="string", length=255, nullable=true)
+     */
+    protected string $comment = '';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="consignee", type="string", length=255, nullable=true)
+     */
+    protected string $consignee = '';
+
+    /**
+     * @return string
+     */
+    public function getWeight(): string
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param string $weight
+     *
+     * @return PackingListInterface
+     */
+    public function setWeight(string $weight): PackingListInterface
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormFactor(): string
+    {
+        return $this->formFactor;
+    }
+
+    /**
+     * @param string $formFactor
+     *
+     * @return PackingListInterface
+     */
+    public function setFormFactor(string $formFactor): PackingListInterface
+    {
+        $this->formFactor = $formFactor;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDimensions(): string
+    {
+        return $this->dimensions;
+    }
+
+    /**
+     * @param string $dimensions
+     *
+     * @return PackingListInterface
+     */
+    public function setDimensions(string $dimensions): PackingListInterface
+    {
+        $this->dimensions = $dimensions;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentDept(): string
+    {
+        return $this->currentDept;
+    }
+
+    /**
+     * @param string $currentDept
+     *
+     * @return PackingListInterface
+     */
+    public function setCurrentDept(string $currentDept): PackingListInterface
+    {
+        $this->currentDept = $currentDept;
+
+        return $this;
+    }
+
+    /**
+     * @return ?\DateTimeImmutable
+     */
+    public function getDateTTN(): ?\DateTimeImmutable
+    {
+        return $this->dateTTN;
+    }
+
+    /**
+     * @param \DateTimeImmutable $dateTTN
+     *
+     * @return PackingListInterface
+     */
+    public function setDateTTN(\DateTimeImmutable $dateTTN): PackingListInterface
+    {
+        $this->dateTTN = $dateTTN;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment(): string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     *
+     * @return PackingListInterface
+     */
+    public function setComment(string $comment): PackingListInterface
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getConsignee(): string
+    {
+        return $this->consignee;
+    }
+
+    /**
+     * @param string $consignee
+     *
+     * @return PackingListInterface
+     */
+    public function setConsignee(string $consignee): PackingListInterface
+    {
+        $this->consignee = $consignee;
+
+        return $this;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * @param int|null $id
@@ -192,23 +399,6 @@ abstract class AbstractPackingList implements PackingListInterface
     public function setSubContracts(string $subContracts): PackingListInterface
     {
         $this->subContracts = $subContracts;
-
-        return $this;
-    }
-
-    public function getItems()
-    {
-        return $this->items;
-    }
-
-    /**
-     * @param $items
-     *
-     * @return PackingListInterface
-     */
-    public function setItems($items): PackingListInterface
-    {
-        $this->items = $items;
 
         return $this;
     }

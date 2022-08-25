@@ -31,9 +31,9 @@ abstract class AbstractLogistics implements LogisticsInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="idDepart", type="string", length=255, nullable=true)
+     * @ORM\Column(name="depart", type="string", length=255, nullable=true)
      */
-    protected string $idDepart = '';
+    protected string $depart = '';
 
     /**
      * @return string
@@ -58,19 +58,19 @@ abstract class AbstractLogistics implements LogisticsInterface
     /**
      * @return string
      */
-    public function getIdDepart(): string
+    public function getDepart(): string
     {
-        return $this->idDepart;
+        return $this->depart;
     }
 
     /**
-     * @param string $idDepart
+     * @param string $depart
      *
      * @return LogisticsInterface
      */
-    public function setIdDepart(string $idDepart): LogisticsInterface
+    public function setDepart(string $depart): LogisticsInterface
     {
-        $this->idDepart = $idDepart;
+        $this->depart = $depart;
 
         return $this;
     }

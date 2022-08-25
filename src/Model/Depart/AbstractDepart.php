@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\Depart;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 use Evrinoma\UtilsBundle\Entity\NameTrait;
 
@@ -26,11 +27,16 @@ abstract class AbstractDepart implements DepartInterface
     use NameTrait;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface")
+     */
+    protected PackingListInterface $packingList;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="idDepart", type="string", length=255, nullable=true)
+     * @ORM\Column(name="depart", type="string", length=255, nullable=true)
      */
-    protected string $idDepart = '';
+    protected string $depart = '';
 
     /**
      * @var string
@@ -42,9 +48,29 @@ abstract class AbstractDepart implements DepartInterface
     /**
      * @var bool
      *
-     * @ORM\Column(name="isFinal", type="boolean")
+     * @ORM\Column(name="final", type="boolean")
      */
-    protected bool $isFinal = false;
+    protected bool $final = false;
+
+    /**
+     * @return PackingListInterface
+     */
+    public function getPackingList(): PackingListInterface
+    {
+        return $this->packingList;
+    }
+
+    /**
+     * @param PackingListInterface $packingList
+     *
+     * @return DepartInterface
+     */
+    public function setPackingList(PackingListInterface $packingList): DepartInterface
+    {
+        $this->packingList = $packingList;
+
+        return $this;
+    }
 
     /**
      * @param int|null $id
@@ -61,19 +87,19 @@ abstract class AbstractDepart implements DepartInterface
     /**
      * @return string
      */
-    public function getIdDepart(): string
+    public function getDepart(): string
     {
-        return $this->idDepart;
+        return $this->depart;
     }
 
     /**
-     * @param string $idDepart
+     * @param string $depart
      *
      * @return DepartInterface
      */
-    public function setIdDepart(string $idDepart): DepartInterface
+    public function setDepart(string $depart): DepartInterface
     {
-        $this->idDepart = $idDepart;
+        $this->depart = $depart;
 
         return $this;
     }
@@ -103,17 +129,17 @@ abstract class AbstractDepart implements DepartInterface
      */
     public function isFinal(): bool
     {
-        return $this->isFinal;
+        return $this->final;
     }
 
     /**
-     * @param bool $isFinal
+     * @param bool $final
      *
      * @return DepartInterface
      */
-    public function setIsFinal(bool $isFinal): DepartInterface
+    public function setFinal(bool $final): DepartInterface
     {
-        $this->isFinal = $isFinal;
+        $this->final = $final;
 
         return $this;
     }

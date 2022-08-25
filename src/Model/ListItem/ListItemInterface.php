@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\ListItem;
 
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 use Evrinoma\UtilsBundle\Entity\NameInterface;
 
@@ -108,4 +109,16 @@ interface ListItemInterface extends IdInterface, NameInterface
      * @return ListItemInterface
      */
     public function setStamp(string $stamp): ListItemInterface;
+
+    /**
+     * @return PackingListInterface
+     */
+    public function getPackingList(): PackingListInterface;
+
+    /**
+     * @param PackingListInterface $packingList
+     *
+     * @return ListItemInterface
+     */
+    public function setPackingList(PackingListInterface $packingList): ListItemInterface;
 }

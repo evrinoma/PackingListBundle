@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\ListItem;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 use Evrinoma\UtilsBundle\Entity\NameTrait;
 
@@ -66,6 +67,31 @@ abstract class AbstractListItem implements ListItemInterface
      * @ORM\Column(name="stamp", type="string", length=255, nullable=true)
      */
     protected string $stamp = '';
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface")
+     */
+    protected PackingListInterface $packingList;
+
+    /**
+     * @return PackingListInterface
+     */
+    public function getPackingList(): PackingListInterface
+    {
+        return $this->packingList;
+    }
+
+    /**
+     * @param PackingListInterface $packingList
+     *
+     * @return ListItemInterface
+     */
+    public function setPackingList(PackingListInterface $packingList): ListItemInterface
+    {
+        $this->packingList = $packingList;
+
+        return $this;
+    }
 
     /**
      * @param int|null $id

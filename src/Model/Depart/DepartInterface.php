@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\Depart;
 
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 use Evrinoma\UtilsBundle\Entity\NameInterface;
 
@@ -28,14 +29,14 @@ interface DepartInterface extends IdInterface, NameInterface
     /**
      * @return string
      */
-    public function getIdDepart(): string;
+    public function getDepart(): string;
 
     /**
-     * @param string $idDepart
+     * @param string $depart
      *
      * @return DepartInterface
      */
-    public function setIdDepart(string $idDepart): DepartInterface;
+    public function setDepart(string $depart): DepartInterface;
 
     /**
      * @return string
@@ -55,9 +56,21 @@ interface DepartInterface extends IdInterface, NameInterface
     public function isFinal(): bool;
 
     /**
-     * @param bool $isFinal
+     * @param bool $final
      *
      * @return DepartInterface
      */
-    public function setIsFinal(bool $isFinal): DepartInterface;
+    public function setFinal(bool $final): DepartInterface;
+
+    /**
+     * @return PackingListInterface
+     */
+    public function getPackingList(): PackingListInterface;
+
+    /**
+     * @param PackingListInterface $packingList
+     *
+     * @return DepartInterface
+     */
+    public function setPackingList(PackingListInterface $packingList): DepartInterface;
 }

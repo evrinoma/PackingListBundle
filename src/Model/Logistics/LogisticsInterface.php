@@ -30,12 +30,12 @@ interface LogisticsInterface
     /**
      * @return string
      */
-    public function getIdDepart(): string;
+    public function getDepart(): string;
 
     /**
-     * @param string $idDepart
+     * @param string $depart
      *
      * @return LogisticsInterface
      */
-    public function setIdDepart(string $idDepart): LogisticsInterface;
+    public function setDepart(string $depart): LogisticsInterface;
 }

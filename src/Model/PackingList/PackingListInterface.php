@@ -96,12 +96,87 @@ interface PackingListInterface extends IdInterface
      */
     public function setSubContracts(string $subContracts): PackingListInterface;
 
-    public function getItems();
+    /**
+     * @return string
+     */
+    public function getWeight(): string;
 
     /**
-     * @param $items
+     * @param string $weight
      *
      * @return PackingListInterface
      */
-    public function setItems($items): PackingListInterface;
+    public function setWeight(string $weight): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getFormFactor(): string;
+
+    /**
+     * @param string $formFactor
+     *
+     * @return PackingListInterface
+     */
+    public function setFormFactor(string $formFactor): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getDimensions(): string;
+
+    /**
+     * @param string $dimensions
+     *
+     * @return PackingListInterface
+     */
+    public function setDimensions(string $dimensions): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getCurrentDept(): string;
+
+    /**
+     * @param string $currentDept
+     *
+     * @return PackingListInterface
+     */
+    public function setCurrentDept(string $currentDept): PackingListInterface;
+
+    /**
+     * @return ?\DateTimeImmutable
+     */
+    public function getDateTTN(): ?\DateTimeImmutable;
+
+    /**
+     * @param \DateTimeImmutable $dateTTN
+     *
+     * @return PackingListInterface
+     */
+    public function setDateTTN(\DateTimeImmutable $dateTTN): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getComment(): string;
+
+    /**
+     * @param string $comment
+     *
+     * @return PackingListInterface
+     */
+    public function setComment(string $comment): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getConsignee(): string;
+
+    /**
+     * @param string $consignee
+     *
+     * @return PackingListInterface
+     */
+    public function setConsignee(string $consignee): PackingListInterface;
 }
