@@ -196,19 +196,12 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="id Entity",
-     *         in="query",
-     *         name="id",
-     *         @OA\Schema(
-     *             type="string",
-     *         )
-     *     ),
-     *     @OA\Parameter(
      *         description="Id Entity Packing List",
      *         in="query",
-     *         name="packing_list_id",
+     *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
+     *     default="1021",
      *         )
      *     ),
      * )
@@ -255,7 +248,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="3",
+     *             default="3807",
      *         )
      *     )
      * )

@@ -194,14 +194,6 @@ final class PackingListApiController extends AbstractWrappedApiController
      *             default="Evrinoma\PackingListBundle\Dto\PackingListApiDto",
      *             readOnly=true
      *         )
-     *     ),
-     *     @OA\Parameter(
-     *         description="id Entity",
-     *         in="query",
-     *         name="id",
-     *         @OA\Schema(
-     *             type="string",
-     *         )
      *     )
      * )
      * @OA\Response(response=200, description="Return packing list")
@@ -247,7 +239,7 @@ final class PackingListApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="3",
+     *             default="1000",
      *         )
      *     )
      * )

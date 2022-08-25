@@ -196,19 +196,12 @@ final class DepartApiController extends AbstractWrappedApiController
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="id Entity",
-     *         in="query",
-     *         name="id",
-     *         @OA\Schema(
-     *             type="string",
-     *         )
-     *     ),
-     *     @OA\Parameter(
      *         description="Id Entity Packing List",
      *         in="query",
-     *         name="packing_list_id",
+     *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
+     *     default="10",
      *         )
      *     ),
      * )
@@ -255,7 +248,7 @@ final class DepartApiController extends AbstractWrappedApiController
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="3",
+     *             default="9",
      *         )
      *     )
      * )
@@ -265,10 +258,14 @@ final class DepartApiController extends AbstractWrappedApiController
      */
     public function getAction(): JsonResponse
     {
+        /** @var DepartApiDtoInterface $departApiDto */
+        $departApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
         $json = [];
+        $error = [];
 
         try {
-            throw new DepartNotFoundException();
+            $json[] = $this->queryManager->get($departApiDto);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
