@@ -248,29 +248,6 @@ abstract class AbstractPackingList implements PackingListInterface
         return $this;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * @param int|null $id
      *

@@ -15,8 +15,8 @@ namespace Evrinoma\PackingListBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Immutable\IdInterface;
-use Evrinoma\DtoCommon\ValueObject\Immutable\NumberInterface;
 use Evrinoma\DtoCommon\ValueObject\Immutable\NameInterface;
+use Evrinoma\DtoCommon\ValueObject\Immutable\NumberInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\CommentInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\MeasureInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\PackingListInterface;

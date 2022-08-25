@@ -201,7 +201,7 @@ final class DepartApiController extends AbstractWrappedApiController
      *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
-     *     default="10",
+     *             default="10",
      *         )
      *     ),
      * )

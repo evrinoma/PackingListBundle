@@ -14,8 +14,6 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
-use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +23,7 @@ trait PackingListTrait
     /**
      * @var PackingListApiDtoInterface|null
      */
-    protected ?PackingListApiDtoInterface $packingListApiDto= null;
+    protected ?PackingListApiDtoInterface $packingListApiDto = null;
 
     /**
      * @return \Generator
@@ -35,7 +33,7 @@ trait PackingListTrait
         if ($request) {
             $type = $request->get(PackingListInterface::PACKING_LIST);
             if ($type) {
-                $newRequest                    = $this->getCloneRequest();
+                $newRequest = $this->getCloneRequest();
                 $type[DtoInterface::DTO_CLASS] = PackingListApiDto::class;
                 $newRequest->request->add($type);
 
@@ -53,5 +51,4 @@ trait PackingListTrait
     {
         return $this->packingListApiDto;
     }
-
 }

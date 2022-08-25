@@ -26,7 +26,7 @@ class CriteriaDescription extends AbstractApiDescription
     protected function getOptions($entity): array
     {
         /* @var ListItemApiDtoInterface $entity */
-        return ($entity->hasPackingListApiDto())? ['packingListId' => $entity->getPackingListApiDto()->getId()] : [];
+        return ($entity->hasPackingListApiDto()) ? ['packingListId' => $entity->getPackingListApiDto()->getId()] : [];
     }
 
     /**

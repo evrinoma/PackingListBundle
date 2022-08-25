@@ -24,8 +24,8 @@ trait DepartApiDtoTrait
 {
     use AddressTrait;
     use DepartTrait;
-    use IdTrait;
     use FinalTrait;
+    use IdTrait;
     use NameTrait;
     use PackingListTrait;
 }

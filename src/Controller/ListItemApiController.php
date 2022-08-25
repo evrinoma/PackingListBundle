@@ -201,7 +201,7 @@ final class ListItemApiController extends AbstractWrappedApiController
      *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
-     *     default="1021",
+     *             default="1021",
      *         )
      *     ),
      * )

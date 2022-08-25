@@ -28,16 +28,17 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 {
     use AddressTrait;
     use DepartTrait;
-    use IdTrait;
     use FinalTrait;
+    use IdTrait;
     use NameTrait;
     use PackingListTrait;
 
     /**
      * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
+     *
      * @var PackingListApiDtoInterface|null
      */
-    protected ?PackingListApiDtoInterface $packingListApiDto= null;
+    protected ?PackingListApiDtoInterface $packingListApiDto = null;
 
     public function toDto(Request $request): DtoInterface
     {

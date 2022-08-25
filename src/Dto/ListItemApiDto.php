@@ -32,20 +32,21 @@ class ListItemApiDto extends AbstractDto implements ListItemApiDtoInterface
 {
     use CommentTrait;
     use IdTrait;
-    use NameTrait;
     use MeasureTrait;
+    use NameTrait;
     use NumberTrait;
+    use PackingListTrait;
     use QuantityTrait;
     use StampTrait;
     use StateStandardTrait;
     use SubContractTrait;
-    use PackingListTrait;
 
     /**
      * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
+     *
      * @var PackingListApiDtoInterface|null
      */
-    protected ?PackingListApiDtoInterface $packingListApiDto= null;
+    protected ?PackingListApiDtoInterface $packingListApiDto = null;
 
     public function toDto(Request $request): DtoInterface
     {

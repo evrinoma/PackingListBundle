@@ -25,7 +25,7 @@ class GetDescription extends AbstractApiDescription
     protected function getOptions($entity): array
     {
         return [
-            'id' => $entity
+            'id' => $entity,
         ];
     }
 

@@ -29,6 +29,6 @@ use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\ProjectNameInterf
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\SubContractInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\WeightInterface;
 
-interface PackingListApiDtoInterface extends DtoInterface, IdInterface, LabelInterface, ContractInterface, ContractDescriptionInterface, ProjectNameInterface, ContractorNameInterface, SubContractInterface,WeightInterface, FormFactorInterface, DimensionsInterface, CurrentDeptInterface, DateTTNInterface, CommentInterface, ConsigneeInterface
+interface PackingListApiDtoInterface extends DtoInterface, IdInterface, LabelInterface, ContractInterface, ContractDescriptionInterface, ProjectNameInterface, ContractorNameInterface, SubContractInterface, WeightInterface, FormFactorInterface, DimensionsInterface, CurrentDeptInterface, DateTTNInterface, CommentInterface, ConsigneeInterface
 {
 }

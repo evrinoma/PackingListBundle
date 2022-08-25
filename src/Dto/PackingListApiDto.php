@@ -18,12 +18,12 @@ use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CommentTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ConsigneeTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CurrentDeptTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DateTTNTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DimensionsTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ContractDescriptionTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ContractorNameTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ContractTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CurrentDeptTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DateTTNTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DimensionsTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FormFactorTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LabelTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ProjectNameTrait;
@@ -33,27 +33,27 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterface
 {
+    use CommentTrait;
+    use ConsigneeTrait;
     use ContractDescriptionTrait;
     use ContractorNameTrait;
     use ContractTrait;
+    use CurrentDeptTrait;
+    use DateTTNTrait;
+    use DimensionsTrait;
+    use FormFactorTrait;
     use IdTrait;
     use LabelTrait;
     use ProjectNameTrait;
     use SubContractTrait;
     use WeightTrait;
-    use FormFactorTrait;
-    use DimensionsTrait;
-    use CurrentDeptTrait;
-    use DateTTNTrait;
-    use CommentTrait;
-    use ConsigneeTrait;
 
     public function toDto(Request $request): DtoInterface
     {
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-           $contractDescription = $request->get(PackingListApiDtoInterface::CONTRACT_DESCRIPTION);
+            $contractDescription = $request->get(PackingListApiDtoInterface::CONTRACT_DESCRIPTION);
             $contractorName = $request->get(PackingListApiDtoInterface::CONTRACTOR_NAME);
             $contract = $request->get(PackingListApiDtoInterface::CONTRACT);
             $id = $request->get(PackingListApiDtoInterface::ID);
