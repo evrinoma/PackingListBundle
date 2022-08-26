@@ -15,8 +15,9 @@ namespace Evrinoma\PackingListBundle\Dto;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\DepartInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\PackingListIdInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\PackingListInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\UserInterface;
 
-interface LogisticsApiDtoInterface extends DtoInterface, PackingListIdInterface, DepartInterface
+interface LogisticsApiDtoInterface extends DtoInterface, DepartInterface, PackingListInterface, UserInterface
 {
 }

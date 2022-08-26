@@ -13,32 +13,47 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Dto;
 
+use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DepartTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListIdTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\UserTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class LogisticsApiDto extends AbstractDto implements LogisticsApiDtoInterface
 {
     use DepartTrait;
-    use PackingListIdTrait;
+    use PackingListTrait;
+    use UserTrait;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
+     *
+     * @var PackingListApiDtoInterface|null
+     */
+    protected ?PackingListApiDtoInterface $packingListApiDto = null;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\DepartApiDto", generator="genRequestDepartApiDto")
+     *
+     * @var DepartApiDtoInterface|null
+     */
+    protected ?DepartApiDtoInterface $departApiDto = null;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\UserApiDto", generator="genRequestUserApiDto")
+     *
+     * @var UserApiDtoInterface|null
+     */
+    protected ?UserApiDtoInterface $userApiDto = null;
+
 
     public function toDto(Request $request): DtoInterface
     {
         $class = $request->get(DtoInterface::DTO_CLASS);
 
         if ($class === $this->getClass()) {
-            $packingListId = $request->get(LogisticsApiDtoInterface::PACKING_LIST_ID);
-            $depart = $request->get(LogisticsApiDtoInterface::DEPART);
-
-            if ($packingListId) {
-                $this->setPackingListId($packingListId);
-            }
-
-            if ($depart) {
-                $this->setDepart($depart);
-            }
         }
 
         return $this;
