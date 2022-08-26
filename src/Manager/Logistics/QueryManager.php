@@ -56,8 +56,8 @@ final class QueryManager implements QueryManagerInterface
     public function proxy(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         try {
-            if ($dto->hasPackingListId()) {
-                $logistics = $this->repository->proxy($dto->getPackingListId());
+            if ($dto->hasPackingListApiDto()) {
+                $logistics = $this->repository->proxy($dto->getPackingListApiDto()->idToString());
             } else {
                 throw new LogisticsProxyException('Id value is not set while trying get proxy object');
             }
@@ -78,7 +78,7 @@ final class QueryManager implements QueryManagerInterface
     public function get(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         try {
-            $logistics = $this->repository->find($dto->getPackingListId());
+            $logistics = $this->repository->find($dto->getPackingListApiDto()->idToString());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }

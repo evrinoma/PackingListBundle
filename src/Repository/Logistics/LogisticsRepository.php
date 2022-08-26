@@ -85,7 +85,7 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
         $logistics = $this->mediator->getResult($dto, $builder);
 
         if (0 === \count($logistics)) {
-            throw new LogisticsNotFoundException('Cannot find depart by findByCriteria');
+            throw new LogisticsNotFoundException('Cannot find logistics by findByCriteria');
         }
 
         return $logistics;
@@ -106,7 +106,7 @@ class LogisticsRepository extends LogisticsRepositoryWrapper implements Logistic
         $logistics = $this->findWrapped($id);
 
         if (null === $logistics) {
-            throw new LogisticsNotFoundException("Cannot find depart with id $id");
+            throw new LogisticsNotFoundException("Cannot find logistics with id $id");
         }
 
         return $logistics;

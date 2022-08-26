@@ -48,7 +48,6 @@ class LogisticsApiDto extends AbstractDto implements LogisticsApiDtoInterface
      */
     protected ?UserApiDtoInterface $userApiDto = null;
 
-
     public function toDto(Request $request): DtoInterface
     {
         $class = $request->get(DtoInterface::DTO_CLASS);

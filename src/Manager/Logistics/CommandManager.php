@@ -20,6 +20,8 @@ use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeSavedExcepti
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsInvalidException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
 use Evrinoma\PackingListBundle\Factory\LogisticsFactoryInterface;
+use Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface as DepartQueryManagerInterface;
+use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface as PackingListQueryManagerInterface;
 use Evrinoma\PackingListBundle\Mediator\Logistics\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
 use Evrinoma\PackingListBundle\Repository\Logistics\LogisticsCommandRepositoryInterface;
@@ -32,18 +34,25 @@ final class CommandManager implements CommandManagerInterface
     private LogisticsFactoryInterface           $factory;
     private CommandMediatorInterface      $mediator;
 
+    private PackingListQueryManagerInterface          $packingListQueryManager;
+    private DepartQueryManagerInterface     $departQueryManager;
+
     /**
      * @param ValidatorInterface                  $validator
      * @param LogisticsCommandRepositoryInterface $repository
      * @param LogisticsFactoryInterface           $factory
      * @param CommandMediatorInterface            $mediator
+     * @param PackingListQueryManagerInterface    $packingListQueryManager
+     * @param DepartQueryManagerInterface         $departQueryManager
      */
-    public function __construct(ValidatorInterface $validator, LogisticsCommandRepositoryInterface $repository, LogisticsFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, LogisticsCommandRepositoryInterface $repository, LogisticsFactoryInterface $factory, CommandMediatorInterface $mediator, PackingListQueryManagerInterface $packingListQueryManager, DepartQueryManagerInterface $departQueryManager)
     {
         $this->validator = $validator;
         $this->repository = $repository;
         $this->factory = $factory;
         $this->mediator = $mediator;
+        $this->packingListQueryManager = $packingListQueryManager;
+        $this->departQueryManager = $departQueryManager;
     }
 
     /**
@@ -58,6 +67,18 @@ final class CommandManager implements CommandManagerInterface
     public function post(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         $logistics = $this->factory->create($dto);
+
+        try {
+            $logistics->setDepart($this->departQueryManager->proxy($dto->getDepartApiDto()));
+        } catch (\Exception $e) {
+            throw new LogisticsCannotBeCreatedException($e->getMessage());
+        }
+
+        try {
+            $logistics->setPackingList($this->packingListQueryManager->proxy($dto->getPackingListApiDto()));
+        } catch (\Exception $e) {
+            throw new LogisticsCannotBeCreatedException($e->getMessage());
+        }
 
         $this->mediator->onCreate($dto, $logistics);
 
@@ -86,7 +107,7 @@ final class CommandManager implements CommandManagerInterface
     public function put(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
         try {
-            $logistics = $this->repository->find($dto->getPackingListId());
+            $logistics = $this->repository->find($dto->getPackingListApiDto()->idToString());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }
@@ -115,7 +136,7 @@ final class CommandManager implements CommandManagerInterface
     public function delete(LogisticsApiDtoInterface $dto): void
     {
         try {
-            $logistics = $this->repository->find($dto->getPackingListId());
+            $logistics = $this->repository->find($dto->getPackingListApiDto()->idToString());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
         }

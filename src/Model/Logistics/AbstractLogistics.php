@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\Logistics;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 
 /**
  * @ORM\MappedSuperclass
@@ -21,19 +23,14 @@ use Doctrine\ORM\Mapping as ORM;
 abstract class AbstractLogistics implements LogisticsInterface
 {
     /**
-     * @var string
-     *
-     * @ORM\Column(name="packing_List", type="string", length=255, nullable=true)
-     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface")
      */
-    protected string $packingList = '';
+    protected PackingListInterface $packingList;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="depart", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\DepartInterface")
      */
-    protected string $depart = '';
+    protected DepartInterface $depart;
 
     /**
      * @var string
@@ -171,19 +168,19 @@ abstract class AbstractLogistics implements LogisticsInterface
     }
 
     /**
-     * @return string
+     * @return PackingListInterface
      */
-    public function getPackingList(): string
+    public function getPackingList(): PackingListInterface
     {
         return $this->packingList;
     }
 
     /**
-     * @param string $packingList
+     * @param PackingListInterface $packingList
      *
      * @return LogisticsInterface
      */
-    public function setPackingList(string $packingList): LogisticsInterface
+    public function setPackingList(PackingListInterface $packingList): LogisticsInterface
     {
         $this->packingList = $packingList;
 
@@ -191,19 +188,19 @@ abstract class AbstractLogistics implements LogisticsInterface
     }
 
     /**
-     * @return string
+     * @return DepartInterface
      */
-    public function getDepart(): string
+    public function getDepart(): DepartInterface
     {
         return $this->depart;
     }
 
     /**
-     * @param string $depart
+     * @param DepartInterface $depart
      *
      * @return LogisticsInterface
      */
-    public function setDepart(string $depart): LogisticsInterface
+    public function setDepart(DepartInterface $depart): LogisticsInterface
     {
         $this->depart = $depart;
 

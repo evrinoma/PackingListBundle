@@ -31,6 +31,8 @@ services:
       - '@evrinoma.packing_list.logistics.repository'
       - '@evrinoma.packing_list.logistics.factory'
       - '@evrinoma.packing_list.logistics.command.mediator'
+      - '@evrinoma.packing_list.packing_list.query.manager'
+      - '@evrinoma.packing_list.depart.query.manager'
 
   Evrinoma\PackingListBundle\Manager\Logistics\CommandManagerInterface:
     alias: evrinoma.packing_list.logistics.command.manager

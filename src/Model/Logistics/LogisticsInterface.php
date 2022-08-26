@@ -13,31 +13,34 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\Logistics;
 
+use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
+
 interface LogisticsInterface
 {
     /**
-     * @return string
+     * @return PackingListInterface
      */
-    public function getPackingList(): string;
+    public function getPackingList(): PackingListInterface;
 
     /**
-     * @param string $packingList
+     * @param PackingListInterface $packingList
      *
      * @return LogisticsInterface
      */
-    public function setPackingList(string $packingList): LogisticsInterface;
+    public function setPackingList(PackingListInterface $packingList): LogisticsInterface;
 
     /**
-     * @return string
+     * @return DepartInterface
      */
-    public function getDepart(): string;
+    public function getDepart(): DepartInterface;
 
     /**
-     * @param string $depart
+     * @param DepartInterface $depart
      *
      * @return LogisticsInterface
      */
-    public function setDepart(string $depart): LogisticsInterface;
+    public function setDepart(DepartInterface $depart): LogisticsInterface;
 
     /**
      * @return string
