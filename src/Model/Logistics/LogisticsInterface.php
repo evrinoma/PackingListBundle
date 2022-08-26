@@ -18,14 +18,14 @@ interface LogisticsInterface
     /**
      * @return string
      */
-    public function getPackingListId(): string;
+    public function getPackingList(): string;
 
     /**
-     * @param string $packingListId
+     * @param string $packingList
      *
      * @return LogisticsInterface
      */
-    public function setPackingListId(string $packingListId): LogisticsInterface;
+    public function setPackingList(string $packingList): LogisticsInterface;
 
     /**
      * @return string
@@ -38,4 +38,64 @@ interface LogisticsInterface
      * @return LogisticsInterface
      */
     public function setDepart(string $depart): LogisticsInterface;
+
+    /**
+     * @return string
+     */
+    public function getUser(): string;
+
+    /**
+     * @param string $user
+     *
+     * @return LogisticsInterface
+     */
+    public function setUser(string $user): LogisticsInterface;
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string;
+
+    /**
+     * @param string $email
+     *
+     * @return LogisticsInterface
+     */
+    public function setEmail(string $email): LogisticsInterface;
+
+    /**
+     * @return string
+     */
+    public function getSurname(): string;
+
+    /**
+     * @param string $surname
+     *
+     * @return LogisticsInterface
+     */
+    public function setSurname(string $surname): LogisticsInterface;
+
+    /**
+     * @return string
+     */
+    public function getName(): string;
+
+    /**
+     * @param string $name
+     *
+     * @return LogisticsInterface
+     */
+    public function setName(string $name): LogisticsInterface;
+
+    /**
+     * @return string
+     */
+    public function getPatronymic(): string;
+
+    /**
+     * @param string $patronymic
+     *
+     * @return LogisticsInterface
+     */
+    public function setPatronymic(string $patronymic): LogisticsInterface;
 }

@@ -14,22 +14,27 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Fetch\Description\Logistics;
 
 use Evrinoma\FetchBundle\Description\Api\AbstractApiDescription;
-use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
 use Evrinoma\PackingListBundle\Fetch\Handler\BasePostHandler;
+use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class PostDescription extends AbstractApiDescription
 {
     public const NAME = 'api_packing_list_logistics_create';
-    protected string $method = Request::METHOD_PUT;
+    protected string $method = Request::METHOD_POST;
 
     protected function getOptions($entity): array
     {
-        /* @var LogisticsApiDtoInterface $entity */
+        /* @var LogisticsInterface $entity */
         return [
-            'id' => $entity->getPackingListId(),
-            'idDepart' => $entity->getDepart(),
-            ];
+            'packingListId' => $entity->getPackingList(),
+            'depart' => $entity->getDepart(),
+            'userId' => $entity->getUser(),
+            'email' => $entity->getEmail(),
+            'surname' => $entity->getSurname(),
+            'name' => $entity->getName(),
+            'patronymic' => $entity->getPatronymic(),
+        ];
     }
 
     /**

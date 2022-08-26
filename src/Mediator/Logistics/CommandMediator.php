@@ -24,8 +24,13 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
     {
         /* @var $dto LogisticsApiDtoInterface */
         $entity
-            ->setPackingListId($dto->getPackingListId())
-            ->setIdDepart($dto->getDepart());
+            ->setPackingList($dto->getPackingListApiDto()->idToString())
+            ->setDepart($dto->getDepartApiDto()->idToString())
+            ->setUser($dto->getUserApiDto()->idToString())
+            ->setEmail($dto->getUserApiDto()->getEmail())
+            ->setSurname($dto->getUserApiDto()->getSurname())
+            ->setName($dto->getUserApiDto()->getName())
+            ->setPatronymic($dto->getUserApiDto()->getPatronymic());
 
         return $entity;
     }
@@ -38,8 +43,13 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
     {
         /* @var $dto LogisticsApiDtoInterface */
         $entity
-            ->setPackingListId($dto->getPackingListId())
-            ->setIdDepart($dto->getDepart());
+            ->setPackingList($dto->getPackingListApiDto()->idToString())
+            ->setDepart($dto->getDepartApiDto()->idToString())
+            ->setUser($dto->getUserApiDto()->idToString())
+            ->setEmail($dto->getUserApiDto()->getEmail())
+            ->setSurname($dto->getUserApiDto()->getSurname())
+            ->setName($dto->getUserApiDto()->getName())
+            ->setPatronymic($dto->getUserApiDto()->getPatronymic());
 
         return $entity;
     }
