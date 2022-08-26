@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
+
 interface DepartInterface
 {
     public const DEPART = 'depart';
@@ -20,10 +22,7 @@ interface DepartInterface
     /**
      * @return bool
      */
-    public function hasDepart(): bool;
+    public function hasDepartApiDto(): bool;
 
-    /**
-     * @return string
-     */
-    public function getDepart(): string;
+    public function getDepartApiDto(): DepartApiDtoInterface;
 }

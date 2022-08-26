@@ -14,20 +14,21 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\PackingListIdTrait as PackingListIdImmutableTrait;
+use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\UserTrait as UserImmutableTrait;
 
-trait PackingListIdTrait
+trait UserTrait
 {
-    use PackingListIdImmutableTrait;
+    use UserImmutableTrait;
 
     /**
-     * @param string $packingListId
+     * @param UserApiDtoInterface $user
      *
      * @return DtoInterface
      */
-    protected function setPackingListId(string $packingListId): DtoInterface
+    public function setUserApiDto(UserApiDtoInterface $user): DtoInterface
     {
-        $this->packingListId = trim($packingListId);
+        $this->user = $user;
 
         return $this;
     }

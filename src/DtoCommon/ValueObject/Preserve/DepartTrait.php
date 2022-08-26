@@ -14,16 +14,17 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 
 trait DepartTrait
 {
     /**
-     * @param string $depart
+     * @param DepartApiDtoInterface $depart
      *
      * @return DtoInterface
      */
-    public function setDepart(string $depart): DtoInterface
+    public function setDepartApiDto(DepartApiDtoInterface $depart): DtoInterface
     {
-        return parent::setDepart($depart);
+        return parent::setDepartApiDto($depart);
     }
 }

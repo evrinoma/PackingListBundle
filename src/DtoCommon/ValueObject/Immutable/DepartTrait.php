@@ -13,22 +13,41 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
+use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Dto\DepartApiDto;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
+use Symfony\Component\HttpFoundation\Request;
+
 trait DepartTrait
 {
-    private string $depart = '';
+    /**
+     * @var DepartApiDtoInterface|null
+     */
+    protected ?DepartApiDtoInterface $depart = null;
 
     /**
-     * @return bool
+     * @return \Generator
      */
-    public function hasDepart(): bool
+    public function genRequestDepartApiDto(?Request $request): ?\Generator
     {
-        return '' !== $this->depart;
+        if ($request) {
+            $depart = $request->get(DepartInterface::DEPART);
+            if ($depart) {
+                $newRequest = $this->getCloneRequest();
+                $depart[DtoInterface::DTO_CLASS] = DepartApiDto::class;
+                $newRequest->request->add($depart);
+
+                yield $newRequest;
+            }
+        }
     }
 
-    /**
-     * @return string
-     */
-    public function getDepart(): string
+    public function hasDepartApiDto(): bool
+    {
+        return null !== $this->depart;
+    }
+
+    public function getDepartApiDto(): DepartApiDtoInterface
     {
         return $this->depart;
     }

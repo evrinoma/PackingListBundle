@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\DepartTrait as DepartImmutableTrait;
 
 trait DepartTrait
@@ -21,13 +22,13 @@ trait DepartTrait
     use DepartImmutableTrait;
 
     /**
-     * @param string $depart
+     * @param DepartApiDtoInterface $depart
      *
      * @return DtoInterface
      */
-    protected function setDepart(string $depart): DtoInterface
+    public function setDepartApiDto(DepartApiDtoInterface $depart): DtoInterface
     {
-        $this->depart = trim($depart);
+        $this->depart = $depart;
 
         return $this;
     }

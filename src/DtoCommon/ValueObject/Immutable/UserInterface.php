@@ -13,20 +13,16 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
-trait PackingListIdTrait
-{
-    private string $packingListId = '';
+use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 
-    public function hasPackingListId(): bool
-    {
-        return '' !== $this->packingListId;
-    }
+interface UserInterface
+{
+    public const USER = 'user';
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getPackingListId(): string
-    {
-        return $this->packingListId;
-    }
+    public function hasUserApiDto(): bool;
+
+    public function getUserApiDto(): UserApiDtoInterface;
 }

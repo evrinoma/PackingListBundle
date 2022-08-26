@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 
 interface DepartInterface
 {
     /**
-     * @param string $depart
+     * @param DepartApiDtoInterface $depart
      *
      * @return DtoInterface
      */
-    public function setDepart(string $depart): DtoInterface;
+    public function setDepartApiDto(DepartApiDtoInterface $depart): DtoInterface;
 }

@@ -14,13 +14,14 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 
-interface PackingListIdInterface
+interface UserInterface
 {
     /**
-     * @param string $packingListId
+     * @param UserApiDtoInterface $user
      *
      * @return DtoInterface
      */
-    public function setPackingListId(string $packingListId): DtoInterface;
+    public function setUserApiDto(UserApiDtoInterface $user): DtoInterface;
 }

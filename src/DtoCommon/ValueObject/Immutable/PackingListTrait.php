@@ -11,6 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
+declare(strict_packingLists=1);
+
+/*
+ * This file is part of the package.
+ *
+ * (c) Nikolay Nikolaev <evrinoma@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
@@ -31,11 +42,11 @@ trait PackingListTrait
     public function genRequestPackingListApiDto(?Request $request): ?\Generator
     {
         if ($request) {
-            $type = $request->get(PackingListInterface::PACKING_LIST);
-            if ($type) {
+            $packingList = $request->get(PackingListInterface::PACKING_LIST);
+            if ($packingList) {
                 $newRequest = $this->getCloneRequest();
-                $type[DtoInterface::DTO_CLASS] = PackingListApiDto::class;
-                $newRequest->request->add($type);
+                $packingList[DtoInterface::DTO_CLASS] = PackingListApiDto::class;
+                $newRequest->request->add($packingList);
 
                 yield $newRequest;
             }

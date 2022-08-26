@@ -14,16 +14,17 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 
-trait PackingListIdTrait
+trait UserTrait
 {
     /**
-     * @param string $packingListId
+     * @param UserApiDtoInterface $user
      *
      * @return DtoInterface
      */
-    public function setPackingListId(string $packingListId): DtoInterface
+    public function setUserApiDto(UserApiDtoInterface $user): DtoInterface
     {
-        return parent::setPackingListId($packingListId);
+        return parent::setUserApiDto($user);
     }
 }
