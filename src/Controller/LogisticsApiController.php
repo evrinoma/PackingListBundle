@@ -78,13 +78,24 @@ final class LogisticsApiController extends AbstractWrappedApiController
      *             @OA\Schema(
      *                 example={
      *                     "class": "Evrinoma\PackingListBundle\Dto\LogisticsApiDto",
-     *                     "packing_list_id": "1004",
-     *                     "id_depart": "9",
+     *                     "packing_list": {
+     *                         "id": "1004"
+     *                     },
+     *                     "depart": {
+     *                         "id": "9"
+     *                     },
+     *                     "user": {
+     *                         "id": "9",
+     *                         "email": "email@email.com",
+     *                         "name": "name",
+     *                         "surname": "surname",
+     *                         "patronymic": "patronymic",
+     *                     },
      *                 },
      *                 type="object",
      *                 @OA\Property(property="class", type="string", default="Evrinoma\PackingListBundle\Dto\LogisticsApiDto"),
-     *                 @OA\Property(property="packing_list_id", type="string"),
-     *                 @OA\Property(property="id_depart", type="string"),
+     *                 @OA\Property(property="packing_list", type="object"),
+     *                 @OA\Property(property="depart", type="object")
      *             )
      *         )
      *     )
