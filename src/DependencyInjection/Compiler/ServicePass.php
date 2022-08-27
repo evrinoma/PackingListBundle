@@ -24,33 +24,33 @@ class ServicePass extends AbstractRecursivePass
      */
     public function process(ContainerBuilder $container)
     {
-        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.depart.validator');
+        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.depart.pre.validator');
         if ($servicePreValidator) {
-            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.depart.validator');
+            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.depart.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
             $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.depart.api.controller');
             $apiController->setArgument(5, $preValidator);
         }
 
-        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.logistics.validator');
+        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.pre.validator');
         if ($servicePreValidator) {
-            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.logistics.validator');
+            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
             $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics.api.controller');
             $apiController->setArgument(5, $preValidator);
         }
 
-        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.packing_list.validator');
+        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.pre.validator');
         if ($servicePreValidator) {
-            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.packing_list.validator');
+            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
             $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.packing_list.api.controller');
             $apiController->setArgument(5, $preValidator);
         }
 
-        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.list_item.validator');
+        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.list_item.pre.validator');
         if ($servicePreValidator) {
-            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.pre.list_item.validator');
+            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.list_item.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
             $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.list_item.api.controller');
             $apiController->setArgument(5, $preValidator);
