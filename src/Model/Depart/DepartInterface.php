@@ -29,14 +29,14 @@ interface DepartInterface extends IdInterface, NameInterface
     /**
      * @return string
      */
-    public function getDepart(): string;
+    public function getPoint(): string;
 
     /**
-     * @param string $depart
+     * @param string $point
      *
      * @return DepartInterface
      */
-    public function setDepart(string $depart): DepartInterface;
+    public function setPoint(string $point): DepartInterface;
 
     /**
      * @return string

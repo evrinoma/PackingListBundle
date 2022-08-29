@@ -34,9 +34,9 @@ abstract class AbstractDepart implements DepartInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="depart", type="string", length=255, nullable=true)
+     * @ORM\Column(name="point", type="string", length=255, nullable=true)
      */
-    protected string $depart = '';
+    protected string $point = '';
 
     /**
      * @var string
@@ -87,19 +87,19 @@ abstract class AbstractDepart implements DepartInterface
     /**
      * @return string
      */
-    public function getDepart(): string
+    public function getPoint(): string
     {
-        return $this->depart;
+        return $this->point;
     }
 
     /**
-     * @param string $depart
+     * @param string $point
      *
      * @return DepartInterface
      */
-    public function setDepart(string $depart): DepartInterface
+    public function setPoint(string $point): DepartInterface
     {
-        $this->depart = $depart;
+        $this->point = $point;
 
         return $this;
     }
