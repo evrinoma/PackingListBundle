@@ -25,19 +25,23 @@
         dto_depart: App\PackingList\Dto\DepartDto класс dto с которым работает сущность склада
         dto_logistics: App\PackingList\Dto\LogisticsDto класс dto с которым работает сущность логистики
         decorates:
-          command_packing_list - декоратор команд упаковочного листа
-          query_packing_list - декоратор запросов упаковочного листа
-          command_list_item - декоратор команд связи единцы входящей в упаковочный лист
-          command_list_item - декоратор запросов единцы входящей в упаковочный лист
-          command_depart - декоратор команд склада
-          query_depart - декоратор запросов склада
-          command_logistics - декоратор команд логистики
-          query_logistics - декоратор запросов логистики
+            command_packing_list - декоратор команд упаковочного листа
+            query_packing_list - декоратор запросов упаковочного листа
+            command_list_item - декоратор команд связи единцы входящей в упаковочный лист
+            command_list_item - декоратор запросов единцы входящей в упаковочный лист
+            command_depart - декоратор команд склада
+            query_depart - декоратор запросов склада
+            command_logistics - декоратор команд логистики
+            query_logistics - декоратор запросов логистики
         services:
-          pre_validator_packing_list - переопределение сервиса валидатора упаковочного листа
-          pre_validator_list_item - переопределение сервиса валидатора единцы входящей в упаковочный лист
-          pre_validator_depart - переопределение сервиса валидатора склада
-          pre_validator_logistics - переопределение сервиса валидатора логистики
+            pre_validator_packing_list - переопределение сервиса валидатора упаковочного листа
+            pre_validator_list_item - переопределение сервиса валидатора единцы входящей в упаковочный лист
+            pre_validator_depart - переопределение сервиса валидатора склада
+            pre_validator_logistics - переопределение сервиса валидатора логистики
+            handler_packing_list - переопределение сервиса обработчика упаковочного листа
+            handler_list_item - переопределение сервиса обработчика единцы входящей в упаковочный лист
+            handler_depart - переопределение сервиса обработчика склада
+            handler_logistics - переопределение сервиса обработчика логистики
         fetch:  - можно включить или выключить (disabled/enabled)
             host: настройка host
             urls: настйрока api routes

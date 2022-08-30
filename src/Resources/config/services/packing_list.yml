@@ -12,6 +12,7 @@ services:
       - '@evrinoma.packing_list.packing_list.command.manager'
       - '@evrinoma.packing_list.packing_list.query.manager'
       - '@evrinoma.packing_list.packing_list.pre.validator'
+      - '@evrinoma.utils.handler.base_handler'
     autowire: true
 
   evrinoma.packing_list.packing_list.factory:

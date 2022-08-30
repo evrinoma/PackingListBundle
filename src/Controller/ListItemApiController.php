@@ -25,6 +25,7 @@ use Evrinoma\PackingListBundle\Manager\ListItem\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\ListItem\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\ListItem\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
+use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -55,9 +56,21 @@ final class ListItemApiController extends AbstractWrappedApiController
      * @var DtoPreValidatorInterface
      */
     private DtoPreValidatorInterface $preValidator;
+    /**
+     * @var HandlerInterface
+     */
+    private HandlerInterface  $handler;
 
-    public function __construct(SerializerInterface $serializer, RequestStack $requestStack, FactoryDtoInterface $factoryDto, CommandManagerInterface $commandManager, QueryManagerInterface $queryManager, DtoPreValidatorInterface $preValidator, string $dtoClass)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        RequestStack $requestStack,
+        FactoryDtoInterface $factoryDto,
+        CommandManagerInterface $commandManager,
+        QueryManagerInterface $queryManager,
+        DtoPreValidatorInterface $preValidator,
+        HandlerInterface $handler,
+        string $dtoClass
+    ) {
         parent::__construct($serializer);
         $this->request = $requestStack->getCurrentRequest();
         $this->factoryDto = $factoryDto;
@@ -65,6 +78,7 @@ final class ListItemApiController extends AbstractWrappedApiController
         $this->queryManager = $queryManager;
         $this->dtoClass = $dtoClass;
         $this->preValidator = $preValidator;
+        $this->handler = $handler;
     }
 
     /**
@@ -92,6 +106,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     public function postAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_post_list_item';
 
         try {
             throw new ListItemCannotBeCreatedException();
@@ -99,7 +114,7 @@ final class ListItemApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_post_list_item')->JsonResponse('Create list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Create list item', $json, $error);
     }
 
     /**
@@ -127,6 +142,7 @@ final class ListItemApiController extends AbstractWrappedApiController
     public function putAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_put_list_item';
 
         try {
             throw new ListItemCannotBeSavedException();
@@ -134,7 +150,7 @@ final class ListItemApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_put_list_item')->JsonResponse('Save list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Save list item', $json, $error);
     }
 
     /**
@@ -216,14 +232,16 @@ final class ListItemApiController extends AbstractWrappedApiController
 
         $json = [];
         $error = [];
+        $group = 'api_get_list_item';
 
         try {
             $json = $this->queryManager->criteria($listItemApiDto);
+            $this->handler->onCriteria($json, $group);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_list_item')->JsonResponse('Get list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get list item', $json, $error);
     }
 
     /**
@@ -263,14 +281,16 @@ final class ListItemApiController extends AbstractWrappedApiController
 
         $json = [];
         $error = [];
+        $group = 'api_get_list_item';
 
         try {
             $json[] = $this->queryManager->get($listItemApiDto);
+            $this->handler->onGet($json, $group);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_list_item')->JsonResponse('Get list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get list item', $json, $error);
     }
 
     /**

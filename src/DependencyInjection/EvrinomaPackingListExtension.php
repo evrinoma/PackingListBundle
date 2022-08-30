@@ -27,6 +27,7 @@ use Evrinoma\PackingListBundle\Factory\ListItemFactory;
 use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListFactory;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
+use Evrinoma\UtilsBundle\Handler\BaseHandler;
 use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Alias;
@@ -57,6 +58,7 @@ class EvrinomaPackingListExtension extends Extension
     public const ENTITY_FACTORY_LOGISTICS = LogisticsFactory::class;
     public const ENTITY_BASE_LOGISTICS = BaseLogistics::class;
     public const DTO_BASE_LOGISTICS = LogisticsApiDto::class;
+    public const HANDLER = BaseHandler::class;
 
     /**
      * @var array
@@ -237,6 +239,18 @@ class EvrinomaPackingListExtension extends Extension
                         case 'pre_validator_logistics':
                             $remap['pre_validator_logistics'] = 'evrinoma.'.$this->getAlias().'.services.logistics.pre.validator';
                             break;
+                        case 'handler_packing_list':
+                            $remap['handler_packing_list'] = 'evrinoma.'.$this->getAlias().'.services.packing_list.handler';
+                            break;
+                        case 'handler_list_item':
+                            $remap['handler_list_item'] = 'evrinoma.'.$this->getAlias().'.services.list_item.handler';
+                            break;
+                        case 'handler_depart':
+                            $remap['handler_depart'] = 'evrinoma.'.$this->getAlias().'.services.depart.handler';
+                            break;
+                        case 'handler_logistics':
+                            $remap['handler_logistics'] = 'evrinoma.'.$this->getAlias().'.services.logistics.handler';
+                            break;
                     }
                 }
             }
@@ -281,7 +295,7 @@ class EvrinomaPackingListExtension extends Extension
     private function wireController(ContainerBuilder $container, string $name, string $class): void
     {
         $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.api.controller');
-        $definitionApiController->setArgument(6, $class);
+        $definitionApiController->setArgument(7, $class);
     }
 
     private function wireValidator(ContainerBuilder $container, string $name, string $class): void

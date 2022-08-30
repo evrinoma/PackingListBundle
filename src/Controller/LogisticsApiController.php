@@ -25,6 +25,7 @@ use Evrinoma\PackingListBundle\Manager\Logistics\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\Logistics\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\Logistics\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
+use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -55,9 +56,21 @@ final class LogisticsApiController extends AbstractWrappedApiController
      * @var DtoPreValidatorInterface
      */
     private DtoPreValidatorInterface $preValidator;
+    /**
+     * @var HandlerInterface
+     */
+    private HandlerInterface  $handler;
 
-    public function __construct(SerializerInterface $serializer, RequestStack $requestStack, FactoryDtoInterface $factoryDto, CommandManagerInterface $commandManager, QueryManagerInterface $queryManager, DtoPreValidatorInterface $preValidator, string $dtoClass)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        RequestStack $requestStack,
+        FactoryDtoInterface $factoryDto,
+        CommandManagerInterface $commandManager,
+        QueryManagerInterface $queryManager,
+        DtoPreValidatorInterface $preValidator,
+        HandlerInterface $handler,
+        string $dtoClass
+    ) {
         parent::__construct($serializer);
         $this->request = $requestStack->getCurrentRequest();
         $this->factoryDto = $factoryDto;
@@ -65,6 +78,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
         $this->queryManager = $queryManager;
         $this->dtoClass = $dtoClass;
         $this->preValidator = $preValidator;
+        $this->handler = $handler;
     }
 
     /**
@@ -112,6 +126,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
 
         $json = [];
         $error = [];
+        $group = 'api_post_logistics';
 
         try {
             $this->preValidator->onPost($logicsticApiDto);
@@ -123,11 +138,13 @@ final class LogisticsApiController extends AbstractWrappedApiController
                     $json[] = $commandManager->post($logicsticApiDto);
                 }
             );
+
+            $this->handler->onPost($json, $group);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_post_logistics')->JsonResponse('Create logistics', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Create logistics', $json, $error);
     }
 
     /**
@@ -155,6 +172,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     public function putAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_put_logistics';
 
         try {
             throw new LogisticsCannotBeSavedException();
@@ -162,7 +180,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_put_logistics')->JsonResponse('Save logistics item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Save logistics item', $json, $error);
     }
 
     /**
@@ -245,6 +263,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     public function criteriaAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_get_logistics';
 
         try {
             throw new LogisticsNotFoundException();
@@ -252,7 +271,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_logistics')->JsonResponse('Get logistics item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get logistics item', $json, $error);
     }
 
     /**
@@ -286,6 +305,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
     public function getAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_get_logistics';
 
         try {
             throw new LogisticsNotFoundException();
@@ -293,7 +313,7 @@ final class LogisticsApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_logistics')->JsonResponse('Get logistics item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get logistics item', $json, $error);
     }
 
     /**

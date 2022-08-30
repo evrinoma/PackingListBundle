@@ -25,6 +25,7 @@ use Evrinoma\PackingListBundle\Manager\PackingList\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
+use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -55,9 +56,21 @@ final class PackingListApiController extends AbstractWrappedApiController
      * @var DtoPreValidatorInterface
      */
     private DtoPreValidatorInterface $preValidator;
+    /**
+     * @var HandlerInterface
+     */
+    private HandlerInterface  $handler;
 
-    public function __construct(SerializerInterface $serializer, RequestStack $requestStack, FactoryDtoInterface $factoryDto, CommandManagerInterface $commandManager, QueryManagerInterface $queryManager, DtoPreValidatorInterface $preValidator, string $dtoClass)
-    {
+    public function __construct(
+        SerializerInterface $serializer,
+        RequestStack $requestStack,
+        FactoryDtoInterface $factoryDto,
+        CommandManagerInterface $commandManager,
+        QueryManagerInterface $queryManager,
+        DtoPreValidatorInterface $preValidator,
+        HandlerInterface $handler,
+        string $dtoClass
+    ) {
         parent::__construct($serializer);
         $this->request = $requestStack->getCurrentRequest();
         $this->factoryDto = $factoryDto;
@@ -65,6 +78,7 @@ final class PackingListApiController extends AbstractWrappedApiController
         $this->queryManager = $queryManager;
         $this->dtoClass = $dtoClass;
         $this->preValidator = $preValidator;
+        $this->handler = $handler;
     }
 
     /**
@@ -92,6 +106,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     public function postAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_post_packing_list';
 
         try {
             throw new PackingListCannotBeCreatedException();
@@ -99,7 +114,7 @@ final class PackingListApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_post_packing_list')->JsonResponse('Create packing list', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Create packing list', $json, $error);
     }
 
     /**
@@ -127,6 +142,7 @@ final class PackingListApiController extends AbstractWrappedApiController
     public function putAction(): JsonResponse
     {
         $json = [];
+        $group = 'api_put_packing_list';
 
         try {
             throw new PackingListCannotBeSavedException();
@@ -134,7 +150,7 @@ final class PackingListApiController extends AbstractWrappedApiController
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_put_packing_list')->JsonResponse('Save packing list', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Save packing list', $json, $error);
     }
 
     /**
@@ -207,14 +223,16 @@ final class PackingListApiController extends AbstractWrappedApiController
 
         $json = [];
         $error = [];
+        $group = 'api_get_packing_list';
 
         try {
             $json = $this->queryManager->criteria($packingListApiDto);
+            $this->handler->onCriteria($json, $group);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_packing_list')->JsonResponse('Get packing list', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get packing list', $json, $error);
     }
 
     /**
@@ -254,14 +272,16 @@ final class PackingListApiController extends AbstractWrappedApiController
 
         $json = [];
         $error = [];
+        $group = 'api_get_packing_list';
 
         try {
             $json[] = $this->queryManager->get($packingListApiDto);
+            $this->handler->onGet($json, $group);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup('api_get_packing_list')->JsonResponse('Get packing list', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get packing list', $json, $error);
     }
 
     /**
