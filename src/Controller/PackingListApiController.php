@@ -25,6 +25,7 @@ use Evrinoma\PackingListBundle\Manager\PackingList\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
+use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
@@ -33,7 +34,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-final class PackingListApiController extends AbstractWrappedApiController
+final class PackingListApiController extends AbstractWrappedApiController implements ApiControllerInterface
 {
     private string $dtoClass;
     /**
