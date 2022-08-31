@@ -24,6 +24,7 @@ use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
 use Evrinoma\PackingListBundle\Manager\ListItem\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\ListItem\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\ListItem\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Handler\HandlerInterface;
@@ -107,7 +108,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
     public function postAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_post_list_item';
+        $group = GroupInterface::API_POST_LIST_ITEM;
 
         try {
             throw new ListItemCannotBeCreatedException();
@@ -143,7 +144,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
     public function putAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_put_list_item';
+        $group = GroupInterface::API_PUT_LIST_ITEM;
 
         try {
             throw new ListItemCannotBeSavedException();
@@ -233,7 +234,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
 
         $json = [];
         $error = [];
-        $group = 'api_get_list_item';
+        $group = GroupInterface::API_CRITERIA_DEPART;
 
         try {
             $json = $this->queryManager->criteria($listItemApiDto);
@@ -282,7 +283,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
 
         $json = [];
         $error = [];
-        $group = 'api_get_list_item';
+        $group = GroupInterface::API_GET_LIST_ITEM;
 
         try {
             $json[] = $this->queryManager->get($listItemApiDto);

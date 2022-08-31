@@ -24,6 +24,7 @@ use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
 use Evrinoma\PackingListBundle\Manager\Logistics\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\Logistics\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\Logistics\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Handler\HandlerInterface;
@@ -127,7 +128,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
 
         $json = [];
         $error = [];
-        $group = 'api_post_logistics';
+        $group = GroupInterface::API_POST_LOGISTICS;
 
         try {
             $this->preValidator->onPost($logicsticApiDto);
@@ -173,7 +174,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
     public function putAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_put_logistics';
+        $group = GroupInterface::API_PUT_LOGISTICS;
 
         try {
             throw new LogisticsCannotBeSavedException();
@@ -264,7 +265,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
     public function criteriaAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_get_logistics';
+        $group = GroupInterface::API_CRITERIA_LOGISTICS;
 
         try {
             throw new LogisticsNotFoundException();
@@ -306,7 +307,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
     public function getAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_get_logistics';
+        $group = GroupInterface::API_GET_LOGISTICS;
 
         try {
             throw new LogisticsNotFoundException();

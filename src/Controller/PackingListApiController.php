@@ -24,6 +24,7 @@ use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundExceptio
 use Evrinoma\PackingListBundle\Manager\PackingList\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Handler\HandlerInterface;
@@ -107,7 +108,7 @@ final class PackingListApiController extends AbstractWrappedApiController implem
     public function postAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_post_packing_list';
+        $group = GroupInterface::API_POST_PACKING_LIST;
 
         try {
             throw new PackingListCannotBeCreatedException();
@@ -143,7 +144,7 @@ final class PackingListApiController extends AbstractWrappedApiController implem
     public function putAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_put_packing_list';
+        $group = GroupInterface::API_PUT_PACKING_LIST;
 
         try {
             throw new PackingListCannotBeSavedException();
@@ -224,7 +225,7 @@ final class PackingListApiController extends AbstractWrappedApiController implem
 
         $json = [];
         $error = [];
-        $group = 'api_get_packing_list';
+        $group = GroupInterface::API_CRITERIA_PACKING_LIST;
 
         try {
             $json = $this->queryManager->criteria($packingListApiDto);
@@ -273,7 +274,7 @@ final class PackingListApiController extends AbstractWrappedApiController implem
 
         $json = [];
         $error = [];
-        $group = 'api_get_packing_list';
+        $group = GroupInterface::API_GET_PACKING_LIST;
 
         try {
             $json[] = $this->queryManager->get($packingListApiDto);

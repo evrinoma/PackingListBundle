@@ -24,6 +24,7 @@ use Evrinoma\PackingListBundle\Exception\Depart\DepartNotFoundException;
 use Evrinoma\PackingListBundle\Manager\Depart\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\Depart\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
 use Evrinoma\UtilsBundle\Handler\HandlerInterface;
@@ -107,7 +108,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
     public function postAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_post_depart';
+        $group = GroupInterface::API_POST_DEPART;
 
         try {
             throw new DepartCannotBeCreatedException();
@@ -143,7 +144,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
     public function putAction(): JsonResponse
     {
         $json = [];
-        $group = 'api_put_depart';
+        $group = GroupInterface::API_PUT_DEPART;
 
         try {
             throw new DepartCannotBeSavedException();
@@ -233,7 +234,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
 
         $json = [];
         $error = [];
-        $group = 'api_get_depart';
+        $group = GroupInterface::API_CRITERIA_DEPART;
 
         try {
             $json = $this->queryManager->criteria($departApiDto);
@@ -282,7 +283,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
 
         $json = [];
         $error = [];
-        $group = 'api_get_depart';
+        $group = GroupInterface::API_GET_DEPART;
 
         try {
             $json[] = $this->queryManager->get($departApiDto);
