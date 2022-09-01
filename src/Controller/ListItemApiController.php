@@ -234,7 +234,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
 
         $json = [];
         $error = [];
-        $group = GroupInterface::API_CRITERIA_DEPART;
+        $group = GroupInterface::API_CRITERIA_LIST_ITEM;
 
         try {
             $json = $this->queryManager->criteria($listItemApiDto);
