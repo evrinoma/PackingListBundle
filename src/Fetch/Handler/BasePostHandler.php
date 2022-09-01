@@ -21,7 +21,7 @@ class BasePostHandler extends AbstractHandler
 
     public function isValid(): bool
     {
-        return \is_array($this->data) && \array_key_exists('success', $this->data) && true === $this->data['success'];
+        return \is_array($this->data) && \array_key_exists('status', $this->data) && 'OK' === $this->data['status'];
     }
 
     public function name(): string
