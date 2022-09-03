@@ -1,0 +1,9 @@
+services:
+  evrinoma.packing_list.test.functional.action.packing_list:
+    class: Evrinoma\PackingListBundle\Tests\Functional\Action\BasePackingList
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Tests\Functional\Action\BasePackingList:
+    alias: evrinoma.packing_list.test.functional.action.packing_list
+    public: true

@@ -14,20 +14,20 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
-use Evrinoma\PackingListBundle\Tests\Functional\Helper\BaseLogisticsTestTrait;
-use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Logistics\Id;
+use Evrinoma\PackingListBundle\Tests\Functional\Helper\BasePackingListTestTrait;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingList\Id;
 use Evrinoma\TestUtilsBundle\Action\AbstractServiceTest;
 use PHPUnit\Framework\Assert;
 
-class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInterface
+class BasePackingList extends AbstractServiceTest implements BasePackingListTestInterface
 {
-    use BaseLogisticsTestTrait;
+    use BasePackingListTestTrait;
 
-    public const API_GET      = 'evrinoma/api/packing_list/logistics';
-    public const API_CRITERIA = 'evrinoma/api/packing_list/logistics/criteria';
-    public const API_DELETE   = 'evrinoma/api/packing_list/logistics/delete';
-    public const API_PUT      = 'evrinoma/api/packing_list/logistics/save';
-    public const API_POST     = 'evrinoma/api/packing_list/logistics/create';
+    public const API_GET      = 'evrinoma/api/packing_list';
+    public const API_CRITERIA = 'evrinoma/api/packing_list/criteria';
+    public const API_DELETE   = 'evrinoma/api/packing_list/delete';
+    public const API_PUT      = 'evrinoma/api/packing_list/save';
+    public const API_POST     = 'evrinoma/api/packing_list/create';
 
     protected static function getDtoClass(): string
     {
