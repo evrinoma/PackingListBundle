@@ -1,0 +1,2 @@
+menu:
+    resource: "@EvrinomaPackingListBundle/Resources/config/routes.yml"

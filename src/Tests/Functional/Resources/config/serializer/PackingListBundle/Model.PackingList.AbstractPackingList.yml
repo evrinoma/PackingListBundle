@@ -1,0 +1,102 @@
+Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    label:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    contract:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    contractDescription:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    projectName:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    contractorName:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    subContracts:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    weight:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    formFactor:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    dimensions:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    currentDept:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    dateTTN:
+      type: DateTimeImmutable<'Y-m-d'>
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true`
+    comment:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true
+    consignee:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST, API_POST_PACKING_LIST, API_GET_PACKING_LIST,
+      ]
+      expose: true

@@ -1,0 +1,9 @@
+services:
+  evrinoma.packing_list.test.functional.action.depart:
+    class: Evrinoma\PackingListBundle\Tests\Functional\Action\BaseDepart
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Tests\Functional\Action\BaseDepart:
+    alias: evrinoma.packing_list.test.functional.action.depart
+    public: true

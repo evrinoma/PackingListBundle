@@ -1,0 +1,14 @@
+Evrinoma\PackingListBundle\Model\Logistics\AbstractLogistics:
+  exclusion_policy: ALL
+  properties:
+    packingListId:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
+    depart:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
+

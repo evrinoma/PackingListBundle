@@ -1,0 +1,6 @@
+jms_serializer:
+  metadata:
+    directories:
+      MenuBundle:
+        namespace_prefix: "Evrinoma\\PackingListBundle"
+        path: '%kernel.root_dir%/Resources/config/serializer/PackingListBundle'

@@ -76,6 +76,10 @@ class EvrinomaPackingListExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        if ('prod' !== $container->getParameter('kernel.environment')) {
+            $loader->load('fixtures.yml');
+        }
+
         if ('test' === $container->getParameter('kernel.environment')) {
             $loader->load('tests.yml');
         }

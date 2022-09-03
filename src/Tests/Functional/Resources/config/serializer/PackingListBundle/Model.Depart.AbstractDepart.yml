@@ -1,0 +1,39 @@
+Evrinoma\PackingListBundle\Model\Depart\AbstractDepart:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true
+    name:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true
+    depart:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true
+    point:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true
+    address:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true
+    final:
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true
+    packingList:
+      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+      ]
+      expose: true

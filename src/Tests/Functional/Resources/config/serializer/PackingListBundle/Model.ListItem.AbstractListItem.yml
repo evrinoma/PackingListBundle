@@ -1,0 +1,54 @@
+Evrinoma\PackingListBundle\Model\ListItem\AbstractListItem:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    name:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    stateStandard:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    quantity:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    measure:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    comment:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    subContract:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    number:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    stamp:
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
+    packingList:
+      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      groups: [
+          API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+      ]
+      expose: true
