@@ -1,3 +1,4 @@
 imports:
   - { resource: tests/depart.yml }
   - { resource: tests/list_item.yml }
+  - { resource: tests/logistics.yml}
