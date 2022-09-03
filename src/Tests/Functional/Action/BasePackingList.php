@@ -23,11 +23,11 @@ class BasePackingList extends AbstractServiceTest implements BasePackingListTest
 {
     use BasePackingListTestTrait;
 
-    public const API_GET      = 'evrinoma/api/packing_list';
+    public const API_GET = 'evrinoma/api/packing_list';
     public const API_CRITERIA = 'evrinoma/api/packing_list/criteria';
-    public const API_DELETE   = 'evrinoma/api/packing_list/delete';
-    public const API_PUT      = 'evrinoma/api/packing_list/save';
-    public const API_POST     = 'evrinoma/api/packing_list/create';
+    public const API_DELETE = 'evrinoma/api/packing_list/delete';
+    public const API_PUT = 'evrinoma/api/packing_list/save';
+    public const API_POST = 'evrinoma/api/packing_list/create';
 
     protected static function getDtoClass(): string
     {
@@ -38,7 +38,7 @@ class BasePackingList extends AbstractServiceTest implements BasePackingListTest
     {
         return [
             'class' => static::getDtoClass(),
-            'id'    => Id::default(),
+            'id' => Id::default(),
         ];
     }
 

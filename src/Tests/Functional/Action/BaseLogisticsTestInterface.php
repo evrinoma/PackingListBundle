@@ -14,4 +14,5 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
 interface BaseLogisticsTestInterface
-{}
+{
+}

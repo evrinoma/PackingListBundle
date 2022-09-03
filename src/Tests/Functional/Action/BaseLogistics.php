@@ -23,11 +23,11 @@ class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInte
 {
     use BaseLogisticsTestTrait;
 
-    public const API_GET      = 'evrinoma/api/packing_list/logistics';
+    public const API_GET = 'evrinoma/api/packing_list/logistics';
     public const API_CRITERIA = 'evrinoma/api/packing_list/logistics/criteria';
-    public const API_DELETE   = 'evrinoma/api/packing_list/logistics/delete';
-    public const API_PUT      = 'evrinoma/api/packing_list/logistics/save';
-    public const API_POST     = 'evrinoma/api/packing_list/logistics/create';
+    public const API_DELETE = 'evrinoma/api/packing_list/logistics/delete';
+    public const API_PUT = 'evrinoma/api/packing_list/logistics/save';
+    public const API_POST = 'evrinoma/api/packing_list/logistics/create';
 
     protected static function getDtoClass(): string
     {
@@ -38,7 +38,7 @@ class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInte
     {
         return [
             'class' => static::getDtoClass(),
-            'id'    => Id::default(),
+            'id' => Id::default(),
         ];
     }
 

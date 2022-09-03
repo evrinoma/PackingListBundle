@@ -23,11 +23,11 @@ class BaseListItem extends AbstractServiceTest implements BaseListItemTestInterf
 {
     use BaseListItemTestTrait;
 
-    public const API_GET      = 'evrinoma/api/packing_list/list_item';
+    public const API_GET = 'evrinoma/api/packing_list/list_item';
     public const API_CRITERIA = 'evrinoma/api/packing_list/list_item/criteria';
-    public const API_DELETE   = 'evrinoma/api/packing_list/list_item/delete';
-    public const API_PUT      = 'evrinoma/api/packing_list/list_item/save';
-    public const API_POST     = 'evrinoma/api/packing_list/list_item/create';
+    public const API_DELETE = 'evrinoma/api/packing_list/list_item/delete';
+    public const API_PUT = 'evrinoma/api/packing_list/list_item/save';
+    public const API_POST = 'evrinoma/api/packing_list/list_item/create';
 
     protected static function getDtoClass(): string
     {
@@ -38,7 +38,7 @@ class BaseListItem extends AbstractServiceTest implements BaseListItemTestInterf
     {
         return [
             'class' => static::getDtoClass(),
-            'id'    => Id::default(),
+            'id' => Id::default(),
         ];
     }
 
