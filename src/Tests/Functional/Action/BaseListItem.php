@@ -44,12 +44,16 @@ class BaseListItem extends AbstractServiceTest implements BaseListItemTestInterf
 
     public function actionPost(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->createListItem();
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionDelete(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->delete(Id::value());
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionGet(): void
@@ -64,27 +68,37 @@ class BaseListItem extends AbstractServiceTest implements BaseListItemTestInterf
 
     public function actionDeleteNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->delete(Id::wrong());
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionDeleteUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->delete(Id::empty());
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionPutNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $updated = $this->put(static::getDefault(['id' => Id::wrong()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($updated);
     }
 
     public function actionPutUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $updated = $this->put(static::getDefault(['id' => Id::empty()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($updated);
     }
 
     public function actionPostUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $created = $this->post(static::getDefault(['id' => Id::empty()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($created);
     }
 
     public function actionCriteriaNotFound(): void
@@ -99,7 +113,9 @@ class BaseListItem extends AbstractServiceTest implements BaseListItemTestInterf
 
     public function actionPut(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $updated = $this->put(static::getDefault(['id' => Id::value()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($updated);
     }
 
     public function actionPostDuplicate(): void

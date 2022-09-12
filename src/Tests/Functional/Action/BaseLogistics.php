@@ -49,37 +49,51 @@ class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInte
 
     public function actionDelete(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->delete(Id::value());
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionGet(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $find = $this->get(static::getDefault(['id' => Id::value()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($find);
     }
 
     public function actionGetNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $find = $this->get(static::getDefault(['id' => Id::wrong()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($find);
     }
 
     public function actionDeleteNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->delete(Id::wrong());
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionDeleteUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $value = $this->delete(Id::empty());
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
     }
 
     public function actionPutNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $updated = $this->put(static::getDefault(['id' => Id::wrong()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($updated);
     }
 
     public function actionPutUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $updated = $this->put(static::getDefault(['id' => Id::empty()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($updated);
     }
 
     public function actionPostUnprocessable(): void
@@ -89,17 +103,23 @@ class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInte
 
     public function actionCriteriaNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $find = $this->criteria(static::getDefault(['id' => Id::wrong()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($find);
     }
 
     public function actionCriteria(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $find = $this->criteria(static::getDefault(['id' => Id::value()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($find);
     }
 
     public function actionPut(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $updated = $this->put(static::getDefault(['id' => Id::value()]));
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($updated);
     }
 
     public function actionPostDuplicate(): void

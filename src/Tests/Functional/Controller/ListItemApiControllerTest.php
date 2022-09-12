@@ -45,4 +45,8 @@ final class ListItemApiControllerTest extends AbstractFunctionalTest
     protected function setUpFixtures($container): void
     {
     }
+
+    protected function purgeSchema(): void
+    {
+    }
 }

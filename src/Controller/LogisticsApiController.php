@@ -329,13 +329,11 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
             case $e instanceof LogisticsCannotBeCreatedException:
             case $e instanceof LogisticsCannotBeRemovedException:
             case $e instanceof LogisticsCannotBeSavedException:
+            case $e instanceof LogisticsNotFoundException:
                 $this->setStatusNotImplemented();
                 break;
             case $e instanceof UniqueConstraintViolationException:
                 $this->setStatusConflict();
-                break;
-            case $e instanceof LogisticsNotFoundException:
-                $this->setStatusNotFound();
                 break;
             case $e instanceof LogisticsInvalidException:
                 $this->setStatusUnprocessableEntity();

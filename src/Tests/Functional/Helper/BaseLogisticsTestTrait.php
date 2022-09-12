@@ -40,6 +40,13 @@ trait BaseLogisticsTestTrait
         return $find;
     }
 
+    protected function hasError($value)
+    {
+        Assert::assertArrayHasKey(PayloadModel::PAYLOAD, $value);
+        Assert::assertCount(0, $value[PayloadModel::PAYLOAD]);
+        Assert::assertCount(1, $value[ErrorModel::ERROR]);
+    }
+
     protected function createLogistics(): array
     {
         $query = static::getDefault();

@@ -45,4 +45,8 @@ final class LogisticsApiControllerTest extends AbstractFunctionalTest
     protected function setUpFixtures($container): void
     {
     }
+
+    protected function purgeSchema(): void
+    {
+    }
 }
