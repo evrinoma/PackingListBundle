@@ -109,6 +109,13 @@ abstract class AbstractPackingList implements PackingListInterface
     protected string $consignee = '';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="linkFile", type="text")
+     */
+    protected string $linkFile = '';
+
+    /**
      * @return string
      */
     public function getWeight(): string
@@ -124,6 +131,26 @@ abstract class AbstractPackingList implements PackingListInterface
     public function setWeight(string $weight): PackingListInterface
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLinkFile(): string
+    {
+        return $this->linkFile;
+    }
+
+    /**
+     * @param string $linkFile
+     *
+     * @return PackingListInterface
+     */
+    public function setLinkFile(string $linkFile): PackingListInterface
+    {
+        $this->linkFile = $linkFile;
 
         return $this;
     }

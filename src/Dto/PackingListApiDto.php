@@ -26,6 +26,7 @@ use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DateTTNTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DimensionsTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FormFactorTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LabelTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LinkFileTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ProjectNameTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\SubContractTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\WeightTrait;
@@ -44,6 +45,7 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
     use FormFactorTrait;
     use IdTrait;
     use LabelTrait;
+    use LinkFileTrait;
     use ProjectNameTrait;
     use SubContractTrait;
     use WeightTrait;
@@ -67,6 +69,7 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
             $dateTTN = $request->get(PackingListApiDtoInterface::DATE_TTN);
             $comment = $request->get(PackingListApiDtoInterface::COMMENT);
             $consignee = $request->get(PackingListApiDtoInterface::CONSIGNEE);
+            $linkFile = $request->get(PackingListApiDtoInterface::LINK_FILE);
 
             if ($contractDescription) {
                 $this->setContractDescription($contractDescription);
@@ -121,6 +124,10 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
 
             if ($consignee) {
                 $this->setConsignee($consignee);
+            }
+
+            if ($linkFile) {
+                $this->setLinkFile($linkFile);
             }
         }
 

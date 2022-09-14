@@ -179,4 +179,16 @@ interface PackingListInterface extends IdInterface
      * @return PackingListInterface
      */
     public function setConsignee(string $consignee): PackingListInterface;
+
+    /**
+     * @return string
+     */
+    public function getLinkFile(): string;
+
+    /**
+     * @param string $linkFile
+     *
+     * @return PackingListInterface
+     */
+    public function setLinkFile(string $linkFile): PackingListInterface;
 }
