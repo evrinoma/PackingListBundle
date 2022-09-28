@@ -40,7 +40,7 @@
         "phpunit/phpunit": "^9.5.2",
         "friendsofphp/php-cs-fixer": "^3.4|^3.8",
         "friendsofsymfony/rest-bundle": "^3",
-        "nelmio/api-doc-bundle": "^4",
+        "nelmio/api-doc-bundle": "4.9.0",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "2.6.4",
         "doctrine/doctrine-migrations-bundle": "^3.0",
