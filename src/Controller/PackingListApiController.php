@@ -21,13 +21,10 @@ use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeRemovedE
 use Evrinoma\PackingListBundle\Exception\PackingList\PackingListCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\PackingList\PackingListInvalidException;
 use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundException;
-use Evrinoma\PackingListBundle\Manager\PackingList\CommandManagerInterface;
-use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface;
-use Evrinoma\PackingListBundle\PreValidator\PackingList\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Facade\PackingList\FacadeInterface;
 use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
-use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -38,49 +35,25 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class PackingListApiController extends AbstractWrappedApiController implements ApiControllerInterface
 {
     private string $dtoClass;
-    /**
-     * @var ?Request
-     */
+
     private ?Request $request;
-    /**
-     * @var QueryManagerInterface
-     */
-    private QueryManagerInterface $queryManager;
-    /**
-     * @var CommandManagerInterface
-     */
-    private CommandManagerInterface $commandManager;
-    /**
-     * @var FactoryDtoInterface
-     */
+
     private FactoryDtoInterface $factoryDto;
-    /**
-     * @var DtoPreValidatorInterface
-     */
-    private DtoPreValidatorInterface $preValidator;
-    /**
-     * @var HandlerInterface
-     */
-    private HandlerInterface  $handler;
+
+    private FacadeInterface $facade;
 
     public function __construct(
         SerializerInterface $serializer,
         RequestStack $requestStack,
         FactoryDtoInterface $factoryDto,
-        CommandManagerInterface $commandManager,
-        QueryManagerInterface $queryManager,
-        DtoPreValidatorInterface $preValidator,
-        HandlerInterface $handler,
+        FacadeInterface $facade,
         string $dtoClass
     ) {
         parent::__construct($serializer);
         $this->request = $requestStack->getCurrentRequest();
         $this->factoryDto = $factoryDto;
-        $this->commandManager = $commandManager;
-        $this->queryManager = $queryManager;
         $this->dtoClass = $dtoClass;
-        $this->preValidator = $preValidator;
-        $this->handler = $handler;
+        $this->facade = $facade;
     }
 
     /**
@@ -107,11 +80,16 @@ final class PackingListApiController extends AbstractWrappedApiController implem
      */
     public function postAction(): JsonResponse
     {
+        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        $this->setStatusCreated();
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_POST_PACKING_LIST;
 
         try {
-            throw new PackingListCannotBeCreatedException();
+            $this->facade->post($packingListApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -143,11 +121,14 @@ final class PackingListApiController extends AbstractWrappedApiController implem
      */
     public function putAction(): JsonResponse
     {
+        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_PUT_PACKING_LIST;
 
         try {
-            throw new PackingListCannotBeSavedException();
+            $this->facade->put($packingListApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -187,10 +168,15 @@ final class PackingListApiController extends AbstractWrappedApiController implem
      */
     public function deleteAction(): JsonResponse
     {
+        $packingListApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        $this->setStatusAccepted();
+
         $json = [];
+        $error = [];
 
         try {
-            throw new PackingListCannotBeRemovedException();
+            $this->facade->delete($packingListApiDto, '', $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -228,8 +214,7 @@ final class PackingListApiController extends AbstractWrappedApiController implem
         $group = GroupInterface::API_CRITERIA_PACKING_LIST;
 
         try {
-            $json = $this->queryManager->criteria($packingListApiDto);
-            $this->handler->onCriteria($json, $group);
+            $this->facade->criteria($packingListApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -277,8 +262,7 @@ final class PackingListApiController extends AbstractWrappedApiController implem
         $group = GroupInterface::API_GET_PACKING_LIST;
 
         try {
-            $json[] = $this->queryManager->get($packingListApiDto);
-            $this->handler->onGet($json, $group);
+            $this->facade->get($packingListApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }

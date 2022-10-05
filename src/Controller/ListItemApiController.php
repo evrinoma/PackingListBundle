@@ -21,13 +21,10 @@ use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeRemovedExcepti
 use Evrinoma\PackingListBundle\Exception\ListItem\ListItemCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
 use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
-use Evrinoma\PackingListBundle\Manager\ListItem\CommandManagerInterface;
-use Evrinoma\PackingListBundle\Manager\ListItem\QueryManagerInterface;
-use Evrinoma\PackingListBundle\PreValidator\ListItem\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Facade\ListItem\FacadeInterface;
 use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
-use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -38,49 +35,25 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class ListItemApiController extends AbstractWrappedApiController implements ApiControllerInterface
 {
     private string $dtoClass;
-    /**
-     * @var ?Request
-     */
+
     private ?Request $request;
-    /**
-     * @var QueryManagerInterface
-     */
-    private QueryManagerInterface $queryManager;
-    /**
-     * @var CommandManagerInterface
-     */
-    private CommandManagerInterface $commandManager;
-    /**
-     * @var FactoryDtoInterface
-     */
+
     private FactoryDtoInterface $factoryDto;
-    /**
-     * @var DtoPreValidatorInterface
-     */
-    private DtoPreValidatorInterface $preValidator;
-    /**
-     * @var HandlerInterface
-     */
-    private HandlerInterface  $handler;
+
+    private FacadeInterface $facade;
 
     public function __construct(
         SerializerInterface $serializer,
         RequestStack $requestStack,
         FactoryDtoInterface $factoryDto,
-        CommandManagerInterface $commandManager,
-        QueryManagerInterface $queryManager,
-        DtoPreValidatorInterface $preValidator,
-        HandlerInterface $handler,
+        FacadeInterface $facade,
         string $dtoClass
     ) {
         parent::__construct($serializer);
         $this->request = $requestStack->getCurrentRequest();
         $this->factoryDto = $factoryDto;
-        $this->commandManager = $commandManager;
-        $this->queryManager = $queryManager;
         $this->dtoClass = $dtoClass;
-        $this->preValidator = $preValidator;
-        $this->handler = $handler;
+        $this->facade = $facade;
     }
 
     /**
@@ -107,11 +80,16 @@ final class ListItemApiController extends AbstractWrappedApiController implement
      */
     public function postAction(): JsonResponse
     {
+        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        $this->setStatusCreated();
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_POST_LIST_ITEM;
 
         try {
-            throw new ListItemCannotBeCreatedException();
+            $this->facade->post($listItemApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -143,11 +121,14 @@ final class ListItemApiController extends AbstractWrappedApiController implement
      */
     public function putAction(): JsonResponse
     {
+        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_PUT_LIST_ITEM;
 
         try {
-            throw new ListItemCannotBeSavedException();
+            $this->facade->put($listItemApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -187,10 +168,15 @@ final class ListItemApiController extends AbstractWrappedApiController implement
      */
     public function deleteAction(): JsonResponse
     {
+        $listItemApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        $this->setStatusAccepted();
+
         $json = [];
+        $error = [];
 
         try {
-            throw new ListItemCannotBeRemovedException();
+            $this->facade->delete($listItemApiDto, '', $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -237,8 +223,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
         $group = GroupInterface::API_CRITERIA_LIST_ITEM;
 
         try {
-            $json = $this->queryManager->criteria($listItemApiDto);
-            $this->handler->onCriteria($json, $group);
+            $this->facade->criteria($listItemApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -286,8 +271,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
         $group = GroupInterface::API_GET_LIST_ITEM;
 
         try {
-            $json[] = $this->queryManager->get($listItemApiDto);
-            $this->handler->onGet($json, $group);
+            $this->facade->get($listItemApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }

@@ -299,7 +299,7 @@ class EvrinomaPackingListExtension extends Extension
     private function wireController(ContainerBuilder $container, string $name, string $class): void
     {
         $definitionApiController = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.api.controller');
-        $definitionApiController->setArgument(7, $class);
+        $definitionApiController->setArgument(4, $class);
     }
 
     private function wireValidator(ContainerBuilder $container, string $name, string $class): void

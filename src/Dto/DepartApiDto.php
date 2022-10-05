@@ -59,6 +59,10 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
                 $this->setName($name);
             }
 
+            if ($point) {
+                $this->setPoint($point);
+            }
+
             if ($final) {
                 if ('true' === $final) {
                     $this->setFinal();

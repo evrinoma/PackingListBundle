@@ -9,11 +9,19 @@ services:
       - '@jms_serializer'
       - '@request_stack'
       - '@evrinoma.dto.factory'
+      - '@evrinoma.packing_list.depart.facade'
+    autowire: true
+
+  evrinoma.packing_list.depart.facade:
+    class: Evrinoma\PackingListBundle\Facade\Depart\Facade
+    arguments:
+      - '@doctrine'
       - '@evrinoma.packing_list.depart.command.manager'
       - '@evrinoma.packing_list.depart.query.manager'
-      - '@evrinoma.packing_list.depart.pre.validator'
-      - '@evrinoma.utils.handler.base_handler'
     autowire: true
+
+  Evrinoma\PackingListBundle\Facade\Depart\FacadeInterface:
+    alias: evrinoma.packing_list.depart.facade
 
   evrinoma.packing_list.depart.factory:
     class: Evrinoma\PackingListBundle\Factory\DepartFactory

@@ -28,64 +28,64 @@ class ServicePass extends AbstractRecursivePass
         if ($servicePreValidator) {
             $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.depart.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.depart.api.controller');
-            $apiController->setArgument(5, $preValidator);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.depart.facade');
+            $facade->setArgument(3, $preValidator);
         }
 
         $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.pre.validator');
         if ($servicePreValidator) {
             $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics.api.controller');
-            $apiController->setArgument(5, $preValidator);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics.facade');
+            $facade->setArgument(3, $preValidator);
         }
 
         $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.pre.validator');
         if ($servicePreValidator) {
             $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.packing_list.api.controller');
-            $apiController->setArgument(5, $preValidator);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.packing_list.facade');
+            $facade->setArgument(3, $preValidator);
         }
 
         $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.list_item.pre.validator');
         if ($servicePreValidator) {
             $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.list_item.pre.validator');
             $preValidator = $container->getDefinition($servicePreValidator);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.list_item.api.controller');
-            $apiController->setArgument(5, $preValidator);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.list_item.facade');
+            $facade->setArgument(3, $preValidator);
         }
 
         $serviceHandler = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.handler');
         if ($serviceHandler) {
             $serviceHandler = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.handler');
             $handler = $container->getDefinition($serviceHandler);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.packing_list.api.controller');
-            $apiController->setArgument(6, $handler);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.packing_list.facade');
+            $facade->setArgument(4, $handler);
         }
 
         $serviceHandler = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.list_item.handler');
         if ($serviceHandler) {
             $serviceHandler = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.list_item.handler');
             $handler = $container->getDefinition($serviceHandler);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.list_item.api.controller');
-            $apiController->setArgument(6, $handler);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.list_item.facade');
+            $facade->setArgument(4, $handler);
         }
 
         $serviceHandler = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.depart.handler');
         if ($serviceHandler) {
             $serviceHandler = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.depart.handler');
             $handler = $container->getDefinition($serviceHandler);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.depart.api.controller');
-            $apiController->setArgument(6, $handler);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.depart.facade');
+            $facade->setArgument(4, $handler);
         }
 
         $serviceHandler = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.handler');
         if ($serviceHandler) {
             $serviceHandler = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.handler');
             $handler = $container->getDefinition($serviceHandler);
-            $apiController = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics.api.controller');
-            $apiController->setArgument(6, $handler);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics.facade');
+            $facade->setArgument(4, $handler);
         }
     }
 }

@@ -21,13 +21,10 @@ use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeRemovedExcep
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsInvalidException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
-use Evrinoma\PackingListBundle\Manager\Logistics\CommandManagerInterface;
-use Evrinoma\PackingListBundle\Manager\Logistics\QueryManagerInterface;
-use Evrinoma\PackingListBundle\PreValidator\Logistics\DtoPreValidatorInterface;
+use Evrinoma\PackingListBundle\Facade\Logistics\FacadeInterface;
 use Evrinoma\PackingListBundle\Serializer\GroupInterface;
 use Evrinoma\UtilsBundle\Controller\AbstractWrappedApiController;
 use Evrinoma\UtilsBundle\Controller\ApiControllerInterface;
-use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use JMS\Serializer\SerializerInterface;
 use OpenApi\Annotations as OA;
@@ -38,49 +35,25 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class LogisticsApiController extends AbstractWrappedApiController implements ApiControllerInterface
 {
     private string $dtoClass;
-    /**
-     * @var ?Request
-     */
+
     private ?Request $request;
-    /**
-     * @var QueryManagerInterface
-     */
-    private QueryManagerInterface $queryManager;
-    /**
-     * @var CommandManagerInterface
-     */
-    private CommandManagerInterface $commandManager;
-    /**
-     * @var FactoryDtoInterface
-     */
+
     private FactoryDtoInterface $factoryDto;
-    /**
-     * @var DtoPreValidatorInterface
-     */
-    private DtoPreValidatorInterface $preValidator;
-    /**
-     * @var HandlerInterface
-     */
-    private HandlerInterface  $handler;
+
+    private FacadeInterface $facade;
 
     public function __construct(
         SerializerInterface $serializer,
         RequestStack $requestStack,
         FactoryDtoInterface $factoryDto,
-        CommandManagerInterface $commandManager,
-        QueryManagerInterface $queryManager,
-        DtoPreValidatorInterface $preValidator,
-        HandlerInterface $handler,
+        FacadeInterface $facade,
         string $dtoClass
     ) {
         parent::__construct($serializer);
         $this->request = $requestStack->getCurrentRequest();
         $this->factoryDto = $factoryDto;
-        $this->commandManager = $commandManager;
-        $this->queryManager = $queryManager;
         $this->dtoClass = $dtoClass;
-        $this->preValidator = $preValidator;
-        $this->handler = $handler;
+        $this->facade = $facade;
     }
 
     /**
@@ -123,25 +96,16 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
     public function postAction(): JsonResponse
     {
         /** @var LogisticsApiDtoInterface $fcrApiDto */
-        $logicsticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
-        $commandManager = $this->commandManager;
+        $logisticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        $this->setStatusCreated();
 
         $json = [];
         $error = [];
         $group = GroupInterface::API_POST_LOGISTICS;
 
         try {
-            $this->preValidator->onPost($logicsticApiDto);
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->transactional(
-                function () use ($logicsticApiDto, $commandManager, &$json) {
-                    $json[] = $commandManager->post($logicsticApiDto);
-                }
-            );
-
-            $this->handler->onPost($json, $group);
+            $this->facade->post($logisticApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -173,11 +137,15 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      */
     public function putAction(): JsonResponse
     {
+        /** @var LogisticsApiDtoInterface $fcrApiDto */
+        $logisticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_PUT_LOGISTICS;
 
         try {
-            throw new LogisticsCannotBeSavedException();
+            $this->facade->put($logisticApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -215,10 +183,16 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      */
     public function deleteAction(): JsonResponse
     {
+        /** @var LogisticsApiDtoInterface $fcrApiDto */
+        $logisticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
+        $this->setStatusAccepted();
+
         $json = [];
+        $error = [];
 
         try {
-            throw new LogisticsCannotBeRemovedException();
+            $this->facade->delete($logisticApiDto, '', $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -264,11 +238,15 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      */
     public function criteriaAction(): JsonResponse
     {
+        /** @var LogisticsApiDtoInterface $fcrApiDto */
+        $logisticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_CRITERIA_LOGISTICS;
 
         try {
-            throw new LogisticsNotFoundException();
+            $this->facade->criteria($logisticApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
@@ -306,11 +284,15 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      */
     public function getAction(): JsonResponse
     {
+        /** @var LogisticsApiDtoInterface $fcrApiDto */
+        $logisticApiDto = $this->factoryDto->setRequest($this->request)->createDto($this->dtoClass);
+
         $json = [];
+        $error = [];
         $group = GroupInterface::API_GET_LOGISTICS;
 
         try {
-            throw new LogisticsNotFoundException();
+            $this->facade->criteria($logisticApiDto, $group, $json);
         } catch (\Exception $e) {
             $error = $this->setRestStatus($e);
         }
