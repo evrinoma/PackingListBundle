@@ -22,23 +22,23 @@ use Evrinoma\PackingListBundle\Exception\ListItem\ListItemNotFoundException;
 use Evrinoma\PackingListBundle\Factory\ListItemFactoryInterface;
 use Evrinoma\PackingListBundle\Mediator\ListItem\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
-use Evrinoma\PackingListBundle\Repository\ListItem\ListItemCommandRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\ListItem\ListItemRepositoryInterface;
 use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 
 final class CommandManager implements CommandManagerInterface
 {
-    private ListItemCommandRepositoryInterface $repository;
+    private ListItemRepositoryInterface $repository;
     private ValidatorInterface            $validator;
     private ListItemFactoryInterface           $factory;
     private CommandMediatorInterface      $mediator;
 
     /**
      * @param ValidatorInterface                 $validator
-     * @param ListItemCommandRepositoryInterface $repository
+     * @param ListItemRepositoryInterface $repository
      * @param ListItemFactoryInterface           $factory
      * @param CommandMediatorInterface           $mediator
      */
-    public function __construct(ValidatorInterface $validator, ListItemCommandRepositoryInterface $repository, ListItemFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, ListItemRepositoryInterface $repository, ListItemFactoryInterface $factory, CommandMediatorInterface $mediator)
     {
         $this->validator = $validator;
         $this->repository = $repository;

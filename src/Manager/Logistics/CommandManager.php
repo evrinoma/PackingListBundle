@@ -24,12 +24,12 @@ use Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface as DepartQue
 use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface as PackingListQueryManagerInterface;
 use Evrinoma\PackingListBundle\Mediator\Logistics\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
-use Evrinoma\PackingListBundle\Repository\Logistics\LogisticsCommandRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\Logistics\LogisticsRepositoryInterface;
 use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 
 final class CommandManager implements CommandManagerInterface
 {
-    private LogisticsCommandRepositoryInterface $repository;
+    private LogisticsRepositoryInterface $repository;
     private ValidatorInterface            $validator;
     private LogisticsFactoryInterface           $factory;
     private CommandMediatorInterface      $mediator;
@@ -39,13 +39,13 @@ final class CommandManager implements CommandManagerInterface
 
     /**
      * @param ValidatorInterface                  $validator
-     * @param LogisticsCommandRepositoryInterface $repository
+     * @param LogisticsRepositoryInterface $repository
      * @param LogisticsFactoryInterface           $factory
      * @param CommandMediatorInterface            $mediator
      * @param PackingListQueryManagerInterface    $packingListQueryManager
      * @param DepartQueryManagerInterface         $departQueryManager
      */
-    public function __construct(ValidatorInterface $validator, LogisticsCommandRepositoryInterface $repository, LogisticsFactoryInterface $factory, CommandMediatorInterface $mediator, PackingListQueryManagerInterface $packingListQueryManager, DepartQueryManagerInterface $departQueryManager)
+    public function __construct(ValidatorInterface $validator, LogisticsRepositoryInterface $repository, LogisticsFactoryInterface $factory, CommandMediatorInterface $mediator, PackingListQueryManagerInterface $packingListQueryManager, DepartQueryManagerInterface $departQueryManager)
     {
         $this->validator = $validator;
         $this->repository = $repository;

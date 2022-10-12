@@ -22,23 +22,23 @@ use Evrinoma\PackingListBundle\Exception\Depart\DepartNotFoundException;
 use Evrinoma\PackingListBundle\Factory\DepartFactoryInterface;
 use Evrinoma\PackingListBundle\Mediator\Depart\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
-use Evrinoma\PackingListBundle\Repository\Depart\DepartCommandRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\Depart\DepartRepositoryInterface;
 use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 
 final class CommandManager implements CommandManagerInterface
 {
-    private DepartCommandRepositoryInterface $repository;
+    private DepartRepositoryInterface $repository;
     private ValidatorInterface            $validator;
     private DepartFactoryInterface           $factory;
     private CommandMediatorInterface      $mediator;
 
     /**
      * @param ValidatorInterface               $validator
-     * @param DepartCommandRepositoryInterface $repository
+     * @param DepartRepositoryInterface $repository
      * @param DepartFactoryInterface           $factory
      * @param CommandMediatorInterface         $mediator
      */
-    public function __construct(ValidatorInterface $validator, DepartCommandRepositoryInterface $repository, DepartFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, DepartRepositoryInterface $repository, DepartFactoryInterface $factory, CommandMediatorInterface $mediator)
     {
         $this->validator = $validator;
         $this->repository = $repository;

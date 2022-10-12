@@ -22,23 +22,23 @@ use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundExceptio
 use Evrinoma\PackingListBundle\Factory\PackingListFactoryInterface;
 use Evrinoma\PackingListBundle\Mediator\PackingList\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
-use Evrinoma\PackingListBundle\Repository\PackingList\PackingListCommandRepositoryInterface;
+use Evrinoma\PackingListBundle\Repository\PackingList\PackingListRepositoryInterface;
 use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 
 final class CommandManager implements CommandManagerInterface
 {
-    private PackingListCommandRepositoryInterface $repository;
+    private PackingListRepositoryInterface $repository;
     private ValidatorInterface            $validator;
     private PackingListFactoryInterface           $factory;
     private CommandMediatorInterface      $mediator;
 
     /**
      * @param ValidatorInterface                    $validator
-     * @param PackingListCommandRepositoryInterface $repository
+     * @param PackingListRepositoryInterface $repository
      * @param PackingListFactoryInterface           $factory
      * @param CommandMediatorInterface              $mediator
      */
-    public function __construct(ValidatorInterface $validator, PackingListCommandRepositoryInterface $repository, PackingListFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, PackingListRepositoryInterface $repository, PackingListFactoryInterface $factory, CommandMediatorInterface $mediator)
     {
         $this->validator = $validator;
         $this->repository = $repository;
