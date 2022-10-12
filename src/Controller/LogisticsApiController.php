@@ -89,7 +89,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Create packing logistics")
+     * @OA\Response(response=200, description="Create logistics item")
      *
      * @return JsonResponse
      */
@@ -110,7 +110,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup($group)->JsonResponse('Create logistics', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Create logistics item', $json, $error);
     }
 
     /**

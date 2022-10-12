@@ -74,7 +74,7 @@ final class ListItemApiController extends AbstractWrappedApiController implement
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Create packing list")
+     * @OA\Response(response=200, description="Create list item")
      *
      * @return JsonResponse
      */

@@ -74,7 +74,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Create packing list")
+     * @OA\Response(response=200, description="Create depart")
      *
      * @return JsonResponse
      */
@@ -94,7 +94,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup($group)->JsonResponse('Create list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Create depart', $json, $error);
     }
 
     /**
@@ -115,7 +115,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Save list item")
+     * @OA\Response(response=200, description="Save depart")
      *
      * @return JsonResponse
      */
@@ -133,7 +133,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup($group)->JsonResponse('Save list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Save depart', $json, $error);
     }
 
     /**
@@ -162,7 +162,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Delete list item")
+     * @OA\Response(response=200, description="Delete depart")
      *
      * @return JsonResponse
      */
@@ -181,7 +181,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
             $error = $this->setRestStatus($e);
         }
 
-        return $this->JsonResponse('Delete list item', $json, $error);
+        return $this->JsonResponse('Delete depart', $json, $error);
     }
 
     /**
@@ -209,7 +209,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     ),
      * )
-     * @OA\Response(response=200, description="Return list item")
+     * @OA\Response(response=200, description="Return depart")
      *
      * @return JsonResponse
      */
@@ -228,7 +228,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup($group)->JsonResponse('Get list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get depart', $json, $error);
     }
 
     /**
@@ -257,7 +257,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     )
      * )
-     * @OA\Response(response=200, description="Return list item")
+     * @OA\Response(response=200, description="Return depart")
      *
      * @return JsonResponse
      */
@@ -276,7 +276,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
             $error = $this->setRestStatus($e);
         }
 
-        return $this->setSerializeGroup($group)->JsonResponse('Get list item', $json, $error);
+        return $this->setSerializeGroup($group)->JsonResponse('Get depart', $json, $error);
     }
 
     /**
