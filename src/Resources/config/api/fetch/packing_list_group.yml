@@ -1,0 +1,14 @@
+services:
+  Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\CriteriaDescription:
+    tags:
+      - { name: 'evrinoma.fetch.description' }
+
+  evrinoma.packing_list.packing_list_group.fetch.criteria:
+    alias: Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\CriteriaDescription
+
+  Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\GetDescription:
+    tags:
+      - { name: 'evrinoma.fetch.description' }
+
+  evrinoma.packing_list.packing_list_group.fetch.get:
+    alias: Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\GetDescription

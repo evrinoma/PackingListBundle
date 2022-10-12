@@ -34,4 +34,14 @@ interface GroupInterface
     public const API_PUT_PACKING_LIST = 'API_PUT_PACKING_LIST';
     public const API_GET_PACKING_LIST = 'API_GET_PACKING_LIST';
     public const API_CRITERIA_PACKING_LIST = self::API_GET_PACKING_LIST;
+
+    public const API_POST_PACKING_LIST_GROUP = 'API_POST_PACKING_LIST_GROUP';
+    public const API_PUT_PACKING_LIST_GROUP = 'API_PUT_PACKING_LIST_GROUP';
+    public const API_GET_PACKING_LIST_GROUP = 'API_GET_PACKING_LIST_GROUP';
+    public const API_CRITERIA_PACKING_LIST_GROUP = self::API_GET_PACKING_LIST_GROUP;
+
+    public const API_POST_GROUP = 'API_POST_GROUP';
+    public const API_PUT_GROUP = 'API_PUT_GROUP';
+    public const API_GET_GROUP = 'API_GET_GROUP';
+    public const API_CRITERIA_GROUP = self::API_GET_GROUP;
 }

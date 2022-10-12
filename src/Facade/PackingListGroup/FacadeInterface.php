@@ -11,11 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository;
+namespace Evrinoma\PackingListBundle\Facade\PackingListGroup;
 
-interface AliasInterface
+use Evrinoma\UtilsBundle\Facade\FacadeInterface as BaseFacadeInterface;
+
+interface FacadeInterface extends BaseFacadeInterface
 {
-    public const PACKING_LIST_GROUP = 'packing_list_group';
-    public const PACKING_LIST = 'packing_list';
-    public const LIST_ITEM = 'list_item';
 }

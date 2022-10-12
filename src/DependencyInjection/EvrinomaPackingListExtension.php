@@ -17,15 +17,18 @@ use Evrinoma\PackingListBundle\Dto\DepartApiDto;
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
 use Evrinoma\PackingListBundle\Dto\LogisticsApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
+use Evrinoma\PackingListBundle\Dto\PackingListGroupApiDto;
 use Evrinoma\PackingListBundle\Entity\Depart\BaseDepart;
 use Evrinoma\PackingListBundle\Entity\ListItem\BaseListItem;
 use Evrinoma\PackingListBundle\Entity\Logistics\BaseLogistics;
 use Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList;
+use Evrinoma\PackingListBundle\Entity\PackingListGroup\BasePackingListGroup;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
 use Evrinoma\PackingListBundle\Factory\DepartFactory;
 use Evrinoma\PackingListBundle\Factory\ListItemFactory;
 use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListFactory;
+use Evrinoma\PackingListBundle\Factory\PackingListGroupFactory;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
 use Evrinoma\UtilsBundle\Handler\BaseHandler;
 use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
@@ -43,6 +46,11 @@ class EvrinomaPackingListExtension extends Extension
 
     public const ENTITY = 'Evrinoma\PackingListBundle\Entity';
     public const MODEL = 'Evrinoma\PackingListBundle\Model';
+
+    public const ENTITY_FACTORY_PACKING_LIST_GROUP = PackingListGroupFactory::class;
+    public const ENTITY_BASE_PACKING_LIST_GROUP = BasePackingListGroup::class;
+    public const DTO_BASE_PACKING_LIST_GROUP = PackingListGroupApiDto::class;
+
     public const ENTITY_FACTORY_PACKING_LIST = PackingListFactory::class;
     public const ENTITY_BASE_PACKING_LIST = BasePackingList::class;
     public const DTO_BASE_PACKING_LIST = PackingListApiDto::class;
@@ -94,21 +102,28 @@ class EvrinomaPackingListExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_packing_list']);
         }
 
-        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory_list_item']) {
+        if (self::ENTITY_FACTORY_PACKING_LIST_GROUP !== $config['factory_packing_list_group']) {
+            $this->wireFactory($container, 'packing_list_group', $config['factory_packing_list_group'], $config['entity_packing_list_group']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.packing_list_group.factory');
+            $definitionFactory->setArgument(0, $config['entity_packing_list_group']);
+        }
+
+        if (self::ENTITY_FACTORY_LIST_ITEM !== $config['factory_list_item']) {
             $this->wireFactory($container, 'list_item', $config['factory_list_item'], $config['entity_list_item']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.list_item.factory');
             $definitionFactory->setArgument(0, $config['entity_list_item']);
         }
 
-        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory_depart']) {
+        if (self::ENTITY_FACTORY_DEPART !== $config['factory_depart']) {
             $this->wireFactory($container, 'depart', $config['factory_depart'], $config['entity_depart']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.depart.factory');
             $definitionFactory->setArgument(0, $config['entity_depart']);
         }
 
-        if (self::ENTITY_FACTORY_PACKING_LIST !== $config['factory_logistics']) {
+        if (self::ENTITY_FACTORY_LOGISTICS !== $config['factory_logistics']) {
             $this->wireFactory($container, 'logistics', $config['factory_logistics'], $config['entity_logistics']);
         } else {
             $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.logistics.factory');
@@ -146,6 +161,7 @@ class EvrinomaPackingListExtension extends Extension
                 '' => [
                     'db_driver' => 'evrinoma.'.$this->getAlias().'.storage',
                     'entity_packing_list' => 'evrinoma.'.$this->getAlias().'.entity_packing_list',
+                    'entity_packing_list_group' => 'evrinoma.'.$this->getAlias().'.entity_packing_list_group',
                     'entity_list_item' => 'evrinoma.'.$this->getAlias().'.entity_list_item',
                     'entity_depart' => 'evrinoma.'.$this->getAlias().'.entity_depart',
                     'entity_logistics' => 'evrinoma.'.$this->getAlias().'.entity_logistics',
@@ -155,17 +171,20 @@ class EvrinomaPackingListExtension extends Extension
 
         if ($registry instanceof Reference && 'api' === $config['db_driver']) {
             $this->wireRepository($container, $registry, 'packing_list', $config['entity_packing_list']);
+            $this->wireRepository($container, $registry, 'packing_list_group', $config['entity_packing_list_group']);
             $this->wireRepository($container, $registry, 'list_item', $config['entity_list_item']);
             $this->wireRepository($container, $registry, 'depart', $config['entity_depart']);
             $this->wireRepository($container, $registry, 'logistics', $config['entity_logistics']);
         }
 
         $this->wireController($container, 'packing_list', $config['dto_packing_list']);
+        $this->wireController($container, 'packing_list_group', $config['dto_packing_list_group']);
         $this->wireController($container, 'list_item', $config['dto_list_item']);
         $this->wireController($container, 'depart', $config['dto_depart']);
         $this->wireController($container, 'logistics', $config['dto_logistics']);
 
         $this->wireValidator($container, 'packing_list', $config['entity_packing_list']);
+        $this->wireValidator($container, 'packing_list_group', $config['entity_packing_list_group']);
         $this->wireValidator($container, 'list_item', $config['entity_list_item']);
         $this->wireValidator($container, 'depart', $config['entity_depart']);
         $this->wireValidator($container, 'logistics', $config['entity_logistics']);
@@ -186,6 +205,10 @@ class EvrinomaPackingListExtension extends Extension
             $loader->load('constraint/logistics.yml');
         }
 
+        if ($config['constraints_packing_list_group']) {
+            $loader->load('constraint/packing_list_group.yml');
+        }
+
         if ($config['decorates']) {
             $remap = [];
             foreach ($config['decorates'] as $key => $service) {
@@ -196,6 +219,12 @@ class EvrinomaPackingListExtension extends Extension
                             break;
                         case 'query_packing_list':
                             $remap['query_packing_list'] = 'evrinoma.'.$this->getAlias().'.decorates.packing_list.query';
+                            break;
+                        case 'command_packing_list_group':
+                            $remap['command_packing_list_group'] = 'evrinoma.'.$this->getAlias().'.decorates.packing_list_group.command';
+                            break;
+                        case 'query_packing_list_group':
+                            $remap['query_packing_list_group'] = 'evrinoma.'.$this->getAlias().'.decorates.packing_list_group.query';
                             break;
                         case 'command_list_item':
                             $remap['command_list_item'] = 'evrinoma.'.$this->getAlias().'.decorates.list_item.command';
@@ -236,6 +265,9 @@ class EvrinomaPackingListExtension extends Extension
                             break;
                         case 'pre_validator_list_item':
                             $remap['pre_validator_list_item'] = 'evrinoma.'.$this->getAlias().'.services.list_item.pre.validator';
+                            break;
+                        case 'pre_validator_packing_list_group':
+                            $remap['pre_validator_packing_list_group'] = 'evrinoma.'.$this->getAlias().'.services.packing_list_group.pre.validator';
                             break;
                         case 'pre_validator_depart':
                             $remap['pre_validator_depart'] = 'evrinoma.'.$this->getAlias().'.services.depart.pre.validator';

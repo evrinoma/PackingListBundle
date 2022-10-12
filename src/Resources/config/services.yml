@@ -3,3 +3,4 @@ imports:
   - { resource: services/list_item.yml }
   - { resource: services/depart.yml }
   - { resource: services/logistics.yml }
+  - { resource: services/packing_list_group.yml }
