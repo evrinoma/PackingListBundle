@@ -1,10 +1,12 @@
 imports:
   - { resource: api/fetch/depart.yml }
+  - { resource: api/fetch/group.yml }
   - { resource: api/fetch/list_item.yml }
   - { resource: api/fetch/logistics.yml }
   - { resource: api/fetch/packing_list.yml }
   - { resource: api/fetch/packing_list_group.yml }
   - { resource: api/handler/depart.yml }
+  - { resource: api/handler/group.yml }
   - { resource: api/handler/list_item.yml }
   - { resource: api/handler/logistics.yml }
   - { resource: api/handler/packing_list.yml }

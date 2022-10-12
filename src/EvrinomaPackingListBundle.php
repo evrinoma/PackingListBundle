@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle;
 
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\DepartPass as PropertyDepartPass;
+use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\GroupPass as PropertyGroupPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\ListItemPass as PropertyListItemPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\LogisticsPass as PropertyLogisticsPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\PackingListPass as PropertyPackingListPass;
@@ -36,6 +37,7 @@ class EvrinomaPackingListBundle extends Bundle
             ->addCompilerPass(new MapEntityPass($this->getNamespace(), $this->getPath()))
             ->addCompilerPass(new DecoratorPass())
             ->addCompilerPass(new PropertyDepartPass())
+            ->addCompilerPass(new PropertyGroupPass())
             ->addCompilerPass(new PropertyListItemPass())
             ->addCompilerPass(new PropertyLogisticsPass())
             ->addCompilerPass(new PropertyPackingListPass())

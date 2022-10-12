@@ -3,3 +3,5 @@ imports:
   - { resource: tests/list_item.yml }
   - { resource: tests/logistics.yml }
   - { resource: tests/packing_list.yml }
+  - { resource: tests/packing_list_group.yml }
+  - { resource: tests/group.yml }

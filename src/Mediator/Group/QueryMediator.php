@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Mediator\Depart;
+namespace Evrinoma\PackingListBundle\Mediator\Group;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Repository\AliasInterface;
@@ -23,7 +23,7 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 {
     use QueryMediatorTrait;
 
-    protected static string $alias = AliasInterface::DEPART;
+    protected static string $alias = AliasInterface::GROUP;
 
     /**
      * @param DtoInterface          $dto

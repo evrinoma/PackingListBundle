@@ -16,6 +16,7 @@ namespace Evrinoma\PackingListBundle\DependencyInjection\Compiler;
 use Evrinoma\PackingListBundle\DependencyInjection\EvrinomaPackingListExtension;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
 use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
+use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
@@ -45,6 +46,12 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
             $entity = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_depart');
             if (false !== strpos($entity, EvrinomaPackingListExtension::ENTITY)) {
                 $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Depart', '%s/Entity/Depart');
+            }
+            $this->addResolveTargetEntity([$entity => [DepartInterface::class => []]], false);
+
+            $entity = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_group');
+            if (false !== strpos($entity, EvrinomaPackingListExtension::ENTITY)) {
+                $this->loadMetadata($driver, $referenceAnnotationReader, '%s/Model/Group', '%s/Entity/Group');
             }
             $this->addResolveTargetEntity([$entity => [DepartInterface::class => []]], false);
 
@@ -85,6 +92,8 @@ class MapEntityPass extends AbstractMapEntity implements CompilerPassInterface
 
             $entity = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_depart');
             $definition->addMethodCall('registerEntity', [$entity, DepartInterface::class]);
+            $entity = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_group');
+            $definition->addMethodCall('registerEntity', [$entity, GroupInterface::class]);
             $entity = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_list_item');
             $definition->addMethodCall('registerEntity', [$entity, ListItemInterface::class]);
             $entity = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.entity_packing_list');

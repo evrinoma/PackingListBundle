@@ -23,7 +23,7 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 {
     use QueryMediatorTrait;
 
-    protected static string $alias = AliasInterface::LIST_ITEM;
+    protected static string $alias = AliasInterface::LOGISTICS;
 
     /**
      * @param DtoInterface          $dto

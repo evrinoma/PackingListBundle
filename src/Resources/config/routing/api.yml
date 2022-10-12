@@ -14,6 +14,10 @@ packing_logistics_api:
   resource: "@EvrinomaPackingListBundle/Controller/LogisticsApiController.php"
   type: annotation
 
-packing_list_group_api:
+packing_list_packing_list_group_api:
   resource: "@EvrinomaPackingListBundle/Controller/PackingListGroupApiController.php"
+  type: annotation
+
+packing_list_group_api:
+  resource: "@EvrinomaPackingListBundle/Controller/GroupApiController.php"
   type: annotation
