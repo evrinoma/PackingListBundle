@@ -35,11 +35,11 @@ interface PackingListGroupQueryRepositoryInterface
      * @param null   $lockMode
      * @param null   $lockVersion
      *
-     * @return PackingListGroupInterface
+     * @return array
      *
      * @throws PackingListGroupNotFoundException
      */
-    public function find(string $id, $lockMode = null, $lockVersion = null): PackingListGroupInterface;
+    public function find(string $id, $lockMode = null, $lockVersion = null): array;
 
     /**
      * @param string $id

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingListGroup;
 
+use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 
 interface PackingListGroupInterface extends IdInterface
@@ -23,4 +25,16 @@ interface PackingListGroupInterface extends IdInterface
      * @return PackingListGroupInterface
      */
     public function setId(?int $id): PackingListGroupInterface;
+
+    /**
+     * @return PackingListInterface
+     */
+    public function getPackingList(): PackingListInterface;
+
+    /**
+     * @param PackingListInterface $packingList
+     *
+     * @return PackingListGroupInterface
+     */
+    public function setPackingList(PackingListInterface $packingList): PackingListGroupInterface;
 }

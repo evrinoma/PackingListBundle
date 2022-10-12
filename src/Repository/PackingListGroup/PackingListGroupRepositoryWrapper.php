@@ -35,10 +35,10 @@ abstract class PackingListGroupRepositoryWrapper extends RepositoryWrapper
         $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
         $handler = $manager->getHandler(BaseGetHandler::NAME, GetDescription::NAME);
 
-        $rows[] = $handler->setEntity($id)->run()->getRaw();
+        $rows = $handler->setEntity($id)->run()->getRaw();
         $entities = $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
 
-        return (0 === \count($entities)) ? null : $entities[0];
+        return (0 === \count($entities)) ? null : $entities;
     }
 
     protected function criteriaWrapped($entity): array

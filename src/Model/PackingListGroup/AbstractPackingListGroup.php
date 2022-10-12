@@ -14,6 +14,8 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\PackingListGroup;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
+use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 
 /**
@@ -22,6 +24,11 @@ use Evrinoma\UtilsBundle\Entity\IdTrait;
 abstract class AbstractPackingListGroup implements PackingListGroupInterface
 {
     use IdTrait;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface")
+     */
+    protected PackingListInterface $packingList;
 
     /**
      * @param int|null $id
@@ -35,4 +42,23 @@ abstract class AbstractPackingListGroup implements PackingListGroupInterface
         return $this;
     }
 
+    /**
+     * @return PackingListInterface
+     */
+    public function getPackingList(): PackingListInterface
+    {
+        return $this->packingList;
+    }
+
+    /**
+     * @param PackingListInterface $packingList
+     *
+     * @return PackingListGroupInterface
+     */
+    public function setPackingList(PackingListInterface $packingList): PackingListGroupInterface
+    {
+        $this->packingList = $packingList;
+
+        return $this;
+    }
 }

@@ -100,7 +100,7 @@ class PackingListGroupRepository extends PackingListGroupRepositoryWrapper imple
      *
      * @throws PackingListGroupNotFoundException
      */
-    public function find($id, $lockMode = null, $lockVersion = null): PackingListGroupInterface
+    public function find($id, $lockMode = null, $lockVersion = null): array
     {
         /** @var PackingListGroupInterface $packingList */
         $packingList = $this->findWrapped($id);

@@ -32,11 +32,11 @@ interface QueryManagerInterface
     /**
      * @param PackingListGroupApiDtoInterface $dto
      *
-     * @return PackingListGroupInterface
+     * @return array
      *
      * @throws PackingListGroupNotFoundException
      */
-    public function get(PackingListGroupApiDtoInterface $dto): PackingListGroupInterface;
+    public function get(PackingListGroupApiDtoInterface $dto): array;
 
     /**
      * @param PackingListGroupApiDtoInterface $dto
