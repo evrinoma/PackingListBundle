@@ -1,0 +1,20 @@
+Evrinoma\PackingListBundle\Model\PackingListGroup\AbstractPackingListGroup:
+  exclusion_policy: ALL
+  properties:
+    id:
+      groups: [
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
+      ]
+      expose: true
+    packingList:
+      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      groups: [
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
+      ]
+      expose: true
+    packingListGroup:
+      type: Evrinoma\PackingListBundle\Model\Group\AbstractGroup
+      groups: [
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
+      ]
+      expose: true

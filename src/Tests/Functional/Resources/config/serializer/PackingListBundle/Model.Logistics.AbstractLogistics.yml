@@ -2,13 +2,39 @@ Evrinoma\PackingListBundle\Model\Logistics\AbstractLogistics:
   exclusion_policy: ALL
   properties:
     packingListId:
+      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
       groups: [
           API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     depart:
+      type: Evrinoma\PackingListBundle\Model\Depart\AbstractDepart
       groups: [
           API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
-
+    name:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
+    user:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
+    email:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
+    surname:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
+    patronymic:
+      groups: [
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true

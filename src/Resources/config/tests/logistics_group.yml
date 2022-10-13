@@ -1,1 +1,9 @@
 services:
+  evrinoma.packing_list.test.functional.action.logistics_group:
+    class: Evrinoma\PackingListBundle\Tests\Functional\Action\BaseLogisticsGroup
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Tests\Functional\Action\BaseLogisticsGroup:
+    alias: evrinoma.packing_list.test.functional.action.logistics_group
+    public: true

@@ -4,36 +4,50 @@ Evrinoma\PackingListBundle\Model\Depart\AbstractDepart:
     id:
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     name:
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     depart:
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     point:
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     address:
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     final:
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     packingList:
       type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
