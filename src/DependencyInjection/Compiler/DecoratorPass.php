@@ -84,6 +84,21 @@ class DecoratorPass extends AbstractRecursivePass
             $commandManager->setArgument(3, $commandMediator);
         }
 
+        $decoratorQuery = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.decorates.logistics_group.query');
+        if ($decoratorQuery) {
+            $decoratorQuery = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.decorates.logistics_group.query');
+            $queryMediator = $container->getDefinition($decoratorQuery);
+            $repository = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics_group.repository');
+            $repository->setArgument(2, $queryMediator);
+        }
+        $decoratorCommand = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.decorates.logistics_group.command');
+        if ($decoratorCommand) {
+            $decoratorCommand = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.decorates.logistics_group.command');
+            $commandMediator = $container->getDefinition($decoratorCommand);
+            $commandManager = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics_group.command.manager');
+            $commandManager->setArgument(3, $commandMediator);
+        }
+
         $decoratorQuery = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.decorates.packing_list.query');
         if ($decoratorQuery) {
             $decoratorQuery = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.decorates.packing_list.query');

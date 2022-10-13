@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingListGroup;
 
-use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
 use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;

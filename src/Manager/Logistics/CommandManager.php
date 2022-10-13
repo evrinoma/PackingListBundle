@@ -30,20 +30,20 @@ use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 final class CommandManager implements CommandManagerInterface
 {
     private LogisticsRepositoryInterface $repository;
-    private ValidatorInterface            $validator;
-    private LogisticsFactoryInterface           $factory;
-    private CommandMediatorInterface      $mediator;
+    private ValidatorInterface $validator;
+    private LogisticsFactoryInterface $factory;
+    private CommandMediatorInterface $mediator;
 
-    private PackingListQueryManagerInterface          $packingListQueryManager;
-    private DepartQueryManagerInterface     $departQueryManager;
+    private PackingListQueryManagerInterface $packingListQueryManager;
+    private DepartQueryManagerInterface $departQueryManager;
 
     /**
-     * @param ValidatorInterface                  $validator
-     * @param LogisticsRepositoryInterface $repository
-     * @param LogisticsFactoryInterface           $factory
-     * @param CommandMediatorInterface            $mediator
-     * @param PackingListQueryManagerInterface    $packingListQueryManager
-     * @param DepartQueryManagerInterface         $departQueryManager
+     * @param ValidatorInterface               $validator
+     * @param LogisticsRepositoryInterface     $repository
+     * @param LogisticsFactoryInterface        $factory
+     * @param CommandMediatorInterface         $mediator
+     * @param PackingListQueryManagerInterface $packingListQueryManager
+     * @param DepartQueryManagerInterface      $departQueryManager
      */
     public function __construct(ValidatorInterface $validator, LogisticsRepositoryInterface $repository, LogisticsFactoryInterface $factory, CommandMediatorInterface $mediator, PackingListQueryManagerInterface $packingListQueryManager, DepartQueryManagerInterface $departQueryManager)
     {
@@ -110,6 +110,18 @@ final class CommandManager implements CommandManagerInterface
             $logistics = $this->repository->find($dto->getPackingListApiDto()->idToString());
         } catch (LogisticsNotFoundException $e) {
             throw $e;
+        }
+
+        try {
+            $logistics->setDepart($this->departQueryManager->proxy($dto->getDepartApiDto()));
+        } catch (\Exception $e) {
+            throw new LogisticsCannotBeSavedException($e->getMessage());
+        }
+
+        try {
+            $logistics->setPackingList($this->packingListQueryManager->proxy($dto->getPackingListApiDto()));
+        } catch (\Exception $e) {
+            throw new LogisticsCannotBeSavedException($e->getMessage());
         }
 
         $this->mediator->onUpdate($dto, $logistics);

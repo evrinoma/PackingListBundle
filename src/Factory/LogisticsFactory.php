@@ -33,7 +33,6 @@ class LogisticsFactory implements LogisticsFactoryInterface
      */
     public function create(LogisticsApiDtoInterface $dto): LogisticsInterface
     {
-        /* @var BaseLogistics $packingList */
         return new self::$entityClass();
     }
 }

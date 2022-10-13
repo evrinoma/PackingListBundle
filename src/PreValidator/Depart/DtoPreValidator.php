@@ -15,7 +15,7 @@ namespace Evrinoma\PackingListBundle\PreValidator\Depart;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
+use Evrinoma\PackingListBundle\Exception\Depart\DepartInvalidException;
 use Evrinoma\UtilsBundle\PreValidator\AbstractPreValidator;
 
 class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInterface
@@ -38,7 +38,7 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
     {
         /** @var DepartApiDtoInterface $dto */
         if (!$dto->hasId()) {
-            throw new ListItemInvalidException('The Dto has\'t ID or class invalid');
+            throw new DepartInvalidException('The Dto has\'t ID or class invalid');
         }
     }
 }

@@ -25,6 +25,7 @@ abstract class AbstractListItem implements ListItemInterface
 {
     use IdTrait;
     use NameTrait;
+
     /**
      * @var string
      *

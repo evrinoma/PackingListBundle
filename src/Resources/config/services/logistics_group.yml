@@ -1,0 +1,96 @@
+services:
+  Evrinoma\PackingListBundle\Controller\LogisticsGroupApiController:
+    alias: evrinoma.packing_list.logistics_group.api.controller
+    public: true
+
+  evrinoma.packing_list.logistics_group.api.controller:
+    class: Evrinoma\PackingListBundle\Controller\LogisticsGroupApiController
+    arguments:
+      - '@jms_serializer'
+      - '@request_stack'
+      - '@evrinoma.dto.factory'
+      - '@evrinoma.packing_list.logistics_group.facade'
+    autowire: true
+
+  evrinoma.packing_list.logistics_group.facade:
+    class: Evrinoma\PackingListBundle\Facade\LogisticsGroup\Facade
+    arguments:
+      - '@doctrine'
+      - '@evrinoma.packing_list.logistics_group.command.manager'
+      - '@evrinoma.packing_list.logistics_group.query.manager'
+    autowire: true
+
+  Evrinoma\PackingListBundle\Facade\LogisticsGroup\FacadeInterface:
+    alias: evrinoma.packing_list.logistics_group.facade
+
+  evrinoma.packing_list.logistics_group.factory:
+    class: Evrinoma\PackingListBundle\Factory\LogisticsGroupFactory
+    public: true
+    arguments:
+
+  evrinoma.packing_list.logistics_group.repository:
+    class: Evrinoma\PackingListBundle\Repository\LogisticsGroup\LogisticsGroupRepository
+    public: true
+    arguments:
+
+  evrinoma.packing_list.logistics_group.command.manager:
+    class: Evrinoma\PackingListBundle\Manager\LogisticsGroup\CommandManager
+    arguments:
+      - '@evrinoma.packing_list.logistics_group.validator'
+      - '@evrinoma.packing_list.logistics_group.repository'
+      - '@evrinoma.packing_list.logistics_group.factory'
+      - '@evrinoma.packing_list.logistics_group.command.mediator'
+      - '@evrinoma.packing_list.group.query.manager'
+      - '@evrinoma.packing_list.depart.query.manager'
+
+  Evrinoma\PackingListBundle\Manager\LogisticsGroup\CommandManagerInterface:
+    alias: evrinoma.packing_list.logistics_group.command.manager
+
+  evrinoma.packing_list.logistics_group.query.manager:
+    class: Evrinoma\PackingListBundle\Manager\LogisticsGroup\QueryManager
+    arguments:
+      - '@evrinoma.packing_list.logistics_group.repository'
+
+  Evrinoma\PackingListBundle\Manager\LogisticsGroup\QueryManagerInterface:
+    alias: evrinoma.packing_list.logistics_group.query.manager
+
+  evrinoma.packing_list.logistics_group.validator:
+    class: Evrinoma\PackingListBundle\Validator\LogisticsGroupValidator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Validator\LogisticsGroupValidator:
+    alias: evrinoma.packing_list.logistics_group.validator
+
+  evrinoma.packing_list.logistics_group.query.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\LogisticsGroup\QueryMediator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Mediator\LogisticsGroup\QueryMediator:
+    alias: evrinoma.packing_list.logistics_group.query.mediator
+
+  Evrinoma\PackingListBundle\Mediator\LogisticsGroup\QueryMediatorInterface:
+    alias: evrinoma.packing_list.logistics_group.query.mediator
+
+  evrinoma.packing_list.logistics_group.command.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\LogisticsGroup\CommandMediator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\Mediator\LogisticsGroup\CommandMediator:
+    alias: evrinoma.packing_list.logistics_group.command.mediator
+
+  Evrinoma\PackingListBundle\Mediator\LogisticsGroup\CommandMediatorInterface:
+    alias: evrinoma.packing_list.logistics_group.command.mediator
+
+  evrinoma.packing_list.logistics_group.pre.validator:
+    class: Evrinoma\PackingListBundle\PreValidator\LogisticsGroup\DtoPreValidator
+    public: true
+    arguments:
+
+  Evrinoma\PackingListBundle\PreValidator\LogisticsGroup\DtoPreValidator:
+    alias: evrinoma.packing_list.logistics_group.pre.validator
+
+  Evrinoma\PackingListBundle\PreValidator\LogisticsGroup\DtoPreValidatorInterface:
+    alias: evrinoma.packing_list.logistics_group.pre.validator

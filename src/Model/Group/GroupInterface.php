@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\Group;
 
 use Evrinoma\UtilsBundle\Entity\IdInterface;
-use Evrinoma\UtilsBundle\Entity\NameInterface;
 
 interface GroupInterface extends IdInterface
 {
@@ -36,5 +35,4 @@ interface GroupInterface extends IdInterface
      * @return GroupInterface
      */
     public function setInfo(string $info): GroupInterface;
-
 }

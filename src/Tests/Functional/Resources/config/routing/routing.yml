@@ -1,2 +1,2 @@
 menu:
-    resource: "@EvrinomaPackingListBundle/Resources/config/routes.yml"
+  resource: "@EvrinomaPackingListBundle/Resources/config/routes.yml"

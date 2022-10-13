@@ -171,7 +171,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      *     @OA\Parameter(
      *         description="Id Entity Packing List",
      *         in="query",
-     *         name="packing_list_id",
+     *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
      *         )
@@ -218,7 +218,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      *     @OA\Parameter(
      *         description="id Entity Depart",
      *         in="query",
-     *         name="id_depart",
+     *         name="depart[id]",
      *         @OA\Schema(
      *             type="string",
      *         )
@@ -226,7 +226,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      *     @OA\Parameter(
      *         description="Id Entity Packing List",
      *         in="query",
-     *         name="packing_list_id",
+     *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
      *         )
@@ -272,7 +272,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      *     @OA\Parameter(
      *         description="Id Entity Packing List",
      *         in="query",
-     *         name="packing_list_id",
+     *         name="packing_list[id]",
      *         @OA\Schema(
      *             type="string",
      *         )

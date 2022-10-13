@@ -1,0 +1,8 @@
+services:
+  Evrinoma\PackingListBundle\Fetch\Description\LogisticsGroup\PostDescription:
+    tags:
+      - { name: 'evrinoma.fetch.description' }
+
+  evrinoma.packing_list.logistics_group.fetch.post:
+    alias: Evrinoma\PackingListBundle\Fetch\Description\LogisticsGroup\PostDescription
+    public: true

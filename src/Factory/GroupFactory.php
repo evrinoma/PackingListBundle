@@ -33,7 +33,6 @@ class GroupFactory implements GroupFactoryInterface
      */
     public function create(GroupApiDtoInterface $dto): GroupInterface
     {
-        /* @var BaseGroup $packingList */
         return new self::$entityClass();
     }
 }

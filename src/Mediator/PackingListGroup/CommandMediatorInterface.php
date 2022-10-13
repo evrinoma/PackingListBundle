@@ -23,7 +23,7 @@ interface CommandMediatorInterface
 {
     /**
      * @param PackingListApiDtoInterface $dto
-     * @param PackingListGroupInterface       $entity
+     * @param PackingListGroupInterface  $entity
      *
      * @return PackingListGroupInterface
      *
@@ -33,7 +33,7 @@ interface CommandMediatorInterface
 
     /**
      * @param PackingListApiDtoInterface $dto
-     * @param PackingListGroupInterface       $entity
+     * @param PackingListGroupInterface  $entity
      *
      * @throws PackingListGroupCannotBeRemovedException
      */
@@ -41,7 +41,7 @@ interface CommandMediatorInterface
 
     /**
      * @param PackingListApiDtoInterface $dto
-     * @param PackingListGroupInterface       $entity
+     * @param PackingListGroupInterface  $entity
      *
      * @return PackingListGroupInterface
      *

@@ -19,6 +19,7 @@ interface AliasInterface
     public const PACKING_LIST = 'packing_list';
     public const LIST_ITEM = 'list_item';
     public const LOGISTICS = 'logistics';
+    public const LOGISTICS_GROUP = 'logistics_group';
     public const DEPART = 'depart';
     public const GROUP = 'group';
 }

@@ -86,6 +86,4 @@ abstract class AbstractPackingListGroup implements PackingListGroupInterface
 
         return $this;
     }
-
-
 }

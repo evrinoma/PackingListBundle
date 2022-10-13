@@ -15,7 +15,7 @@ namespace Evrinoma\PackingListBundle\PreValidator\Logistics;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
-use Evrinoma\PackingListBundle\Exception\ListItem\ListItemInvalidException;
+use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsInvalidException;
 use Evrinoma\UtilsBundle\PreValidator\AbstractPreValidator;
 
 class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInterface
@@ -45,7 +45,7 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
     {
         /** @var LogisticsApiDtoInterface $dto */
         if (!$dto->hasUserApiDto()) {
-            throw new ListItemInvalidException('The Dto has\'t User');
+            throw new LogisticsInvalidException('The Dto has\'t User');
         }
     }
 
@@ -53,7 +53,7 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
     {
         /** @var LogisticsApiDtoInterface $dto */
         if (!$dto->hasDepartApiDto()) {
-            throw new ListItemInvalidException('The Dto has\'t Depart');
+            throw new LogisticsInvalidException('The Dto has\'t Depart');
         }
     }
 
@@ -61,7 +61,7 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
     {
         /** @var LogisticsApiDtoInterface $dto */
         if (!$dto->hasPackingListApiDto()) {
-            throw new ListItemInvalidException('The Dto has\'t PackingList');
+            throw new LogisticsInvalidException('The Dto has\'t PackingList');
         }
     }
 }

@@ -17,12 +17,14 @@ use Evrinoma\PackingListBundle\Dto\DepartApiDto;
 use Evrinoma\PackingListBundle\Dto\GroupApiDto;
 use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
 use Evrinoma\PackingListBundle\Dto\LogisticsApiDto;
+use Evrinoma\PackingListBundle\Dto\LogisticsGroupApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListApiDto;
 use Evrinoma\PackingListBundle\Dto\PackingListGroupApiDto;
 use Evrinoma\PackingListBundle\Entity\Depart\BaseDepart;
 use Evrinoma\PackingListBundle\Entity\Group\BaseGroup;
 use Evrinoma\PackingListBundle\Entity\ListItem\BaseListItem;
 use Evrinoma\PackingListBundle\Entity\Logistics\BaseLogistics;
+use Evrinoma\PackingListBundle\Entity\LogisticsGroup\BaseLogisticsGroup;
 use Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList;
 use Evrinoma\PackingListBundle\Entity\PackingListGroup\BasePackingListGroup;
 use Evrinoma\PackingListBundle\EvrinomaPackingListBundle;
@@ -30,6 +32,7 @@ use Evrinoma\PackingListBundle\Factory\DepartFactory;
 use Evrinoma\PackingListBundle\Factory\GroupFactory;
 use Evrinoma\PackingListBundle\Factory\ListItemFactory;
 use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
+use Evrinoma\PackingListBundle\Factory\LogisticsGroupFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListGroupFactory;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
@@ -73,6 +76,11 @@ class EvrinomaPackingListExtension extends Extension
     public const ENTITY_FACTORY_LOGISTICS = LogisticsFactory::class;
     public const ENTITY_BASE_LOGISTICS = BaseLogistics::class;
     public const DTO_BASE_LOGISTICS = LogisticsApiDto::class;
+
+    public const ENTITY_FACTORY_LOGISTICS_GROUP = LogisticsGroupFactory::class;
+    public const ENTITY_BASE_LOGISTICS_GROUP = BaseLogisticsGroup::class;
+    public const DTO_BASE_LOGISTICS_GROUP = LogisticsGroupApiDto::class;
+
     public const HANDLER = BaseHandler::class;
 
     /**
@@ -144,6 +152,13 @@ class EvrinomaPackingListExtension extends Extension
             $definitionFactory->setArgument(0, $config['entity_logistics']);
         }
 
+        if (self::ENTITY_FACTORY_LOGISTICS_GROUP !== $config['factory_logistics_group']) {
+            $this->wireFactory($container, 'logistics_group', $config['factory_logistics_group'], $config['entity_logistics_group']);
+        } else {
+            $definitionFactory = $container->getDefinition('evrinoma.'.$this->getAlias().'.logistics_group.factory');
+            $definitionFactory->setArgument(0, $config['entity_logistics_group']);
+        }
+
         $registry = null;
 
         if (isset(self::$doctrineDrivers[$config['db_driver']]) && 'api' === $config['db_driver']) {
@@ -180,6 +195,7 @@ class EvrinomaPackingListExtension extends Extension
                     'entity_depart' => 'evrinoma.'.$this->getAlias().'.entity_depart',
                     'entity_group' => 'evrinoma.'.$this->getAlias().'.entity_group',
                     'entity_logistics' => 'evrinoma.'.$this->getAlias().'.entity_logistics',
+                    'entity_logistics_group' => 'evrinoma.'.$this->getAlias().'.entity_logistics_group',
                 ],
             ]
         );
@@ -191,6 +207,7 @@ class EvrinomaPackingListExtension extends Extension
             $this->wireRepository($container, $registry, 'depart', $config['entity_depart']);
             $this->wireRepository($container, $registry, 'group', $config['entity_group']);
             $this->wireRepository($container, $registry, 'logistics', $config['entity_logistics']);
+            $this->wireRepository($container, $registry, 'logistics_group', $config['entity_logistics_group']);
         }
 
         $this->wireController($container, 'packing_list', $config['dto_packing_list']);
@@ -199,6 +216,7 @@ class EvrinomaPackingListExtension extends Extension
         $this->wireController($container, 'depart', $config['dto_depart']);
         $this->wireController($container, 'group', $config['dto_group']);
         $this->wireController($container, 'logistics', $config['dto_logistics']);
+        $this->wireController($container, 'logistics_group', $config['dto_logistics_group']);
 
         $this->wireValidator($container, 'packing_list', $config['entity_packing_list']);
         $this->wireValidator($container, 'packing_list_group', $config['entity_packing_list_group']);
@@ -206,6 +224,7 @@ class EvrinomaPackingListExtension extends Extension
         $this->wireValidator($container, 'depart', $config['entity_depart']);
         $this->wireValidator($container, 'group', $config['entity_group']);
         $this->wireValidator($container, 'logistics', $config['entity_logistics']);
+        $this->wireValidator($container, 'logistics_group', $config['entity_logistics_group']);
 
         if ($config['constraints_packing_list']) {
             $loader->load('constraint/packing_list.yml');
@@ -229,6 +248,10 @@ class EvrinomaPackingListExtension extends Extension
 
         if ($config['constraints_packing_list_group']) {
             $loader->load('constraint/packing_list_group.yml');
+        }
+
+        if ($config['constraints_logistics_group']) {
+            $loader->load('constraint/logistics_group.yml');
         }
 
         if ($config['decorates']) {
@@ -272,6 +295,12 @@ class EvrinomaPackingListExtension extends Extension
                         case 'query_logistics':
                             $remap['query_logistics'] = 'evrinoma.'.$this->getAlias().'.decorates.logistics.query';
                             break;
+                        case 'command_logistics_group':
+                            $remap['command_logistics_group'] = 'evrinoma.'.$this->getAlias().'.decorates.logistics_group.command';
+                            break;
+                        case 'query_logistics_group':
+                            $remap['query_logistics_group'] = 'evrinoma.'.$this->getAlias().'.decorates.logistics_group.query';
+                            break;
                     }
                 }
             }
@@ -300,14 +329,24 @@ class EvrinomaPackingListExtension extends Extension
                         case 'pre_validator_depart':
                             $remap['pre_validator_depart'] = 'evrinoma.'.$this->getAlias().'.services.depart.pre.validator';
                             break;
+                        case 'pre_validator_group':
+                            $remap['pre_validator_group'] = 'evrinoma.'.$this->getAlias().'.services.group.pre.validator';
+                            break;
                         case 'pre_validator_logistics':
                             $remap['pre_validator_logistics'] = 'evrinoma.'.$this->getAlias().'.services.logistics.pre.validator';
                             break;
+                        case 'pre_validator_logistics_group':
+                            $remap['pre_validator_logistics_group'] = 'evrinoma.'.$this->getAlias().'.services.logistics_group.pre.validator';
+                            break;
+
                         case 'handler_packing_list':
                             $remap['handler_packing_list'] = 'evrinoma.'.$this->getAlias().'.services.packing_list.handler';
                             break;
                         case 'handler_list_item':
                             $remap['handler_list_item'] = 'evrinoma.'.$this->getAlias().'.services.list_item.handler';
+                            break;
+                        case 'handler_packing_list_group':
+                            $remap['handler_packing_list_group'] = 'evrinoma.'.$this->getAlias().'.services.packing_list_group.pre.handler';
                             break;
                         case 'handler_depart':
                             $remap['handler_depart'] = 'evrinoma.'.$this->getAlias().'.services.depart.handler';
@@ -317,6 +356,9 @@ class EvrinomaPackingListExtension extends Extension
                             break;
                         case 'handler_logistics':
                             $remap['handler_logistics'] = 'evrinoma.'.$this->getAlias().'.services.logistics.handler';
+                            break;
+                        case 'handler_logistics_group':
+                            $remap['handler_logistics_group'] = 'evrinoma.'.$this->getAlias().'.services.logistics_group.handler';
                             break;
                     }
                 }

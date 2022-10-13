@@ -17,25 +17,13 @@ use Evrinoma\DtoBundle\Annotation\Dto;
 use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CommentTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ConsigneeTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ContractDescriptionTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ContractorNameTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ContractTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\CurrentDeptTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DateTTNTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\DimensionsTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FormFactorTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LabelTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LinkFileTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\GroupTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ProjectNameTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\SubContractTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\WeightTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class PackingListGroupApiDto extends AbstractDto implements PackingListGroupApiDtoInterface
 {
+    use GroupTrait;
     use IdTrait;
     use PackingListTrait;
 
@@ -45,6 +33,13 @@ class PackingListGroupApiDto extends AbstractDto implements PackingListGroupApiD
      * @var PackingListApiDtoInterface|null
      */
     protected ?PackingListApiDtoInterface $packingListApiDto = null;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\GroupApiDto", generator="genRequestGroupApiDto")
+     *
+     * @var GroupApiDtoInterface|null
+     */
+    protected ?GroupApiDtoInterface $groupApiDto = null;
 
     public function toDto(Request $request): DtoInterface
     {

@@ -17,8 +17,8 @@ use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\GroupPass as PropertyGroupPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\ListItemPass as PropertyListItemPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\LogisticsPass as PropertyLogisticsPass;
-use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\PackingListPass as PropertyPackingListPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\PackingListGroupPass as PropertyPackingListGroupPass;
+use Evrinoma\PackingListBundle\DependencyInjection\Compiler\Constraint\Property\PackingListPass as PropertyPackingListPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\DecoratorPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\MapEntityPass;
 use Evrinoma\PackingListBundle\DependencyInjection\Compiler\ServicePass;

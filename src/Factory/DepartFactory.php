@@ -33,7 +33,6 @@ class DepartFactory implements DepartFactoryInterface
      */
     public function create(DepartApiDtoInterface $dto): DepartInterface
     {
-        /* @var BaseDepart $packingList */
         return new self::$entityClass();
     }
 }

@@ -5,3 +5,4 @@ imports:
   - { resource: constraint/logistics.yml }
   - { resource: constraint/packing_list_group.yml }
   - { resource: constraint/group.yml }
+  - { resource: constraint/logistics_group.yml }

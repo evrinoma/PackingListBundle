@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\Logistics;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\PackingListBundle\Model\Common\UserTrait;
 use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 
@@ -22,6 +23,8 @@ use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
  */
 abstract class AbstractLogistics implements LogisticsInterface
 {
+    use UserTrait;
+
     /**
      * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface")
      */
@@ -31,141 +34,6 @@ abstract class AbstractLogistics implements LogisticsInterface
      * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\DepartInterface")
      */
     protected DepartInterface $depart;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="user", type="string", length=255, nullable=true)
-     */
-    protected string $user = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=true)
-     */
-    protected string $email = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="surname", type="string", length=255, nullable=true)
-     */
-    protected string $surname = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
-     */
-    protected string $name = '';
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="patronymic", type="string", length=255, nullable=true)
-     */
-    protected string $patronymic = '';
-
-    /**
-     * @return string
-     */
-    public function getUser(): string
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param string $user
-     *
-     * @return LogisticsInterface
-     */
-    public function setUser(string $user): LogisticsInterface
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     *
-     * @return LogisticsInterface
-     */
-    public function setEmail(string $email): LogisticsInterface
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getSurname(): string
-    {
-        return $this->surname;
-    }
-
-    /**
-     * @param string $surname
-     *
-     * @return LogisticsInterface
-     */
-    public function setSurname(string $surname): LogisticsInterface
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return LogisticsInterface
-     */
-    public function setName(string $name): LogisticsInterface
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPatronymic(): string
-    {
-        return $this->patronymic;
-    }
-
-    /**
-     * @param string $patronymic
-     *
-     * @return LogisticsInterface
-     */
-    public function setPatronymic(string $patronymic): LogisticsInterface
-    {
-        $this->patronymic = $patronymic;
-
-        return $this;
-    }
 
     /**
      * @return PackingListInterface

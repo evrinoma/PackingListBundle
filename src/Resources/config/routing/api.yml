@@ -21,3 +21,7 @@ packing_list_packing_list_group_api:
 packing_list_group_api:
   resource: "@EvrinomaPackingListBundle/Controller/GroupApiController.php"
   type: annotation
+
+packing_logistics_group_api:
+  resource: "@EvrinomaPackingListBundle/Controller/LogisticsGroupApiController.php"
+  type: annotation

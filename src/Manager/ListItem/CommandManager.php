@@ -28,15 +28,15 @@ use Evrinoma\UtilsBundle\Validator\ValidatorInterface;
 final class CommandManager implements CommandManagerInterface
 {
     private ListItemRepositoryInterface $repository;
-    private ValidatorInterface            $validator;
-    private ListItemFactoryInterface           $factory;
-    private CommandMediatorInterface      $mediator;
+    private ValidatorInterface $validator;
+    private ListItemFactoryInterface $factory;
+    private CommandMediatorInterface $mediator;
 
     /**
-     * @param ValidatorInterface                 $validator
+     * @param ValidatorInterface          $validator
      * @param ListItemRepositoryInterface $repository
-     * @param ListItemFactoryInterface           $factory
-     * @param CommandMediatorInterface           $mediator
+     * @param ListItemFactoryInterface    $factory
+     * @param CommandMediatorInterface    $mediator
      */
     public function __construct(ValidatorInterface $validator, ListItemRepositoryInterface $repository, ListItemFactoryInterface $factory, CommandMediatorInterface $mediator)
     {

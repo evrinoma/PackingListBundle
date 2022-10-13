@@ -1,5 +1,5 @@
 services:
   evrinoma.packing_list.object_manager:
-    class:  Doctrine\Persistence\ObjectManager
+    class: Doctrine\Persistence\ObjectManager
     public: false
-    arguments: ['%evrinoma.packing_list.model_manager_name%']
+    arguments: [ '%evrinoma.packing_list.model_manager_name%' ]

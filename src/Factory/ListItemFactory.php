@@ -33,7 +33,6 @@ class ListItemFactory implements ListItemFactoryInterface
      */
     public function create(ListItemApiDtoInterface $dto): ListItemInterface
     {
-        /* @var BaseListItem $packingList */
         return new self::$entityClass();
     }
 }

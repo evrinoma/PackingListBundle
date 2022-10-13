@@ -22,6 +22,7 @@ use Evrinoma\UtilsBundle\Entity\IdTrait;
 abstract class AbstractPackingList implements PackingListInterface
 {
     use IdTrait;
+
     /**
      * @var string
      *

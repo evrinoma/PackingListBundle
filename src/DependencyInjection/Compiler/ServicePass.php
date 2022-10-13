@@ -48,6 +48,14 @@ class ServicePass extends AbstractRecursivePass
             $facade->setArgument(3, $preValidator);
         }
 
+        $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics_group.pre.validator');
+        if ($servicePreValidator) {
+            $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics_group.pre.validator');
+            $preValidator = $container->getDefinition($servicePreValidator);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics_group.facade');
+            $facade->setArgument(3, $preValidator);
+        }
+
         $servicePreValidator = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.pre.validator');
         if ($servicePreValidator) {
             $servicePreValidator = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.packing_list.pre.validator');
@@ -117,6 +125,14 @@ class ServicePass extends AbstractRecursivePass
             $serviceHandler = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics.handler');
             $handler = $container->getDefinition($serviceHandler);
             $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics.facade');
+            $facade->setArgument(4, $handler);
+        }
+
+        $serviceHandler = $container->hasParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics_group.handler');
+        if ($serviceHandler) {
+            $serviceHandler = $container->getParameter('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.services.logistics_group.handler');
+            $handler = $container->getDefinition($serviceHandler);
+            $facade = $container->getDefinition('evrinoma.'.EvrinomaPackingListBundle::BUNDLE.'.logistics_group.facade');
             $facade->setArgument(4, $handler);
         }
     }

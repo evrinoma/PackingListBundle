@@ -15,7 +15,7 @@ namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable;
 
 trait FinalTrait
 {
-    private ?bool  $final = null;
+    private ?bool $final = null;
 
     /**
      * @return bool

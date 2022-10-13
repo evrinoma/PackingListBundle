@@ -33,7 +33,6 @@ class PackingListFactory implements PackingListFactoryInterface
      */
     public function create(PackingListApiDtoInterface $dto): PackingListInterface
     {
-        /* @var BasePackingList $packingList */
         return new self::$entityClass();
     }
 }
