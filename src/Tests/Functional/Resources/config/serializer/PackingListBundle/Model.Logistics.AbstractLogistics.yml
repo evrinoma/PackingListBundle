@@ -2,13 +2,13 @@ Evrinoma\PackingListBundle\Model\Logistics\AbstractLogistics:
   exclusion_policy: ALL
   properties:
     packingListId:
-      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      type: Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList
       groups: [
           API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
     depart:
-      type: Evrinoma\PackingListBundle\Model\Depart\AbstractDepart
+      type: Evrinoma\PackingListBundle\Entity\Depart\BaseDepart
       groups: [
           API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]

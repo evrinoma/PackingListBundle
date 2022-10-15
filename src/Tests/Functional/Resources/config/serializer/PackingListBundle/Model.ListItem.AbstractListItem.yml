@@ -4,51 +4,61 @@ Evrinoma\PackingListBundle\Model\ListItem\AbstractListItem:
     id:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     name:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     stateStandard:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     quantity:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     measure:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     comment:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     subContract:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     number:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     stamp:
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     packingList:
-      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      type: Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList
       groups: [
           API_PUT_LIST_ITEM, API_POST_LIST_ITEM, API_GET_LIST_ITEM,
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true

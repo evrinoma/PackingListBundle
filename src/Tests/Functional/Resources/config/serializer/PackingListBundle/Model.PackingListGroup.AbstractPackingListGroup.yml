@@ -7,13 +7,19 @@ Evrinoma\PackingListBundle\Model\PackingListGroup\AbstractPackingListGroup:
       ]
       expose: true
     packingList:
-      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      type: Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList
       groups: [
           API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]
       expose: true
     packingListGroup:
-      type: Evrinoma\PackingListBundle\Model\Group\AbstractGroup
+      type: Evrinoma\PackingListBundle\Entity\Group\BaseGroup
+      groups: [
+          API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
+      ]
+      expose: true
+    packingListItems:
+      type: ArrayCollection<Evrinoma\PackingListBundle\Entity\ListItem\BaseListItem>
       groups: [
           API_PUT_PACKING_LIST_GROUP, API_POST_PACKING_LIST_GROUP, API_GET_PACKING_LIST_GROUP,
       ]

@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\PackingListGroup;
 
+use Doctrine\Common\Collections\Collection;
 use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
+use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 
@@ -49,4 +51,16 @@ interface PackingListGroupInterface extends IdInterface
      * @return PackingListGroupInterface
      */
     public function setPackingListGroup(GroupInterface $packingListGroup): PackingListGroupInterface;
+
+    /**
+     * @return Collection<ListItemInterface>
+     */
+    public function getPackingListItems(): Collection;
+
+    /**
+     * @param Collection $packingListItems
+     *
+     * @return PackingListGroupInterface
+     */
+    public function setPackingListItems(Collection $packingListItems): PackingListGroupInterface;
 }

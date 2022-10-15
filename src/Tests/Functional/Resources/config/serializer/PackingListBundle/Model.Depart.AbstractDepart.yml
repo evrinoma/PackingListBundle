@@ -44,7 +44,7 @@ Evrinoma\PackingListBundle\Model\Depart\AbstractDepart:
       ]
       expose: true
     packingList:
-      type: Evrinoma\PackingListBundle\Model\PackingList\AbstractPackingList
+      type: Evrinoma\PackingListBundle\Entity\PackingList\BasePackingList
       groups: [
           API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
           API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
