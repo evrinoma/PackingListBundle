@@ -51,3 +51,11 @@ Evrinoma\PackingListBundle\Model\Depart\AbstractDepart:
           API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
       ]
       expose: true
+    group:
+      type: Evrinoma\PackingListBundle\Entity\Group\BaseGroup
+      groups: [
+          API_PUT_DEPART, API_POST_DEPART, API_GET_DEPART,
+          API_PUT_LOGISTICS_GROUP, API_POST_LOGISTICS_GROUP, API_GET_LOGISTICS_GROUP,
+          API_PUT_LOGISTICS, API_POST_LOGISTICS, API_GET_LOGISTICS,
+      ]
+      expose: true
