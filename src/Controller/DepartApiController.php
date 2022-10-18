@@ -158,7 +158,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="3",
+     *             default="64",
      *         )
      *     )
      * )
@@ -200,7 +200,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="Id Entity Packing List",
+     *         description="Packing List Entity Id ",
      *         in="query",
      *         name="packing_list[id]",
      *         @OA\Schema(
@@ -208,6 +208,24 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *             default="10",
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         description="Warehouse point name",
+     *         in="query",
+     *         name="point",
+     *         @OA\Schema(
+     *             type="string",
+     *             default="ЧГРК_№3",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         description="Warehouse type",
+     *         in="query",
+     *         name="type",
+     *         @OA\Schema(
+     *             type="string",
+     *             default="PACKING_LIST_GROUP_INFO",
+     *         )
+     *     )
      * )
      * @OA\Response(response=200, description="Return depart")
      *
@@ -253,7 +271,7 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         required=true,
      *         @OA\Schema(
      *             type="string",
-     *             default="9",
+     *             default="64",
      *         )
      *     )
      * )

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Model\Depart;
 
+use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdInterface;
 use Evrinoma\UtilsBundle\Entity\NameInterface;
@@ -73,4 +74,16 @@ interface DepartInterface extends IdInterface, NameInterface
      * @return DepartInterface
      */
     public function setPackingList(PackingListInterface $packingList): DepartInterface;
+
+    /**
+     * @return GroupInterface
+     */
+    public function getGroup(): GroupInterface;
+
+    /**
+     * @param GroupInterface $group
+     *
+     * @return DepartInterface
+     */
+    public function setGroup(GroupInterface $group): DepartInterface;
 }

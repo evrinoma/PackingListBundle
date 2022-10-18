@@ -169,7 +169,7 @@ final class LogisticsGroupApiController extends AbstractWrappedApiController imp
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="Id Entity Packing List group",
+     *         description="Packing List Group Entity Id ",
      *         in="query",
      *         name="group[id]",
      *         @OA\Schema(
@@ -224,7 +224,7 @@ final class LogisticsGroupApiController extends AbstractWrappedApiController imp
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="Id Entity Packing List group",
+     *         description="Packing List Group Entity Id ",
      *         in="query",
      *         name="group[id]",
      *         @OA\Schema(
@@ -270,7 +270,7 @@ final class LogisticsGroupApiController extends AbstractWrappedApiController imp
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="Id Entity Packing List group",
+     *         description="Packing List Group Entity Id ",
      *         in="query",
      *         name="group[id]",
      *         @OA\Schema(

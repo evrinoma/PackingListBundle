@@ -15,11 +15,12 @@ namespace Evrinoma\PackingListBundle\Dto\Preserve;
 
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\NameInterface;
+use Evrinoma\DtoCommon\ValueObject\Mutable\TypeInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\AddressInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FinalInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListInterface;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PointInterface;
 
-interface DepartApiDtoInterface extends IdInterface, NameInterface, AddressInterface, FinalInterface, PackingListInterface, PointInterface
+interface DepartApiDtoInterface extends IdInterface, NameInterface, AddressInterface, FinalInterface, PackingListInterface, PointInterface, TypeInterface
 {
 }

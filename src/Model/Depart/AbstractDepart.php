@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Model\Depart;
 
 use Doctrine\ORM\Mapping as ORM;
+use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
 use Evrinoma\UtilsBundle\Entity\IdTrait;
 use Evrinoma\UtilsBundle\Entity\NameTrait;
@@ -30,6 +31,12 @@ abstract class AbstractDepart implements DepartInterface
      * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface")
      */
     protected PackingListInterface $packingList;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Evrinoma\PackingListBundle\Model\Group\GroupInterface")
+     * @ORM\JoinColumn(name="packingListGroupInfo")
+     */
+    protected GroupInterface $group;
 
     /**
      * @var string
@@ -140,6 +147,26 @@ abstract class AbstractDepart implements DepartInterface
     public function setFinal(bool $final): DepartInterface
     {
         $this->final = $final;
+
+        return $this;
+    }
+
+    /**
+     * @return GroupInterface
+     */
+    public function getGroup(): GroupInterface
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param GroupInterface $group
+     *
+     * @return DepartInterface
+     */
+    public function setGroup(GroupInterface $group): DepartInterface
+    {
+        $this->group = $group;
 
         return $this;
     }

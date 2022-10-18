@@ -200,7 +200,7 @@ final class PackingListGroupApiController extends AbstractWrappedApiController i
      *         )
      *     ),
      *     @OA\Parameter(
-     *         description="Id Entity Packing List",
+     *         description="Packing List Entity Id ",
      *         in="query",
      *         name="packing_list[id]",
      *         @OA\Schema(

@@ -26,7 +26,20 @@ class CriteriaDescription extends AbstractApiDescription
     protected function getOptions($entity): array
     {
         /* @var DepartApiDtoInterface $entity */
-        return ($entity->hasPackingListApiDto()) ? ['packingListId' => $entity->getPackingListApiDto()->getId()] : [];
+        $params = [];
+        if ($entity->hasPackingListApiDto()) {
+            $params['packingListId'] = $entity->getPackingListApiDto()->getId();
+        }
+
+        if ($entity->hasPoint()) {
+            $params['departPoint'] = $entity->getPoint();
+        }
+
+        if ($entity->hasType()) {
+            $params['departType'] = $entity->getType();
+        }
+
+        return $params;
     }
 
     /**

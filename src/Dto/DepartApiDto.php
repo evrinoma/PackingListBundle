@@ -18,6 +18,7 @@ use Evrinoma\DtoBundle\Dto\AbstractDto;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\DtoCommon\ValueObject\Mutable\IdTrait;
 use Evrinoma\DtoCommon\ValueObject\Mutable\NameTrait;
+use Evrinoma\DtoCommon\ValueObject\Mutable\TypeTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\AddressTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FinalTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListTrait;
@@ -32,6 +33,7 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
     use NameTrait;
     use PackingListTrait;
     use PointTrait;
+    use TypeTrait;
 
     /**
      * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
@@ -50,6 +52,7 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
             $address = $request->get(DepartApiDtoInterface::ADDRESS);
             $final = $request->get(DepartApiDtoInterface::FINAL);
             $name = $request->get(DepartApiDtoInterface::NAME);
+            $type = $request->get(DepartApiDtoInterface::TYPE);
 
             if ($address) {
                 $this->setAddress($address);
@@ -73,6 +76,10 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 
             if ($id) {
                 $this->setId($id);
+            }
+
+            if ($type) {
+                $this->setType($type);
             }
         }
 

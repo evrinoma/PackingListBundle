@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CriteriaDescription extends AbstractApiDescription
 {
-    public const NAME = 'api_packing_list_depart_criteria';
+    public const NAME = 'api_packing_list_group_criteria';
     protected string $method = Request::METHOD_GET;
 
     protected function getOptions($entity): array
