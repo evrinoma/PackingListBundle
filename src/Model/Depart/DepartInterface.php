@@ -86,4 +86,16 @@ interface DepartInterface extends IdInterface, NameInterface
      * @return DepartInterface
      */
     public function setGroup(GroupInterface $group): DepartInterface;
+
+    /**
+     * @return string
+     */
+    public function getWarehouse(): string;
+
+    /**
+     * @param string $warehouse
+     *
+     * @return DepartInterface
+     */
+    public function setWarehouse(string $warehouse): DepartInterface;
 }

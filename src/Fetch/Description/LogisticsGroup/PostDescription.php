@@ -28,7 +28,7 @@ class PostDescription extends AbstractApiDescription
         /* @var LogisticsGroupInterface $entity */
         return [
             'groupId' => $entity->getGroup()->getId(),
-            'departId' => $entity->getDepart()->getId(),
+            'departId' => $entity->getDepart()->getWarehouse(),
             'userId' => $entity->getUser(),
             'email' => $entity->getEmail(),
             'surname' => $entity->getSurname(),

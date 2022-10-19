@@ -21,19 +21,30 @@ use Evrinoma\DtoCommon\ValueObject\Mutable\NameTrait;
 use Evrinoma\DtoCommon\ValueObject\Mutable\TypeTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\AddressTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FinalTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\GroupTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PackingListTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\PointTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\WarehouseTrait;
 use Symfony\Component\HttpFoundation\Request;
 
 class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 {
     use AddressTrait;
     use FinalTrait;
+    use GroupTrait;
     use IdTrait;
     use NameTrait;
     use PackingListTrait;
     use PointTrait;
     use TypeTrait;
+    use WarehouseTrait;
+
+    /**
+     * @Dto(class="Evrinoma\PackingListBundle\Dto\GroupApiDto", generator="genRequestGroupApiDto")
+     *
+     * @var GroupApiDtoInterface|null
+     */
+    protected ?GroupApiDtoInterface $groupApiDto = null;
 
     /**
      * @Dto(class="Evrinoma\PackingListBundle\Dto\PackingListApiDto", generator="genRequestPackingListApiDto")
@@ -48,6 +59,7 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 
         if ($class === $this->getClass()) {
             $id = $request->get(DepartApiDtoInterface::ID);
+            $warehouse = $request->get(DepartApiDtoInterface::WAREHOUSE);
             $point = $request->get(DepartApiDtoInterface::POINT);
             $address = $request->get(DepartApiDtoInterface::ADDRESS);
             $final = $request->get(DepartApiDtoInterface::FINAL);
@@ -80,6 +92,10 @@ class DepartApiDto extends AbstractDto implements DepartApiDtoInterface
 
             if ($type) {
                 $this->setType($type);
+            }
+
+            if ($warehouse) {
+                $this->setWarehouse($warehouse);
             }
         }
 

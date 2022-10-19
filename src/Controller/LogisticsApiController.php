@@ -71,7 +71,7 @@ final class LogisticsApiController extends AbstractWrappedApiController implemen
      *                         "id": "1004"
      *                     },
      *                     "depart": {
-     *                         "id": "9"
+     *                         "warehouse": "9"
      *                     },
      *                     "user": {
      *                         "id": "9",

@@ -41,6 +41,13 @@ abstract class AbstractDepart implements DepartInterface
     /**
      * @var string
      *
+     * @ORM\Column(name="warehouse", type="string", length=255, nullable=true)
+     */
+    protected string $warehouse = '';
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="point", type="string", length=255, nullable=true)
      */
     protected string $point = '';
@@ -58,6 +65,26 @@ abstract class AbstractDepart implements DepartInterface
      * @ORM\Column(name="final", type="boolean")
      */
     protected bool $final = false;
+
+    /**
+     * @return string
+     */
+    public function getWarehouse(): string
+    {
+        return $this->warehouse;
+    }
+
+    /**
+     * @param string $warehouse
+     *
+     * @return DepartInterface
+     */
+    public function setWarehouse(string $warehouse): DepartInterface
+    {
+        $this->warehouse = $warehouse;
+
+        return $this;
+    }
 
     /**
      * @return PackingListInterface

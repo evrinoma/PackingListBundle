@@ -209,6 +209,15 @@ final class DepartApiController extends AbstractWrappedApiController implements 
      *         )
      *     ),
      *     @OA\Parameter(
+     *         description="Packing List Group Entity Id ",
+     *         in="query",
+     *         name="group[id]",
+     *         @OA\Schema(
+     *             type="string",
+     *             default="6",
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         description="Warehouse point name",
      *         in="query",
      *         name="point",

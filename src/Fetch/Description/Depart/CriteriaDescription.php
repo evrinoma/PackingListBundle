@@ -31,6 +31,10 @@ class CriteriaDescription extends AbstractApiDescription
             $params['packingListId'] = $entity->getPackingListApiDto()->getId();
         }
 
+        if ($entity->hasGroupApiDto()) {
+            $params['groupId'] = $entity->getGroupApiDto()->getId();
+        }
+
         if ($entity->hasPoint()) {
             $params['departPoint'] = $entity->getPoint();
         }
