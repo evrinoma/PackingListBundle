@@ -27,7 +27,10 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
             ->setUser($dto->getUserApiDto()->idToString())
             ->setEmail($dto->getUserApiDto()->getEmail())
             ->setSurname($dto->getUserApiDto()->getSurname())
-            ->setName($dto->getUserApiDto()->getName());
+            ->setName($dto->getUserApiDto()->getName())
+            ->setPatronymic($dto->getUserApiDto()->getPatronymic());
+
+        $entity->getDepart()->setWarehouse($dto->getDepartApiDto()->getWarehouse());
 
         return $entity;
     }
@@ -43,7 +46,10 @@ class CommandMediator extends AbstractCommandMediator implements CommandMediator
             ->setUser($dto->getUserApiDto()->idToString())
             ->setEmail($dto->getUserApiDto()->getEmail())
             ->setSurname($dto->getUserApiDto()->getSurname())
-            ->setName($dto->getUserApiDto()->getName());
+            ->setName($dto->getUserApiDto()->getName())
+            ->setPatronymic($dto->getUserApiDto()->getPatronymic());
+
+        $entity->getDepart()->setWarehouse($dto->getDepartApiDto()->getWarehouse());
 
         return $entity;
     }

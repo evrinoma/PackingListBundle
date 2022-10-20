@@ -52,7 +52,7 @@ class DtoPreValidator extends AbstractPreValidator implements DtoPreValidatorInt
     private function checkDepart(DtoInterface $dto): void
     {
         /** @var LogisticsApiDtoInterface $dto */
-        if (!$dto->hasDepartApiDto()) {
+        if (!$dto->hasDepartApiDto() || !$dto->getDepartApiDto()->hasId() || !$dto->getDepartApiDto()->hasWarehouse()) {
             throw new LogisticsInvalidException('The Dto has\'t Depart');
         }
     }
