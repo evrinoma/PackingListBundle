@@ -1,4 +1,4 @@
-Evrinoma\PackingListBundle\Model\Logistics\AbstractLogistics:
+Evrinoma\PackingListBundle\Model\LogisticsGroup\AbstractLogisticsGroup:
   exclusion_policy: ALL
   properties:
     packingListGroup:
