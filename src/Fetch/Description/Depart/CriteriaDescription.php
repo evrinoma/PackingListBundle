@@ -40,7 +40,7 @@ class CriteriaDescription extends AbstractApiDescription
         }
 
         if ($entity->hasType()) {
-            $params['departType'] = $entity->getType();
+            $params['type'] = $entity->getType();
         }
 
         return $params;
