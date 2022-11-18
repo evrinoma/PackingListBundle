@@ -28,8 +28,8 @@ services:
     public: true
     arguments:
 
-  evrinoma.packing_list.packing_list_group.repository:
-    class: Evrinoma\PackingListBundle\Repository\PackingListGroup\PackingListGroupRepository
+  evrinoma.packing_list.packing_list_group.api.repository:
+    class: Evrinoma\PackingListBundle\Repository\Api\PackingListGroup\PackingListGroupRepository
     public: true
     arguments:
 

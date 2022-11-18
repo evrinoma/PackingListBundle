@@ -21,24 +21,10 @@ use Evrinoma\PackingListBundle\Exception\Group\GroupNotFoundException;
 use Evrinoma\PackingListBundle\Exception\Group\GroupProxyException;
 use Evrinoma\PackingListBundle\Mediator\Group\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
-use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
-use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class GroupRepository extends GroupRepositoryWrapper implements GroupRepositoryInterface, RepositoryWrapperInterface
+trait GroupRepositoryTrait
 {
     private QueryMediatorInterface $mediator;
-
-    /**
-     * @param ManagerRegistryInterface $managerRegistry
-     * @param string                   $entityClass
-     * @param QueryMediatorInterface   $mediator
-     */
-    public function __construct(ManagerRegistryInterface $managerRegistry, string $entityClass, QueryMediatorInterface $mediator)
-    {
-        parent::__construct($managerRegistry);
-        $this->mediator = $mediator;
-        $this->entityClass = $entityClass;
-    }
 
     /**
      * @param GroupInterface $group

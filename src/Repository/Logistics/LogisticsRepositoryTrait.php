@@ -21,24 +21,10 @@ use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsProxyException;
 use Evrinoma\PackingListBundle\Mediator\Logistics\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Logistics\LogisticsInterface;
-use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
-use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class LogisticsRepository extends LogisticsRepositoryWrapper implements LogisticsRepositoryInterface, RepositoryWrapperInterface
+trait LogisticsRepositoryTrait
 {
     private QueryMediatorInterface $mediator;
-
-    /**
-     * @param ManagerRegistryInterface $managerRegistry
-     * @param string                   $entityClass
-     * @param QueryMediatorInterface   $mediator
-     */
-    public function __construct(ManagerRegistryInterface $managerRegistry, string $entityClass, QueryMediatorInterface $mediator)
-    {
-        parent::__construct($managerRegistry);
-        $this->mediator = $mediator;
-        $this->entityClass = $entityClass;
-    }
 
     /**
      * @param LogisticsInterface $logistics

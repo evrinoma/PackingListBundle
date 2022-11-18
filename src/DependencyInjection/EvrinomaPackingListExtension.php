@@ -201,13 +201,13 @@ class EvrinomaPackingListExtension extends Extension
         );
 
         if ($registry instanceof Reference && 'api' === $config['db_driver']) {
-            $this->wireRepository($container, $registry, 'packing_list', $config['entity_packing_list']);
-            $this->wireRepository($container, $registry, 'packing_list_group', $config['entity_packing_list_group']);
-            $this->wireRepository($container, $registry, 'list_item', $config['entity_list_item']);
-            $this->wireRepository($container, $registry, 'depart', $config['entity_depart']);
-            $this->wireRepository($container, $registry, 'group', $config['entity_group']);
-            $this->wireRepository($container, $registry, 'logistics', $config['entity_logistics']);
-            $this->wireRepository($container, $registry, 'logistics_group', $config['entity_logistics_group']);
+            $this->wireRepository($container, $registry, 'packing_list', $config['entity_packing_list'], $config['db_driver']);
+            $this->wireRepository($container, $registry, 'packing_list_group', $config['entity_packing_list_group'], $config['db_driver']);
+            $this->wireRepository($container, $registry, 'list_item', $config['entity_list_item'], $config['db_driver']);
+            $this->wireRepository($container, $registry, 'depart', $config['entity_depart'], $config['db_driver']);
+            $this->wireRepository($container, $registry, 'group', $config['entity_group'], $config['db_driver']);
+            $this->wireRepository($container, $registry, 'logistics', $config['entity_logistics'], $config['db_driver']);
+            $this->wireRepository($container, $registry, 'logistics_group', $config['entity_logistics_group'], $config['db_driver']);
         }
 
         $this->wireController($container, 'packing_list', $config['dto_packing_list']);
@@ -379,9 +379,9 @@ class EvrinomaPackingListExtension extends Extension
         $definitionFetch->setArgument(1, $route);
     }
 
-    private function wireRepository(ContainerBuilder $container, Reference $registry, string $name, string $class): void
+    private function wireRepository(ContainerBuilder $container, Reference $registry, string $name, string $class, string $driver): void
     {
-        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.repository');
+        $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.'.$driver.'.repository');
         $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
         $definitionRepository->setArgument(0, $registry);
         $definitionRepository->setArgument(1, $class);
@@ -389,6 +389,7 @@ class EvrinomaPackingListExtension extends Extension
         $array = $definitionRepository->getArguments();
         ksort($array);
         $definitionRepository->setArguments($array);
+        $container->addAliases(['evrinoma.'.$this->getAlias().'.'.$name.'.repository' => 'evrinoma.'.$this->getAlias().'.'.$name.'.'.$driver.'.repository']);
     }
 
     private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass): void

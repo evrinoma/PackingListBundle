@@ -21,24 +21,10 @@ use Evrinoma\PackingListBundle\Exception\PackingListGroup\PackingListGroupNotFou
 use Evrinoma\PackingListBundle\Exception\PackingListGroup\PackingListGroupProxyException;
 use Evrinoma\PackingListBundle\Mediator\PackingListGroup\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\PackingListGroup\PackingListGroupInterface;
-use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
-use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class PackingListGroupRepository extends PackingListGroupRepositoryWrapper implements PackingListGroupRepositoryInterface, RepositoryWrapperInterface
+trait PackingListGroupRepositoryTrait
 {
     private QueryMediatorInterface $mediator;
-
-    /**
-     * @param ManagerRegistryInterface $managerRegistry
-     * @param string                   $entityClass
-     * @param QueryMediatorInterface   $mediator
-     */
-    public function __construct(ManagerRegistryInterface $managerRegistry, string $entityClass, QueryMediatorInterface $mediator)
-    {
-        parent::__construct($managerRegistry);
-        $this->mediator = $mediator;
-        $this->entityClass = $entityClass;
-    }
 
     /**
      * @param PackingListGroupInterface $packingList

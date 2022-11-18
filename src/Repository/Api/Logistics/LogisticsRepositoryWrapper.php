@@ -11,27 +11,22 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\Group;
+namespace Evrinoma\PackingListBundle\Repository\Api\Logistics;
 
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
-use Evrinoma\PackingListBundle\Fetch\Description\Group\CriteriaDescription;
-use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
+use Evrinoma\PackingListBundle\Fetch\Description\Logistics\PostDescription;
+use Evrinoma\PackingListBundle\Fetch\Handler\BasePostHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
-abstract class GroupRepositoryWrapper extends RepositoryWrapper
+abstract class LogisticsRepositoryWrapper extends RepositoryWrapper
 {
-    protected function criteriaWrapped($entity): array
+    public function persistWrapped($entity): void
     {
         /** @var FetchManagerInterface $manager */
         $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseGetHandler::NAME, CriteriaDescription::NAME);
-        $rows = $handler->setEntity($entity)->run()->getRaw();
+        $handler = $manager->getHandler(BasePostHandler::NAME, PostDescription::NAME);
 
-        return $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
-    }
-
-    public function persistWrapped($entity): void
-    {
+        $handler->setEntity($entity)->run();
     }
 
     public function removeWrapped($entity): void
@@ -41,5 +36,10 @@ abstract class GroupRepositoryWrapper extends RepositoryWrapper
     public function findWrapped($id, $lockMode = null, $lockVersion = null)
     {
         return null;
+    }
+
+    protected function criteriaWrapped($entity): array
+    {
+        return [];
     }
 }

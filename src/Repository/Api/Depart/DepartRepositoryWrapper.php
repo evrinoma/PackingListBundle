@@ -11,16 +11,26 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\PackingList;
+namespace Evrinoma\PackingListBundle\Repository\Api\Depart;
 
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
-use Evrinoma\PackingListBundle\Fetch\Description\PackingList\CriteriaDescription;
-use Evrinoma\PackingListBundle\Fetch\Description\PackingList\GetDescription;
+use Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription;
+use Evrinoma\PackingListBundle\Fetch\Description\Depart\GetDescription;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
-abstract class PackingListRepositoryWrapper extends RepositoryWrapper
+abstract class DepartRepositoryWrapper extends RepositoryWrapper
 {
+    protected function criteriaWrapped($entity): array
+    {
+        /** @var FetchManagerInterface $manager */
+        $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
+        $handler = $manager->getHandler(BaseGetHandler::NAME, CriteriaDescription::NAME);
+        $rows = $handler->setEntity($entity)->run()->getRaw();
+
+        return $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
+    }
+
     public function persistWrapped($entity): void
     {
     }
@@ -39,16 +49,5 @@ abstract class PackingListRepositoryWrapper extends RepositoryWrapper
         $entities = $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
 
         return (0 === \count($entities)) ? null : $entities[0];
-    }
-
-    protected function criteriaWrapped($entity): array
-    {
-        /** @var FetchManagerInterface $manager */
-        $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseGetHandler::NAME, CriteriaDescription::NAME);
-
-        $rows = $handler->setEntity($entity)->run()->getRaw();
-
-        return $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
     }
 }

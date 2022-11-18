@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\ListItem;
+namespace Evrinoma\PackingListBundle\Repository\Api\ListItem;
 
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
 use Evrinoma\PackingListBundle\Fetch\Description\ListItem\CriteriaDescription;

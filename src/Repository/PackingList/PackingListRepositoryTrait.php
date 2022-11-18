@@ -21,24 +21,10 @@ use Evrinoma\PackingListBundle\Exception\PackingList\PackingListNotFoundExceptio
 use Evrinoma\PackingListBundle\Exception\PackingList\PackingListProxyException;
 use Evrinoma\PackingListBundle\Mediator\PackingList\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Model\PackingList\PackingListInterface;
-use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
-use Evrinoma\UtilsBundle\Repository\RepositoryWrapperInterface;
 
-class PackingListRepository extends PackingListRepositoryWrapper implements PackingListRepositoryInterface, RepositoryWrapperInterface
+trait PackingListRepositoryTrait
 {
     private QueryMediatorInterface $mediator;
-
-    /**
-     * @param ManagerRegistryInterface $managerRegistry
-     * @param string                   $entityClass
-     * @param QueryMediatorInterface   $mediator
-     */
-    public function __construct(ManagerRegistryInterface $managerRegistry, string $entityClass, QueryMediatorInterface $mediator)
-    {
-        parent::__construct($managerRegistry);
-        $this->mediator = $mediator;
-        $this->entityClass = $entityClass;
-    }
 
     /**
      * @param PackingListInterface $packingList

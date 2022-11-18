@@ -28,8 +28,8 @@ services:
     public: true
     arguments:
 
-  evrinoma.packing_list.depart.repository:
-    class: Evrinoma\PackingListBundle\Repository\Depart\DepartRepository
+  evrinoma.packing_list.depart.api.repository:
+    class: Evrinoma\PackingListBundle\Repository\Api\Depart\DepartRepository
     public: true
     arguments:
 

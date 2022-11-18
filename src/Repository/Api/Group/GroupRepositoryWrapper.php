@@ -11,15 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Repository\Depart;
+namespace Evrinoma\PackingListBundle\Repository\Api\Group;
 
 use Evrinoma\FetchBundle\Manager\FetchManagerInterface;
-use Evrinoma\PackingListBundle\Fetch\Description\Depart\CriteriaDescription;
-use Evrinoma\PackingListBundle\Fetch\Description\Depart\GetDescription;
+use Evrinoma\PackingListBundle\Fetch\Description\Group\CriteriaDescription;
 use Evrinoma\PackingListBundle\Fetch\Handler\BaseGetHandler;
 use Evrinoma\UtilsBundle\Repository\Api\RepositoryWrapper;
 
-abstract class DepartRepositoryWrapper extends RepositoryWrapper
+abstract class GroupRepositoryWrapper extends RepositoryWrapper
 {
     protected function criteriaWrapped($entity): array
     {
@@ -41,13 +40,6 @@ abstract class DepartRepositoryWrapper extends RepositoryWrapper
 
     public function findWrapped($id, $lockMode = null, $lockVersion = null)
     {
-        /** @var FetchManagerInterface $manager */
-        $manager = $this->managerRegistry->getManager(FetchManagerInterface::class);
-        $handler = $manager->getHandler(BaseGetHandler::NAME, GetDescription::NAME);
-
-        $rows[] = $handler->setEntity($id)->run()->getRaw();
-        $entities = $this->managerRegistry->hydrateRowData($rows, $this->entityClass);
-
-        return (0 === \count($entities)) ? null : $entities[0];
+        return null;
     }
 }
