@@ -389,7 +389,7 @@ class EvrinomaPackingListExtension extends Extension
         $array = $definitionRepository->getArguments();
         ksort($array);
         $definitionRepository->setArguments($array);
-        $container->addAliases(['evrinoma.'.$this->getAlias().'.'.$name.'.repository' => 'evrinoma.'.$this->getAlias().'.'.$name.'.'.$driver.'.repository']);
+        $container->addDefinitions(['evrinoma.'.$this->getAlias().'.'.$name.'.repository' => $definitionRepository]);
     }
 
     private function wireFactory(ContainerBuilder $container, string $name, string $class, string $paramClass): void
