@@ -5,6 +5,7 @@ services:
 
   evrinoma.packing_list.packing_list_group.fetch.criteria:
     alias: Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\CriteriaDescription
+    public: true
 
   Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\GetDescription:
     tags:
@@ -12,3 +13,4 @@ services:
 
   evrinoma.packing_list.packing_list_group.fetch.get:
     alias: Evrinoma\PackingListBundle\Fetch\Description\PackingListGroup\GetDescription
+    public: true
