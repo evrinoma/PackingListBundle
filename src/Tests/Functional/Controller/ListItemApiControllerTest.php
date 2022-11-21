@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Tests\Functional\Controller;
 
 use Evrinoma\TestUtilsBundle\Action\ActionTestInterface;
-use Evrinoma\TestUtilsBundle\Functional\AbstractFunctionalTest;
+use Evrinoma\TestUtilsBundle\Functional\Api\AbstractFunctionalTest;
 use Psr\Container\ContainerInterface;
 
 /**

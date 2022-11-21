@@ -36,7 +36,7 @@ class CriteriaDescription extends AbstractApiDescription
         }
 
         if ($entity->hasPoint()) {
-            $params['departPoint'] = $entity->getPoint();
+            $params['point'] = $entity->getPoint();
         }
 
         if ($entity->hasType()) {

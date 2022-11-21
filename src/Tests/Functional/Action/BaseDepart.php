@@ -14,10 +14,19 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
 use Evrinoma\PackingListBundle\Dto\DepartApiDto;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\PackingListGroupApiDtoInterface;
 use Evrinoma\PackingListBundle\Tests\Functional\Helper\BaseDepartTestTrait;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Id;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Point;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Type;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingList\Id as PackingListId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingListGroup\Id as PackingListGroupId;
 use Evrinoma\TestUtilsBundle\Action\AbstractServiceTest;
+use Evrinoma\UtilsBundle\Model\Rest\PayloadModel;
 use PHPUnit\Framework\Assert;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
 {
@@ -37,8 +46,12 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
     protected static function defaultData(): array
     {
         return [
-            'class' => static::getDtoClass(),
-            'id' => Id::default(),
+            DepartApiDtoInterface::DTO_CLASS => static::getDtoClass(),
+            DepartApiDtoInterface::ID => Id::default(),
+            DepartApiDtoInterface::POINT => Point::default(),
+            DepartApiDtoInterface::TYPE => Type::value(),
+            DepartApiDtoInterface::PACKING_LIST => [PackingListApiDtoInterface::ID => PackingListId::value()],
+            DepartApiDtoInterface::GROUP => [PackingListGroupApiDtoInterface::ID => PackingListGroupId::value()],
         ];
     }
 
@@ -58,12 +71,16 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
 
     public function actionGet(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $this->contentActionGet();
+        $find = $this->assertGet(Id::value());
+        Assert::assertCount(1, $find[PayloadModel::PAYLOAD]);
+        $this->checkGetDepart($find[PayloadModel::PAYLOAD][0]);
     }
 
     public function actionGetNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $this->exceptionActionGetNotFound();
+        $find = $this->assertGet(Id::wrong(), Response::HTTP_BAD_REQUEST);
     }
 
     public function actionDeleteNotFound(): void
@@ -82,38 +99,42 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
 
     public function actionPutNotFound(): void
     {
-        $updated = $this->put(static::getDefault(['id' => Id::wrong()]));
+        $updated = $this->put(static::getDefault([DepartApiDtoInterface::ID => Id::wrong()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($updated);
     }
 
     public function actionPutUnprocessable(): void
     {
-        $updated = $this->put(static::getDefault(['id' => Id::empty()]));
+        $updated = $this->put(static::getDefault([DepartApiDtoInterface::ID => Id::empty()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($updated);
     }
 
     public function actionPostUnprocessable(): void
     {
-        $created = $this->post(static::getDefault(['id' => Id::empty()]));
+        $created = $this->post(static::getDefault([DepartApiDtoInterface::ID => Id::empty()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($created);
     }
 
     public function actionCriteriaNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        foreach ($this->contentActionCriteriaNotFound() as $value) {
+            $value['call']($this->criteria($value['query']));
+        }
     }
 
     public function actionCriteria(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        foreach ($this->contentActionCriteria() as $value) {
+            $value['call']($this->criteria($value['query']));
+        }
     }
 
     public function actionPut(): void
     {
-        $updated = $this->put(static::getDefault(['id' => Id::value()]));
+        $updated = $this->put(static::getDefault([DepartApiDtoInterface::ID => Id::value()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($updated);
     }
@@ -121,5 +142,17 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
     public function actionPostDuplicate(): void
     {
         Assert::markTestIncomplete('This test has not been implemented yet.');
+    }
+
+    public function request(string $method, string $url, array $options = []): string
+    {
+        return $this->content;
+    }
+
+    public function exception(string $method, string $url, array $options = []): void
+    {
+        if (null !== $this->exception) {
+            throw $this->exception;
+        }
     }
 }
