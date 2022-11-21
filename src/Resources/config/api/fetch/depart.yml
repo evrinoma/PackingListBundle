@@ -13,3 +13,4 @@ services:
 
   evrinoma.packing_list.depart.fetch.get:
     alias: Evrinoma\PackingListBundle\Fetch\Description\Depart\GetDescription
+    public: true
