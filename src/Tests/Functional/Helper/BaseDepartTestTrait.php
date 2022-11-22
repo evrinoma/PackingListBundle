@@ -104,7 +104,7 @@ EOF,
                'call' => function ($args) {
                    Assert::assertCount(2, $args[PayloadModel::PAYLOAD]);
                    foreach ($args[PayloadModel::PAYLOAD] as $depart) {
-                       $this->checkGetDepart($depart);
+                       $this->checkCriteriaDepart($depart);
                    }
                },
         ];
@@ -141,7 +141,7 @@ EOF,
                'call' => function ($args) {
                    Assert::assertCount(1, $args[PayloadModel::PAYLOAD]);
                    foreach ($args[PayloadModel::PAYLOAD] as $depart) {
-                       $this->checkGetDepart($depart);
+                       $this->checkCriteriaDepart($depart);
                    }
                },
            ];
@@ -155,30 +155,49 @@ EOF,
             'query' => $query,
             'content' => <<< EOF
 [{
-"id":52,
-"warehouse":61,
-"packingList":
+"id":13,
+"warehouse":59,
+"packingListGroupInfo":
     {
     "id":2,
-    "label":"",
-    "weight":"",
-    "formFactor":"",
-    "contract":"948",
-    "projectName":"\u0427\u0435\u0440\u043d\u043e\u0433\u043e\u0440\u0441\u043a\u0430\u044f \u0422\u042d\u0426",
-    "contractorName":"SIEMENS",
-    "subContracts":"",
-    "dimensions":""
+    "info":"\u041a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 KRPU 1003579"
     },
-"point":"\u0427\u0413\u0420\u041a_\u21161.1",
-"name":"\u041f\u0443\u043d\u043a\u0442 \u21161",
-"address":"\u0410\u0440\u0445\u0430\u043d\u0433\u0435\u043b\u044c\u0441\u043a",
+"point":"\u0427\u0413\u0420\u041a_\u21162",
+"name":"\u041f\u0443\u043d\u043a\u0442 \u21162",
+"address":"\u043f\u043e\u0440\u0442 \u0414\u0443\u0434\u0438\u043d\u043a\u0430",
+"final":false
+},
+{
+"id":15,
+"warehouse":60,
+"packingListGroupInfo":
+    {
+    "id":2,
+    "info":"\u041a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 KRPU 1003579"
+    },
+"point":"\u0427\u0413\u0420\u041a_\u21163",
+"name":"\u041f\u0443\u043d\u043a\u0442 \u21163",
+"address":"\u041f\u0440\u043e\u043c\u0435\u0436.\u0431\u0430\u0437\u0430 \u041d\u043e\u0440\u0438\u043b\u044c\u0441\u043a",
+"final":false
+},
+{
+"id":18,
+"warehouse":62,
+"packingListGroupInfo":
+    {
+    "id":2,
+    "info":"\u041a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 KRPU 1003579"
+    },
+"point":"\u0427\u0413\u0420\u041a_\u21164",
+"name":"\u041f\u0443\u043d\u043a\u0442 \u21164",
+"address":"\u0441\u0442\u0440\u043e\u0439 \u043f\u043b\u043e\u0449\u0430\u0434\u043a\u0430",
 "final":true
 }]
 EOF,
             'call' => function ($args) {
-                Assert::assertCount(1, $args[PayloadModel::PAYLOAD]);
+                Assert::assertCount(3, $args[PayloadModel::PAYLOAD]);
                 foreach ($args[PayloadModel::PAYLOAD] as $depart) {
-                    $this->checkGetDepart($depart);
+                    $this->checkCriteriaWarehouse($depart);
                 }
             },
         ];
@@ -285,5 +304,17 @@ EOF,
         Assert::assertArrayHasKey(DepartApiDtoInterface::POINT, $entity);
         Assert::assertArrayHasKey(DepartApiDtoInterface::WAREHOUSE, $entity);
         Assert::assertArrayHasKey(DepartApiDtoInterface::FINAL, $entity);
+    }
+
+    protected function checkCriteriaDepart($entity): void
+    {
+        $this->checkGetDepart($entity);
+        Assert::assertArrayHasKey(DepartApiDtoInterface::PACKING_LIST, $entity);
+    }
+
+    protected function checkCriteriaWarehouse($entity): void
+    {
+        $this->checkGetDepart($entity);
+        Assert::assertArrayHasKey(DepartApiDtoInterface::GROUP, $entity);
     }
 }
