@@ -26,7 +26,7 @@ use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\FormFactorTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\LabelTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\LinkFileTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\ProjectNameTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\SubContractTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\SubContractsTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve\WeightTrait;
 
 trait PackingListApiDtoTrait
@@ -44,6 +44,6 @@ trait PackingListApiDtoTrait
     use LabelTrait;
     use LinkFileTrait;
     use ProjectNameTrait;
-    use SubContractTrait;
+    use SubContractsTrait;
     use WeightTrait;
 }

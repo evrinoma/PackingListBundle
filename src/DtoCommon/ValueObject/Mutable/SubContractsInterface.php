@@ -11,20 +11,16 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve;
+namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 
-trait DepartTrait
+interface SubContractsInterface
 {
     /**
-     * @param DepartApiDtoInterface $departApiDto
+     * @param string $subContracts
      *
      * @return DtoInterface
      */
-    public function setDepartApiDto(DepartApiDtoInterface $departApiDto): DtoInterface
-    {
-        return parent::setDepartApiDto($departApiDto);
-    }
+    public function setSubContracts(string $subContracts): DtoInterface;
 }

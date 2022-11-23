@@ -28,7 +28,7 @@ use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\FormFactorTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LabelTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\LinkFileTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\ProjectNameTrait;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\SubContractTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\SubContractsTrait;
 use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable\WeightTrait;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -47,7 +47,7 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
     use LabelTrait;
     use LinkFileTrait;
     use ProjectNameTrait;
-    use SubContractTrait;
+    use SubContractsTrait;
     use WeightTrait;
 
     public function toDto(Request $request): DtoInterface
@@ -61,7 +61,7 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
             $id = $request->get(PackingListApiDtoInterface::ID);
             $label = $request->get(PackingListApiDtoInterface::LABEL);
             $projectName = $request->get(PackingListApiDtoInterface::PROJECT_NAME);
-            $subContract = $request->get(PackingListApiDtoInterface::SUB_CONTRACT);
+            $subContracts = $request->get(PackingListApiDtoInterface::SUB_CONTRACTS);
             $weight = $request->get(PackingListApiDtoInterface::WEIGHT);
             $formFactor = $request->get(PackingListApiDtoInterface::FORM_FACTOR);
             $dimensions = $request->get(PackingListApiDtoInterface::DIMENSIONS);
@@ -95,8 +95,8 @@ class PackingListApiDto extends AbstractDto implements PackingListApiDtoInterfac
                 $this->setProjectName($projectName);
             }
 
-            if ($subContract) {
-                $this->setSubContract($subContract);
+            if ($subContracts) {
+                $this->setSubContracts($subContracts);
             }
             if ($weight) {
                 $this->setWeight($weight);

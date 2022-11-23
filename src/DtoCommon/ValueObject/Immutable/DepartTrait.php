@@ -23,7 +23,7 @@ trait DepartTrait
     /**
      * @var DepartApiDtoInterface|null
      */
-    protected ?DepartApiDtoInterface $depart = null;
+    protected ?DepartApiDtoInterface $departApiDto = null;
 
     /**
      * @return \Generator
@@ -44,11 +44,11 @@ trait DepartTrait
 
     public function hasDepartApiDto(): bool
     {
-        return null !== $this->depart;
+        return null !== $this->departApiDto;
     }
 
     public function getDepartApiDto(): DepartApiDtoInterface
     {
-        return $this->depart;
+        return $this->departApiDto;
     }
 }

@@ -14,21 +14,20 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Mutable;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\DepartTrait as DepartImmutableTrait;
+use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\SubContractsTrait as SubContractsImmutableTrait;
 
-trait DepartTrait
+trait SubContractsTrait
 {
-    use DepartImmutableTrait;
+    use SubContractsImmutableTrait;
 
     /**
-     * @param DepartApiDtoInterface $departApiDto
+     * @param string $subContracts
      *
      * @return DtoInterface
      */
-    public function setDepartApiDto(DepartApiDtoInterface $departApiDto): DtoInterface
+    protected function setSubContracts(string $subContracts): DtoInterface
     {
-        $this->departApiDto = $departApiDto;
+        $this->subContract = trim($subContracts);
 
         return $this;
     }

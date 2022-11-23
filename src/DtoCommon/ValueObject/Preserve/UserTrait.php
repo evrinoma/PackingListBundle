@@ -19,12 +19,12 @@ use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 trait UserTrait
 {
     /**
-     * @param UserApiDtoInterface $user
+     * @param UserApiDtoInterface $userApiDto
      *
      * @return DtoInterface
      */
-    public function setUserApiDto(UserApiDtoInterface $user): DtoInterface
+    public function setUserApiDto(UserApiDtoInterface $userApiDto): DtoInterface
     {
-        return parent::setUserApiDto($user);
+        return parent::setUserApiDto($userApiDto);
     }
 }

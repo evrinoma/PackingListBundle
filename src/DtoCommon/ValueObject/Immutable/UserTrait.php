@@ -23,7 +23,7 @@ trait UserTrait
     /**
      * @var UserApiDtoInterface|null
      */
-    protected ?UserApiDtoInterface $user = null;
+    protected ?UserApiDtoInterface $userApiDto = null;
 
     /**
      * @return \Generator
@@ -44,11 +44,11 @@ trait UserTrait
 
     public function hasUserApiDto(): bool
     {
-        return null !== $this->user;
+        return null !== $this->userApiDto;
     }
 
     public function getUserApiDto(): UserApiDtoInterface
     {
-        return $this->user;
+        return $this->userApiDto;
     }
 }

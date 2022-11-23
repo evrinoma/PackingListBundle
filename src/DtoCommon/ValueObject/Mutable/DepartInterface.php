@@ -19,9 +19,9 @@ use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
 interface DepartInterface
 {
     /**
-     * @param DepartApiDtoInterface $depart
+     * @param DepartApiDtoInterface $departApi
      *
      * @return DtoInterface
      */
-    public function setDepartApiDto(DepartApiDtoInterface $depart): DtoInterface;
+    public function setDepartApiDto(DepartApiDtoInterface $departApi): DtoInterface;
 }

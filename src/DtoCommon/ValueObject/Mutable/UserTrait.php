@@ -22,13 +22,13 @@ trait UserTrait
     use UserImmutableTrait;
 
     /**
-     * @param UserApiDtoInterface $user
+     * @param UserApiDtoInterface $userApiDto
      *
      * @return DtoInterface
      */
-    public function setUserApiDto(UserApiDtoInterface $user): DtoInterface
+    public function setUserApiDto(UserApiDtoInterface $userApiDto): DtoInterface
     {
-        $this->user = $user;
+        $this->userApiDto = $userApiDto;
 
         return $this;
     }

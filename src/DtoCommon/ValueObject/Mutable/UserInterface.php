@@ -19,9 +19,9 @@ use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 interface UserInterface
 {
     /**
-     * @param UserApiDtoInterface $user
+     * @param UserApiDtoInterface $userApiDto
      *
      * @return DtoInterface
      */
-    public function setUserApiDto(UserApiDtoInterface $user): DtoInterface;
+    public function setUserApiDto(UserApiDtoInterface $userApiDto): DtoInterface;
 }
