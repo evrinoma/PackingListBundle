@@ -13,14 +13,28 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
-use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\LogisticsApiDto;
+use Evrinoma\PackingListBundle\Dto\LogisticsApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\PackingListApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 use Evrinoma\PackingListBundle\Tests\Functional\Helper\BaseLogisticsTestTrait;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Id as DepartId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Warehouse;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Logistics\Id;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingList\Id as PackingListId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Email;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Id as UserId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Name;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Patronymic;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Surname;
 use Evrinoma\TestUtilsBundle\Action\AbstractServiceTest;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestTrait;
 use PHPUnit\Framework\Assert;
 
 class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInterface
 {
+    use ApiRepositoryHelperTestTrait;
     use BaseLogisticsTestTrait;
 
     public const API_GET = 'evrinoma/api/packing_list/logistics';
@@ -31,20 +45,33 @@ class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInte
 
     protected static function getDtoClass(): string
     {
-        return ListItemApiDto::class;
+        return LogisticsApiDto::class;
     }
 
     protected static function defaultData(): array
     {
         return [
-            'class' => static::getDtoClass(),
-            'id' => Id::default(),
+            LogisticsApiDtoInterface::DTO_CLASS => static::getDtoClass(),
+            LogisticsApiDtoInterface::PACKING_LIST => [PackingListApiDtoInterface::ID => PackingListId::value()],
+            LogisticsApiDtoInterface::DEPART => [
+                DepartApiDtoInterface::ID => DepartId::value(),
+                DepartApiDtoInterface::WAREHOUSE => Warehouse::value(),
+                ],
+            LogisticsApiDtoInterface::USER => [
+                UserApiDtoInterface::ID => UserId::value(),
+                UserApiDtoInterface::EMAIL => Email::value(),
+                UserApiDtoInterface::NAME => Name::value(),
+                UserApiDtoInterface::PATRONYMIC => Patronymic::value(),
+                UserApiDtoInterface::SURNAME => Surname::value(),
+            ],
         ];
     }
 
     public function actionPost(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $this->contentPost();
+        $this->createLogistics();
+        $this->testResponseStatusCreated();
     }
 
     public function actionDelete(): void
@@ -98,7 +125,29 @@ class BaseLogistics extends AbstractServiceTest implements BaseLogisticsTestInte
 
     public function actionPostUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $query = static::getDefault();
+        unset($query[LogisticsApiDtoInterface::PACKING_LIST]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
+
+        $query = static::getDefault();
+        unset($query[LogisticsApiDtoInterface::DEPART]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
+
+        $query = static::getDefault();
+        unset($query[LogisticsApiDtoInterface::DEPART][DepartApiDtoInterface::WAREHOUSE]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
+
+        $query = static::getDefault();
+        unset($query[LogisticsApiDtoInterface::USER]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
     }
 
     public function actionCriteriaNotFound(): void

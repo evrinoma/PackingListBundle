@@ -24,12 +24,15 @@ use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Type;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingList\Id as PackingListId;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingListGroup\Id as PackingListGroupId;
 use Evrinoma\TestUtilsBundle\Action\AbstractServiceTest;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestInterface;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestTrait;
 use Evrinoma\UtilsBundle\Model\Rest\PayloadModel;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\Response;
 
 class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
 {
+    use ApiRepositoryHelperTestTrait;
     use BaseDepartTestTrait;
 
     public const API_GET = 'evrinoma/api/packing_list/depart';
@@ -58,6 +61,10 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
     public function actionPost(): void
     {
         $value = $this->createDepart();
+        $this->testResponseStatusNotImplemented();
+        $this->hasError($value);
+
+        $value = $this->createWarehouse();
         $this->testResponseStatusNotImplemented();
         $this->hasError($value);
     }
@@ -121,14 +128,14 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
     public function actionCriteriaNotFound(): void
     {
         foreach ($this->contentActionCriteriaNotFound() as $value) {
-            $value['call']($this->criteria($value['query']));
+            $value[ApiRepositoryHelperTestInterface::CALL]($this->criteria($value[ApiRepositoryHelperTestInterface::QUERY]));
         }
     }
 
     public function actionCriteria(): void
     {
         foreach ($this->contentActionCriteria() as $value) {
-            $value['call']($this->criteria($value['query']));
+            $value[ApiRepositoryHelperTestInterface::CALL]($this->criteria($value[ApiRepositoryHelperTestInterface::QUERY]));
         }
     }
 
@@ -142,17 +149,5 @@ class BaseDepart extends AbstractServiceTest implements BaseDepartTestInterface
     public function actionPostDuplicate(): void
     {
         Assert::markTestIncomplete('This test has not been implemented yet.');
-    }
-
-    public function request(string $method, string $url, array $options = []): string
-    {
-        return $this->content;
-    }
-
-    public function exception(string $method, string $url, array $options = []): void
-    {
-        if (null !== $this->exception) {
-            throw $this->exception;
-        }
     }
 }

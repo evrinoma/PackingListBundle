@@ -14,20 +14,26 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
 use Evrinoma\PackingListBundle\Dto\GroupApiDto;
+use Evrinoma\PackingListBundle\Dto\GroupApiDtoInterface;
 use Evrinoma\PackingListBundle\Tests\Functional\Helper\BaseGroupTestTrait;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Group\Id;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Group\Info;
 use Evrinoma\TestUtilsBundle\Action\AbstractServiceTest;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestInterface;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestTrait;
 use PHPUnit\Framework\Assert;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseGroup extends AbstractServiceTest implements BaseGroupTestInterface
 {
+    use ApiRepositoryHelperTestTrait;
     use BaseGroupTestTrait;
 
-    public const API_GET = 'evrinoma/api/packing_list/group';
-    public const API_CRITERIA = 'evrinoma/api/packing_list/group/criteria';
-    public const API_DELETE = 'evrinoma/api/packing_list/group/delete';
-    public const API_PUT = 'evrinoma/api/packing_list/group/save';
-    public const API_POST = 'evrinoma/api/packing_list/group/create';
+    public const API_GET = 'evrinoma/api/packing_list/group/info';
+    public const API_CRITERIA = 'evrinoma/api/packing_list/group/info/criteria';
+    public const API_DELETE = 'evrinoma/api/packing_list/group/info/delete';
+    public const API_PUT = 'evrinoma/api/packing_list/group/info/save';
+    public const API_POST = 'evrinoma/api/packing_list/group/info/create';
 
     protected static function getDtoClass(): string
     {
@@ -37,8 +43,9 @@ class BaseGroup extends AbstractServiceTest implements BaseGroupTestInterface
     protected static function defaultData(): array
     {
         return [
-            'class' => static::getDtoClass(),
-            'id' => Id::default(),
+            GroupApiDtoInterface::DTO_CLASS => static::getDtoClass(),
+            GroupApiDtoInterface::ID => Id::default(),
+            GroupApiDtoInterface::INFO => Info::default(),
         ];
     }
 
@@ -58,12 +65,14 @@ class BaseGroup extends AbstractServiceTest implements BaseGroupTestInterface
 
     public function actionGet(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $find = $this->assertGet(Id::value(), Response::HTTP_NOT_FOUND);
+        $this->hasError($find);
     }
 
     public function actionGetNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $find = $this->assertGet(Id::value(), Response::HTTP_NOT_FOUND);
+        $this->hasError($find);
     }
 
     public function actionDeleteNotFound(): void
@@ -82,38 +91,42 @@ class BaseGroup extends AbstractServiceTest implements BaseGroupTestInterface
 
     public function actionPutNotFound(): void
     {
-        $updated = $this->put(static::getDefault(['id' => Id::wrong()]));
+        $updated = $this->put(static::getDefault([GroupApiDtoInterface::ID => Id::wrong()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($updated);
     }
 
     public function actionPutUnprocessable(): void
     {
-        $updated = $this->put(static::getDefault(['id' => Id::empty()]));
+        $updated = $this->put(static::getDefault([GroupApiDtoInterface::ID => Id::empty()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($updated);
     }
 
     public function actionPostUnprocessable(): void
     {
-        $created = $this->post(static::getDefault(['id' => Id::empty()]));
+        $created = $this->post(static::getDefault([GroupApiDtoInterface::ID => Id::empty()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($created);
     }
 
     public function actionCriteriaNotFound(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        foreach ($this->contentActionCriteriaNotFound() as $value) {
+            $value[ApiRepositoryHelperTestInterface::CALL]($this->criteria($value[ApiRepositoryHelperTestInterface::QUERY]));
+        }
     }
 
     public function actionCriteria(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        foreach ($this->contentActionCriteria() as $value) {
+            $value[ApiRepositoryHelperTestInterface::CALL]($this->criteria($value[ApiRepositoryHelperTestInterface::QUERY]));
+        }
     }
 
     public function actionPut(): void
     {
-        $updated = $this->put(static::getDefault(['id' => Id::value()]));
+        $updated = $this->put(static::getDefault([GroupApiDtoInterface::ID => Id::value()]));
         $this->testResponseStatusNotImplemented();
         $this->hasError($updated);
     }

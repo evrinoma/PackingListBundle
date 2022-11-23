@@ -11,10 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
+namespace Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User;
 
-use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryTestInterface;
+use Evrinoma\TestUtilsBundle\ValueObject\Common\AbstractId;
 
-interface BasePackingListGroupTestInterface extends ApiRepositoryTestInterface
+class Id extends AbstractId
 {
+    protected static string $default = '6';
+    protected static string $value = '2';
 }

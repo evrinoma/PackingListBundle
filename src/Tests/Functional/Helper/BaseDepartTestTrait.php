@@ -18,6 +18,7 @@ use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Id;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Point;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingList\Id as PackingListId;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingListGroup\Id as PackingListGroupId;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestInterface;
 use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryTestInterface;
 use Evrinoma\UtilsBundle\Model\Rest\ErrorModel;
 use Evrinoma\UtilsBundle\Model\Rest\PayloadModel;
@@ -26,9 +27,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait BaseDepartTestTrait
 {
-    protected string $content = '';
-    protected ?\Exception $exception = null;
-
     protected function contentActionGet(): void
     {
         $id = Id::value();
@@ -58,8 +56,8 @@ EOF;
         unset($query[DepartApiDtoInterface::GROUP]);
 
         $content[] = [
-               'query' => $query,
-               'content' => <<< EOF
+               ApiRepositoryHelperTestInterface::QUERY => $query,
+               ApiRepositoryHelperTestInterface::CONTENT => <<< EOF
 [{
 "id":49,
 "warehouse":64,
@@ -101,10 +99,10 @@ EOF;
 "final":true
 }]
 EOF,
-               'call' => function ($args) {
+               ApiRepositoryHelperTestInterface::CALL => function ($args) {
                    Assert::assertCount(2, $args[PayloadModel::PAYLOAD]);
-                   foreach ($args[PayloadModel::PAYLOAD] as $depart) {
-                       $this->checkCriteriaDepart($depart);
+                   foreach ($args[PayloadModel::PAYLOAD] as $item) {
+                       $this->checkCriteriaDepart($item);
                    }
                },
         ];
@@ -114,15 +112,17 @@ EOF,
         unset($query[DepartApiDtoInterface::TYPE]);
         unset($query[DepartApiDtoInterface::GROUP]);
 
+        $packingListId = PackingListId::value();
+
         $content[] = [
-               'query' => $query,
-            'content' => <<< EOF
+               ApiRepositoryHelperTestInterface::QUERY => $query,
+            ApiRepositoryHelperTestInterface::CONTENT => <<< EOF
 [{
 "id":52,
 "warehouse":61,
 "packingList":
     {
-    "id":2,
+    "id":{$packingListId},
     "label":"",
     "weight":"",
     "formFactor":"",
@@ -138,10 +138,10 @@ EOF,
 "final":true
 }]
 EOF,
-               'call' => function ($args) {
+               ApiRepositoryHelperTestInterface::CALL => function ($args) {
                    Assert::assertCount(1, $args[PayloadModel::PAYLOAD]);
-                   foreach ($args[PayloadModel::PAYLOAD] as $depart) {
-                       $this->checkCriteriaDepart($depart);
+                   foreach ($args[PayloadModel::PAYLOAD] as $item) {
+                       $this->checkCriteriaDepart($item);
                    }
                },
            ];
@@ -151,15 +151,17 @@ EOF,
         unset($query[DepartApiDtoInterface::ID]);
         unset($query[DepartApiDtoInterface::PACKING_LIST]);
 
+        $packingListGroupId = PackingListGroupId::value();
+
         $content[] = [
-            'query' => $query,
-            'content' => <<< EOF
+            ApiRepositoryHelperTestInterface::QUERY => $query,
+            ApiRepositoryHelperTestInterface::CONTENT => <<< EOF
 [{
 "id":13,
 "warehouse":59,
 "packingListGroupInfo":
     {
-    "id":2,
+    "id":{$packingListGroupId},
     "info":"\u041a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 KRPU 1003579"
     },
 "point":"\u0427\u0413\u0420\u041a_\u21162",
@@ -172,7 +174,7 @@ EOF,
 "warehouse":60,
 "packingListGroupInfo":
     {
-    "id":2,
+    "id":{$packingListGroupId},
     "info":"\u041a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 KRPU 1003579"
     },
 "point":"\u0427\u0413\u0420\u041a_\u21163",
@@ -185,7 +187,7 @@ EOF,
 "warehouse":62,
 "packingListGroupInfo":
     {
-    "id":2,
+    "id":{$packingListGroupId},
     "info":"\u041a\u043e\u043d\u0442\u0435\u0439\u043d\u0435\u0440 KRPU 1003579"
     },
 "point":"\u0427\u0413\u0420\u041a_\u21164",
@@ -194,17 +196,20 @@ EOF,
 "final":true
 }]
 EOF,
-            'call' => function ($args) {
+            ApiRepositoryHelperTestInterface::CALL => function ($args) {
                 Assert::assertCount(3, $args[PayloadModel::PAYLOAD]);
-                foreach ($args[PayloadModel::PAYLOAD] as $depart) {
-                    $this->checkCriteriaWarehouse($depart);
+                foreach ($args[PayloadModel::PAYLOAD] as $item) {
+                    $this->checkCriteriaWarehouse($item);
                 }
             },
         ];
 
         foreach ($content as $value) {
-            $this->content = $value['content'];
-            yield ['query' => $value['query'], 'call' => $value['call']];
+            $this->content = $value[ApiRepositoryHelperTestInterface::CONTENT];
+            yield [
+                ApiRepositoryHelperTestInterface::QUERY => $value[ApiRepositoryHelperTestInterface::QUERY],
+                ApiRepositoryHelperTestInterface::CALL => $value[ApiRepositoryHelperTestInterface::CALL],
+            ];
         }
     }
 
@@ -217,9 +222,9 @@ EOF,
         unset($query[DepartApiDtoInterface::GROUP]);
 
         $content[] = [
-            'query' => $query,
-            'exception' => new \RuntimeException('HTTP/1.1 404 Not Found returned for "'.ApiRepositoryTestInterface::HOST.static::API_GET.'?packingListId='.PackingListId::wrong().'"'),
-            'call' => function ($args) {
+            ApiRepositoryHelperTestInterface::QUERY => $query,
+            ApiRepositoryHelperTestInterface::EXCEPTION => new \RuntimeException('HTTP/1.1 404 Not Found returned for "'.ApiRepositoryTestInterface::HOST.static::API_GET.'?packingListId='.PackingListId::wrong().'"'),
+            ApiRepositoryHelperTestInterface::CALL => function ($args) {
                 $this->hasError($args);
             },
         ];
@@ -230,9 +235,9 @@ EOF,
         unset($query[DepartApiDtoInterface::GROUP]);
 
         $content[] = [
-            'query' => $query,
-            'exception' => new \RuntimeException('HTTP/1.1 404 Not Found returned for "'.ApiRepositoryTestInterface::HOST.static::API_GET.'?packingListId='.PackingListId::wrong().'&point='.Point::wrong().'"'),
-            'call' => function ($args) {
+            ApiRepositoryHelperTestInterface::QUERY => $query,
+            ApiRepositoryHelperTestInterface::EXCEPTION => new \RuntimeException('HTTP/1.1 404 Not Found returned for "'.ApiRepositoryTestInterface::HOST.static::API_GET.'?packingListId='.PackingListId::wrong().'&point='.Point::wrong().'"'),
+            ApiRepositoryHelperTestInterface::CALL => function ($args) {
                 $this->hasError($args);
             },
         ];
@@ -243,16 +248,16 @@ EOF,
         unset($query[DepartApiDtoInterface::PACKING_LIST]);
 
         $content[] = [
-            'query' => $query,
-            'exception' => new \RuntimeException('HTTP/1.1 404 Not Found returned for "'.ApiRepositoryTestInterface::HOST.static::API_GET.'?groupId='.PackingListGroupId::wrong().'&type=PACKING_LIST_GROUP_INFO"'),
-            'call' => function ($args) {
+            ApiRepositoryHelperTestInterface::QUERY => $query,
+            ApiRepositoryHelperTestInterface::EXCEPTION => new \RuntimeException('HTTP/1.1 404 Not Found returned for "'.ApiRepositoryTestInterface::HOST.static::API_GET.'?groupId='.PackingListGroupId::wrong().'&type=PACKING_LIST_GROUP_INFO"'),
+            ApiRepositoryHelperTestInterface::CALL => function ($args) {
                 $this->hasError($args);
             },
         ];
 
         foreach ($content as $value) {
-            $this->exception = $value['exception'];
-            yield ['query' => $value['query'], 'call' => $value['call']];
+            $this->exception = $value[ApiRepositoryHelperTestInterface::EXCEPTION];
+            yield [ApiRepositoryHelperTestInterface::QUERY => $value[ApiRepositoryHelperTestInterface::QUERY], ApiRepositoryHelperTestInterface::CALL => $value[ApiRepositoryHelperTestInterface::CALL]];
         }
     }
 
@@ -267,15 +272,11 @@ EOF,
                 break;
             case Response::HTTP_BAD_REQUEST:
                 $this->testResponseStatusBadRequest();
-                Assert::assertArrayHasKey(PayloadModel::PAYLOAD, $find);
-                Assert::assertCount(0, $find[PayloadModel::PAYLOAD]);
-                Assert::assertCount(1, $find[ErrorModel::ERROR]);
+                $this->hasError($find);
                 break;
             case Response::HTTP_NOT_FOUND:
                 $this->testResponseStatusNotFound();
-                Assert::assertArrayHasKey(PayloadModel::PAYLOAD, $find);
-                Assert::assertCount(0, $find[PayloadModel::PAYLOAD]);
-                Assert::assertCount(1, $find[ErrorModel::ERROR]);
+                $this->hasError($find);
                 break;
         }
 
@@ -290,6 +291,13 @@ EOF,
     }
 
     protected function createDepart(): array
+    {
+        $query = static::getDefault();
+
+        return $this->post($query);
+    }
+
+    protected function createWarehouse(): array
     {
         $query = static::getDefault();
 

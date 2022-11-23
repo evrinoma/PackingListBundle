@@ -13,14 +13,28 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
-use Evrinoma\PackingListBundle\Dto\ListItemApiDto;
+use Evrinoma\PackingListBundle\Dto\DepartApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\LogisticsGroupApiDto;
+use Evrinoma\PackingListBundle\Dto\LogisticsGroupApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\PackingListGroupApiDtoInterface;
+use Evrinoma\PackingListBundle\Dto\UserApiDtoInterface;
 use Evrinoma\PackingListBundle\Tests\Functional\Helper\BaseLogisticsGroupTestTrait;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Id as DepartId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\Depart\Warehouse;
 use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\LogisticsGroup\Id;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\PackingListGroup\Id as PackingListGroupId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Email;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Id as UserId;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Name;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Patronymic;
+use Evrinoma\PackingListBundle\Tests\Functional\ValueObject\User\Surname;
 use Evrinoma\TestUtilsBundle\Action\AbstractServiceTest;
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryHelperTestTrait;
 use PHPUnit\Framework\Assert;
 
 class BaseLogisticsGroup extends AbstractServiceTest implements BaseLogisticsGroupTestInterface
 {
+    use ApiRepositoryHelperTestTrait;
     use BaseLogisticsGroupTestTrait;
 
     public const API_GET = 'evrinoma/api/packing_list/logistics/group';
@@ -31,20 +45,33 @@ class BaseLogisticsGroup extends AbstractServiceTest implements BaseLogisticsGro
 
     protected static function getDtoClass(): string
     {
-        return ListItemApiDto::class;
+        return LogisticsGroupApiDto::class;
     }
 
     protected static function defaultData(): array
     {
         return [
-            'class' => static::getDtoClass(),
-            'id' => Id::default(),
+            LogisticsGroupApiDtoInterface::DTO_CLASS => static::getDtoClass(),
+            LogisticsGroupApiDtoInterface::GROUP => [PackingListGroupApiDtoInterface::ID => PackingListGroupId::value()],
+            LogisticsGroupApiDtoInterface::DEPART => [
+                DepartApiDtoInterface::ID => DepartId::value(),
+                DepartApiDtoInterface::WAREHOUSE => Warehouse::value(),
+            ],
+            LogisticsGroupApiDtoInterface::USER => [
+                UserApiDtoInterface::ID => UserId::value(),
+                UserApiDtoInterface::EMAIL => Email::value(),
+                UserApiDtoInterface::NAME => Name::value(),
+                UserApiDtoInterface::PATRONYMIC => Patronymic::value(),
+                UserApiDtoInterface::SURNAME => Surname::value(),
+            ],
         ];
     }
 
     public function actionPost(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $this->contentPost();
+        $this->createLogisticsGroup();
+        $this->testResponseStatusCreated();
     }
 
     public function actionDelete(): void
@@ -98,7 +125,29 @@ class BaseLogisticsGroup extends AbstractServiceTest implements BaseLogisticsGro
 
     public function actionPostUnprocessable(): void
     {
-        Assert::markTestIncomplete('This test has not been implemented yet.');
+        $query = static::getDefault();
+        unset($query[LogisticsGroupApiDtoInterface::GROUP]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
+
+        $query = static::getDefault();
+        unset($query[LogisticsGroupApiDtoInterface::DEPART]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
+
+        $query = static::getDefault();
+        unset($query[LogisticsGroupApiDtoInterface::DEPART][DepartApiDtoInterface::WAREHOUSE]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
+
+        $query = static::getDefault();
+        unset($query[LogisticsGroupApiDtoInterface::USER]);
+
+        $this->post($query);
+        $this->testResponseStatusUnprocessable();
     }
 
     public function actionCriteriaNotFound(): void

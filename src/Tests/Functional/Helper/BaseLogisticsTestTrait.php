@@ -20,6 +20,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 trait BaseLogisticsTestTrait
 {
+    protected function contentPost(): void
+    {
+        $this->content = <<< EOF
+{"status":"OK"}
+EOF;
+    }
+
     protected function assertGet(string $id, int $status = Response::HTTP_OK): array
     {
         $find = $this->get($id);
@@ -29,11 +36,13 @@ trait BaseLogisticsTestTrait
                 $this->testResponseStatusOK();
                 $this->checkResult($find);
                 break;
+            case Response::HTTP_BAD_REQUEST:
+                $this->testResponseStatusBadRequest();
+                $this->hasError($find);
+                break;
             case Response::HTTP_NOT_FOUND:
                 $this->testResponseStatusNotFound();
-                Assert::assertArrayHasKey(PayloadModel::PAYLOAD, $find);
-                Assert::assertCount(0, $find[PayloadModel::PAYLOAD]);
-                Assert::assertCount(1, $find[ErrorModel::ERROR]);
+                $this->hasError($find);
                 break;
         }
 

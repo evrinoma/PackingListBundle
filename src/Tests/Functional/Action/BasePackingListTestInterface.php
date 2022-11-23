@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Tests\Functional\Action;
 
-interface BasePackingListTestInterface
+use Evrinoma\TestUtilsBundle\Repository\Api\ApiRepositoryTestInterface;
+
+interface BasePackingListTestInterface extends ApiRepositoryTestInterface
 {
 }

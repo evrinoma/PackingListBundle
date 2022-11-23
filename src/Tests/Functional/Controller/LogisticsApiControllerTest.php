@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Tests\Functional\Controller;
 
+use Evrinoma\PackingListBundle\Fetch\Description\Logistics\PostDescription;
 use Evrinoma\TestUtilsBundle\Action\ActionTestInterface;
 use Evrinoma\TestUtilsBundle\Functional\Api\AbstractFunctionalTest;
 use Psr\Container\ContainerInterface;
@@ -22,31 +23,12 @@ use Psr\Container\ContainerInterface;
  */
 final class LogisticsApiControllerTest extends AbstractFunctionalTest
 {
+    protected array $serviceDescriptionName = [PostDescription::class];
+
     protected string $actionServiceName = 'evrinoma.packing_list.test.functional.action.logistics';
 
     protected function getActionService(ContainerInterface $container): ActionTestInterface
     {
         return $container->get($this->actionServiceName);
-    }
-
-    public static function getFixtures(): array
-    {
-        return [];
-    }
-
-    protected function setUpEntityManager($container): void
-    {
-    }
-
-    protected function setUpSchemaTool(): void
-    {
-    }
-
-    protected function setUpFixtures($container): void
-    {
-    }
-
-    protected function purgeSchema(): void
-    {
     }
 }
