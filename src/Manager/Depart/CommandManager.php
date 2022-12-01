@@ -86,7 +86,7 @@ final class CommandManager implements CommandManagerInterface
     public function put(DepartApiDtoInterface $dto): DepartInterface
     {
         try {
-            $depart = $this->repository->find($dto->getId());
+            $depart = $this->repository->find($dto->idToString());
         } catch (DepartNotFoundException $e) {
             throw $e;
         }
@@ -115,7 +115,7 @@ final class CommandManager implements CommandManagerInterface
     public function delete(DepartApiDtoInterface $dto): void
     {
         try {
-            $depart = $this->repository->find($dto->getId());
+            $depart = $this->repository->find($dto->idToString());
         } catch (DepartNotFoundException $e) {
             throw $e;
         }

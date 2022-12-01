@@ -86,7 +86,7 @@ final class CommandManager implements CommandManagerInterface
     public function put(PackingListApiDtoInterface $dto): PackingListInterface
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $packingList = $this->repository->find($dto->idToString());
         } catch (PackingListNotFoundException $e) {
             throw $e;
         }
@@ -115,7 +115,7 @@ final class CommandManager implements CommandManagerInterface
     public function delete(PackingListApiDtoInterface $dto): void
     {
         try {
-            $packingList = $this->repository->find($dto->getId());
+            $packingList = $this->repository->find($dto->idToString());
         } catch (PackingListNotFoundException $e) {
             throw $e;
         }

@@ -86,7 +86,7 @@ final class CommandManager implements CommandManagerInterface
     public function put(ListItemApiDtoInterface $dto): ListItemInterface
     {
         try {
-            $listItem = $this->repository->find($dto->getId());
+            $listItem = $this->repository->find($dto->idToString());
         } catch (ListItemNotFoundException $e) {
             throw $e;
         }
@@ -115,7 +115,7 @@ final class CommandManager implements CommandManagerInterface
     public function delete(ListItemApiDtoInterface $dto): void
     {
         try {
-            $listItem = $this->repository->find($dto->getId());
+            $listItem = $this->repository->find($dto->idToString());
         } catch (ListItemNotFoundException $e) {
             throw $e;
         }

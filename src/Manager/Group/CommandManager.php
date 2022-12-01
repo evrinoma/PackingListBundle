@@ -86,7 +86,7 @@ final class CommandManager implements CommandManagerInterface
     public function put(GroupApiDtoInterface $dto): GroupInterface
     {
         try {
-            $group = $this->repository->find($dto->getId());
+            $group = $this->repository->find($dto->idToString());
         } catch (GroupNotFoundException $e) {
             throw $e;
         }
@@ -115,7 +115,7 @@ final class CommandManager implements CommandManagerInterface
     public function delete(GroupApiDtoInterface $dto): void
     {
         try {
-            $group = $this->repository->find($dto->getId());
+            $group = $this->repository->find($dto->idToString());
         } catch (GroupNotFoundException $e) {
             throw $e;
         }
