@@ -15,7 +15,6 @@ services:
   evrinoma.packing_list.group.facade:
     class: Evrinoma\PackingListBundle\Facade\Group\Facade
     arguments:
-      - '@doctrine'
       - '@evrinoma.packing_list.group.command.manager'
       - '@evrinoma.packing_list.group.query.manager'
     autowire: true

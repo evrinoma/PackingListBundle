@@ -35,6 +35,8 @@ use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
 use Evrinoma\PackingListBundle\Factory\LogisticsGroupFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListGroupFactory;
+use Evrinoma\UtilsBundle\Adaptor\AdaptorRegistry;
+use Evrinoma\UtilsBundle\Adaptor\AdaptorRegistryInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
 use Evrinoma\UtilsBundle\Handler\BaseHandler;
 use Evrinoma\UtilsBundle\Persistence\ManagerRegistryInterface;
@@ -181,6 +183,10 @@ class EvrinomaPackingListExtension extends Extension
             $container->setParameter('evrinoma.'.$this->getAlias().'.backend_type_'.$config['db_driver'], true);
             $objectManager = $container->getDefinition('evrinoma.'.$this->getAlias().'.object_manager');
             $objectManager->setFactory([$registry, 'getManager']);
+        }
+
+        if (null !== $registry) {
+            $this->wireAdaptorRegistry($container, $registry);
         }
 
         $this->remapParametersNamespaces(
@@ -370,6 +376,15 @@ class EvrinomaPackingListExtension extends Extension
                 ['' => $remap]
             );
         }
+    }
+
+    private function wireAdaptorRegistry(ContainerBuilder $container, Reference $registry): void
+    {
+        $definitionAdaptor = new Definition(AdaptorRegistry::class);
+        $definitionAdaptor->addArgument($registry);
+        $alias = new Alias('evrinoma.'.$this->getAlias().'.adaptor');
+        $container->addDefinitions(['evrinoma.'.$this->getAlias().'.adaptor' => $definitionAdaptor]);
+        $container->addAliases([AdaptorRegistryInterface::class => $alias]);
     }
 
     private function wireFetch(ContainerBuilder $container, string $name, string $method, string $host, string $route): void

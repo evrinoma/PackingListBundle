@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Evrinoma\PackingListBundle\Facade\Logistics;
 
-use Doctrine\Persistence\ManagerRegistry;
 use Evrinoma\DtoBundle\Dto\DtoInterface;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeRemovedException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeSavedException;
@@ -21,6 +20,7 @@ use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
 use Evrinoma\PackingListBundle\Manager\Logistics\CommandManagerInterface;
 use Evrinoma\PackingListBundle\Manager\Logistics\QueryManagerInterface;
 use Evrinoma\PackingListBundle\PreValidator\Logistics\DtoPreValidatorInterface;
+use Evrinoma\UtilsBundle\Adaptor\AdaptorRegistryInterface;
 use Evrinoma\UtilsBundle\Facade\FacadeTrait;
 use Evrinoma\UtilsBundle\Handler\HandlerInterface;
 
@@ -34,16 +34,14 @@ final class Facade implements FacadeInterface
 
     protected DtoPreValidatorInterface $preValidator;
 
-    protected ManagerRegistry $managerRegistry;
-
     public function __construct(
-        ManagerRegistry $managerRegistry,
         CommandManagerInterface $commandManager,
         QueryManagerInterface $queryManager,
+        AdaptorRegistryInterface $adaptorRegistry,
         DtoPreValidatorInterface $preValidator,
         HandlerInterface $handler
     ) {
-        $this->managerRegistry = $managerRegistry;
+        $this->adaptorRegistry = $adaptorRegistry;
         $this->commandManager = $commandManager;
         $this->queryManager = $queryManager;
         $this->preValidator = $preValidator;
