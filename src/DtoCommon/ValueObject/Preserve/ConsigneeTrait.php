@@ -14,21 +14,16 @@ declare(strict_types=1);
 namespace Evrinoma\PackingListBundle\DtoCommon\ValueObject\Preserve;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
-use Evrinoma\PackingListBundle\DtoCommon\ValueObject\Immutable\ConsigneeTrait as ConsigneeImmutableTrait;
 
 trait ConsigneeTrait
 {
-    use ConsigneeImmutableTrait;
-
     /**
      * @param string $consignee
      *
      * @return DtoInterface
      */
-    protected function setConsignee(string $consignee): DtoInterface
+    public function setConsignee(string $consignee): DtoInterface
     {
-        $this->consignee = trim($consignee);
-
-        return $this;
+        return parent::setConsignee($consignee);
     }
 }
