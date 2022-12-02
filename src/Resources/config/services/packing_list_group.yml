@@ -59,16 +59,13 @@ services:
   Evrinoma\PackingListBundle\Validator\PackingListGroupValidator:
     alias: evrinoma.packing_list.packing_list_group.validator
 
-  evrinoma.packing_list.packing_list_group.query.mediator:
-    class: Evrinoma\PackingListBundle\Mediator\PackingListGroup\QueryMediator
+  evrinoma.packing_list.packing_list_group.query.api.mediator:
+    class: Evrinoma\PackingListBundle\Mediator\PackingListGroup\Api\QueryMediator
     public: true
     arguments:
 
-  Evrinoma\PackingListBundle\Mediator\PackingListGroup\QueryMediator:
-    alias: evrinoma.packing_list.packing_list_group.query.mediator
-
-  Evrinoma\PackingListBundle\Mediator\PackingListGroup\QueryMediatorInterface:
-    alias: evrinoma.packing_list.packing_list_group.query.mediator
+  Evrinoma\PackingListBundle\Mediator\PackingListGroup\Api\QueryMediator:
+    alias: evrinoma.packing_list.packing_list_group.query.api.mediator
 
   evrinoma.packing_list.packing_list_group.command.mediator:
     class: Evrinoma\PackingListBundle\Mediator\PackingListGroup\CommandMediator

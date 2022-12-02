@@ -35,6 +35,13 @@ use Evrinoma\PackingListBundle\Factory\LogisticsFactory;
 use Evrinoma\PackingListBundle\Factory\LogisticsGroupFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListFactory;
 use Evrinoma\PackingListBundle\Factory\PackingListGroupFactory;
+use Evrinoma\PackingListBundle\Mediator\Depart\QueryMediatorInterface as DepartQueryMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\Group\QueryMediatorInterface as GroupQueryMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\ListItem\QueryMediatorInterface as ListItemQueryMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\Logistics\QueryMediatorInterface as LogisticsQueryMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\LogisticsGroup\QueryMediatorInterface as LogisticsGroupQueryMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\PackingList\QueryMediatorInterface as PackingListQueryMediatorInterface;
+use Evrinoma\PackingListBundle\Mediator\PackingListGroup\QueryMediatorInterface as PackingListGroupQueryMediatorInterface;
 use Evrinoma\UtilsBundle\Adaptor\AdaptorRegistry;
 use Evrinoma\UtilsBundle\Adaptor\AdaptorRegistryInterface;
 use Evrinoma\UtilsBundle\DependencyInjection\HelperTrait;
@@ -189,6 +196,14 @@ class EvrinomaPackingListExtension extends Extension
             $this->wireAdaptorRegistry($container, $registry);
         }
 
+        $this->wireMediator($container, PackingListQueryMediatorInterface::class, $config['db_driver'], 'packing_list');
+        $this->wireMediator($container, PackingListGroupQueryMediatorInterface::class, $config['db_driver'], 'packing_list_group');
+        $this->wireMediator($container, ListItemQueryMediatorInterface::class, $config['db_driver'], 'list_item');
+        $this->wireMediator($container, DepartQueryMediatorInterface::class, $config['db_driver'], 'depart');
+        $this->wireMediator($container, GroupQueryMediatorInterface::class, $config['db_driver'], 'group');
+        $this->wireMediator($container, LogisticsQueryMediatorInterface::class, $config['db_driver'], 'logistics');
+        $this->wireMediator($container, LogisticsGroupQueryMediatorInterface::class, $config['db_driver'], 'logistics_group');
+
         $this->remapParametersNamespaces(
             $container,
             $config,
@@ -207,13 +222,13 @@ class EvrinomaPackingListExtension extends Extension
         );
 
         if ($registry instanceof Reference && 'api' === $config['db_driver']) {
-            $this->wireRepository($container, $registry, 'packing_list', $config['entity_packing_list'], $config['db_driver']);
-            $this->wireRepository($container, $registry, 'packing_list_group', $config['entity_packing_list_group'], $config['db_driver']);
-            $this->wireRepository($container, $registry, 'list_item', $config['entity_list_item'], $config['db_driver']);
-            $this->wireRepository($container, $registry, 'depart', $config['entity_depart'], $config['db_driver']);
-            $this->wireRepository($container, $registry, 'group', $config['entity_group'], $config['db_driver']);
-            $this->wireRepository($container, $registry, 'logistics', $config['entity_logistics'], $config['db_driver']);
-            $this->wireRepository($container, $registry, 'logistics_group', $config['entity_logistics_group'], $config['db_driver']);
+            $this->wireRepository($container, $registry, PackingListQueryMediatorInterface::class, 'packing_list', $config['entity_packing_list'], $config['db_driver']);
+            $this->wireRepository($container, $registry, PackingListGroupQueryMediatorInterface::class, 'packing_list_group', $config['entity_packing_list_group'], $config['db_driver']);
+            $this->wireRepository($container, $registry, ListItemQueryMediatorInterface::class, 'list_item', $config['entity_list_item'], $config['db_driver']);
+            $this->wireRepository($container, $registry, DepartQueryMediatorInterface::class, 'depart', $config['entity_depart'], $config['db_driver']);
+            $this->wireRepository($container, $registry, GroupQueryMediatorInterface::class, 'group', $config['entity_group'], $config['db_driver']);
+            $this->wireRepository($container, $registry, LogisticsQueryMediatorInterface::class, 'logistics', $config['entity_logistics'], $config['db_driver']);
+            $this->wireRepository($container, $registry, LogisticsGroupQueryMediatorInterface::class, 'logistics_group', $config['entity_logistics_group'], $config['db_driver']);
         }
 
         $this->wireController($container, 'packing_list', $config['dto_packing_list']);
@@ -378,6 +393,12 @@ class EvrinomaPackingListExtension extends Extension
         }
     }
 
+    private function wireMediator(ContainerBuilder $container, string $class, string $driver, string $name): void
+    {
+        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.'.$driver.'.mediator');
+        $container->addDefinitions([$class => $definitionQueryMediator]);
+    }
+
     private function wireAdaptorRegistry(ContainerBuilder $container, Reference $registry): void
     {
         $definitionAdaptor = new Definition(AdaptorRegistry::class);
@@ -394,10 +415,10 @@ class EvrinomaPackingListExtension extends Extension
         $definitionFetch->setArgument(1, $route);
     }
 
-    private function wireRepository(ContainerBuilder $container, Reference $registry, string $name, string $class, string $driver): void
+    private function wireRepository(ContainerBuilder $container, Reference $registry, string $madiator, string $name, string $class, string $driver): void
     {
         $definitionRepository = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.'.$driver.'.repository');
-        $definitionQueryMediator = $container->getDefinition('evrinoma.'.$this->getAlias().'.'.$name.'.query.mediator');
+        $definitionQueryMediator = $container->getDefinition($madiator);
         $definitionRepository->setArgument(0, $registry);
         $definitionRepository->setArgument(1, $class);
         $definitionRepository->setArgument(2, $definitionQueryMediator);

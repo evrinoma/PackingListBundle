@@ -11,9 +11,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Mediator\ListItem;
+namespace Evrinoma\PackingListBundle\Mediator\Logistics\Api;
 
 use Evrinoma\DtoBundle\Dto\DtoInterface;
+use Evrinoma\PackingListBundle\Mediator\Logistics\QueryMediatorInterface;
 use Evrinoma\PackingListBundle\Repository\AliasInterface;
 use Evrinoma\UtilsBundle\Mediator\AbstractQueryMediator;
 use Evrinoma\UtilsBundle\Mediator\Api\QueryMediatorTrait;
@@ -23,7 +24,7 @@ class QueryMediator extends AbstractQueryMediator implements QueryMediatorInterf
 {
     use QueryMediatorTrait;
 
-    protected static string $alias = AliasInterface::LIST_ITEM;
+    protected static string $alias = AliasInterface::LOGISTICS;
 
     /**
      * @param DtoInterface          $dto
