@@ -17,6 +17,7 @@ services:
     arguments:
       - '@evrinoma.packing_list.logistics.command.manager'
       - '@evrinoma.packing_list.logistics.query.manager'
+      - '@evrinoma.packing_list.adaptor'
     autowire: true
 
   Evrinoma\PackingListBundle\Facade\Logistics\FacadeInterface:
