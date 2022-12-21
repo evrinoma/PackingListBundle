@@ -11,13 +11,13 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Factory;
+namespace Evrinoma\PackingListBundle\Factory\Group;
 
 use Evrinoma\PackingListBundle\Dto\GroupApiDtoInterface;
 use Evrinoma\PackingListBundle\Entity\Group\BaseGroup;
 use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
 
-class GroupFactory implements GroupFactoryInterface
+class Factory implements FactoryInterface
 {
     private static string $entityClass = BaseGroup::class;
 

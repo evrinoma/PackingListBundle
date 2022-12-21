@@ -19,7 +19,7 @@ use Evrinoma\PackingListBundle\Exception\LogisticsGroup\LogisticsGroupCannotBeRe
 use Evrinoma\PackingListBundle\Exception\LogisticsGroup\LogisticsGroupCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\LogisticsGroup\LogisticsGroupInvalidException;
 use Evrinoma\PackingListBundle\Exception\LogisticsGroup\LogisticsGroupNotFoundException;
-use Evrinoma\PackingListBundle\Factory\LogisticsGroupFactoryInterface;
+use Evrinoma\PackingListBundle\Factory\LogisticsGroup\FactoryInterface;
 use Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface as DepartQueryManagerInterface;
 use Evrinoma\PackingListBundle\Manager\Group\QueryManagerInterface as GroupQueryManagerInterface;
 use Evrinoma\PackingListBundle\Mediator\LogisticsGroup\CommandMediatorInterface;
@@ -31,7 +31,7 @@ final class CommandManager implements CommandManagerInterface
 {
     private LogisticsGroupRepositoryInterface $repository;
     private ValidatorInterface $validator;
-    private LogisticsGroupFactoryInterface $factory;
+    private FactoryInterface $factory;
     private CommandMediatorInterface $mediator;
 
     private GroupQueryManagerInterface $groupQueryManager;
@@ -40,12 +40,12 @@ final class CommandManager implements CommandManagerInterface
     /**
      * @param ValidatorInterface                $validator
      * @param LogisticsGroupRepositoryInterface $repository
-     * @param LogisticsGroupFactoryInterface    $factory
+     * @param FactoryInterface                  $factory
      * @param CommandMediatorInterface          $mediator
      * @param GroupQueryManagerInterface        $groupQueryManager
      * @param DepartQueryManagerInterface       $departQueryManager
      */
-    public function __construct(ValidatorInterface $validator, LogisticsGroupRepositoryInterface $repository, LogisticsGroupFactoryInterface $factory, CommandMediatorInterface $mediator, GroupQueryManagerInterface $groupQueryManager, DepartQueryManagerInterface $departQueryManager)
+    public function __construct(ValidatorInterface $validator, LogisticsGroupRepositoryInterface $repository, FactoryInterface $factory, CommandMediatorInterface $mediator, GroupQueryManagerInterface $groupQueryManager, DepartQueryManagerInterface $departQueryManager)
     {
         $this->validator = $validator;
         $this->repository = $repository;

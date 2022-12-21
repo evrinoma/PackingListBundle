@@ -19,7 +19,7 @@ use Evrinoma\PackingListBundle\Exception\Depart\DepartCannotBeRemovedException;
 use Evrinoma\PackingListBundle\Exception\Depart\DepartCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\Depart\DepartInvalidException;
 use Evrinoma\PackingListBundle\Exception\Depart\DepartNotFoundException;
-use Evrinoma\PackingListBundle\Factory\DepartFactoryInterface;
+use Evrinoma\PackingListBundle\Factory\Depart\FactoryInterface;
 use Evrinoma\PackingListBundle\Mediator\Depart\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Depart\DepartInterface;
 use Evrinoma\PackingListBundle\Repository\Depart\DepartRepositoryInterface;
@@ -29,16 +29,16 @@ final class CommandManager implements CommandManagerInterface
 {
     private DepartRepositoryInterface $repository;
     private ValidatorInterface $validator;
-    private DepartFactoryInterface $factory;
+    private FactoryInterface $factory;
     private CommandMediatorInterface $mediator;
 
     /**
      * @param ValidatorInterface        $validator
      * @param DepartRepositoryInterface $repository
-     * @param DepartFactoryInterface    $factory
+     * @param FactoryInterface          $factory
      * @param CommandMediatorInterface  $mediator
      */
-    public function __construct(ValidatorInterface $validator, DepartRepositoryInterface $repository, DepartFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, DepartRepositoryInterface $repository, FactoryInterface $factory, CommandMediatorInterface $mediator)
     {
         $this->validator = $validator;
         $this->repository = $repository;

@@ -24,7 +24,7 @@ services:
     alias: evrinoma.packing_list.logistics.facade
 
   evrinoma.packing_list.logistics.factory:
-    class: Evrinoma\PackingListBundle\Factory\LogisticsFactory
+    class: Evrinoma\PackingListBundle\Factory\Logistics\Factory
     public: true
     arguments:
 

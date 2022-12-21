@@ -11,12 +11,12 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Factory;
+namespace Evrinoma\PackingListBundle\Factory\ListItem;
 
 use Evrinoma\PackingListBundle\Dto\ListItemApiDtoInterface;
 use Evrinoma\PackingListBundle\Model\ListItem\ListItemInterface;
 
-interface ListItemFactoryInterface
+interface FactoryInterface
 {
     /**
      * @param ListItemApiDtoInterface $dto

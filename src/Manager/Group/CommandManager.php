@@ -19,7 +19,7 @@ use Evrinoma\PackingListBundle\Exception\Group\GroupCannotBeRemovedException;
 use Evrinoma\PackingListBundle\Exception\Group\GroupCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\Group\GroupInvalidException;
 use Evrinoma\PackingListBundle\Exception\Group\GroupNotFoundException;
-use Evrinoma\PackingListBundle\Factory\GroupFactoryInterface;
+use Evrinoma\PackingListBundle\Factory\Group\FactoryInterface;
 use Evrinoma\PackingListBundle\Mediator\Group\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\Group\GroupInterface;
 use Evrinoma\PackingListBundle\Repository\Group\GroupRepositoryInterface;
@@ -29,16 +29,16 @@ final class CommandManager implements CommandManagerInterface
 {
     private GroupRepositoryInterface $repository;
     private ValidatorInterface $validator;
-    private GroupFactoryInterface $factory;
+    private FactoryInterface $factory;
     private CommandMediatorInterface $mediator;
 
     /**
      * @param ValidatorInterface       $validator
      * @param GroupRepositoryInterface $repository
-     * @param GroupFactoryInterface    $factory
+     * @param FactoryInterface         $factory
      * @param CommandMediatorInterface $mediator
      */
-    public function __construct(ValidatorInterface $validator, GroupRepositoryInterface $repository, GroupFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, GroupRepositoryInterface $repository, FactoryInterface $factory, CommandMediatorInterface $mediator)
     {
         $this->validator = $validator;
         $this->repository = $repository;

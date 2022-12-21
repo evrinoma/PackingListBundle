@@ -19,7 +19,7 @@ use Evrinoma\PackingListBundle\Exception\PackingListGroup\PackingListGroupCannot
 use Evrinoma\PackingListBundle\Exception\PackingListGroup\PackingListGroupCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\PackingListGroup\PackingListGroupInvalidException;
 use Evrinoma\PackingListBundle\Exception\PackingListGroup\PackingListGroupNotFoundException;
-use Evrinoma\PackingListBundle\Factory\PackingListGroupFactoryInterface;
+use Evrinoma\PackingListBundle\Factory\PackingListGroup\FactoryInterface;
 use Evrinoma\PackingListBundle\Mediator\PackingListGroup\CommandMediatorInterface;
 use Evrinoma\PackingListBundle\Model\PackingListGroup\PackingListGroupInterface;
 use Evrinoma\PackingListBundle\Repository\PackingListGroup\PackingListGroupRepositoryInterface;
@@ -29,16 +29,16 @@ final class CommandManager implements CommandManagerInterface
 {
     private PackingListGroupRepositoryInterface $repository;
     private ValidatorInterface $validator;
-    private PackingListGroupFactoryInterface $factory;
+    private FactoryInterface $factory;
     private CommandMediatorInterface $mediator;
 
     /**
      * @param ValidatorInterface                  $validator
      * @param PackingListGroupRepositoryInterface $repository
-     * @param PackingListGroupFactoryInterface    $factory
+     * @param FactoryInterface                    $factory
      * @param CommandMediatorInterface            $mediator
      */
-    public function __construct(ValidatorInterface $validator, PackingListGroupRepositoryInterface $repository, PackingListGroupFactoryInterface $factory, CommandMediatorInterface $mediator)
+    public function __construct(ValidatorInterface $validator, PackingListGroupRepositoryInterface $repository, FactoryInterface $factory, CommandMediatorInterface $mediator)
     {
         $this->validator = $validator;
         $this->repository = $repository;

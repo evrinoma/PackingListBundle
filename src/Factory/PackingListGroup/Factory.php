@@ -11,17 +11,28 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Evrinoma\PackingListBundle\Factory;
+namespace Evrinoma\PackingListBundle\Factory\PackingListGroup;
 
 use Evrinoma\PackingListBundle\Dto\PackingListGroupApiDtoInterface;
+use Evrinoma\PackingListBundle\Entity\PackingListGroup\BasePackingListGroup;
 use Evrinoma\PackingListBundle\Model\PackingListGroup\PackingListGroupInterface;
 
-interface PackingListGroupFactoryInterface
+class Factory implements FactoryInterface
 {
+    private static string $entityClass = BasePackingListGroup::class;
+
+    public function __construct(string $entityClass)
+    {
+        self::$entityClass = $entityClass;
+    }
+
     /**
      * @param PackingListGroupApiDtoInterface $dto
      *
      * @return PackingListGroupInterface
      */
-    public function create(PackingListGroupApiDtoInterface $dto): PackingListGroupInterface;
+    public function create(PackingListGroupApiDtoInterface $dto): PackingListGroupInterface
+    {
+        return new self::$entityClass();
+    }
 }

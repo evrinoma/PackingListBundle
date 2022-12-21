@@ -4,19 +4,19 @@
 
     packing_list:
         db_driver: api модель данных либо orm (пока не реализованна)
-        factory_packing_list: App\PackingList\Factory\PackingListFactory фабрика для создания объекта упаковочного листа, 
+        factory_packing_list: App\PackingList\Factory\PackingList\Factory фабрика для создания объекта упаковочного листа, 
                  не достающие значения можно разрешить на уровне Mediator или переопределив фабрику
-        factory_packing_list_group: App\PackingList\Factory\PackingListGroupFactory фабрика для создания объекта группы упаковочных листов, 
+        factory_packing_list_group: App\PackingList\Factory\PackingListGroup\Factory фабрика для создания объекта группы упаковочных листов, 
                  не достающие значения можно разрешить на уровне Mediator или переопределив фабрику 
-        factory_list_item: App\PackingList\Factory\ListItemFactory фабрика для создания объекта единцы входящей в упаковочный лист, 
+        factory_list_item: App\PackingList\Factory\ListItem\Factory фабрика для создания объекта единцы входящей в упаковочный лист, 
                  не достающие значения можно разрешить на уровне Mediator или переопределив фабрику 
-        factory_depart: App\PackingList\Factory\DepartFactory фабрика для создания объекта склада,
+        factory_depart: App\PackingList\Factory\Depart\Factory фабрика для создания объекта склада,
                 не достающие значения можно разрешить на уровне Mediator или переопределив фабрику
-        factory_group: App\PackingList\Factory\GroupFactory фабрика для создания объекта группы,
+        factory_group: App\PackingList\Factory\Group\Factory фабрика для создания объекта группы,
                 не достающие значения можно разрешить на уровне Mediator или переопределив фабрику
-        factory_logistics: App\PackingList\Factory\LogisticsFactory фабрика для создания объекта логистики,
+        factory_logistics: App\PackingList\Factory\Logistics\Factory фабрика для создания объекта логистики,
                 не достающие значения можно разрешить на уровне Mediator или переопределив фабрику
-        factory_logistics_group: App\PackingList\Factory\LogisticsGroupFactory фабрика для создания объекта логистики группы,
+        factory_logistics_group: App\PackingList\Factory\LogisticsGroup\Factory фабрика для создания объекта логистики группы,
                 не достающие значения можно разрешить на уровне Mediator или переопределив фабрику
         entity_packing_list: App\PackingList\Entity\PackingList сущность паковочного листа
         entity_packing_list_group: App\PackingList\Entity\PackingListGroup сущность группы упаковочных листов

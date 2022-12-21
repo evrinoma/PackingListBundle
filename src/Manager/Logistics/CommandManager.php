@@ -19,7 +19,7 @@ use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeRemovedExcep
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsCannotBeSavedException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsInvalidException;
 use Evrinoma\PackingListBundle\Exception\Logistics\LogisticsNotFoundException;
-use Evrinoma\PackingListBundle\Factory\LogisticsFactoryInterface;
+use Evrinoma\PackingListBundle\Factory\Logistics\FactoryInterface;
 use Evrinoma\PackingListBundle\Manager\Depart\QueryManagerInterface as DepartQueryManagerInterface;
 use Evrinoma\PackingListBundle\Manager\PackingList\QueryManagerInterface as PackingListQueryManagerInterface;
 use Evrinoma\PackingListBundle\Mediator\Logistics\CommandMediatorInterface;
@@ -31,7 +31,7 @@ final class CommandManager implements CommandManagerInterface
 {
     private LogisticsRepositoryInterface $repository;
     private ValidatorInterface $validator;
-    private LogisticsFactoryInterface $factory;
+    private FactoryInterface $factory;
     private CommandMediatorInterface $mediator;
 
     private PackingListQueryManagerInterface $packingListQueryManager;
@@ -40,12 +40,12 @@ final class CommandManager implements CommandManagerInterface
     /**
      * @param ValidatorInterface               $validator
      * @param LogisticsRepositoryInterface     $repository
-     * @param LogisticsFactoryInterface        $factory
+     * @param FactoryInterface                 $factory
      * @param CommandMediatorInterface         $mediator
      * @param PackingListQueryManagerInterface $packingListQueryManager
      * @param DepartQueryManagerInterface      $departQueryManager
      */
-    public function __construct(ValidatorInterface $validator, LogisticsRepositoryInterface $repository, LogisticsFactoryInterface $factory, CommandMediatorInterface $mediator, PackingListQueryManagerInterface $packingListQueryManager, DepartQueryManagerInterface $departQueryManager)
+    public function __construct(ValidatorInterface $validator, LogisticsRepositoryInterface $repository, FactoryInterface $factory, CommandMediatorInterface $mediator, PackingListQueryManagerInterface $packingListQueryManager, DepartQueryManagerInterface $departQueryManager)
     {
         $this->validator = $validator;
         $this->repository = $repository;
